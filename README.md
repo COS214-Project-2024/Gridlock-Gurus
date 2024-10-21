@@ -57,9 +57,12 @@ With smart design patterns under the hood, our system is built to grow as a city
 
 ## Milestones and Deadlines
 
-| Milestone                | Deadline         |
-|--------------------------|------------------|
-| Initial Engine Setup      | 10 November 2024 |
-| Buildings and Utilities   | 25 November 2024 |
-| Citizens and Policies     | 10 December 2024 |
-| Final Integration & Testing | 22 December 2024 |
+| Milestone                                        | Deadline               |
+|--------------------------------------------------|------------------------|
+| Team registration (5-7 members) & assign team lead | **13 October 2024**     |
+| Submit initial project design (Practical 6)      | **15 October 2024**     |
+| Initial design marked & feedback received        | **15 and 16 October 2024** |
+| Demonstrate updated design & skeleton implementation | **22 and 23 October 2024** |
+| Review minimal viable project & receive feedback | **29 and 30 October 2024** |
+| Submit final project on ClickUP                  | **4 November 2024**     |
+| Project demos                                    | **5 and 6 November 2024** |
