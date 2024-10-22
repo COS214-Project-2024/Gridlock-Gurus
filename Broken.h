@@ -6,6 +6,10 @@
 /**
  * @class Broken
  * @brief Represents a broken state of a vehicle in the transport system.
+ * 
+ * The `Broken` class models the state of a vehicle that is no longer functional. 
+ * This state could be transitioned into after some damage from breaking. 
+ * Vehicles in this state need repair before they can become functional again.
  */
 class Broken : public TransportState {
 public:

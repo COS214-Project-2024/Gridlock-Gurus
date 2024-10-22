@@ -6,6 +6,10 @@
 /**
  * @class Functional
  * @brief Represents a functional state of a vehicle in the transport system.
+ * 
+ * The `Functional` class models the state of a vehicle that is not damaged.
+ * This state could be transitioned into after repairing from Damaged or Broken states. 
+ * Vehicles in this state can take damage to become Damaged.
  */
 class Functional : public TransportState {
 public:

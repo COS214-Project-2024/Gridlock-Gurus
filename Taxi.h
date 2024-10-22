@@ -6,6 +6,10 @@
 /**
  * @class Taxi
  * @brief Concrete class representing a taxi in the transportation system.
+ * 
+ * The `Taxi` class implements the behavior of a taxi vehicle, which is responsible for 
+ * transporting passengers. It defines the collection, offloading, and other 
+ * taxi-specific operations.
  */
 class Taxi : public Vehicle {
 public:

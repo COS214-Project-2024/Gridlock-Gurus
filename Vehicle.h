@@ -7,6 +7,11 @@
 /**
  * @class Vehicle
  * @brief Abstract base class representing a vehicle in the transportation system.
+ * 
+ * The `Vehicle` class defines the common properties and behaviors of various types of vehicles
+ * (e.g., train, truck, taxi) used in the transportation system. Each specific vehicle type must 
+ * implement the abstract functions defined in this class. The class also tracks the state of 
+ * the vehicle, such as whether it is functional, damaged, or broken.
  */
 class Vehicle {
 private:

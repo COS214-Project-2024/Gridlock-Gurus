@@ -6,6 +6,10 @@
 /**
  * @class Truck
  * @brief Concrete class representing a truck in the transportation system.
+ * 
+ * The `Truck` class implements the behavior of a truck vehicle, which is responsible for 
+ * transporting goods or passengers. It defines the collection, offloading, and other 
+ * vehicle-specific operations.
  */
 class Truck : public Vehicle {
 public:

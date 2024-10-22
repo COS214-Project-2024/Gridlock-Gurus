@@ -6,6 +6,10 @@
 /**
  * @class Damage
  * @brief Represents a damage state of a vehicle in the transport system.
+ * 
+ * The `Damage` class models the state of a vehicle that is no longer fully functional. 
+ * This state could be transitioned into after some damage from breaking. 
+ * Vehicles in this state need repair before they can become fully functional again.
  */
 class Damaged : public TransportState {
 public:

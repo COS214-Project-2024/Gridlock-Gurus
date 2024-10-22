@@ -4,6 +4,10 @@
 /**
  * @class TransportState
  * @brief Abstract class representing the state of a vehicle in the transport system.
+ * 
+ * The `TransportState` class is the base class for different states that a vehicle 
+ * can exist in, such as functional, damaged, or broken. It provides an interface for 
+ * the common operations that can be performed on vehicles in any state.
  */
 class TransportState {
 public:

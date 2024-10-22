@@ -6,6 +6,10 @@
 /**
  * @class Train
  * @brief Concrete class representing a train in the transportation system.
+ * 
+ * The `Train` class implements the behavior of a train vehicle, which is responsible for 
+ * transporting goods or passengers. It defines the collection, offloading, and other 
+ * train-specific operations.
  */
 class Train : public Vehicle {
 public:
