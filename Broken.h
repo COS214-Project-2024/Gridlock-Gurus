@@ -4,12 +4,46 @@
 #include "TransportState.h"
 
 /**
- * @brief Represents a broken state of a vehicle.
+ * @class Broken
+ * @brief Represents a broken state of a vehicle in the transport system.
  */
 class Broken : public TransportState {
 public:
-    Broken();  ///< Constructor
-    ~Broken();  ///< Destructor
+    /**
+     * @brief Constructor for the Broken state.
+     *
+     * Initializes the state of the vehicle as "broken".
+     */
+    Broken();
+
+    /**
+     * @brief Destructor for the Broken state.
+     *
+     * Cleans up any resources associated with the broken state.
+     */
+    ~Broken();
+
+    /**
+     * @brief Returns the current state of the vehicle.
+     *
+     * @return A `TransportState` object representing the current state of the vehicle.
+     */
+    TransportState returnState() override;
+
+    /**
+     * @brief Simulates breaking the vehicle.
+     *
+     * This method would trigger the transition of the vehicle to the broken state.
+     */
+    void breakTransport() override;
+
+    /**
+     * @brief Repairs the vehicle.
+     *
+     * This method would trigger the transition of the vehicle out of the broken state, 
+     * making it functional again.
+     */
+    void repair() override;
 };
 
 #endif // BROKEN_H
