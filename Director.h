@@ -19,7 +19,7 @@ public:
     /**
      * @brief Destroys the Director object.
      */
-    ~Director();
+    virtual ~Director();
 
     /**
      * @brief Constructs a city using the CityBuilder.

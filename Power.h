@@ -13,7 +13,7 @@ public:
      */
     Power();
 
-    ~Power();
+    virtual ~Power();
 
     /**
      * @brief Check the power capacity.

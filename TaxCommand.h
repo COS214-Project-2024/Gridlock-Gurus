@@ -18,7 +18,7 @@ public:
     /**
      * @brief Destroys the TaxCommand object.
      */
-    ~TaxCommand();
+    virtual ~TaxCommand();
 
     /**
      * @brief Executes the command to manage taxes.

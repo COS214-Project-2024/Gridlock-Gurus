@@ -30,7 +30,7 @@ public:
     /**
      * @brief Destroys the HealthService building.
      */
-    ~HealthService();
+    virtual ~HealthService();
 
     /**
      * @brief Gets details about the health service building.

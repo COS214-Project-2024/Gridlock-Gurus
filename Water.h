@@ -13,7 +13,7 @@ public:
      */
     Water();
 
-    ~Water();
+    virtual ~Water();
 
     /**
      * @brief Check the water capacity.

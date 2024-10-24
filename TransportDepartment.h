@@ -31,7 +31,7 @@ public:
      *
      * Cleans up resources and deletes the vehicle lists.
      */
-    ~TransportDepartment();
+    virtual ~TransportDepartment();
 
     /**
      * @brief Calls for transport from the fleet.

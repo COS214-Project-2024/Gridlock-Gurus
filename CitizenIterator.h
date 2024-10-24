@@ -23,7 +23,7 @@ public:
      *
      * Cleans up resources used by the iterator.
      */
-    ~CitizenIterator();
+    virtual ~CitizenIterator();
 
     /**
      * @brief Checks if there are more citizens to iterate over.

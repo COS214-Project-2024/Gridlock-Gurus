@@ -33,7 +33,7 @@ public:
      *
      * Cleans up resources and deletes any dynamically allocated components.
      */
-    ~TaxAuthority();
+    virtual ~TaxAuthority();
 
     /**
      * @brief Registers a building with the tax authority.

@@ -13,7 +13,7 @@ public:
      */
     Sanitation();
 
-    ~Sanitation();
+    virtual ~Sanitation();
 
     /**
      * @brief Check the sanitation capacity.

@@ -25,7 +25,7 @@ public:
      *
      * Cleans up any resources associated with the functional state.
      */
-    ~Functional();
+    virtual ~Functional();
 
     /**
      * @brief Returns the current state of the vehicle.

@@ -30,7 +30,7 @@ public:
     /**
      * @brief Destroys the EducationService building.
      */
-    ~EducationService();
+    virtual ~EducationService();
 
     /**
      * @brief Gets details about the education service building.

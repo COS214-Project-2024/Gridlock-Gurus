@@ -19,7 +19,7 @@ public:
     /**
      * @brief Destroys the BuildingIterator object.
      */
-    ~BuildingIterator();
+    virtual ~BuildingIterator();
 
     /**
      * @brief Returns the next building in the collection.

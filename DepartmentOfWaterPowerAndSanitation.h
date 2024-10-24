@@ -27,7 +27,7 @@ public:
      *
      * Cleans up resources and deletes the utilities.
      */
-    ~DepartmentOfWaterPowerAndSanitation();
+    virtual ~DepartmentOfWaterPowerAndSanitation();
     
     /**
      * @brief Update the number of citizens in the network.

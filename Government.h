@@ -35,7 +35,7 @@ public:
      *
      * Cleans up resources and deletes pointers to all department objects.
      */
-    ~Government();
+    virtual ~Government();
 };
 
 #endif // GOVERNMENT_H

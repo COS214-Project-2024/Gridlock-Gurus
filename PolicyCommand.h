@@ -18,7 +18,7 @@ public:
     /**
      * @brief Destroys the PolicyCommand object.
      */
-    ~PolicyCommand();
+    virtual ~PolicyCommand();
 
     /**
      * @brief Executes the command to implement a policy.

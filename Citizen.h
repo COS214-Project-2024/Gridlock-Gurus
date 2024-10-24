@@ -39,7 +39,7 @@ public:
      *
      * Cleans up resources related to the citizen.
      */
-    ~Citizen();
+    virtual ~Citizen();
 
     /**
      * @brief Finds employment at a specified building.

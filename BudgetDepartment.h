@@ -21,7 +21,7 @@ public:
     /**
      * @brief Destroys the BudgetDepartment object.
      */
-    ~BudgetDepartment();
+    virtual ~BudgetDepartment();
 
     /**
      * @brief Checks the total available budget.

@@ -16,7 +16,7 @@ public:
      */
     Resources();
 
-    ~Resources();
+    virtual ~Resources();
 
     /**
      * @brief Manages the consumption of resources.

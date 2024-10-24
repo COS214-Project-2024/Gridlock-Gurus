@@ -28,7 +28,7 @@ public:
      *
      * Cleans up any resources used by the factory.
      */
-    ~CitizenFactory();
+    virtual ~CitizenFactory();
 
     /**
      * @brief Creates a new Citizen object.

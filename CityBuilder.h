@@ -16,7 +16,7 @@ public:
     /**
      * @brief Destroys the CityBuilder object.
      */
-    ~CityBuilder();
+    virtual ~CityBuilder();
 
     /**
      * @brief Builds the residential area of the city.

@@ -25,7 +25,7 @@ public:
      *
      * Cleans up any resources associated with the damaged state.
      */
-    ~Damaged();
+    virtual ~Damaged();
 
     /**
      * @brief Returns the current state of the vehicle.

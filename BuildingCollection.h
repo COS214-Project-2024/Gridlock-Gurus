@@ -24,7 +24,7 @@ public:
     /**
      * @brief Destroys the BuildingCollection object.
      */
-    ~BuildingCollection();
+    virtual ~BuildingCollection();
 
     /**
      * @brief Creates an iterator for the collection of buildings.

@@ -33,7 +33,7 @@ public:
      *
      * Cleans up resources and deletes any dynamically allocated components.
      */
-    ~DepartmentOfHomeAffairs();
+    virtual ~DepartmentOfHomeAffairs();
 
     /**
      * @brief Registers a birth in the department.

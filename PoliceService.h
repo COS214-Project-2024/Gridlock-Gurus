@@ -30,7 +30,7 @@ public:
     /**
      * @brief Destroys the PoliceService building.
      */
-    ~PoliceService();
+    virtual ~PoliceService();
 
     /**
      * @brief Gets details about the police service building.
