@@ -9,16 +9,18 @@
  * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create landmarks.
  */
 class LandmarkFactory : public BuildingFactory {
+private:
+ TaxAuthority* tax;
 public:
     /**
      * @brief Constructs a new LandmarkFactory object.
      */
-    LandmarkFactory();
+    LandmarkFactory(TaxAuthority* taxAuthority);
 
     /**
      * @brief Destroys the LandmarkFactory object.
      */
-    virtual ~LandmarkFactory();
+    virtual ~LandmarkFactory() = default;
     
     /**
      * @brief Creates a Landmark building.
@@ -27,7 +29,7 @@ public:
      *
      * This method overrides the factory method to create a Landmark building.
      */
-    Building* createBuilding(std::string type) override;
+    Building* createBuilding(std::string type, Citizen* owner) override;
 };
 
 #endif // LANDMARKFACTORY_H

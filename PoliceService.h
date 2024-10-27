@@ -3,6 +3,9 @@
 
 #include "Service.h"
 #include "PoliceState.h"
+#include <set>
+#include "PeaceState.h"
+#include "UnrestState.h"
 
 /**
  * @brief Represents a police service building.
@@ -14,6 +17,10 @@ private:
     PoliceState* policeState;  ///< Current state of the police service.
     int stationId;  ///< ID of the police station.
     std::list<Citizen*> officers;  ///< List of officers in the police service.
+    int maxStaff;
+    int currentStaff;
+    string stationName;
+    int responseTime;
 
 public:
     /**
@@ -25,12 +32,12 @@ public:
      * @param owner Pointer to the owner of the police service.
      * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    PoliceService(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name);
 
     /**
      * @brief Destroys the PoliceService building.
      */
-    virtual ~PoliceService();
+    virtual ~PoliceService() = default;
 
     /**
      * @brief Gets details about the police service building.
@@ -60,7 +67,14 @@ public:
      * @brief Pays an officer in the police service.
      * @param officer Pointer to the officer being paid.
      */
-    void payOfficer(Citizen* officer);
+    int pay(Citizen* officer);
+    void employ(Citizen* employee);
+    void fire(Citizen* employee);
+    void retire(Citizen* employee);
+    int getStaff();
+    int getMaxStaff();
+    void responseTimeDec(int by);
+    void responseTimeInc(int by);
 };
 
 #endif // POLICESERVICE_H

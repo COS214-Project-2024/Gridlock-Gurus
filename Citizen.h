@@ -4,6 +4,7 @@
 #include "TaxAuthority.h"
 #include "Building.h"
 #include <string>
+using namespace std;
 
 /**
  * @brief Represents a citizen in the city.
@@ -16,7 +17,8 @@ private:
     TaxAuthority* taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
 
 protected:
-    std::string type;              ///< The type of the citizen (e.g., worker, retiree).
+    string name;
+    string type;              ///< The type of the citizen (e.g., worker, retiree).
     int satisfactionLevel;         ///< The satisfaction level of the citizen.
     int funds;                     ///< The amount of funds available to the citizen.
     bool employmentStatus;         ///< Employment status of the citizen (employed or not).
@@ -89,6 +91,7 @@ public:
      * This function sets the citizen's retirement status to true.
      */
     void retire();
+    void retireToCountryside();
 
     /**
      * @brief Quits the citizen's job.
@@ -96,6 +99,16 @@ public:
      * This function updates the employment status of the citizen.
      */
     void quitJob();
+    void fired();
+
+    /**
+     * @brief Quits the citizen's job.
+     *
+     * This function updates the employment status of the citizen.
+     */
+    string getName();
+    bool getEmploymentStatus();
+    int getFunds();
 };
 
 #endif // CITIZEN_H
