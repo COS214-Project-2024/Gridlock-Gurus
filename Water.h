@@ -19,22 +19,22 @@ public:
      * @brief Check the water capacity.
      * @return The current water capacity.
      */
-    int checkCapacity() const override;
+    void checkCapacity() const override;
 
-    /**
-     * @brief Shed water temporarily.
-     */
-    void shed() override;
+    // /**
+    //  * @brief Shed water temporarily.
+    //  */
+    // void shed() override;
 
-    /**
-     * @brief Break the water utility.
-     */
-    void breakUtility() override;
+    // /**
+    //  * @brief Break the water utility.
+    //  */
+    // void breakUtility() override;
 
-    /**
-     * @brief Repair the water utility.
-     */
-    void repair() override;
+    // /**
+    //  * @brief Repair the water utility.
+    //  */
+    // void repair() override;
 };
 
 #endif // WATER_H

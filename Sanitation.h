@@ -19,22 +19,22 @@ public:
      * @brief Check the sanitation capacity.
      * @return The current sanitation capacity.
      */
-    int checkCapacity() const override;
+    void checkCapacity() const override;
 
-    /**
-     * @brief Shed sanitation temporarily.
-     */
-    void shed() override;
+    // /**
+    //  * @brief Shed sanitation temporarily.
+    //  */
+    // void shed() override;
 
-    /**
-     * @brief Break the sanitation utility.
-     */
-    void breakUtility() override;
+    // /**
+    //  * @brief Break the sanitation utility.
+    //  */
+    // void breakUtility() override;
 
-    /**
-     * @brief Repair the sanitation utility.
-     */
-    void repair() override;
+    // /**
+    //  * @brief Repair the sanitation utility.
+    //  */
+    // void repair() override;
 };
 
 #endif // SANITATION_H

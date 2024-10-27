@@ -11,7 +11,7 @@
 class DepartmentOfWaterPowerAndSanitation {
 private:
     std::vector<Utilities*> utilities;
-    Resources resources;
+    Resources* resources;
 
 public:
 
@@ -20,7 +20,7 @@ public:
      *
      * Initializes the DepartmentOfWaterPowerAndSanitation and prepares the resources and utilities.
      */
-    DepartmentOfWaterPowerAndSanitation();
+    DepartmentOfWaterPowerAndSanitation(Resources* resources);
 
     /**
      * @brief Destroy the DepartmentOfWaterPowerAndSanitation object.
