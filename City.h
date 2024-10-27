@@ -11,32 +11,37 @@
  */
 class City {
 private:
-    Government* government;  ///< Pointer to the government managing the city.
-    BuildingCollection* buildings;  ///< Collection of buildings in the city.
-    int citizenHappiness;  ///< The overall happiness level of citizens.
+    Government *government; ///< Pointer to the government managing the city.
+    BuildingCollection *buildings; ///< Pointer to the city's BuildingCollection.
+    std::vector<Citizen> observingCitizens;
+    int citizenSatisfaction; ///< The overall satisfaction level of citizens.
 
 public:
     /**
      * @brief Constructs a new City object.
+     *
+     * @param government A pointer to the Government object associated with this City.
+     * @param buildings A pointer to the BuildingCollection containing the buildings in this City.
+     * @param citizenSatisfaction An optional integer representing the initial satisfaction of the citizens, defaulting to MAX 100.
      */
-    City();
-    
+    City(Government *government, BuildingCollection *buildings, int citizenSatisfaction = 100);
+
     /**
      * @brief Destroys the City object.
      */
     virtual ~City();
 
     /**
-     * @brief Adds an observer (Government) to the city.
-     * @param observer The observer to be added.
+     * @brief Adds an observer (Citizen) to the city.
+     * @param observer The citizen to be added.
      */
-    void addObserver(Government* observer);
+    void addObserver(const Citizen &observer);
 
     /**
-     * @brief Removes an observer (Government) from the city.
-     * @param observer The observer to be removed.
+     * @brief Removes an observer (Citizen) from the city.
+     * @param observer The citizen to be removed.
      */
-    void removeObserver(Government* observer);
+    void removeObserver(const Citizen &observer);
 
     /**
      * @brief Notifies all observers of a change in the city's state.
@@ -48,22 +53,22 @@ public:
     /**
      * @brief Adds a new building to the city's collection of buildings.
      */
-    void addBuilding();
+    void addBuilding(Building *building) const;
 
     /**
-     * @brief Updates citizen happiness based on city conditions.
+     * @brief Updates citizen satisfaction based on city conditions.
      */
-    void citizenHappiness();
+    void calcOverallCitizenSatisfaction();
 
     /**
-     * @brief Sets the state of citizen happiness in the city.
-     * @param citizenHappiness The new citizen happiness level.
+     * @brief Sets the state of citizen satisfaction in the city.
+     * @param citizenSatisfaction The new citizen satisfaction level.
      */
-    void setState(int citizenHappiness);
+    void setState(int citizenSatisfaction);
 
     /**
-     * @brief Gets the current state of citizen happiness in the city.
-     * @return The current citizen happiness level.
+     * @brief Gets the current state of citizen satisfaction in the city.
+     * @return The current citizen satisfaction level.
      */
     int getState() const;
 };
