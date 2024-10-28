@@ -43,10 +43,8 @@ public:
 
     /**
      * @brief Pays taxes for the health service building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Sets the state of the health service.
@@ -63,15 +61,16 @@ public:
      * @brief Pays a staff member in the health service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    int pay(Citizen* staffMember);
-    void employ(Citizen* employee);
-    void fire(Citizen* employee);
-    void retire(Citizen* employee);
+    int pay(Citizen* staffMember) override;
+    void employ(Citizen* employee) override;
+    void fire(Citizen* employee) override;
+    void retire(Citizen* employee) override;
     int getStaff();
     int getMaxStaff();
     void responseTimeDec(int by);
     void responseTimeInc(int by);
     int getResponseTime();
+    void update() override;
 };
 
 #endif // HEALTHSERVICE_H

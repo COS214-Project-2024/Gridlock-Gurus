@@ -40,6 +40,8 @@ public:
      * @brief Sets the tax strategy configuration.
      */
     void set();
+
+    virtual void adjustRate(int percentage) = 0;
 };
 
 #endif // TAXSTRATEGY_H

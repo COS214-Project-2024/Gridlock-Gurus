@@ -45,10 +45,12 @@ public:
 
     /**
      * @brief Pays taxes on the building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    virtual void payTax(int amount, Citizen* owner);
+    virtual void payTax();
+
+    virtual int pay(Citizen* employee) = 0;
+    virtual void update() = 0;
+
 };
 
 #endif // BUILDING_H

@@ -26,8 +26,8 @@ std::string HealthService::getDetails() {
     return details;
 }
 
-void HealthService::payTax(int amount, Citizen *owner) {
-    //implement
+void HealthService::payTax() {
+    owner->payTaxes();
 }
 
 void HealthService::employ(Citizen *employee) {
@@ -106,3 +106,6 @@ void HealthService::responseTimeInc(int by) {
     responseTime += by;
 }
 
+void HealthService::update(){
+    payTax();
+}

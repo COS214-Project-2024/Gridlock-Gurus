@@ -2,8 +2,9 @@
 #define BUILDINGCOLLECTION_H
 
 #include "BuildCommand.h"
-#include "BuildingIterator.h"
 #include <list>
+
+class Building;
 
 /**
  * @brief Holds a collection of buildings in the city.
@@ -13,7 +14,6 @@
 class BuildingCollection {
 private:
     std::list<Building*> buildings;  ///< The collection of buildings in the city.
-    BuildingIterator* iterator;  ///< Iterator for iterating over buildings.
 
 public:
     /**
@@ -27,10 +27,11 @@ public:
     virtual ~BuildingCollection();
 
     /**
-     * @brief Creates an iterator for the collection of buildings.
-     * @return A pointer to a BuildingIterator object.
+     *@brief Adds a building to the collection
      */
-    BuildingIterator* createIterator();
+    void addBuilding(Building *b);
+
+    void update();
 };
 
 #endif // BUILDINGCOLLECTION_H

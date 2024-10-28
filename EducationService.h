@@ -48,7 +48,7 @@ public:
      * @param amount The amount of tax to be paid.
      * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Sets the state of the education service.
@@ -65,15 +65,16 @@ public:
      * @brief Pays a staff member in the education service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    int pay(Citizen* staffMember);
-    void employ(Citizen* employee);
-    void fire(Citizen* employee);
-    void retire(Citizen* employee);
+    int pay(Citizen* staffMember) override;
+    void employ(Citizen* employee) override;
+    void fire(Citizen* employee) override;
+    void retire(Citizen* employee) override;
     int getStaff();
     int getMaxStaff();
     void prestigeDec(int by);
     void prestigeInc(int by);
     int getPrestige();
+    void update() override;
 };
 
 #endif // EDUCATIONSERVICE_H

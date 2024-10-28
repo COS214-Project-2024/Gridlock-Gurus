@@ -2,8 +2,9 @@
 #define TAXAUTHORITY_H
 
 #include "BuildingCollection.h"
-#include "Building.h"
 #include "TaxStrategy.h"
+
+class Building;
 
 /**
  * @brief Manages tax collection and taxation strategies in the city.
@@ -18,7 +19,8 @@ class TaxAuthority {
 private:
     BuildingCollection* buildings;  ///< Pointer to the collection of registered buildings.
     TaxStrategy* strategy;          ///< Pointer to the current tax strategy being used.
-    int currentTaxRate;            ///< The current tax rate applicable for calculations.
+    int collectedTax;            ///< The current tax collected from citizens and buildings.
+    std::vector<Citizen*> citizens;     ///< Vector containing registered citizens.
 
 public:
     /**
@@ -43,18 +45,25 @@ public:
     void registerBuilding(Building* building);
 
     /**
+     * @brief Registers a citizen with the tax authority.
+     *
+     * @param building Pointer to the Citizen object to be registered.
+     */
+    void registerCitizen(Citizen* citizen);
+
+    /**
      * @brief Notifies citizens about tax obligations.
      *
      * @param amount The amount of tax that citizens need to be notified about.
      */
-    void notifyCitizens(int amount);
+    void notifyCitizens();
 
     /**
      * @brief Notifies buildings about their tax obligations.
      *
      * @param amount The amount of tax that buildings need to be notified about.
      */
-    void notifyBuildings(int amount);
+    void notifyBuildings();
 
     /**
      * @brief Sets the tax strategy for the tax authority.
@@ -85,6 +94,10 @@ public:
      * @param percentage The percentage by which to change the current tax rate.
      */
     void changeRate(int percentage);
+
+    // void sendTax(int amount);
+    int collectTaxes();
+    void receiveTaxes(int paidTaxes);
 };
 
 #endif // TAXAUTHORITY_H

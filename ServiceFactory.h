@@ -27,7 +27,7 @@ public:
      *
      * This method overrides the factory method to create a service building.
      */
-    Building* createBuilding(std::string type) override;
+    Building* createBuilding(std::string type, Citizen* owner) override;
 };
 
 #endif // SERVICEFACTORY_H

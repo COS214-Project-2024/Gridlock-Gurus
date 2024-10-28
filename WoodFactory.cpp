@@ -14,8 +14,8 @@ std::string WoodFactory::getDetails() {
     return details;
 }
 
-void WoodFactory::payTax(int amount, Citizen *owner) {
-    //implement
+void WoodFactory::payTax() {
+    owner->payTaxes();
 }
 
 void WoodFactory::produceResource() {
@@ -39,7 +39,7 @@ void WoodFactory::employ(Citizen *employee) {
     }
 }
 
-int WoodFactory::payEmployee(Citizen *employee) {
+int WoodFactory::pay(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         double salary;
@@ -75,4 +75,8 @@ void WoodFactory::retire(Citizen *employee) {
     } else {
         std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
+}
+
+void WoodFactory::update(){
+    payTax();
 }

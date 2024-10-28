@@ -6,8 +6,8 @@ Commercial::Commercial(int cost, std::string location, Resources *resources, int
     this->numEmployees = 0;
 }
 
-void Commercial::payTax(int amount, Citizen *owner) {
-    //implement
+void Commercial::payTax() {
+    owner->payTaxes();
 }
 
 std::string Commercial::getDetails() {
@@ -74,4 +74,8 @@ void Commercial::retire(Citizen *employee) {
     } else {
         std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
+}
+
+void Commercial::update(){
+    payTax();
 }

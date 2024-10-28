@@ -39,10 +39,8 @@ public:
 
     /**
      * @brief Pays taxes for the brick factory.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the factory's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Produces bricks in the factory.
@@ -53,10 +51,11 @@ public:
      * @brief Pays an employee working at the brick factory.
      * @param employee Pointer to the employee.
      */
-    int payEmployee(Citizen* employee);
-    void employ(Citizen* employee);
-    void fire(Citizen* employee);
-    void retire(Citizen* employee);
+    int pay(Citizen* employee) override;
+    void employ(Citizen* employee) override;
+    void fire(Citizen* employee) override;
+    void retire(Citizen* employee) override;
+    void update() override;
 };
 
 #endif // BRICKFACTORY_H

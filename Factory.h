@@ -49,7 +49,7 @@ public:
      *
      * This is an abstract method that must be implemented by concrete factory subclasses.
      */
-    virtual void payTax(int amount, Citizen* owner) = 0;
+    virtual void payTax() = 0;
 
     /**
      * @brief Produces resources in the factory.
@@ -58,9 +58,10 @@ public:
      */
     virtual void produceResource() = 0;
     virtual void employ(Citizen* employee) = 0;
-    virtual void payEmployee(Citizen* employee) = 0;
+    virtual int pay(Citizen* employee) = 0;
     virtual void fire(Citizen* employee) = 0;
     virtual void retire(Citizen* employee) = 0;
+    virtual void update() = 0;
 };
 
 #endif // FACTORY_H
