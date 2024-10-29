@@ -2,6 +2,7 @@
 #define CITIZENFACTORY_H
 
 #include <string>
+#include <memory>
 #include "Citizen.h"
 
 /**
@@ -12,6 +13,7 @@
 class CitizenFactory {
 private:
     Citizen* citizen;
+    std::weak_ptr<TaxAuthority> taxAuthority;
 
 public:
     /**
@@ -19,7 +21,7 @@ public:
      *
      * Initializes the CitizenFactory with default values.
      */
-    CitizenFactory();
+    CitizenFactory(std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroy the CitizenFactory object.
