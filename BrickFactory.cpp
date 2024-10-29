@@ -13,10 +13,10 @@ std::string BrickFactory::getDetails() {
     details += "Size: " + to_string(size) + "\n";
     return details;
 }
-
-void BrickFactory::payTax() {
+// Building taxes are implemented by Building
+/*void BrickFactory::payTax() {
     owner->payTaxes();
-}
+}*/
 
 void BrickFactory::produceResource() {
     //impliment
