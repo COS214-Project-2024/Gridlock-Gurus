@@ -9,6 +9,8 @@
  * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and represents a notable landmark structure within the city.
  */
 class Landmark : public Building {
+private:
+     string name;
 public:
     /**
      * @brief Constructs a new Landmark building.
@@ -19,25 +21,26 @@ public:
      * @param owner Pointer to the owner of the landmark.
      * @param taxAuthority Pointer to the tax authority associated with the landmark.
      */
-    Landmark(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);  ///< Constructor
+    Landmark(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, string name);  ///< Constructor
 
     /**
      * @brief Destroys the Landmark building.
      */
-    virtual ~Landmark();  ///< Destructor
+    virtual ~Landmark() = default;  ///< Destructor
 
     /**
      * @brief Pays taxes for the landmark building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Gets details about the landmark building.
      * @return A string containing details about the landmark.
      */
     std::string getDetails() override;
+
+    int pay(Citizen* citizen) override;
+    void update() override;
 };
 
 #endif // LANDMARK_H

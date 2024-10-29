@@ -6,6 +6,7 @@
 
 class Functional : public TransportState {
 public:
+
     void checkCapacity(Vehicle* vehicle) override;
     void breakTransport(Vehicle* vehicle) override;
     void repair(Vehicle* vehicle) override;

@@ -9,16 +9,17 @@
  * ConcreteStrategy participant in the Strategy Design Pattern.
  */
 class ProgressiveTaxStrategy : public TaxStrategy {
+
 public:
     /**
      * @brief Constructor for the ProgressiveTaxStrategy.
      */
-    ProgressiveTaxStrategy();
+    ProgressiveTaxStrategy() = default;
     
     /**
      * @brief Destructor for the ProgressiveTaxStrategy.
      */
-    virtual ~ProgressiveTaxStrategy();
+    ~ProgressiveTaxStrategy() = default;
 
     /**
      * @brief Calculates tax on a building using the progressive tax strategy.

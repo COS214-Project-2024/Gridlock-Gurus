@@ -8,20 +8,20 @@ class Resources {
 private:
     int energy;
     int water;
-    bool sanitation;
+    bool sanitationAvailable;
 
 public:
     /**
      * @brief Constructor for Resources.
      */
-    Resources();
+    Resources(int energy, int water, bool sanitationAvailable);
 
     virtual ~Resources();
 
     /**
      * @brief Manages the consumption of resources.
      */
-    void manageConsumption();
+    void manageConsumption(int energyUsed, int waterUsed);
 };
 
 #endif // RESOURCES_H

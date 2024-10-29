@@ -3,6 +3,8 @@
 
 #include "Building.h"
 #include <list>
+#include <string>
+using namespace std;
 
 /**
  * @brief Represents a residential building.
@@ -11,8 +13,9 @@
  */
 class Residential : public Building {
 private:
-    int capacity;  ///< The maximum number of citizens the building can house.
-    std::list<Citizen*> tenants;  ///< List of tenants living in the building.
+    int maxCapacity;  ///< The maximum number of citizens the building can house.
+    int capacity;  ///< The number of citizens currently in the building.
+    list<Citizen*> tenants;  ///< List of tenants living in the building.
 
 public:
     /**
@@ -24,12 +27,12 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Residential(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    Residential(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int capacity);
 
     /**
      * @brief Destroys the Residential building object.
      */
-    virtual ~Residential();
+    virtual ~Residential() = default;
 
     /**
      * @brief Gets details about the residential building.
@@ -41,24 +44,32 @@ public:
 
     /**
      * @brief Pays taxes for the residential building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      *
      * This method overrides the base `payTax()` method to implement tax payment for residential buildings.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax(int amount) override;
 
     /**
      * @brief Calculates household tax for the residential building.
-     * @return The calculated household tax.
+     * 
+     * The calculated household tax.
      */
-    double householdTax();
+    void householdTax();
 
     /**
      * @brief Adds a tenant to the residential building.
      * @param tenant Pointer to the citizen to add as a tenant.
      */
     void addTenant(Citizen* tenant);
+
+    /**
+        * @brief Adds a tenant to the residential building.
+        * @param tenant Pointer to the citizen to add as a tenant.
+        */
+    void removeTenant(Citizen* tenant);
+
+    int pay(Citizen* employee) override;
+    void update() override;
 };
 
 #endif // RESIDENTIAL_H

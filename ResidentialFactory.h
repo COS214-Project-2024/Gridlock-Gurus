@@ -3,22 +3,26 @@
 
 #include "BuildingFactory.h"
 
+class TaxAuthority;
+
 /**
  * @brief Factory for creating residential buildings.
  *
  * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create residential buildings.
  */
 class ResidentialFactory : public BuildingFactory {
+private:
+    TaxAuthority* tax;
 public:
     /**
      * @brief Constructs a new ResidentialFactory object.
      */
-    ResidentialFactory();
+    ResidentialFactory(TaxAuthority* taxAuthority);
 
     /**
      * @brief Destroys the ResidentialFactory object.
      */
-    virtual ~ResidentialFactory();
+    virtual ~ResidentialFactory() = default;
 
     /**
      * @brief Creates a residential building.
@@ -27,7 +31,7 @@ public:
      *
      * This method overrides the factory method to create a residential building.
      */
-    Building* createBuilding(std::string type) override;
+    Building* createBuilding(std::string type, Citizen* owner) override;
 };
 
 #endif // RESIDENTIALFACTORY_H

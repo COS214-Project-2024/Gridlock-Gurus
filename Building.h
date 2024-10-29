@@ -3,6 +3,9 @@
 
 #include "Resources.h"
 #include "Citizen.h"
+#include <string>
+#include <memory>
+
 
 /**
  * @brief Represents a building in the city.
@@ -10,13 +13,13 @@
  * Product participant in the Factory Method pattern. It defines the properties and methods shared by all types of buildings.
  */
 class Building {
-private:
+protected:
     int cost;  ///< The construction cost of the building.
     std::string location;  ///< The location of the building.
     Resources* resources;  ///< Resources used by the building.
     int size;  ///< The size of the building.
     Citizen* owner;  ///< The owner of the building.
-    TaxAuthority* taxAuthority;  ///< Tax authority associated with the building.
+    std::weak_ptr<TaxAuthority> taxAuthority;  ///< Tax authority associated with the building.
 
 public:
     /**
@@ -28,12 +31,12 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Building(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    Building(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroys the Building object.
      */
-    virtual ~Building();
+    virtual ~Building() = default;
 
     /**
      * @brief Gets details about the building.
@@ -41,12 +44,23 @@ public:
      */
     virtual std::string getDetails();
 
-    /**
+    virtual int pay(Citizen* employee) = 0;
+  
+    virtual void update() = 0;
+  
+     /**
      * @brief Pays taxes on the building.
      * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    virtual void payTax(int amount, Citizen* owner);
+    virtual void payTax(int amount) = 0;
+
+     /**
+     * @brief Getter for the cost of the building.
+     */
+     int getCost() {
+         return this->cost;
+     }
+     
 };
 
 #endif // BUILDING_H

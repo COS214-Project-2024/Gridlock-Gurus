@@ -2,6 +2,11 @@
 #define COMMERCIAL_H
 
 #include "Building.h"
+#include <algorithm>
+#include <string>
+#include <list>
+#include <iostream>
+using namespace std;
 
 /**
  * @brief Represents a commercial building.
@@ -11,6 +16,10 @@
 class Commercial : public Building {
 private:
     int productionRate;  ///< The rate at which the commercial building generates money.
+    int maxEmployees;
+    int numEmployees;
+    std::string name;
+    std::list<Citizen*> employees;  ///< List of staff members in the education service.
 
 public:
     /**
@@ -22,19 +31,17 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);  ///< Constructor
+    Commercial(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int max, int rate);  ///< Constructor
 
     /**
      * @brief Destroys the Commercial building.
      */
-    virtual ~Commercial();  ///< Destructor
+    virtual ~Commercial() = default;  ///< Destructor
 
     /**
      * @brief Pays taxes for the commercial building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax(int amount) override;
 
     /**
      * @brief Gets details about the commercial building.
@@ -46,6 +53,11 @@ public:
      * @brief Generates money in the commercial building.
      */
     void produceMoney();
+    void employ(Citizen* employee);
+    int pay(Citizen* employee);
+    void fire(Citizen* employee);
+    void retire(Citizen* employee);
+    void update() override;
 };
 
 #endif // COMMERCIAL_H

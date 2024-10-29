@@ -1,37 +1,61 @@
 #ifndef BUILDINGITERATOR_H
 #define BUILDINGITERATOR_H
+#include <vector>
+#include <memory>
 
 class Building;
 
 /**
- * @brief Iterator for iterating over buildings in a collection.
- *
- * ConcreteIterator participant in the Iterator design pattern, providing a way to traverse buildings in a BuildingCollection.
- */
+* @class BuildingIterator
+* @brief Provides functionality to iterate through BuildingCollection.
+*/
 class BuildingIterator {
     friend class Building;
+
 public:
+    using BuildingPtr = std::shared_ptr<Building>;
+
     /**
-     * @brief Constructs a new BuildingIterator object.
-     */
-    BuildingIterator();
+     * @brief Constructs an iterator for the given collection of buildings.
+     * @param buildings Reference to the vector of buildings.
+     * @param pos Initial position of the iterator.
+     */ 
+    BuildingIterator(std::vector<BuildingPtr>& buildings, size_t pos) : buildings(buildings), position(pos){}
     
     /**
      * @brief Destroys the BuildingIterator object.
      */
-    virtual ~BuildingIterator();
+    ~BuildingIterator() = default;
 
     /**
-     * @brief Returns the next building in the collection.
-     * @return Pointer to the next building.
+     * @brief Dereference operator to access the current building.
+     * @return Shared pointer to the current building.
      */
-    Building* next();
+    BuildingPtr operator*() const ;
 
     /**
-     * @brief Checks if there are more buildings to iterate over.
-     * @return True if there are more buildings, false otherwise.
+     * @brief Prefix increment operator to advance to the next building.
+     * @return Reference to the incremented iterator.
      */
-    bool hasNext();
+    BuildingIterator& operator++();
+
+    /**
+     * @brief Inequality operator to compare two iterators.
+     * @param other The iterator to compare with.
+     * @return True if iterators are not equal, false otherwise.
+     */
+    bool operator!=(const BuildingIterator& other) const;
+
+    /**
+     * @brief Equality operator to compare two iterators.
+     * @param other The iterator to compare with.
+     * @return True if iterators are equal, false otherwise.
+     */
+    bool operator==(const BuildingIterator& other) const;
+
+private:
+    std::vector<BuildingPtr>& buildings;    ///< Reference to the vector of buildings.
+    size_t position;                        ///< Current position of the iterator.
 };
 
 #endif // BUILDINGITERATOR_H

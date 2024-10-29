@@ -1,6 +1,9 @@
 #ifndef BUDGETDEPARTMENT_H
 #define BUDGETDEPARTMENT_H
 
+class TaxAuthority;
+
+
 /**
  * @brief Manages the city's budget and financial allocations.
  *
@@ -34,7 +37,7 @@ public:
      * @param amount The amount to check for availability.
      * @return True if the amount is available, false otherwise.
      */
-    bool checkAvailability(int amount);
+    bool checkAvailability(int amount, TaxAuthority* taxAuthority);
 
     /**
      * @brief Increases the total available budget by the specified amount.
@@ -54,11 +57,8 @@ public:
      */
     void inflation(int percentage);
 
-    /**
-     * @brief Applies tax relief by reducing the budget based on a percentage.
-     * @param percentage The percentage of tax relief to apply.
-     */
-    void taxRelief(int percentage);
+    void receiveTaxes(TaxAuthority* taxAuthority);
+
 };
 
 #endif // BUDGETDEPARTMENT_H

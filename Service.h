@@ -2,6 +2,9 @@
 #define SERVICE_H
 
 #include "Building.h"
+#include <algorithm>
+#include <string>
+#include <iostream>
 
 /**
  * @brief Represents a service building (e.g., hospital, police station).
@@ -9,6 +12,9 @@
  * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and serves as a base for specific types of service buildings, providing a common interface for tax payment and services.
  */
 class Service : public Building {
+protected:
+     std::string type;
+     double benefits;
 public:
     /**
      * @brief Constructs a new Service building.
@@ -24,7 +30,7 @@ public:
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service();
+    virtual ~Service() = default;
 
     /**
      * @brief Gets details about the service building.
@@ -34,15 +40,17 @@ public:
 
     /**
      * @brief Pays taxes for the service building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    virtual void payTax(int amount, Citizen* owner) = 0;  ///< Pure virtual function
+    virtual void payTax(int amount) = 0;  ///< Pure virtual function
 
     /**
      * @brief Produces resources in the service building.
      */
-    virtual void produceResource() = 0;  ///< Pure virtual function
+    virtual void employ(Citizen* employee) = 0;
+    virtual int pay(Citizen* employee) = 0;
+    virtual void fire(Citizen* employee) = 0;
+    virtual void retire(Citizen* employee) = 0;
+    virtual void update() = 0;
 };
 
 #endif // SERVICE_H

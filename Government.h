@@ -22,13 +22,16 @@ private:
     DepartmentOfWaterPowerAndSanitation* utilities;  ///< Pointer to the Department of Water and Sanitation managing utilities.
     DepartmentOfHomeAffairs* homeAffairs;       ///< Pointer to the Department of Home Affairs managing citizen registrations.
 
-public:
+protected:
     /**
      * @brief Construct a new Government object.
      *
      * Initializes the Government and sets up pointers to all relevant departments.
      */
     Government();
+
+public:
+    Government* getInstance();
 
     /**
      * @brief Destroy the Government object.

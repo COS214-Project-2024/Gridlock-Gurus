@@ -3,6 +3,8 @@
 
 #include "Service.h"
 #include "PoliceState.h"
+#include <set>
+#include <list>
 
 /**
  * @brief Represents a police service building.
@@ -14,6 +16,10 @@ private:
     PoliceState* policeState;  ///< Current state of the police service.
     int stationId;  ///< ID of the police station.
     std::list<Citizen*> officers;  ///< List of officers in the police service.
+    int maxStaff;
+    int currentStaff;
+    std::string stationName;
+    int responseTime;
 
 public:
     /**
@@ -25,12 +31,12 @@ public:
      * @param owner Pointer to the owner of the police service.
      * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name);
 
     /**
      * @brief Destroys the PoliceService building.
      */
-    virtual ~PoliceService();
+    virtual ~PoliceService() = default;
 
     /**
      * @brief Gets details about the police service building.
@@ -40,10 +46,8 @@ public:
 
     /**
      * @brief Pays taxes for the police service building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax(int amount) override;
 
     /**
      * @brief Sets the state of the police service.
@@ -60,7 +64,15 @@ public:
      * @brief Pays an officer in the police service.
      * @param officer Pointer to the officer being paid.
      */
-    void payOfficer(Citizen* officer);
+    int pay(Citizen* officer) override;
+    void employ(Citizen* employee) override;
+    void fire(Citizen* employee) override;
+    void retire(Citizen* employee) override;
+    int getStaff();
+    int getMaxStaff();
+    void responseTimeDec(int by);
+    void responseTimeInc(int by);
+    void update() override;
 };
 
 #endif // POLICESERVICE_H

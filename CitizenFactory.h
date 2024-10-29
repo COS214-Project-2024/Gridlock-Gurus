@@ -2,6 +2,7 @@
 #define CITIZENFACTORY_H
 
 #include <string>
+#include <memory>
 #include "Citizen.h"
 
 /**
@@ -11,9 +12,8 @@
  */
 class CitizenFactory {
 private:
-    std::string type;              ///< The type of citizen to be created.
-    int startingSatisfaction;      ///< The initial satisfaction level of the citizen.
-    int startingFunds;             ///< The initial funds available to the citizen.
+    Citizen* citizen;
+    std::weak_ptr<TaxAuthority> taxAuthority;
 
 public:
     /**
@@ -21,7 +21,7 @@ public:
      *
      * Initializes the CitizenFactory with default values.
      */
-    CitizenFactory();
+    CitizenFactory(std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroy the CitizenFactory object.

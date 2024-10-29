@@ -18,28 +18,28 @@ public:
     /**
      * @brief Default constructor for Utilities.
      */
-    Utilities();
+    Utilities(std::string type, int maxProduction, int costOfRepair);
 
     /**
      * @brief Check the capacity of the utility.
      * @return The current capacity of the utility.
      */
-    virtual int checkCapacity() const = 0;
+    virtual void checkCapacity() const;
 
     /**
      * @brief Shed the utility, temporarily shutting it down.
      */
-    virtual void shed() = 0;
+    virtual void shed();
 
     /**
      * @brief Break the utility, making it non-functional.
      */
-    virtual void breakUtility() = 0;
+    virtual void breakUtility();
 
     /**
      * @brief Repair the utility, making it functional again.
      */
-    virtual void repair() = 0;
+    virtual void repair();
 
     virtual ~Utilities() = default;
 };

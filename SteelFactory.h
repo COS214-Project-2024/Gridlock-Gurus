@@ -12,7 +12,7 @@
 class SteelFactory : public Factory {
 private:
     std::list<Citizen*> employees;  ///< List of employees working at the steel factory.
-
+    std::string name;
 public:
     /**
      * @brief Constructs a new SteelFactory object.
@@ -23,12 +23,12 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    SteelFactory(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    SteelFactory(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
 
     /**
      * @brief Destroys the SteelFactory object.
      */
-    virtual ~SteelFactory();
+    virtual ~SteelFactory() = default;
 
     /**
      * @brief Gets details about the steel factory.
@@ -38,10 +38,8 @@ public:
 
     /**
      * @brief Pays taxes for the steel factory.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the factory's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax(int amount) override;
 
     /**
      * @brief Produces steel in the factory.
@@ -52,7 +50,11 @@ public:
      * @brief Pays an employee working at the steel factory.
      * @param employee Pointer to the employee.
      */
-    void payEmployee(Citizen* employee);
+     int pay(Citizen* employee) override;
+     void employ(Citizen* employee) override;
+     void fire(Citizen* employee) override;
+     void retire(Citizen* employee) override;
+     void update() override;
 };
 
 #endif // STEELFACTORY_H

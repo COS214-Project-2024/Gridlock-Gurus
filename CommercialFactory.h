@@ -9,11 +9,13 @@
  *  ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create commercial buildings.
  */
 class CommercialFactory : public BuildingFactory {
+private:
+ TaxAuthority* tax;
 public:
     /**
      * @brief Constructs a new CommercialFactory object.
      */
-    CommercialFactory();
+    CommercialFactory(TaxAuthority* taxAuthority);
 
     /**
      * @brief Destroys the CommercialFactory object.
@@ -27,7 +29,7 @@ public:
      *
      * This method overrides the factory method to create a commercial building.
      */
-    Building* createBuilding(std::string type) override;
+    Building* createBuilding(string type, Citizen* owner) override;
 };
 
 #endif // COMMERCIALFACTORY_H
