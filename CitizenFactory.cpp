@@ -1,16 +1,14 @@
 #include "CitizenFactory.h"
 #include <iostream>
 
-using namespace std;
-
 CitizenFactory::CitizenFactory() {}
 
-Citizen* CitizenFactory::createCitizen(string type, int startingSatisfaction, int startingFunds) {
-    cout << "New citizen has arrived.\n";
+Citizen* CitizenFactory::createCitizen(std::string type, int startingSatisfaction, int startingFunds) {
+    std::cout << "New citizen has arrived.\n";
 
-    Citizen* newCitizen = new Citizen(type, startingSatisfaction, startingFunds);
+    Citizen* newCitizen = new Citizen(type, startingSatisfaction, startingFunds,taxAuthority);
     this->citizen = newCitizen;
     
-    cout << "Citizen " + newCitizen->getName() + " has been registered\n";
+    std::cout << "Citizen " + newCitizen->getName() + " has been registered\n";
     return newCitizen;
 }
