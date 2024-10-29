@@ -1,4 +1,6 @@
 #include "PoliceService.h"
+#include "PeaceState.h"
+#include "UnrestState.h"
 
 PoliceService::PoliceService(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name) : Service(cost, location, resources, size, owner, taxAuthority) {
     this->stationId = id;
@@ -24,8 +26,8 @@ string PoliceService::getDetails() {
     return details;
 }
 
-void PoliceService::payTax(int amount, Citizen *owner) {
-    //implement
+void PoliceService::payTax() {
+    owner->payTaxes();
 }
 
 void PoliceService::employ(Citizen *employee) {
@@ -124,4 +126,8 @@ void PoliceService::setState(PoliceState *state) {
     } else if(state->getName() == "PeaceState") {
         benefits += 0.2;
     }
+}
+
+void PoliceService::update(){
+    payTax();
 }

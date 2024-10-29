@@ -14,6 +14,7 @@ public:
      * @brief Constructor for the FlatTaxStrategy.
      */
     FlatTaxStrategy() = default;
+
     
     /**
      * @brief Destructor for the FlatTaxStrategy.

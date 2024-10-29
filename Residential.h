@@ -44,18 +44,17 @@ public:
 
     /**
      * @brief Pays taxes for the residential building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      *
      * This method overrides the base `payTax()` method to implement tax payment for residential buildings.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Calculates household tax for the residential building.
-     * @return The calculated household tax.
+     * 
+     * The calculated household tax.
      */
-    double householdTax();
+    void householdTax();
 
     /**
      * @brief Adds a tenant to the residential building.
@@ -68,6 +67,9 @@ public:
         * @param tenant Pointer to the citizen to add as a tenant.
         */
     void removeTenant(Citizen* tenant);
+
+    int pay(Citizen* employee) override;
+    void update() override;
 };
 
 #endif // RESIDENTIAL_H

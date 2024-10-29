@@ -14,8 +14,8 @@ std::string BrickFactory::getDetails() {
     return details;
 }
 
-void BrickFactory::payTax(int amount, Citizen *owner) {
-    //implement
+void BrickFactory::payTax() {
+    owner->payTaxes();
 }
 
 void BrickFactory::produceResource() {
@@ -39,7 +39,7 @@ void BrickFactory::employ(Citizen *employee) {
     }
 }
 
-int BrickFactory::payEmployee(Citizen *employee) {
+int BrickFactory::pay(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         double salary;
@@ -75,4 +75,8 @@ void BrickFactory::retire(Citizen *employee) {
     } else {
         std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
+}
+
+void BrickFactory::update(){
+    payTax();
 }

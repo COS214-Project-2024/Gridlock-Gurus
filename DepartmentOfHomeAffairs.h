@@ -3,8 +3,9 @@
 
 #include "CitizenIterator.h"
 #include "CitizenFactory.h"
-#include "Citizen.h"
 #include <list>
+
+class Citizen;
 
 /**
  * @brief Manages citizen registrations and identity-related services.

@@ -11,9 +11,7 @@
  */
 class CitizenFactory {
 private:
-    std::string type;              ///< The type of citizen to be created.
-    int startingSatisfaction;      ///< The initial satisfaction level of the citizen.
-    int startingFunds;             ///< The initial funds available to the citizen.
+    Citizen* citizen;
 
 public:
     /**

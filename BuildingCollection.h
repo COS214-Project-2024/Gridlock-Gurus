@@ -1,12 +1,14 @@
 #ifndef BUILDINGCOLLECTION_H
 #define BUILDINGCOLLECTION_H
-
 #include "Building.h"
 #include "BuildingIterator.h"
 #include <vector>
 #include <memory>
 
 class BuildingIterator;
+
+
+class Building;
 
 /**
  * @class BuildingCollection
@@ -49,6 +51,7 @@ public:
 
 private:
     std::vector<BuildingPtr> buildings;                 ///< The collection of buildings in the city.
+
 };
 
 #endif // BUILDINGCOLLECTION_H

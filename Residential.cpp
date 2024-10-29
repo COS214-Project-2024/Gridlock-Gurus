@@ -16,12 +16,16 @@ string Residential::getDetails() {
     return details;
 }
 
-void Residential::payTax(int amount, Citizen *owner) {
-    //still needs implementation
+void Residential::payTax() {
+    owner->payTaxes();
 }
 
-double Residential::householdTax() {
-    //calculate this and return it
+void Residential::householdTax() {
+    for (Citizen* tenant : tenants) {
+        if (tenant) {
+            tenant->payTaxes();
+        }
+    }
 }
 
 void Residential::addTenant(Citizen* tenant) {
@@ -48,5 +52,20 @@ void Residential::removeTenant(Citizen *tenant) {
     }
 }
 
+int Residential::pay(Citizen* citizen){
+    if(citizen == owner){
+        int salary = 40000;
+        cout<< owner->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
+        return salary;
+    }
+    else{
+        cout << citizen->getName() << ", you're not the owner? How did you get in here??\n";
+        return 0;
+    }
+}
 
+void Residential::update(){
+    payTax();
+    householdTax();
+}
 

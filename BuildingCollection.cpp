@@ -12,4 +12,3 @@ BuildingIterator BuildingCollection::end() {
     return BuildingIterator(buildings, buildings.size()); 
 }
 
-

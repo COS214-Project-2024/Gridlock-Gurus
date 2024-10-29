@@ -44,7 +44,11 @@ public:
      */
     virtual std::string getDetails();
 
-    /**
+    virtual int pay(Citizen* employee) = 0;
+  
+    virtual void update() = 0;
+  
+     /**
      * @brief Pays taxes on the building.
      * @param amount The amount of tax to be paid.
      * @param owner Pointer to the building's owner.
@@ -56,6 +60,7 @@ public:
      */
      int getCost();
      
+
 };
 
 #endif // BUILDING_H

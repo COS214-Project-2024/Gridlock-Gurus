@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "BuildingCollection.h"
-#include "Building.h"
 #include "TaxStrategy.h"
 #include "FlatTaxStrategy.h"
 #include "ProgressiveTaxStrategy.h"
@@ -14,6 +13,7 @@
 class Citizen;
 class Building;
 class BuildingCollection;
+
 /**
  * @brief Manages tax collection and taxation strategies in the city.
  *
@@ -58,7 +58,7 @@ public:
      * @param citizen A shared_ptr to a citizen object.
      */
     void registerCitizen(std::shared_ptr<Citizen> citizen);
-
+  
     /**
      * @brief Notifies all registered members to pay taxes.
      */
@@ -92,7 +92,6 @@ private:
      */
     void notifyBuildings();
 
-
     /**
      * @brief Calculates the tax for a building based on its value.
      *
@@ -108,7 +107,6 @@ private:
      * @return The calculated tax amount for the citizen.
      */
     int calculateCitizenTax(int earnings);
-
 };
 
 #endif // TAXAUTHORITY_H

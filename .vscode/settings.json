@@ -49,6 +49,10 @@
         "unordered_map": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__tree": "cpp",
+        "iostream": "cpp",
+        "set": "cpp",
+        "__memory": "cpp"
     }
 }

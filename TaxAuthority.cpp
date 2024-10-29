@@ -52,3 +52,4 @@ int TaxAuthority::calculateCitizenTax(int earnings) {
 void TaxAuthority::sendTax(int amount) {
     this->collectedTax += amount;
 }
+

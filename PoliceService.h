@@ -4,8 +4,6 @@
 #include "Service.h"
 #include "PoliceState.h"
 #include <set>
-#include "PeaceState.h"
-#include "UnrestState.h"
 
 /**
  * @brief Represents a police service building.
@@ -47,10 +45,8 @@ public:
 
     /**
      * @brief Pays taxes for the police service building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Sets the state of the police service.
@@ -67,14 +63,15 @@ public:
      * @brief Pays an officer in the police service.
      * @param officer Pointer to the officer being paid.
      */
-    int pay(Citizen* officer);
-    void employ(Citizen* employee);
-    void fire(Citizen* employee);
-    void retire(Citizen* employee);
+    int pay(Citizen* officer) override;
+    void employ(Citizen* employee) override;
+    void fire(Citizen* employee) override;
+    void retire(Citizen* employee) override;
     int getStaff();
     int getMaxStaff();
     void responseTimeDec(int by);
     void responseTimeInc(int by);
+    void update() override;
 };
 
 #endif // POLICESERVICE_H

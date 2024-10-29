@@ -9,6 +9,7 @@
  * ConcreteStrategy participant in the Strategy Design Pattern.
  */
 class ProgressiveTaxStrategy : public TaxStrategy {
+
 public:
     /**
      * @brief Constructor for the ProgressiveTaxStrategy.

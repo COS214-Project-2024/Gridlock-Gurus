@@ -14,8 +14,8 @@ std::string SteelFactory::getDetails() {
     return details;
 }
 
-void SteelFactory::payTax(int amount, Citizen *owner) {
-    //implement
+void SteelFactory::payTax() {
+    owner->payTaxes();
 }
 
 void SteelFactory::produceResource() {
@@ -39,7 +39,7 @@ void SteelFactory::employ(Citizen *employee) {
     }
 }
 
-int SteelFactory::payEmployee(Citizen *employee) {
+int SteelFactory::pay(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         double salary;
@@ -75,4 +75,8 @@ void SteelFactory::retire(Citizen *employee) {
     } else {
         std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
+}
+
+void SteelFactory::update(){
+    payTax();
 }

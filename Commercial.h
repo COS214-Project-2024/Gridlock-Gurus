@@ -40,10 +40,8 @@ public:
 
     /**
      * @brief Pays taxes for the commercial building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount, Citizen* owner) override;
+    void payTax() override;
 
     /**
      * @brief Gets details about the commercial building.
@@ -59,6 +57,7 @@ public:
     int pay(Citizen* employee);
     void fire(Citizen* employee);
     void retire(Citizen* employee);
+    void update() override;
 };
 
 #endif // COMMERCIAL_H
