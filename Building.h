@@ -31,7 +31,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Building(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    Building(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroys the Building object.
@@ -58,9 +58,10 @@ public:
      /**
      * @brief Getter for the cost of the building.
      */
-     int getCost();
+     int getCost() {
+         return this->cost;
+     }
      
-
 };
 
 #endif // BUILDING_H
