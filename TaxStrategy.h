@@ -11,12 +11,12 @@ public:
     /**
      * @brief Constructor for the TaxStrategy.
      */
-    TaxStrategy();
+    TaxStrategy() = default;
     
     /**
      * @brief Destructor for the TaxStrategy.
      */
-    virtual ~TaxStrategy();
+    virtual ~TaxStrategy() = default;
 
     /**
      * @brief Calculates tax on a building.
@@ -35,13 +35,6 @@ public:
      * This function acts as the algorithm() function.
      */
     virtual int calculateCitizenTax(int earnings) = 0;
-
-    /**
-     * @brief Sets the tax strategy configuration.
-     */
-    void set();
-
-    virtual void adjustRate(int percentage) = 0;
 };
 
 #endif // TAXSTRATEGY_H

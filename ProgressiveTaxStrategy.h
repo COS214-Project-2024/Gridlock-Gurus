@@ -9,19 +9,17 @@
  * ConcreteStrategy participant in the Strategy Design Pattern.
  */
 class ProgressiveTaxStrategy : public TaxStrategy {
-private:
-    int taxRate;
 
 public:
     /**
      * @brief Constructor for the ProgressiveTaxStrategy.
      */
-    ProgressiveTaxStrategy(int taxRate);
+    ProgressiveTaxStrategy() = default;
     
     /**
      * @brief Destructor for the ProgressiveTaxStrategy.
      */
-    virtual ~ProgressiveTaxStrategy();
+    ~ProgressiveTaxStrategy() = default;
 
     /**
      * @brief Calculates tax on a building using the progressive tax strategy.
@@ -40,8 +38,6 @@ public:
      * This function acts as the algorithm() function.
      */
     int calculateCitizenTax(int earnings) override;
-
-    void adjustRate(int percentage) override;
 };
 
 #endif // PROGRESSIVETAXSTRATEGY_H

@@ -1,15 +1,11 @@
 #include "FlatTaxStrategy.h"
 
-FlatTaxStrategy::FlatTaxStrategy(int flatRate) : flatRate(flatRate / 100) {}
-
 int FlatTaxStrategy::calculateBuildingTax(int value) {
-    return value * flatRate;
+    // Flat tax of 30 units
+    return 30;
 }
 
 int FlatTaxStrategy::calculateCitizenTax(int earnings) {
-    return earnings * flatRate;
-}
-
-void FlatTaxStrategy::adjustRate(int percentage){
-    this->flatRate = percentage / 100;
+    //Flat tax of 30 units
+    return 30;
 }

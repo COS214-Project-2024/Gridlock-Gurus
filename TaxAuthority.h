@@ -1,11 +1,18 @@
 #ifndef TAXAUTHORITY_H
 #define TAXAUTHORITY_H
+#include <memory>
+#include <vector>
+#include <iostream>
 
 #include "BuildingCollection.h"
 #include "TaxStrategy.h"
+#include "FlatTaxStrategy.h"
+#include "ProgressiveTaxStrategy.h"
+#include "Citizen.h"
 
-class Building;
 class Citizen;
+class Building;
+class BuildingCollection;
 
 /**
  * @brief Manages tax collection and taxation strategies in the city.
@@ -18,16 +25,16 @@ class Citizen;
  */
 class TaxAuthority {
 private:
-    BuildingCollection* buildings;  ///< Pointer to the collection of registered buildings.
-    TaxStrategy* strategy;          ///< Pointer to the current tax strategy being used.
-    int collectedTax;            ///< The current tax collected from citizens and buildings.
-    std::vector<Citizen*> citizens;     ///< Vector containing registered citizens.
+    std::unique_ptr<BuildingCollection> buildings;  ///< Pointer to the collection of registered buildings.
+    std::vector<std::shared_ptr<Citizen>> citizens; ///< vector of shared_pointers to citizen objects.
+    std::unique_ptr<TaxStrategy> strategy;          ///< Pointer to the current tax strategy being used.
+    int collectedTax;
 
 public:
     /**
      * @brief Construct a new TaxAuthority object.
      *
-     * Initializes the TaxAuthority with default values and prepares necessary components.
+     * Initializes the TaxAuthority with default strategy and values.
      */
     TaxAuthority();
 
@@ -36,42 +43,54 @@ public:
      *
      * Cleans up resources and deletes any dynamically allocated components.
      */
-    virtual ~TaxAuthority();
+     ~TaxAuthority() = default;
 
     /**
      * @brief Registers a building with the tax authority.
      *
      * @param building Pointer to the Building object to be registered.
      */
-    void registerBuilding(Building* building);
+    void registerBuilding(std::shared_ptr<Building> building);
 
     /**
      * @brief Registers a citizen with the tax authority.
      *
-     * @param building Pointer to the Citizen object to be registered.
+     * @param citizen A shared_ptr to a citizen object.
      */
-    void registerCitizen(Citizen* citizen);
-
+    void registerCitizen(std::shared_ptr<Citizen> citizen);
+  
     /**
-     * @brief Notifies citizens about tax obligations.
-     *
-     * @param amount The amount of tax that citizens need to be notified about.
+     * @brief Notifies all registered members to pay taxes.
      */
-    void notifyCitizens();
-
-    /**
-     * @brief Notifies buildings about their tax obligations.
-     *
-     * @param amount The amount of tax that buildings need to be notified about.
-     */
-    void notifyBuildings();
+    void collectTaxes();
 
     /**
      * @brief Sets the tax strategy for the tax authority.
      *
      * @param taxStrategy Pointer to the TaxStrategy object to be set as the current strategy.
      */
-    void setStrategy(TaxStrategy* taxStrategy);
+    void setStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
+
+    /**
+    * @brief Recieves the tax from buildings and citizens.
+    *
+    * @param amount The amout being sent to the tax authority.
+    */
+    void sendTax(int amount);
+
+
+private:
+    /**
+     * @brief Notifies citizens about tax obligations.
+     * Iterates through a vector of registered citizens and notifies them to make payment.
+     */
+    void notifyCitizens();
+
+    /**
+     * @brief Notifies buildings about their tax obligations.
+     * Iterates through the building collection and notifies them to make payment.
+     */
+    void notifyBuildings();
 
     /**
      * @brief Calculates the tax for a building based on its value.
@@ -88,17 +107,6 @@ public:
      * @return The calculated tax amount for the citizen.
      */
     int calculateCitizenTax(int earnings);
-
-    /**
-     * @brief Changes the current tax rate by a specified percentage.
-     *
-     * @param percentage The percentage by which to change the current tax rate.
-     */
-    void changeRate(int percentage);
-
-    // void sendTax(int amount);
-    int collectTaxes();
-    void receiveTaxes(int paidTaxes);
 };
 
 #endif // TAXAUTHORITY_H

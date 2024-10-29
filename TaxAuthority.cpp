@@ -1,65 +1,55 @@
 #include "TaxAuthority.h"
-#include "Citizen.h"
 
-TaxAuthority::TaxAuthority() : buildings(nullptr), strategy(nullptr), collectedTax(0) {}
-
-TaxAuthority::~TaxAuthority() {
-    delete buildings;
-    delete strategy;
+TaxAuthority::TaxAuthority(){
+    this->buildings = std::make_unique<BuildingCollection>();
+    this->strategy = std::make_unique<FlatTaxStrategy>();
+    this->collectedTax = 0;
 }
 
-void TaxAuthority::registerBuilding(Building* building) {
-    if (buildings) {
-        buildings->addBuilding(building);
-    }
+void TaxAuthority::registerBuilding(std::shared_ptr<Building> building) {
+    this->buildings->addBuilding(building);
 }
 
-void TaxAuthority::registerCitizen(Citizen* citizen) {
-    if (citizen) {
-        citizens.push_back(citizen);
-    }
+void TaxAuthority::registerCitizen(std::shared_ptr<Citizen> citizen) {
+    this->citizens.push_back(citizen);
+}
+
+void TaxAuthority::collectTaxes() {
+    this->collectedTax = 0; // Reset the collected tax for the new cycle
+    
+    // Collect Taxes
+    this->notifyBuildings();
+    this->notifyCitizens();
 }
 
 void TaxAuthority::notifyCitizens() {
-    for (Citizen* citizen : citizens) {
-        citizen->update();
+    for(auto c : this->citizens) {
+        c->payTax(calculateCitizenTax(c->getFunds()));
     }
 }
 
 void TaxAuthority::notifyBuildings() {
-    if (buildings) {
-        buildings->update();
+    int counter = 0;
+    for(auto it = buildings->begin(); it != buildings->end(); ++it) {
+        counter++;
+        auto building = *it;
+        building->payTax(calculateBuildingTax(building->getCost()));
     }
 }
 
-void TaxAuthority::setStrategy(TaxStrategy* taxStrategy) {
-    strategy = taxStrategy;
+void TaxAuthority::setStrategy(std::unique_ptr<TaxStrategy> taxStrategy) {
+    this->strategy = std::move(taxStrategy);
 }
 
 int TaxAuthority::calculateBuildingTax(int value) {
-    if (strategy) {
-        return strategy->calculateBuildingTax(value);
-    }
-    return 0;
+    return this->strategy->calculateBuildingTax(value);
 }
 
 int TaxAuthority::calculateCitizenTax(int earnings) {
-    if (strategy) {
-        return strategy->calculateCitizenTax(earnings);
-    }
-    return 0;
+    return this->strategy->calculateCitizenTax(earnings);
 }
 
-void TaxAuthority::changeRate(int percentage) {
-    if (strategy) {
-        strategy->adjustRate(percentage);
-    }
+void TaxAuthority::sendTax(int amount) {
+    this->collectedTax += amount;
 }
 
-int TaxAuthority::collectTaxes() {
-    return collectedTax;
-}
-
-void TaxAuthority::receiveTaxes(int paidTaxes) {
-    collectedTax += paidTaxes;
-}

@@ -9,19 +9,17 @@
  * ConcreteStrategy participant in the Strategy Design Pattern.
  */
 class FlatTaxStrategy : public TaxStrategy {
-private:
-    int flatRate;
-
 public:
     /**
      * @brief Constructor for the FlatTaxStrategy.
      */
-    FlatTaxStrategy(int flatRate);
+    FlatTaxStrategy() = default;
+
     
     /**
      * @brief Destructor for the FlatTaxStrategy.
      */
-    virtual ~FlatTaxStrategy();
+     ~FlatTaxStrategy() = default;
 
     /**
      * @brief Calculates tax on a building using the flat tax strategy.
@@ -40,8 +38,6 @@ public:
      * This function acts as the algorithm() function.
      */
     int calculateCitizenTax(int earnings) override;
-
-    void adjustRate(int percentage) override;
 };
 
 #endif // FLATTAXSTRATEGY_H
