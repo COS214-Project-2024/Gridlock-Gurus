@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
-using namespace std;
+
 
 /**
  * @brief Represents an industrial factory building.
