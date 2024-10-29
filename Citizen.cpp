@@ -1,7 +1,7 @@
 #include "Citizen.h"
 #include "NameGenerator.h"
 
-Citizen::Citizen(string type, int satisfactionLevel, int funds){
+Citizen::Citizen(std::string type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority){
     this->type = type;
     this->satisfactionLevel = satisfactionLevel;
     this->funds = funds;
@@ -9,7 +9,7 @@ Citizen::Citizen(string type, int satisfactionLevel, int funds){
     this->retired = false;
     this->home = nullptr;
     this->placeOfWork = nullptr;
-    this->taxAuthority = nullptr;
+    this->taxAuthroity = taxAuthority;
     name = NameGenerator::getInstance().getRandomName();
 }
 
@@ -44,12 +44,11 @@ void Citizen::collectSalary(Building* placeOfWork){
     }
 }
 
-void Citizen::payTaxes(){
-    if (taxAuthority) {
-        int taxAmount = taxAuthority->calculateCitizenTax(funds);
-        if (funds >= taxAmount) {
-            funds -= taxAmount;
-            taxAuthority->receiveTaxes(taxAmount);
+void Citizen::payTaxes(int amount){
+    if (employmentStatus) {
+        if (funds >= amount) {
+            funds -= amount;
+            taxAuthority->sendTax(amount);
         }
     }
 }
