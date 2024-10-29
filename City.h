@@ -13,7 +13,6 @@ class City {
 private:
     Government* government;  ///< Pointer to the government managing the city.
     BuildingCollection* buildings;  ///< Collection of buildings in the city.
-    int citizenHappiness;  ///< The overall happiness level of citizens.
 
 public:
     /**

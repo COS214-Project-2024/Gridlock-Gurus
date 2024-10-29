@@ -5,6 +5,7 @@
 #include "TaxStrategy.h"
 
 class Building;
+class Citizen;
 
 /**
  * @brief Manages tax collection and taxation strategies in the city.

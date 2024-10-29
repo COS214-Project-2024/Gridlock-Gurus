@@ -32,7 +32,7 @@ public:
      * 
      * @return A `TransportState` object representing the current state of the vehicle.
      */
-    virtual TransportState returnState() = 0;
+    virtual TransportState* returnState() = 0;
 
     /**
      * @brief Simulates breaking the vehicle.

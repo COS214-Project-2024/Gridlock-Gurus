@@ -1,4 +1,5 @@
 #include "BudgetDepartment.h"
+#include "TaxAuthority.h"
 
 BudgetDepartment::BudgetDepartment() : totalAvailable(0), broke(false) {}
 
@@ -9,8 +10,12 @@ int BudgetDepartment::checkTotal() {
 bool BudgetDepartment::checkAvailability(int amount, TaxAuthority* taxAuthority) {
     if (totalAvailable < amount){
         receiveTaxes(taxAuthority);
+        if (totalAvailable > amount){
+            return true;
+        }
+        else return false;
     }
-    return ;
+    else return false;
 }
 
 void BudgetDepartment::gain(int amount) {

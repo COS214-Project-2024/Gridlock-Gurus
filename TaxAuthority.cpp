@@ -1,4 +1,5 @@
 #include "TaxAuthority.h"
+#include "Citizen.h"
 
 TaxAuthority::TaxAuthority() : buildings(nullptr), strategy(nullptr), collectedTax(0) {}
 
@@ -42,9 +43,9 @@ int TaxAuthority::calculateBuildingTax(int value) {
     return 0;
 }
 
-int TaxAuthority::calculateBuildingTax(int earnings) {
+int TaxAuthority::calculateCitizenTax(int earnings) {
     if (strategy) {
-        return strategy->calculateBuildingTax(earnings);
+        return strategy->calculateCitizenTax(earnings);
     }
     return 0;
 }
