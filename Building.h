@@ -50,6 +50,12 @@ public:
      * @param owner Pointer to the building's owner.
      */
      void payTax(int amount, std::shared_ptr<Citizen> owner);
+
+     /**
+     * @brief Getter for the cost of the building.
+     */
+     int getCost();
+     
 };
 
 #endif // BUILDING_H
