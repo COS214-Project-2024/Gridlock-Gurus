@@ -1,7 +1,7 @@
 #include "CitizenFactory.h"
 #include <iostream>
 
-CitizenFactory::CitizenFactory() {}
+CitizenFactory::CitizenFactory(std::weak_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {}
 
 Citizen* CitizenFactory::createCitizen(std::string type, int startingSatisfaction, int startingFunds) {
     std::cout << "New citizen has arrived.\n";
