@@ -1,20 +1,14 @@
 #ifndef CITIZEN_H
 #define CITIZEN_H
-
-#include "TaxAuthority.h"
-#include "Building.h"
+#include "Vehicle.h"
+#include "TransportDepartment.h"
 #include <string>
 #include <memory>
 
-/**
- * @brief Represents a citizen in the city.
- *
- * The Citizen class encapsulates information and behaviors related to individual citizens,
- * including employment, taxes, and residence.
- */
+
 class Citizen {
 private:
-    std::weak_ptr<TaxAuthority> taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
+  std::weak_ptr<TaxAuthority> taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
 
 protected:
     std::string name;
@@ -25,6 +19,8 @@ protected:
     bool retired;                  ///< Retirement status of the citizen.
     Building* home;                ///< Pointer to the citizen's home building.
     Building* placeOfWork;         ///< Pointer to the citizen's workplace.
+    int id;
+    Vehicle* currentVehicle;
 
 public:
     /**
@@ -41,7 +37,7 @@ public:
      *
      * Cleans up resources related to the citizen.
      */
-    virtual ~Citizen();
+     ~Citizen();
 
     /**
      * @brief Finds employment at a specified building.
@@ -78,12 +74,16 @@ public:
      */
     void payTaxes(int amount);
 
-    /**
-     * @brief Updates the state of the citizen.
-     *
-     * This function is called to update various attributes of the citizen.
-     */
-    void update();
+
+    std::string getName() const;
+    int getId() const;
+
+
+    void callTransport(TransportDepartment& department, const std::string& type);
+    void boardVehicle(Vehicle* vehicle);
+    void offloadVehicle();
+
+    bool isInVehicle() const;
 
     /**
      * @brief Retires the citizen.
@@ -118,3 +118,4 @@ public:
 };
 
 #endif // CITIZEN_H
+

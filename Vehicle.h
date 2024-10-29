@@ -4,83 +4,30 @@
 #include <string>
 #include "TransportState.h"
 
-/**
- * @class Vehicle
- * @brief Abstract base class representing a vehicle in the transportation system.
- * 
- * The `Vehicle` class defines the common properties and behaviors of various types of vehicles
- * (e.g., train, truck, taxi) used in the transportation system. Each specific vehicle type must 
- * implement the abstract functions defined in this class. The class also tracks the state of 
- * the vehicle, such as whether it is functional, damaged, or broken.
- */
 class Vehicle {
-private:
-    std::string type;  ///< Type of the vehicle (e.g., "train", "truck", "taxi").
-    int numberOfPassengers;  ///< Number of passengers currently in the vehicle.
-    int capacity;  ///< Maximum capacity of the vehicle.
-    TransportState* transportState;  ///< The current state of the vehicle (functional, broken, etc.).
+protected:
+    std::string type;
+    int capacity;
+    int currentPassengers;
+    TransportState* state;
 
 public:
-    /**
-     * @brief Default constructor for the Vehicle class.
-     *
-     * Initializes a vehicle object with default values.
-     */
-    Vehicle();
+    Vehicle(const std::string& type, int capacity);
+    virtual ~Vehicle() = default;
 
-    /**
-     * @brief Virtual destructor for the Vehicle class.
-     *
-     * Ensures proper cleanup of resources used by derived vehicle objects.
-     */
-    virtual ~Vehicle();
+    virtual void checkState() = 0;    
+    virtual void collect(int amount) = 0; 
+    virtual void run() = 0;           
+    virtual void breakDown() = 0;     
+    virtual void delay() = 0;         
+    virtual Vehicle* clone() = 0;     
 
-    /**
-     * @brief Collects a specified amount of goods or passengers.
-     *
-     * This is a pure virtual function that must be implemented by derived vehicle types.
-     * 
-     * @param amount The amount to collect (e.g., number of passengers, cargo).
-     */
-    virtual void collect(int amount) = 0;
+    void setState(TransportState* newState);
+    TransportState* getState() const;
+    std::string getType() const;
 
-    /**
-     * @brief Offloads a specified amount of goods or passengers.
-     *
-     * This is a pure virtual function that must be implemented by derived vehicle types.
-     * 
-     * @param amount The amount to offload (e.g., number of passengers, cargo).
-     */
-    virtual void offload(int amount) = 0;
-
-    /**
-     * @brief Runs the vehicle.
-     *
-     * This method simulates the operation of the vehicle (e.g., moving to a destination).
-     */
-    virtual void run() = 0;
-
-    /**
-     * @brief Simulates a vehicle breakdown.
-     *
-     * This method transitions the vehicle into a broken or damaged state.
-     */
-    virtual void breakDown() = 0;
-
-    /**
-     * @brief Delays the vehicle operation.
-     *
-     * This method simulates a delay in the vehicle's operation.
-     */
-    virtual void delay() = 0;
-
-    /**
-     * @brief Clones the vehicle.
-     *
-     * Creates a copy of the vehicle object.
-     */
-    virtual void clone() = 0;
+    void load(int passengers);
+    void offload();
 };
 
-#endif // VEHICLE_H
-
+#endif
