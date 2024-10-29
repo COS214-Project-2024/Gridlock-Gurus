@@ -13,12 +13,12 @@ public:
     /**
      * @brief Constructor for the FlatTaxStrategy.
      */
-    FlatTaxStrategy();
+    FlatTaxStrategy() = default;
     
     /**
      * @brief Destructor for the FlatTaxStrategy.
      */
-    virtual ~FlatTaxStrategy();
+     ~FlatTaxStrategy() = default;
 
     /**
      * @brief Calculates tax on a building using the flat tax strategy.
