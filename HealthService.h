@@ -14,7 +14,10 @@ private:
     HealthState* healthState;  ///< Current state of the health service.
     int hospitalId;  ///< ID of the hospital.
     std::list<Citizen*> staff;  ///< List of staff members in the health service.
-
+    int maxStaff;
+    int currentStaff;
+    string hospitalName;
+    int responseTime;
 public:
     /**
      * @brief Constructs a new HealthService building.
@@ -25,12 +28,12 @@ public:
      * @param owner Pointer to the owner of the health service.
      * @param taxAuthority Pointer to the tax authority associated with the health service.
      */
-    HealthService(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    HealthService(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name);
 
     /**
      * @brief Destroys the HealthService building.
      */
-    virtual ~HealthService();
+    virtual ~HealthService() = default;
 
     /**
      * @brief Gets details about the health service building.
@@ -60,7 +63,15 @@ public:
      * @brief Pays a staff member in the health service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    void payStaff(Citizen* staffMember);
+    int pay(Citizen* staffMember);
+    void employ(Citizen* employee);
+    void fire(Citizen* employee);
+    void retire(Citizen* employee);
+    int getStaff();
+    int getMaxStaff();
+    void responseTimeDec(int by);
+    void responseTimeInc(int by);
+    int getResponseTime();
 };
 
 #endif // HEALTHSERVICE_H

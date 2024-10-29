@@ -1,6 +1,7 @@
 #ifndef LOWFUNDINGEDUCATIONSTATE_H
 #define LOWFUNDINGEDUCATIONSTATE_H
 
+#include "EducationService.h"
 #include "EducationState.h"
 
 /**
@@ -9,6 +10,8 @@
  * ConcreteState in the State pattern. It extends the EducationState class and implements the methods to manage education service operations when funding is low.
  */
 class LowFundingEducationState : public EducationState {
+private:
+    EducationService* service;
 public:
     /**
      * @brief Constructs a new LowFundingEducationState object.
@@ -31,6 +34,7 @@ public:
      * @return int The quality level of education.
      */
     int getEducationQuality() override;
+    string getName() override;
 };
 
 #endif // LOWFUNDINGEDUCATIONSTATE_H

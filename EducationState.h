@@ -1,12 +1,18 @@
 #ifndef EDUCATIONSTATE_H
 #define EDUCATIONSTATE_H
 
+#include <string>
+#include <iostream>
+using namespace std;
+
 /**
  * @brief Abstract class representing the state of education services.
  *
  * AbstractState in the State pattern, defining the interface for various education service states. Concrete states will implement specific behaviors for managing education service operations based on funding levels.
  */
 class EducationState {
+protected:
+    string name;
 public:
     /**
      * @brief Constructs a new EducationState object.
@@ -16,7 +22,7 @@ public:
     /**
      * @brief Destroys the EducationState object.
      */
-    virtual ~EducationState();
+    virtual ~EducationState() = default;
 
     /**
      * @brief Checks the current state of education services.
@@ -30,6 +36,7 @@ public:
      * @return int The quality level of education.
      */
     virtual int getEducationQuality() = 0;
+    virtual string getName() = 0;
 };
 
 #endif // EDUCATIONSTATE_H

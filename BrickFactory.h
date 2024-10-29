@@ -3,6 +3,7 @@
 
 #include "Factory.h"
 #include <list>
+using namespace std;
 
 /**
  * @brief Represents a brick manufacturing factory.
@@ -11,8 +12,8 @@
  */
 class BrickFactory : public Factory {
 private:
-    std::list<Citizen*> employees;  ///< List of employees working at the brick factory.
-
+    list<Citizen*> employees;  ///< List of employees working at the brick factory.
+    string name;
 public:
     /**
      * @brief Constructs a new BrickFactory object.
@@ -23,12 +24,12 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    BrickFactory(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    BrickFactory(int cost, string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
 
     /**
      * @brief Destroys the BrickFactory object.
      */
-    virtual ~BrickFactory();
+    virtual ~BrickFactory() = default;
 
     /**
      * @brief Gets details about the brick factory.
@@ -52,7 +53,10 @@ public:
      * @brief Pays an employee working at the brick factory.
      * @param employee Pointer to the employee.
      */
-    void payEmployee(Citizen* employee);
+    int payEmployee(Citizen* employee);
+    void employ(Citizen* employee);
+    void fire(Citizen* employee);
+    void retire(Citizen* employee);
 };
 
 #endif // BRICKFACTORY_H

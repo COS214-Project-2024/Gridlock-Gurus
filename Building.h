@@ -3,6 +3,8 @@
 
 #include "Resources.h"
 #include "Citizen.h"
+#include <string>
+using namespace std;
 
 /**
  * @brief Represents a building in the city.
@@ -10,7 +12,7 @@
  * Product participant in the Factory Method pattern. It defines the properties and methods shared by all types of buildings.
  */
 class Building {
-private:
+protected:
     int cost;  ///< The construction cost of the building.
     std::string location;  ///< The location of the building.
     Resources* resources;  ///< Resources used by the building.
@@ -33,7 +35,7 @@ public:
     /**
      * @brief Destroys the Building object.
      */
-    virtual ~Building();
+    virtual ~Building() = default;
 
     /**
      * @brief Gets details about the building.
