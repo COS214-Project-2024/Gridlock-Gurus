@@ -3,6 +3,8 @@
 
 #include "BuildingFactory.h"
 
+class TaxAuthority;
+
 /**
  * @brief Factory for creating residential buildings.
  *
@@ -29,7 +31,7 @@ public:
      *
      * This method overrides the factory method to create a residential building.
      */
-    Building* createBuilding(string type, Citizen* owner) override;
+    Building* createBuilding(std::string type, Citizen* owner) override;
 };
 
 #endif // RESIDENTIALFACTORY_H

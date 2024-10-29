@@ -3,7 +3,7 @@
 
 #include "Service.h"
 #include "EducationState.h"
-
+#include <list>
 
 /**
  * @brief Represents an education service building.
@@ -48,7 +48,7 @@ public:
      * @param amount The amount of tax to be paid.
      * @param owner Pointer to the building's owner.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Sets the state of the education service.

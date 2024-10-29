@@ -16,8 +16,8 @@ string Residential::getDetails() {
     return details;
 }
 
-void Residential::payTax() {
-    owner->payTaxes();
+void Residential::payTax(int amount) {
+    owner->payTaxes(amount);
 }
 
 void Residential::householdTax() {
@@ -33,11 +33,11 @@ void Residential::addTenant(Citizen* tenant) {
         if(find(tenants.begin(), tenants.end(), tenant) != tenants.end()) {
             tenants.push_back(tenant);
         } else {
-            cout<< tenant->getName() << " is already a resident.\n";
+            std::cout<< tenant->getName() << " is already a resident.\n";
         }
         capacity++;
     } else {
-        cout<< "This building is full, " + tenant->getName() + " can't move in.\n";
+        std::cout<< "This building is full, " + tenant->getName() + " can't move in.\n";
     }
 }
 

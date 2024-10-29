@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
-using namespace std;
 
 /**
  * @brief Represents a service building (e.g., hospital, police station).
@@ -14,7 +13,7 @@ using namespace std;
  */
 class Service : public Building {
 protected:
-     string type;
+     std::string type;
      double benefits;
 public:
     /**
@@ -42,7 +41,7 @@ public:
     /**
      * @brief Pays taxes for the service building.
      */
-    virtual void payTax() = 0;  ///< Pure virtual function
+    virtual void payTax(int amount) = 0;  ///< Pure virtual function
 
     /**
      * @brief Produces resources in the service building.

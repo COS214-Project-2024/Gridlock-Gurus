@@ -18,7 +18,7 @@ private:
     int productionRate;  ///< The rate at which the commercial building generates money.
     int maxEmployees;
     int numEmployees;
-    string name;
+    std::string name;
     std::list<Citizen*> employees;  ///< List of staff members in the education service.
 
 public:
@@ -41,7 +41,7 @@ public:
     /**
      * @brief Pays taxes for the commercial building.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Gets details about the commercial building.

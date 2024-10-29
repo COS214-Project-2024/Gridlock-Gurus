@@ -6,17 +6,17 @@ Commercial::Commercial(int cost, std::string location, Resources *resources, int
     this->numEmployees = 0;
 }
 
-void Commercial::payTax() {
-    owner->payTaxes();
+void Commercial::payTax(int amount) {
+    owner->payTaxes(amount);
 }
 
 std::string Commercial::getDetails() {
-    string details =  "Shop: \n";
+    std::string details =  "Shop: \n";
     details += "Owner: " + owner->getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Capacity: " + to_string(numEmployees) + "/" + to_string(maxEmployees) + "\n";
-    details += "Cost: " + to_string(cost) + "\n";
-    details += "Size: " + to_string(size) + "\n";
+    details += "Capacity: " + std::to_string(numEmployees) + "/" + std::to_string(maxEmployees) + "\n";
+    details += "Cost: " + std::to_string(cost) + "\n";
+    details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
 
@@ -30,14 +30,14 @@ void Commercial::employ(Citizen *employee) {
             if(find(employees.begin(), employees.end(), employee) != employees.end()) {
                 employees.push_back(employee);
             } else {
-                cout<< employee->getName() << " is already employed.\n";
+                std::cout<< employee->getName() << " is already employed.\n";
             }
             numEmployees++;
         } else {
-            cout<< "This shop is fully staffed, " + employee->getName() + " can't apply here.\n";
+            std::cout<< "This shop is fully staffed, " + employee->getName() + " can't apply here.\n";
         }
     } else {
-        cout<< employee->getName() << " is already employed.\n";
+        std::cout<< employee->getName() << " is already employed.\n";
     }
 }
 
@@ -45,7 +45,7 @@ int Commercial::pay(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         int amount = 3700;
-        cout<< employee->getName() << " was paid their salary. R" << amount << " was paid into their account\n";
+        std::cout<< employee->getName() << " was paid their salary. R" << amount << " was paid into their account\n";
         return amount;
     } else {
         std::cout << employee->getName() << "? Who the heck are you? You're not a doctor!\n";
@@ -56,7 +56,7 @@ void Commercial::fire(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         employees.erase(it);
-        cout<< employee->getName() << " was fired from their job. Their patients breathe a sigh of relief.\n";
+        std::cout<< employee->getName() << " was fired from their job. Their patients breathe a sigh of relief.\n";
         employee->fired();
         numEmployees--;
     } else {
@@ -68,7 +68,7 @@ void Commercial::retire(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         employees.erase(it);
-        cout<< employee->getName() << " retired from their job. Their regular patients will miss them.\n";
+        std::cout<< employee->getName() << " retired from their job. Their regular patients will miss them.\n";
         employee->retireToCountryside();
         numEmployees--;
     } else {
@@ -77,5 +77,5 @@ void Commercial::retire(Citizen *employee) {
 }
 
 void Commercial::update(){
-    payTax();
+    // payTax();
 }

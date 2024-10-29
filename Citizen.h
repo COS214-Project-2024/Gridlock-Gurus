@@ -17,8 +17,8 @@ private:
     std::weak_ptr<TaxAuthority> taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
 
 protected:
-    string name;
-    string type;              ///< The type of the citizen (e.g., worker, retiree).
+    std::string name;
+    std::string type;              ///< The type of the citizen (e.g., worker, retiree).
     int satisfactionLevel;         ///< The satisfaction level of the citizen.
     int funds;                     ///< The amount of funds available to the citizen.
     bool employmentStatus;         ///< Employment status of the citizen (employed or not).
@@ -106,7 +106,7 @@ public:
      *
      * This function updates the employment status of the citizen.
      */
-    string getName();
+    std::string getName();
     bool getEmploymentStatus();
 
     /**

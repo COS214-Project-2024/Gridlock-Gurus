@@ -51,9 +51,8 @@ public:
      /**
      * @brief Pays taxes on the building.
      * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
      */
-     void payTax(int amount, std::shared_ptr<Citizen> owner);
+    virtual void payTax(int amount) = 0;
 
      /**
      * @brief Getter for the cost of the building.

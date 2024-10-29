@@ -8,7 +8,7 @@ Government* Government::getInstance() {
 Government::Government() : taxAuthority(new TaxAuthority()),
     transportDepartment(new TransportDepartment()),
     budgetDepartment(new BudgetDepartment()),
-    utilities(new DepartmentOfWaterPowerAndSanitation()),
+    utilities(new DepartmentOfWaterPowerAndSanitation(new Resources(5000, 5000, true))),
     homeAffairs(new DepartmentOfHomeAffairs()) {}
 
 Government::~Government() {

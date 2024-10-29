@@ -1,21 +1,21 @@
 #include "SteelFactory.h"
 
-SteelFactory::SteelFactory(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max){
+SteelFactory::SteelFactory(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max){
     name = "SteelFactory";
 }
 
 std::string SteelFactory::getDetails() {
-    string details =  "Steel factory: \n";
+    std::string details =  "Steel factory: \n";
     details += "Owner: " + owner->getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Employees: " + to_string(numOfEmployees) + "/" + to_string(maxEmployees) + "\n";
-    details += "Cost: " + to_string(cost) + "\n";
-    details += "Size: " + to_string(size) + "\n";
+    details += "Employees: " + std::to_string(numOfEmployees) + "/" + std::to_string(maxEmployees) + "\n";
+    details += "Cost: " + std::to_string(cost) + "\n";
+    details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
 
-void SteelFactory::payTax() {
-    owner->payTaxes();
+void SteelFactory::payTax(int amount) {
+    owner->payTaxes(amount);
 }
 
 void SteelFactory::produceResource() {
@@ -28,14 +28,14 @@ void SteelFactory::employ(Citizen *employee) {
             if(find(employees.begin(), employees.end(), employee) != employees.end()) {
                 employees.push_back(employee);
             } else {
-                cout<< employee->getName() << " is already employed.\n";
+                std::cout<< employee->getName() << " is already employed.\n";
             }
             numOfEmployees++;
         } else {
-            cout<< "This factory is fully staffed, " + employee->getName() + " can't apply here.\n";
+            std::cout<< "This factory is fully staffed, " + employee->getName() + " can't apply here.\n";
         }
     } else {
-        cout<< employee->getName() << " is already employed.\n";
+        std::cout<< employee->getName() << " is already employed.\n";
     }
 }
 
@@ -45,7 +45,7 @@ int SteelFactory::pay(Citizen *employee) {
         double salary;
         int amount = 163;
         //benefits are affected by the state of education
-        cout<< employee->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
+        std::cout<< employee->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
         return amount;
     } else {
         std::cout << employee->getName() << "? Who the heck are you? You're not a doctor!\n";
@@ -56,7 +56,7 @@ void SteelFactory::fire(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         employees.erase(it);
-        cout<< employee->getName() << " was fired from their job.\n";
+        std::cout<< employee->getName() << " was fired from their job.\n";
         employee->fired();
         numOfEmployees--;
     } else {
@@ -69,7 +69,7 @@ void SteelFactory::retire(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
     if(it != employees.end()) {
         employees.erase(it);
-        cout<< employee->getName() << " retired from their job.\n";
+        std::cout<< employee->getName() << " retired from their job.\n";
         employee->retireToCountryside();
         numOfEmployees--;
     } else {

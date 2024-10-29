@@ -4,6 +4,7 @@
 #include "Service.h"
 #include "PoliceState.h"
 #include <set>
+#include <list>
 
 /**
  * @brief Represents a police service building.
@@ -17,7 +18,7 @@ private:
     std::list<Citizen*> officers;  ///< List of officers in the police service.
     int maxStaff;
     int currentStaff;
-    string stationName;
+    std::string stationName;
     int responseTime;
 
 public:
@@ -30,7 +31,7 @@ public:
      * @param owner Pointer to the owner of the police service.
      * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name);
+    PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name);
 
     /**
      * @brief Destroys the PoliceService building.
@@ -46,7 +47,7 @@ public:
     /**
      * @brief Pays taxes for the police service building.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Sets the state of the police service.

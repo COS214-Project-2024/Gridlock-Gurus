@@ -12,7 +12,7 @@
 class SteelFactory : public Factory {
 private:
     std::list<Citizen*> employees;  ///< List of employees working at the steel factory.
-    string name;
+    std::string name;
 public:
     /**
      * @brief Constructs a new SteelFactory object.
@@ -23,7 +23,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    SteelFactory(int cost, string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
+    SteelFactory(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
 
     /**
      * @brief Destroys the SteelFactory object.
@@ -34,12 +34,12 @@ public:
      * @brief Gets details about the steel factory.
      * @return A string containing details about the steel factory.
      */
-    string getDetails() override;
+    std::string getDetails() override;
 
     /**
      * @brief Pays taxes for the steel factory.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Produces steel in the factory.

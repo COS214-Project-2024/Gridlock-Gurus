@@ -11,8 +11,8 @@
  */
 class WoodFactory : public Factory {
 private:
-    list<Citizen*> employees;  ///< List of employees working at the wood factory.
-    string name;
+    std::list<Citizen*> employees;  ///< List of employees working at the wood factory.
+    std::string name;
 public:
     /**
      * @brief Constructs a new WoodFactory object.
@@ -23,7 +23,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    WoodFactory(int cost, string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
+    WoodFactory(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
 
     /**
      * @brief Destroys the WoodFactory object.
@@ -34,12 +34,12 @@ public:
      * @brief Gets details about the wood factory.
      * @return A string containing details about the wood factory.
      */
-    string getDetails() override;
+    std::string getDetails() override;
 
     /**
      * @brief Pays taxes for the wood factory.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Produces wood in the factory.

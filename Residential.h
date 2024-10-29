@@ -47,7 +47,7 @@ public:
      *
      * This method overrides the base `payTax()` method to implement tax payment for residential buildings.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Calculates household tax for the residential building.

@@ -39,7 +39,7 @@ public:
     /**
      * @brief Pays taxes for the brick factory.
      */
-    void payTax() override;
+    void payTax(int amount) override;
 
     /**
      * @brief Produces bricks in the factory.

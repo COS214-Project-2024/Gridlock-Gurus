@@ -2,7 +2,7 @@
 #include "PeaceState.h"
 #include "UnrestState.h"
 
-PoliceService::PoliceService(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name) : Service(cost, location, resources, size, owner, taxAuthority) {
+PoliceService::PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name) : Service(cost, location, resources, size, owner, taxAuthority) {
     this->stationId = id;
     this->benefits = 1.5;
     this->maxStaff = max;
@@ -14,20 +14,20 @@ PoliceService::PoliceService(int cost, string location, Resources *resources, in
 }
 
 string PoliceService::getDetails() {
-    string details =  "Police service: \n";
+    std::string details =  "Police service: \n";
     details += "Name: " + stationName + "\n";
     details += "Police state: " + this->policeState->getName() + "\n";
-    details += "Response time: " + to_string(responseTime) + " minutes\n";
+    details += "Response time: " + std::to_string(responseTime) + " minutes\n";
     details += "Owner: " + owner->getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Capacity: " + to_string(currentStaff) + "/" + to_string(maxStaff) + "\n";
-    details += "Cost: " + to_string(cost) + "\n";
-    details += "Size: " + to_string(size) + "\n";
+    details += "Capacity: " + std::to_string(currentStaff) + "/" + std::to_string(maxStaff) + "\n";
+    details += "Cost: " + std::to_string(cost) + "\n";
+    details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
 
-void PoliceService::payTax() {
-    owner->payTaxes();
+void PoliceService::payTax(int amount) {
+    owner->payTaxes(amount);
 }
 
 void PoliceService::employ(Citizen *employee) {
@@ -129,5 +129,5 @@ void PoliceService::setState(PoliceState *state) {
 }
 
 void PoliceService::update(){
-    payTax();
+    // payTax();
 }

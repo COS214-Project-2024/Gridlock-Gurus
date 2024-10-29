@@ -49,15 +49,15 @@ void Citizen::payTaxes(int amount){
         if (funds >= amount) {
             funds -= amount;
             taxAuthority->sendTax(amount);
-        }
+        } // calculateCitizenTax(getFunds())
     }
 }
 
 void Citizen::update(){
-    if (taxAuthority) {
-        payTaxes();
-        satisfactionLevel -= 5;
-    }
+    // if (taxAuthority) {
+    //     payTaxes();
+    //     satisfactionLevel -= 5;
+    // }
 }
 
 void Citizen::retire(){
@@ -90,7 +90,7 @@ void Citizen::fired(){
     satisfactionLevel -= 5;
 }
 
-string Citizen::getName() {
+std::string Citizen::getName() {
     return name;
 }
 

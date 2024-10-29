@@ -24,7 +24,7 @@ void TaxAuthority::collectTaxes() {
 
 void TaxAuthority::notifyCitizens() {
     for(auto c : this->citizens) {
-        c->payTax(calculateCitizenTax(c->getFunds()));
+        c->payTaxes(calculateCitizenTax(c->getFunds()));
     }
 }
 

@@ -27,7 +27,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    Factory(int cost, string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
+    Factory(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
 
     /**
      * @brief Destroys the Factory object.
@@ -49,7 +49,7 @@ public:
      *
      * This is an abstract method that must be implemented by concrete factory subclasses.
      */
-    virtual void payTax() = 0;
+    virtual void payTax(int amount) = 0;
 
     /**
      * @brief Produces resources in the factory.
