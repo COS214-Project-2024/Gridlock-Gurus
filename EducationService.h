@@ -5,6 +5,8 @@
 #include "EducationState.h"
 #include <list>
 
+class TaxAuthority;
+
 /**
  * @brief Represents an education service building.
  *
@@ -48,7 +50,7 @@ public:
      * @param amount The amount of tax to be paid.
      * @param owner Pointer to the building's owner.
      */
-    void payTax(int amount) override;
+    // void payTax(int amount) override;
 
     /**
      * @brief Sets the state of the education service.
@@ -74,7 +76,7 @@ public:
     void prestigeDec(int by);
     void prestigeInc(int by);
     int getPrestige();
-    void update() override;
+    // void update() override;
 };
 
 #endif // EDUCATIONSERVICE_H

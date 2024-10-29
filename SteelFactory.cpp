@@ -14,9 +14,9 @@ std::string SteelFactory::getDetails() {
     return details;
 }
 
-void SteelFactory::payTax(int amount) {
-    owner->payTaxes(amount);
-}
+// void SteelFactory::payTax(int amount) {
+//     owner->payTaxes(amount);
+// }
 
 void SteelFactory::produceResource() {
     //impliment
@@ -77,6 +77,6 @@ void SteelFactory::retire(Citizen *employee) {
     }
 }
 
-void SteelFactory::update(){
-    payTax();
-}
+// void SteelFactory::update(){
+//     payTax();
+// }

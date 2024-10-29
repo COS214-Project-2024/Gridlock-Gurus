@@ -4,7 +4,8 @@
 #include "Building.h"
 #include <list>
 #include <string>
-using namespace std;
+
+class TaxAuthority;
 
 /**
  * @brief Represents a residential building.
@@ -15,7 +16,7 @@ class Residential : public Building {
 private:
     int maxCapacity;  ///< The maximum number of citizens the building can house.
     int capacity;  ///< The number of citizens currently in the building.
-    list<Citizen*> tenants;  ///< List of tenants living in the building.
+    std::list<Citizen*> tenants;  ///< List of tenants living in the building.
 
 public:
     /**
@@ -47,7 +48,7 @@ public:
      *
      * This method overrides the base `payTax()` method to implement tax payment for residential buildings.
      */
-    void payTax(int amount) override;
+    // void payTax(int amount) override;
 
     /**
      * @brief Calculates household tax for the residential building.
@@ -69,7 +70,7 @@ public:
     void removeTenant(Citizen* tenant);
 
     int pay(Citizen* employee) override;
-    void update() override;
+    // void update() override;
 };
 
 #endif // RESIDENTIAL_H

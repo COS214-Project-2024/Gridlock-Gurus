@@ -3,6 +3,9 @@
 
 #include "Service.h"
 #include "HealthState.h"
+#include <list>
+
+class TaxAuthority;
 
 /**
  * @brief Represents a health service building.
@@ -16,7 +19,7 @@ private:
     std::list<Citizen*> staff;  ///< List of staff members in the health service.
     int maxStaff;
     int currentStaff;
-    string hospitalName;
+    std::string hospitalName;
     int responseTime;
 public:
     /**
@@ -44,7 +47,7 @@ public:
     /**
      * @brief Pays taxes for the health service building.
      */
-    void payTax() override;
+    // void payTax() override;
 
     /**
      * @brief Sets the state of the health service.
@@ -70,7 +73,7 @@ public:
     void responseTimeDec(int by);
     void responseTimeInc(int by);
     int getResponseTime();
-    void update() override;
+    // void update() override;
 };
 
 #endif // HEALTHSERVICE_H

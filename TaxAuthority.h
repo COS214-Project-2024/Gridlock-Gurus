@@ -6,8 +6,6 @@
 
 #include "BuildingCollection.h"
 #include "TaxStrategy.h"
-#include "FlatTaxStrategy.h"
-#include "ProgressiveTaxStrategy.h"
 #include "Citizen.h"
 
 class Citizen;

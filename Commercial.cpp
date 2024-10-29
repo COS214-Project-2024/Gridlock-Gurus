@@ -6,9 +6,9 @@ Commercial::Commercial(int cost, std::string location, Resources *resources, int
     this->numEmployees = 0;
 }
 
-void Commercial::payTax(int amount) {
-    owner->payTaxes(amount);
-}
+// void Commercial::payTax(int amount) {
+//     owner->payTaxes(amount);
+// }
 
 std::string Commercial::getDetails() {
     std::string details =  "Shop: \n";
@@ -76,6 +76,6 @@ void Commercial::retire(Citizen *employee) {
     }
 }
 
-void Commercial::update(){
-    // payTax();
-}
+// void Commercial::update(){
+//     // payTax();
+// }

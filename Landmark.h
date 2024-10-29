@@ -3,6 +3,8 @@
 
 #include "Building.h"
 
+class TaxAuthority;
+
 /**
  * @brief Represents a landmark in the city.
  *
@@ -10,7 +12,7 @@
  */
 class Landmark : public Building {
 private:
-     string name;
+    std::string name;
 public:
     /**
      * @brief Constructs a new Landmark building.
@@ -21,7 +23,7 @@ public:
      * @param owner Pointer to the owner of the landmark.
      * @param taxAuthority Pointer to the tax authority associated with the landmark.
      */
-    Landmark(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, string name);  ///< Constructor
+    Landmark(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, std::string name);  ///< Constructor
 
     /**
      * @brief Destroys the Landmark building.
@@ -31,7 +33,7 @@ public:
     /**
      * @brief Pays taxes for the landmark building.
      */
-    void payTax() override;
+    // void payTax() override;
 
     /**
      * @brief Gets details about the landmark building.
@@ -40,7 +42,7 @@ public:
     std::string getDetails() override;
 
     int pay(Citizen* citizen) override;
-    void update() override;
+    // void update() override;
 };
 
 #endif // LANDMARK_H

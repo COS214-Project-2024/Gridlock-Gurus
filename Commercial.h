@@ -6,7 +6,8 @@
 #include <string>
 #include <list>
 #include <iostream>
-using namespace std;
+
+class TaxAuthority;
 
 /**
  * @brief Represents a commercial building.
@@ -41,7 +42,7 @@ public:
     /**
      * @brief Pays taxes for the commercial building.
      */
-    void payTax(int amount) override;
+    // void payTax(int amount) override;
 
     /**
      * @brief Gets details about the commercial building.
@@ -57,7 +58,7 @@ public:
     int pay(Citizen* employee);
     void fire(Citizen* employee);
     void retire(Citizen* employee);
-    void update() override;
+    // void update() override;
 };
 
 #endif // COMMERCIAL_H

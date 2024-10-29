@@ -1,13 +1,14 @@
 
 #include <iostream>
 #include "TransportDepartment.h"
-#include "Citizen.h"
+#include "CitizenFactory.h"
 #include "Train.h"
 #include "Taxi.h"
 #include "Truck.h"
 #include "Functional.h"
 #include "Damaged.h"
 #include "Broken.h"
+#include "TaxAuthority.h"
 #include <iostream>
 
 
@@ -34,13 +35,15 @@ int main() {
     department.addVehicle(taxi);
     department.addVehicle(truck);
 
-    
-    Citizen alice("Alice", 1);
-    Citizen bob("Bob", 2);
+    std::weak_ptr<TaxAuthority> tax = new TaxAuthority();
+    // Citizen alice("Alice", 1);
+    // Citizen bob("Bob", 2);
+    Citizen* alice = new Citizen("citizen", 100, 5000, tax);
+    Citizen* bob = new Citizen("citizen", 100, 5000, tax);
 
     
-    alice.callTransport(department, "Train");
-    bob.callTransport(department, "Taxi");  
+    alice->callTransport(department, "Train");
+    bob->callTransport(department, "Taxi");  
 
     train->run();
     train->delay();
@@ -54,8 +57,8 @@ int main() {
     taxi->run();
 
     std::cout << "\n--- Offloading Passengers ---" << std::endl;
-    alice.offloadVehicle();
-    bob.offloadVehicle();  
+    alice->offloadVehicle();
+    bob->offloadVehicle();  
 
     std::cout << "\n--- Cloning Vehicles ---" << std::endl;
     Vehicle* clonedTrain = train->clone();

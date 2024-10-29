@@ -14,9 +14,9 @@ std::string WoodFactory::getDetails() {
     return details;
 }
 
-void WoodFactory::payTax(int amount) {
-    owner->payTaxes(amount);
-}
+// void WoodFactory::payTax(int amount) {
+//     owner->payTaxes(amount);
+// }
 
 void WoodFactory::produceResource() {
     //impliment
@@ -77,6 +77,6 @@ void WoodFactory::retire(Citizen *employee) {
     }
 }
 
-void WoodFactory::update(){
-    // payTax();
-}
+// void WoodFactory::update(){
+//     // payTax();
+// }

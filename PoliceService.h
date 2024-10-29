@@ -6,6 +6,8 @@
 #include <set>
 #include <list>
 
+class TaxAuthority;
+
 /**
  * @brief Represents a police service building.
  *
@@ -31,7 +33,7 @@ public:
      * @param owner Pointer to the owner of the police service.
      * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name);
+    PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, std::string name);
 
     /**
      * @brief Destroys the PoliceService building.
@@ -47,7 +49,7 @@ public:
     /**
      * @brief Pays taxes for the police service building.
      */
-    void payTax(int amount) override;
+    // void payTax(int amount) override;
 
     /**
      * @brief Sets the state of the police service.
@@ -72,7 +74,7 @@ public:
     int getMaxStaff();
     void responseTimeDec(int by);
     void responseTimeInc(int by);
-    void update() override;
+    // void update() override;
 };
 
 #endif // POLICESERVICE_H

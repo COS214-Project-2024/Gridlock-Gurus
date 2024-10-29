@@ -3,6 +3,7 @@
 
 #include "Resources.h"
 #include "Citizen.h"
+#include "TaxAuthority.h"
 #include <string>
 #include <memory>
 
@@ -52,14 +53,12 @@ public:
      * @brief Pays taxes on the building.
      * @param amount The amount of tax to be paid.
      */
-    virtual void payTax(int amount) = 0;
+    void payTax(int amount);
 
      /**
      * @brief Getter for the cost of the building.
      */
-     int getCost() {
-         return this->cost;
-     }
+     int getCost();
      
 };
 

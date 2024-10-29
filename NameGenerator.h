@@ -18,6 +18,7 @@ private:
 public:
     static NameGenerator& getInstance();
     std::string getRandomName();
+    int getRandomID(int numDigits = 8); // New method for generating random ID
 
 };
 

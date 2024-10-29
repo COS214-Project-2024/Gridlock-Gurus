@@ -1,7 +1,10 @@
 #ifndef CITIZEN_H
 #define CITIZEN_H
+
 #include "Vehicle.h"
 #include "TransportDepartment.h"
+#include "Building.h"
+#include "TaxAuthority.h"
 #include <string>
 #include <memory>
 

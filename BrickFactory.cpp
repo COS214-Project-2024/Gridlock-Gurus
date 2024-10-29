@@ -77,6 +77,6 @@ void BrickFactory::retire(Citizen *employee) {
     }
 }
 
-void BrickFactory::update(){
-    // payTax();
-}
+// void BrickFactory::update(){
+//     // payTax();
+// }

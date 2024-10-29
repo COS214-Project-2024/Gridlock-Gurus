@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 
+class TaxAuthority;
+
 /**
  * @brief Represents a service building (e.g., hospital, police station).
  *
@@ -41,7 +43,7 @@ public:
     /**
      * @brief Pays taxes for the service building.
      */
-    virtual void payTax(int amount) = 0;  ///< Pure virtual function
+    // virtual void payTax(int amount) = 0;  ///< Pure virtual function
 
     /**
      * @brief Produces resources in the service building.
@@ -50,7 +52,7 @@ public:
     virtual int pay(Citizen* employee) = 0;
     virtual void fire(Citizen* employee) = 0;
     virtual void retire(Citizen* employee) = 0;
-    virtual void update() = 0;
+    // virtual void update() = 0;
 };
 
 #endif // SERVICE_H

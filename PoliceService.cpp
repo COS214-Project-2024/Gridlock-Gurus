@@ -2,7 +2,7 @@
 #include "PeaceState.h"
 #include "UnrestState.h"
 
-PoliceService::PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, string name) : Service(cost, location, resources, size, owner, taxAuthority) {
+PoliceService::PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int id, int max, std::string name) : Service(cost, location, resources, size, owner, taxAuthority) {
     this->stationId = id;
     this->benefits = 1.5;
     this->maxStaff = max;
@@ -13,7 +13,7 @@ PoliceService::PoliceService(int cost, std::string location, Resources *resource
     setState(peaceState);
 }
 
-string PoliceService::getDetails() {
+std::string PoliceService::getDetails() {
     std::string details =  "Police service: \n";
     details += "Name: " + stationName + "\n";
     details += "Police state: " + this->policeState->getName() + "\n";
@@ -26,9 +26,9 @@ string PoliceService::getDetails() {
     return details;
 }
 
-void PoliceService::payTax(int amount) {
-    owner->payTaxes(amount);
-}
+// void PoliceService::payTax(int amount) {
+//     owner->payTaxes(amount);
+// }
 
 void PoliceService::employ(Citizen *employee) {
     if(employee->getEmploymentStatus() != true) {
@@ -36,14 +36,14 @@ void PoliceService::employ(Citizen *employee) {
             if(find(officers.begin(), officers.end(), employee) != officers.end()) {
                 officers.push_back(employee);
             } else {
-                cout<< employee->getName() << " is already employed.\n";
+                std::cout<< employee->getName() << " is already employed.\n";
             }
             currentStaff++;
         } else {
-            cout<< "This force is fully staffed, " + employee->getName() + " can't apply here.\n";
+            std::cout<< "This force is fully staffed, " + employee->getName() + " can't apply here.\n";
         }
     } else {
-        cout<< employee->getName() << " is already employed.\n";
+        std::cout<< employee->getName() << " is already employed.\n";
     }
 }
 
@@ -51,7 +51,7 @@ void PoliceService::fire(Citizen *employee) {
     auto it = find(officers.begin(), officers.end(), employee);
     if(it != officers.end()) {
         officers.erase(it);
-        cout<< employee->getName() << " was fired from their job. Bad cops just don't go far.\n";
+        std::cout<< employee->getName() << " was fired from their job. Bad cops just don't go far.\n";
         employee->fired();
         currentStaff--;
     } else {
@@ -63,7 +63,7 @@ void PoliceService::retire(Citizen *employee) {
     auto it = find(officers.begin(), officers.end(), employee);
     if(it != officers.end()) {
         officers.erase(it);
-        cout<< employee->getName() << " retired from their job. They are awarded a medal for their service.\n";
+        std::cout<< employee->getName() << " retired from their job. They are awarded a medal for their service.\n";
         employee->retireToCountryside();
         currentStaff--;
     } else {
@@ -78,7 +78,7 @@ int PoliceService::pay(Citizen *staffMember) {
         int amount = 33000;
         //benefits are affected by the state of police
         salary = amount*benefits;
-        cout<< staffMember->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
+        std::cout<< staffMember->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
         return salary;
     } else {
         std::cout << staffMember->getName() << "? Who the heck are you? Where did you get that badge?\n";
@@ -128,6 +128,6 @@ void PoliceService::setState(PoliceState *state) {
     }
 }
 
-void PoliceService::update(){
-    // payTax();
-}
+// void PoliceService::update(){
+//     // payTax();
+// }

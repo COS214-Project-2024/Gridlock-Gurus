@@ -6,19 +6,19 @@ Residential::Residential(int cost, std::string location, Resources *resources, i
     this->maxCapacity = capacity;
 }
 
-string Residential::getDetails() {
-    string details =  "Residential: \n";
+std::string Residential::getDetails() {
+    std::string details =  "Residential: \n";
     details += "Owner: " + owner->getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Capacity: " + to_string(capacity) + "/" + to_string(maxCapacity) + "\n";
-    details += "Cost: " + to_string(cost) + "\n";
-    details += "Size: " + to_string(size) + "\n";
+    details += "Capacity: " + std::to_string(capacity) + "/" + std::to_string(maxCapacity) + "\n";
+    details += "Cost: " + std::to_string(cost) + "\n";
+    details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
 
-void Residential::payTax(int amount) {
-    owner->payTaxes(amount);
-}
+// void Residential::payTax(int amount) {
+//     owner->payTaxes(amount);
+// }
 
 void Residential::householdTax() {
     for (Citizen* tenant : tenants) {
@@ -45,7 +45,7 @@ void Residential::removeTenant(Citizen *tenant) {
     auto it = find(tenants.begin(), tenants.end(), tenant);
     if(it != tenants.end()) {
         tenants.erase(it);
-        cout<< tenant->getName() << " moved out after giving their notice.\n";
+        std::cout<< tenant->getName() << " moved out after giving their notice.\n";
         capacity--;
     } else {
         std::cout << tenant->getName() << " was not found. Perhaps they were a squatter?\n";
@@ -55,17 +55,17 @@ void Residential::removeTenant(Citizen *tenant) {
 int Residential::pay(Citizen* citizen){
     if(citizen == owner){
         int salary = 40000;
-        cout<< owner->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
+        std::cout<< owner->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
         return salary;
     }
     else{
-        cout << citizen->getName() << ", you're not the owner? How did you get in here??\n";
+        std::cout << citizen->getName() << ", you're not the owner? How did you get in here??\n";
         return 0;
     }
 }
 
-void Residential::update(){
-    payTax();
-    householdTax();
-}
+// void Residential::update(){
+//     payTax();
+//     householdTax();
+// }
 

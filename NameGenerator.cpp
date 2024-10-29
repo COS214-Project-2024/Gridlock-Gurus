@@ -1,4 +1,5 @@
 #include "NameGenerator.h"
+#include <sstream>
 
 NameGenerator::NameGenerator() {
     std::srand(std::time(0));
@@ -16,4 +17,10 @@ std::string NameGenerator::getRandomName() {
     std::string firstName = firstNames[rand() % firstNames.size()];
     std::string lastName = lastNames[rand() % lastNames.size()];
     return firstName + " " + lastName;
+}
+
+int NameGenerator::getRandomID(int numDigits) {
+    int min = std::pow(10, numDigits - 1);
+    int max = std::pow(10, numDigits) - 1;
+    return min + rand() % (max - min + 1);
 }

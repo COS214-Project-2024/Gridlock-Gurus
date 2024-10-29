@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 
+class TaxAuthority;
 
 /**
  * @brief Represents an industrial factory building.
@@ -49,7 +50,7 @@ public:
      *
      * This is an abstract method that must be implemented by concrete factory subclasses.
      */
-    virtual void payTax(int amount) = 0;
+    // virtual void payTax(int amount) = 0;
 
     /**
      * @brief Produces resources in the factory.
@@ -61,7 +62,7 @@ public:
     virtual int pay(Citizen* employee) = 0;
     virtual void fire(Citizen* employee) = 0;
     virtual void retire(Citizen* employee) = 0;
-    virtual void update() = 0;
+    // virtual void update() = 0;
 };
 
 #endif // FACTORY_H

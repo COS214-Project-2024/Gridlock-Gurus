@@ -1,4 +1,6 @@
 #include "TaxAuthority.h"
+#include "FlatTaxStrategy.h"
+#include "ProgressiveTaxStrategy.h"
 
 TaxAuthority::TaxAuthority(){
     this->buildings = std::make_unique<BuildingCollection>();

@@ -2,7 +2,7 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(std::string type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority,int id){
+Citizen::Citizen(std::string type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority){
     this->type = type;
     this->satisfactionLevel = satisfactionLevel;
     this->funds = funds;
@@ -12,7 +12,8 @@ Citizen::Citizen(std::string type, int satisfactionLevel, int funds,std::weak_pt
     this->placeOfWork = nullptr;
     this->taxAuthroity = taxAuthority;
     this->currentVehicle = nullptr;
-    name = NameGenerator::getInstance().getRandomName();
+    this->name = NameGenerator::getInstance().getRandomName();
+    this->id = NameGenerator::getInstance().getRandomID();
 }
 
 void Citizen::findWork(Building* placeOfEmployment){
@@ -55,12 +56,12 @@ void Citizen::payTaxes(int amount){
     }
 }
 
-void Citizen::update(){
-    // if (taxAuthority) {
-    //     payTaxes();
-    //     satisfactionLevel -= 5;
-    // }
-}
+// void Citizen::update(){
+//     // if (taxAuthority) {
+//     //     payTaxes();
+//     //     satisfactionLevel -= 5;
+//     // }
+// }
 
 void Citizen::retire(){
     type = "retiree";
@@ -79,14 +80,14 @@ void Citizen::retireToCountryside(){
 }
 
 void Citizen::quitJob(){
-    type = "unemployed";
+    type = "citizen";
     employmentStatus = false;
     placeOfWork = nullptr;
     satisfactionLevel -= 5;
 }
 
 void Citizen::fired(){
-    type = "unemployed";
+    type = "citizen";
     employmentStatus = false;
     placeOfWork = nullptr;
     satisfactionLevel -= 5;

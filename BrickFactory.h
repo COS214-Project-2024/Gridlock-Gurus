@@ -39,7 +39,7 @@ public:
     /**
      * @brief Pays taxes for the brick factory.
      */
-    void payTax(int amount) override;
+    // void payTax(int amount) override;
 
     /**
      * @brief Produces bricks in the factory.
@@ -54,7 +54,7 @@ public:
     void employ(Citizen* employee) override;
     void fire(Citizen* employee) override;
     void retire(Citizen* employee) override;
-    void update() override;
+    // void update() override;
 };
 
 #endif // BRICKFACTORY_H
