@@ -4,7 +4,7 @@
 #include "TaxAuthority.h"
 #include "Building.h"
 #include <string>
-using namespace std;
+#include <memory>
 
 /**
  * @brief Represents a citizen in the city.
@@ -14,7 +14,7 @@ using namespace std;
  */
 class Citizen {
 private:
-    TaxAuthority* taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
+    std::weak_ptr<TaxAuthority> taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
 
 protected:
     string name;
@@ -34,7 +34,7 @@ public:
      * @param satisfactionLevel The initial satisfaction level of the citizen.
      * @param funds The initial funds available to the citizen.
      */
-    Citizen(std::string type, int satisfactionLevel, int funds);
+    Citizen(std::string type, int satisfactionLevel, int funds, std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroy the Citizen object.
@@ -76,7 +76,7 @@ public:
      *
      * This function handles the tax payment process for the citizen.
      */
-    void payTaxes();
+    void payTaxes(int amount);
 
     /**
      * @brief Updates the state of the citizen.
@@ -108,6 +108,12 @@ public:
      */
     string getName();
     bool getEmploymentStatus();
+
+    /**
+    * @brief Getter for the funds to the citizen.
+    *
+    * @return The funds of the citizen.
+    */
     int getFunds();
 };
 
