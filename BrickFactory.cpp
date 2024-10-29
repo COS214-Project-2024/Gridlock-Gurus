@@ -1,11 +1,11 @@
 #include "BrickFactory.h"
 
-BrickFactory::BrickFactory(int cost, string location, Resources *resources, int size, Citizen *owner, TaxAuthority *taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max){
+BrickFactory::BrickFactory(int cost, std::string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max){
     name = "BrickFactory";
 }
 
 std::string BrickFactory::getDetails() {
-    string details =  "Brick factory: \n";
+    std::string details =  "Brick factory: \n";
     details += "Owner: " + owner->getName() + "\n";
     details += "Location: " + location + "\n";
     details += "Employees: " + to_string(numOfEmployees) + "/" + to_string(maxEmployees) + "\n";
