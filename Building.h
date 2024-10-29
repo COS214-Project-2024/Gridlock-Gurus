@@ -4,7 +4,8 @@
 #include "Resources.h"
 #include "Citizen.h"
 #include <string>
-using namespace std;
+#include <memory>
+
 
 /**
  * @brief Represents a building in the city.
@@ -18,7 +19,7 @@ protected:
     Resources* resources;  ///< Resources used by the building.
     int size;  ///< The size of the building.
     Citizen* owner;  ///< The owner of the building.
-    TaxAuthority* taxAuthority;  ///< Tax authority associated with the building.
+    std::weak_ptr<TaxAuthority> taxAuthority;  ///< Tax authority associated with the building.
 
 public:
     /**
@@ -48,7 +49,7 @@ public:
      * @param amount The amount of tax to be paid.
      * @param owner Pointer to the building's owner.
      */
-    virtual void payTax(int amount, Citizen* owner);
+     void payTax(int amount, std::shared_ptr<Citizen> owner);
 };
 
 #endif // BUILDING_H
