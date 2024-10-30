@@ -1,0 +1,99 @@
+
+name: CI Pipeline
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          
+      - name: Update Submodules
+        run: git submodule update --init --recursive
+
+      # Step 2: Branch protection checks
+      - name: Branch Protection Checks
+        run: |
+          # Prevent direct pushes to the main branch
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "Direct pushes to main are not allowed."
+            exit 1
+          fi
+
+      # Step 3: Run Linter (clang-tidy)
+      - name: Linting with clang-tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-tidy
+          rm -rf build/*
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+          cd ..
+          clang-tidy src/*.cpp tests/*.cpp --warnings-as-errors=* -p build
+
+  build:
+    runs-on: ubuntu-latest
+    
+    needs: source
+
+    steps:
+      # Step 1: Check out the code
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Update Submodules
+        run: git submodule update --init --recursive
+
+      # Step 2: Install dependencies
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake valgrind gcovr
+
+      # Step 3: Configure and build with CMake
+      - name: Build Project
+        run: |
+          rm -rf build/*
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+
+      # Step 4: Run Unit Tests
+      - name: Run Unit Tests
+        run: |
+          cd build
+          ctest --output-on-failure
+
+      # Step 5: Memory Leak Check with Valgrind
+      - name: Memory Leak Check with Valgrind
+        run: |
+          cd build
+          valgrind --leak-check=full --error-exitcode=1 ./main
+
+      # Step 6: Code Coverage with gcov/gcovr
+      - name: Code Coverage with gcov/gcovr
+        run: |
+          cd build
+          make clean
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON ..
+          make
+          ./main # Run tests to generate coverage data
+          gcovr -r .. --xml-pretty --output coverage.xml # Generate coverage report
