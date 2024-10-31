@@ -1,7 +1,6 @@
 #include "Commercial.h"
 #include "CommercialFactory.h"
-#include <iostream>
-#include <ostream>
+#include <string>
 
 // Made citizen a reference instead of pointer to prevent it being nullptr
 Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
@@ -23,5 +22,5 @@ Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
         productionRate = 12;
     }
 
-    return new Commercial(cost, temp,*resources, 1000, owner, taxAuthority, maxEmployees,productionRate);
+    return new Commercial(cost, temp,resources, 1000, owner, taxAuthority, maxEmployees,productionRate);
 }

@@ -3,6 +3,7 @@
 
 #include "BuildingFactory.h"
 #include "BuildingType.h"
+#include "TaxAuthority.h"
 
 /**
  * @brief Factory for creating landmarks.
@@ -15,7 +16,7 @@ public:
     /**
      * @brief Constructs a new LandmarkFactory object.
      */
-    LandmarkFactory(TaxAuthority* taxAuthority) : BuildingFactory(taxAuthority) {};
+    LandmarkFactory(TaxAuthority& taxAuthority) : BuildingFactory(taxAuthority) {};
 
     /**
      * @brief Destroys the LandmarkFactory object.

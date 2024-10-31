@@ -1,9 +1,8 @@
 #include "Commercial.h"
 
-Commercial::Commercial(int cost, std::string& location, Resources& resources, int size, Citizen& owner,TaxAuthority& taxAuthority, int max, int rate) : Building(cost, location, resources, size, owner, taxAuthority) {
+Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner,TaxAuthority& taxAuthority, int max, int rate) : Building(cost, location, resources, size, owner, taxAuthority, BuildingType::Shop) {
     this->maxEmployees = max;
     this->productionRate = rate;
-    this->name = BuildingType::Shop;
 }
 
 std::string Commercial::getDetails() const {

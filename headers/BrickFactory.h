@@ -12,7 +12,6 @@
 class BrickFactory : public Factory {
 private:
     std::vector<Citizen*> employees;  ///< List of employees working at the brick factory.
-    std::string name;
 public:
     /**
      * @brief Constructs a new BrickFactory object.
@@ -23,7 +22,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max);
+    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int productionRate, int max);
 
     /**
      * @brief Destroys the BrickFactory object.
@@ -34,7 +33,7 @@ public:
      * @brief Gets details about the brick factory.
      * @return A string containing details about the brick factory.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Pays taxes for the brick factory.
@@ -52,11 +51,11 @@ public:
      */
     int pay() override;
 
-    void employ(Citizen* employee) override;
+    void employ(Citizen& employee) override;
 
-    void fire(Citizen* employee) override;
+    void fire(Citizen& employee) override;
     
-    void retire(Citizen* employee) override;
+    void retire(Citizen& employee) override;
 };
 
 #endif // BRICKFACTORY_H

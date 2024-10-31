@@ -1,19 +1,22 @@
-#include "Landmark.h"
 #include "LandmarkFactory.h"
-#include <iostream>
-#include <ostream>
+#include "Landmark.h"
+#include <string>
 
-LandmarkFactory::LandmarkFactory(TaxAuthority *taxAuthority) : BuildingFactory(){
-    tax = taxAuthority;
-}
 
-Building *LandmarkFactory::createBuilding(string type, Citizen* owner) {
-    cout<< "Constructing Factory...\n";
-    Landmark* landmark;
-    Resources* resources = nullptr;
-    Citizen* citizen = owner;
+Building *LandmarkFactory::createBuilding(BuildingType type, Citizen& owner) {
+    Resources* resources = new Resource(0,0,false);
     int cost;
-    if(type != "") {
+    std::string location = "City center";
+    int size = 2000;
+
+    if(type == BuildingType::Statue) {
+        cost = 1000;
+    } else if(type == BuildingType::Park) {
+        cost = 1200;
+    } else {
+        cost = 3000;
+    }
+/*    if(type != "") {
         if(type == "Statue") {
             cost = 10000;
             if(owner) {
@@ -47,6 +50,6 @@ Building *LandmarkFactory::createBuilding(string type, Citizen* owner) {
         } else {
             cout <<"Invalid type.\n";
         }
-    }
-    return landmark;
+    }*/
+    return new Landmark(cost,location,*resources,size,owner,taxAuthority,type);
 }

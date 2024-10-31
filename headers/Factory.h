@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 class TaxAuthority;
 
@@ -16,10 +17,8 @@ class TaxAuthority;
  */
 class Factory : public Building {
 protected:
-    int numOfEmployees;  ///< Number of employees working in the factory.
     int maxEmployees;  ///< Number of employees working in the factory.
     int productionRate;  ///< The rate at which resources are produced by the factory.
-    BuildingType name;
     std::vector<Citizen*> employees;
 public:
     /**
@@ -31,11 +30,9 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    Factory(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max,BuildingType name) : Building(cost,location,resources,size,owner,taxAuthority) {
+    Factory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int productionRate, int max,BuildingType name) : Building(cost,location,resources,size,owner,taxAuthority,name) {
         this->productionRate = productionRate;
         this->maxEmployees = max;
-        this->numOfEmployees = 0;
-        this->name = name;
     };
 
     /**
@@ -57,8 +54,11 @@ public:
      * This is an abstract method that must be implemented by concrete factory subclasses.
      */
     virtual void produceResource() = 0;
+
     virtual void employ(Citizen& employee) = 0;
+
     virtual void fire(Citizen& employee) = 0;
+
     virtual void retire(Citizen& employee) = 0;
 };
 

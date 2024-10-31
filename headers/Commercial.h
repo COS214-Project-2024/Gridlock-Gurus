@@ -20,7 +20,6 @@ class Commercial : public Building {
 private:
     int productionRate;  
     int maxEmployees;
-    BuildingType name;
     std::vector<Citizen*> employees;  
 
 public:
@@ -33,26 +32,26 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int max, int rate);  ///< Constructor
+    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int max, int rate); 
 
     /**
      * @brief Destroys the Commercial building.
      */
     ~Commercial() override = default;
 
-    /**
-     * @brief Gets details about the commercial building.
-     * @return A string containing details about the commercial building.
-     */
     std::string getDetails() const override;
 
     /**
      * @brief Generates money in the commercial building.
      */
     void produceMoney();
+
     void employ(Citizen& employee);
+
     int pay() override;
+
     void fire(Citizen& employee);
+
     void retire(Citizen& employee);
 
     int getNumberOfEmployees() {

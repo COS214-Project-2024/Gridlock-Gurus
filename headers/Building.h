@@ -6,6 +6,7 @@
 #include "TaxAuthority.h"
 #include <string>
 #include <memory>
+#include "BuildingType.h"
 
 // Forward Declarations
 class TaxAuthority;
@@ -25,6 +26,7 @@ protected:
     int size;  ///< The size of the building.
     Citizen& owner;  ///< The owner of the building.
     TaxAuthority& taxAuthority;  ///< Tax authority associated with the building.
+    BuildingType name;
 
 public:
     /**
@@ -36,20 +38,20 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Building(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority);
+    Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name);
 
     /**
      * @brief Destroys the Building object.
      */
-    virtual ~Building() = default;
+    virtual ~Building();
 
     /**
      * @brief Gets details about the building.
      * @return A string containing details about the building.
      */
-    virtual std::string getDetails() const;
+     virtual std::string getDetails() const;
 
-    virtual int pay();
+     virtual int pay();
   
      /**
      * @brief Pays taxes on the building.
@@ -60,11 +62,13 @@ public:
      /**
      * @brief Getter for the cost of the building.
      */
-     int getCost();
+     int getCost() const;
      
-     std::string getLocation();
+     std::string getLocation() const;
      
-     int getSize();
+     int getSize() const;
+
+     BuildingType getName() const;
      
 };
 
