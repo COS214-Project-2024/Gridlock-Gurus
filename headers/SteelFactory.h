@@ -1,9 +1,12 @@
 #ifndef STEELFACTORY_H
 #define STEELFACTORY_H
-#include "BuildingType.h"
+
 #include "Factory.h"
+#include "Building.h"
+#include "BuildingType.h"
+
 #include <vector>
-#include <memory>
+#include <string>
 
 /**
  * @brief Represents a steel factory.
@@ -21,7 +24,8 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, BuildingType name, int productionRate, int max) : Factory(cost, location, resources,size,owner,taxAuthority,name,productionRate,max) {};
+    SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, BuildingType name, int productionRate, int max) 
+    : Factory(cost, location, resources,size,owner,taxAuthority,name,productionRate,max) {};
 
     /**
      * @brief Destroys the SteelFactory object.
@@ -45,11 +49,6 @@ public:
      */
      int pay() override;
 
-     void employ(Citizen& employee) override;
-
-     void fire(Citizen& employee) override;
-
-     void retire(Citizen& employee) override;
 };
 
 #endif // STEELFACTORY_H

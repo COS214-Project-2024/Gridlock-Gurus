@@ -2,14 +2,8 @@
 #include "HighFundingState.h"
 
 HealthService::HealthService(int cost, std::string location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id, std::string name) : Service(cost, location, resources, size, owner, taxAuthority,name,id){
-    this->hospitalId = id;
-    this->benefits = 1.8;
-    this->maxStaff = max;
-    this->currentStaff = 0;
-    this->hospitalName = name;
     this->responseTime = 10;
     HealthState* highFunding = new HighFundingState();
-    healthState = highFunding;
 }
 
 std::string HealthService::getDetails() const {

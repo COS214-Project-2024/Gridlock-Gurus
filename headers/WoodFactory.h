@@ -1,10 +1,12 @@
 #ifndef WOODFACTORY_H
 #define WOODFACTORY_H
 
-#include "Factory.h"
-#include <vector>
-#include <memory>
 #include "BuildingType.h"
+#include "Building.h"
+#include "Factory.h"
+
+#include <vector>
+#include <string>
 
 /**
  * @brief Represents a wood processing factory.
@@ -45,9 +47,6 @@ public:
      * @param employee Pointer to the employee.
      */
      int pay() override;
-     void employ(Citizen& employee) override;
-     void fire(Citizen& employee) override;
-     void retire(Citizen& employee) override;
 };
 
 #endif // WOODFACTORY_H

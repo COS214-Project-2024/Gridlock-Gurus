@@ -2,7 +2,11 @@
 #define BRICKFACTORY_H
 
 #include "Factory.h"
+#include "Building.h"
+#include "BuildingType.h"
+
 #include <vector>
+#include <size>
 
 /**
  * @brief Represents a brick manufacturing factory.
@@ -10,8 +14,6 @@
  * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that produces bricks.
  */
 class BrickFactory : public Factory {
-private:
-    std::vector<Citizen*> employees;  ///< List of employees working at the brick factory.
 public:
     /**
      * @brief Constructs a new BrickFactory object.
@@ -22,7 +24,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int productionRate, int max);
+    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int productionRate, int max);
 
     /**
      * @brief Destroys the BrickFactory object.
@@ -50,12 +52,6 @@ public:
      * @param employee Pointer to the employee.
      */
     int pay() override;
-
-    void employ(Citizen& employee) override;
-
-    void fire(Citizen& employee) override;
-    
-    void retire(Citizen& employee) override;
 };
 
 #endif // BRICKFACTORY_H

@@ -1,4 +1,5 @@
 #include "FactoryFactory.h"
+#include "Building.h"
 #include "Factory.h"
 #include "BrickFactory.h"
 #include "SteelFactory.h"
@@ -17,19 +18,19 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         maxEmployees = 100;
         cost = 500;
         productionRate = 4;
-        return new WoodFactory(cost, location,resources, 1000, owner, taxAuthority,productionRate, maxEmployees);
+        return new WoodFactory(cost, location,resources, 1000, owner, taxAuthority,type,productionRate, maxEmployees);
       
     } else if(type == BuildingType::SteelFactory) {
         maxEmployees = 100;
         cost = 1000;
         productionRate = 6;
-        return new SteelFactory(cost, location,resources, 1000, owner, taxAuthority,productionRate, maxEmployees);
+        return new SteelFactory(cost, location,resources, 1000, owner, taxAuthority,type,productionRate, maxEmployees);
        
     } else {
         maxEmployees = 1000;
         cost = 1500;
         productionRate = 12;
-        return new BrickFactory(cost, location,resources, 1000, owner, taxAuthority,productionRate, maxEmployees);
+        return new BrickFactory(cost, location,resources, 1000, owner, taxAuthority,type,productionRate, maxEmployees);
 
     }
 }

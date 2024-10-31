@@ -16,31 +16,7 @@ void BrickFactory::produceResource() {
     //impliment
 }
 
-void BrickFactory::employ(Citizen& employee) {
-    if (!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
-        employees.push_back(&employee);
-    }
-}
-
 int BrickFactory::pay() {
     return 163;
 }
 
-void BrickFactory::fire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
-
-    if(it != employees.end()) {
-        employee.fired();
-        employees.erase(it);
-    }
-}
-
-
-void BrickFactory::retire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
-
-    if(it != employees.end()) {
-        employees.erase(it);
-        employee.retireToCountryside();
-    }
-}

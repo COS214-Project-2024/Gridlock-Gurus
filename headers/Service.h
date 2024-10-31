@@ -17,8 +17,8 @@ class TaxAuthority;
  */
 class Service : public Building {
 protected:
-     std::vector<Citizen*> employees;
-     double benefits;
+    std::vector<Citizen*> employees;
+    double benefits;
     int maxEmployees;
     int id;
 public:
