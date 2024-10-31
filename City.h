@@ -3,6 +3,7 @@
 
 #include "Government.h"
 #include "BuildingCollection.h"
+#include <vector>
 
 /**
  * @brief Represents the entire city, managing citizens, buildings, and services.

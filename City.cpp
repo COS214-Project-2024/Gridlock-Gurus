@@ -1,4 +1,5 @@
 #include "City.h"
+#include <algorithm>
 
 City::City(Government *g, BuildingCollection *b, int h) : government(g), buildings(b), citizenSatisfaction(h) {
 }
@@ -16,7 +17,6 @@ void City::addObserver(const Citizen &observer) {
 
 void City::removeObserver(const Citizen &observer) {
     observingCitizens.erase(std::remove(observingCitizens.begin(), observingCitizens.end(), observer), observingCitizens.end());
-    //need to implement an operator== for citizen
 }
 
 void City::notifyObservers() {
