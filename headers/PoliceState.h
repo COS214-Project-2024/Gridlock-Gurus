@@ -3,8 +3,9 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
+#include "PoliceService.h"
 
+class PoliceService;
 /**
  * @brief Abstract class representing the state of police services.
  *
@@ -12,12 +13,12 @@ using namespace std;
  */
 class PoliceState {
 protected:
-   string name;
+    PoliceService& service;
 public:
     /**
      * @brief Constructs a new PoliceState object.
      */
-    PoliceState();
+    PoliceState(PoliceService& service) : service(service) {}
 
     /**
      * @brief Destroys the PoliceState object.
@@ -30,7 +31,7 @@ public:
      */
     virtual void checkOperation() = 0;
 
-    virtual string getName() = 0;
+    virtual std::string getName() = 0;
 };
 
 #endif // POLICESTATE_H

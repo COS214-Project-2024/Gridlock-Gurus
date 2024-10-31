@@ -1,6 +1,6 @@
 #include "SteelFactory.h"
 
-std::string SteelFactory::getDetails() {
+std::string SteelFactory::getDetails() const {
     std::string details =  "Steel factory: \n";
     details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";

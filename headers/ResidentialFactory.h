@@ -5,7 +5,7 @@
 #include "BuildingFactory.h"
 #include "TaxAuthority.h"
 #include <memory>
-
+#include <string>
 
 /**
  * @brief Factory for creating residential buildings.

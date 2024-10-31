@@ -1,11 +1,7 @@
 #include "UnrestState.h"
 
-UnrestState::UnrestState() {
-    name = "UnrestState";
-}
-
 void UnrestState::checkOperation() {
-    if(service) {
+/*    if(service) {
         int currStaff = service->getStaff();
         int maxStaff = service->getMaxStaff();
         double ratio = static_cast<double>(currStaff) / maxStaff;
@@ -19,10 +15,11 @@ void UnrestState::checkOperation() {
     } else {
         cout<< "Error: this state has not been assigned.\n";
     }
+*/
 }
 
-string UnrestState::getName() {
-    return name;
+std::string UnrestState::getName() {
+    return "Unrest State";
 }
 
 

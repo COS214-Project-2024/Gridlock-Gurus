@@ -1059,33 +1059,6 @@ src/PoliceService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceService.cpp.s
 .PHONY : src/PoliceService.cpp.s
 
-src/PoliceState.o: src/PoliceState.cpp.o
-.PHONY : src/PoliceState.o
-
-# target to build an object file
-src/PoliceState.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceState.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceState.cpp.o
-.PHONY : src/PoliceState.cpp.o
-
-src/PoliceState.i: src/PoliceState.cpp.i
-.PHONY : src/PoliceState.i
-
-# target to preprocess a source file
-src/PoliceState.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceState.cpp.i
-.PHONY : src/PoliceState.cpp.i
-
-src/PoliceState.s: src/PoliceState.cpp.s
-.PHONY : src/PoliceState.s
-
-# target to generate assembly for a file
-src/PoliceState.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceState.cpp.s
-.PHONY : src/PoliceState.cpp.s
-
 src/Power.o: src/Power.cpp.o
 .PHONY : src/Power.o
 
@@ -1780,9 +1753,6 @@ help:
 	@echo "... src/PoliceService.o"
 	@echo "... src/PoliceService.i"
 	@echo "... src/PoliceService.s"
-	@echo "... src/PoliceState.o"
-	@echo "... src/PoliceState.i"
-	@echo "... src/PoliceState.s"
 	@echo "... src/Power.o"
 	@echo "... src/Power.i"
 	@echo "... src/Power.s"

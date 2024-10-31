@@ -1,14 +1,12 @@
 #include "ResidentialFactory.h"
 #include "City.h"
 #include "Residential.h"
-#include <iostream>
-#include <ostream>
 
 Building *ResidentialFactory::createBuilding(BuildingType type,Citizen &owner) {
   Resources *resources = new Resources(400, 400, true);
   int maxInhabitants;
   int cost;
-
+    std::string location = "";
   if (type == BuildingType::Flat) {
     cost = 500;
     maxInhabitants = 2;

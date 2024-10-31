@@ -1,5 +1,6 @@
 #include "NameGenerator.h"
 #include <sstream>
+#include <cmath>
 
 NameGenerator::NameGenerator() {
     std::srand(std::time(0));

@@ -59,8 +59,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/tests.dir/src/PeaceState.cpp.o.d"
   "CMakeFiles/tests.dir/src/PoliceService.cpp.o"
   "CMakeFiles/tests.dir/src/PoliceService.cpp.o.d"
-  "CMakeFiles/tests.dir/src/PoliceState.cpp.o"
-  "CMakeFiles/tests.dir/src/PoliceState.cpp.o.d"
   "CMakeFiles/tests.dir/src/Power.cpp.o"
   "CMakeFiles/tests.dir/src/Power.cpp.o.d"
   "CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o"

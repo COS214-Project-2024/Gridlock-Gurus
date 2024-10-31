@@ -6,7 +6,7 @@
 #include "BuildingType.h"
 #include <set>
 #include <vector>
-
+class PoliceState;
 
 /**
  * @brief Represents a police service building.
@@ -50,7 +50,7 @@ public:
      * @brief Sets the state of the police service.
      * @param state Pointer to the new police state.
      */
-    void setState(PoliceState* state);
+    void setState();
 
     /**
      * @brief Checks the operational status of the police service.

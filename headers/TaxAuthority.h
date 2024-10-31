@@ -24,7 +24,7 @@ class BuildingCollection;
 class TaxAuthority {
 private:
     std::unique_ptr<BuildingCollection> buildings;  ///< Pointer to the collection of registered buildings.
-    std::vector<std::shared_ptr<Citizen>> citizens; ///< vector of shared_pointers to citizen objects.
+    std::vector<Citizen*> citizens; ///< vector of shared_pointers to citizen objects.
     std::unique_ptr<TaxStrategy> strategy;          ///< Pointer to the current tax strategy being used.
     int collectedTax;
 

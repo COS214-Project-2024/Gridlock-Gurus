@@ -4,12 +4,11 @@
 
 PoliceService::PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id) {
     this->responseTime = 10;
-    PeaceState* peaceState = new PeaceState();
+    policeState = new PeaceState(*this);
 }
 
 std::string PoliceService::getDetails() const{
     std::string details =  "Police service: \n";
-    details += "Police state: " + this->policeState->getName() + "\n";
     details += "Response time: " + std::to_string(responseTime) + " minutes\n";
     details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";
@@ -32,7 +31,7 @@ void PoliceService::responseTimeInc(int by) {
 }
 
 void PoliceService::checkOperation() {
-    if(responseTime <= 10) {
+/*    if(responseTime <= 10) {
         //fast response
         //check citizen satisfaction
     } else if (responseTime <= 20) {
@@ -46,11 +45,11 @@ void PoliceService::checkOperation() {
             UnrestState* unrestState = new UnrestState();
             setState(unrestState);
         }
-    }
+    }*/
 }
 
-void PoliceService::setState(PoliceState& state) {
-    delete policeState;
-    policeState = &state;
+void PoliceService::setState() {
+/*    delete policeState;
+    policeState = &state;*/
 }
 

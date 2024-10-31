@@ -15,10 +15,12 @@ enum class BuildingType {
     Flat,
     Estate,
     House,
+    Statue,
+    Park
 };
 
 // Overload operator<< to allow printing of BuildingType
-std::ostream& operator<<(std::ostream& os, BuildingType type) {
+/*std::ostream& operator<<(std::ostream& os, BuildingType type) {
     switch (type) {
         case BuildingType::Residential: os << "Residential"; break;
         case BuildingType::Shop:        os << "Shop"; break;
@@ -33,6 +35,6 @@ std::ostream& operator<<(std::ostream& os, BuildingType type) {
         default:                        os << "Building"; break;
     }
     return os;
-}
+}*/
 
 #endif // BUILDINGTYPE_H

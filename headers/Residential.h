@@ -60,7 +60,6 @@ public:
         */
     void removeTenant(Citizen& tenant);
 
-    //int pay(Citizen* employee) override;
 };
 
 #endif // RESIDENTIAL_H

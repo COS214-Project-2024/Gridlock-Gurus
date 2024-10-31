@@ -24,7 +24,7 @@ public:
      * @param owner Pointer to the owner of the landmark.
      * @param taxAuthority Pointer to the tax authority associated with the landmark.
      */
-    Landmark(int cost, std::string& location, Resources& resources, int size, Citizen& owner, BuildingType name) : Building(cost,location,resources,size,owner,name) {} 
+    Landmark(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name) : Building(cost,location,resources,size,owner,name) {} 
 
     /**
      * @brief Destroys the Landmark building.

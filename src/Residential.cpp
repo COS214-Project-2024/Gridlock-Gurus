@@ -30,16 +30,3 @@ void Residential::removeTenant(Citizen& tenant) {
     }
 }
 
-int Residential::pay(Citizen* citizen){
-    if(citizen == owner){
-        int salary = 40000;
-        std::cout<< owner->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
-        return salary;
-    }
-    else{
-        std::cout << citizen->getName() << ", you're not the owner? How did you get in here??\n";
-        return 0;
-    }
-    return 0;
-}
-
