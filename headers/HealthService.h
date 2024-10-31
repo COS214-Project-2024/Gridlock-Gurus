@@ -4,7 +4,7 @@
 #include "Service.h"
 #include "HealthState.h"
 #include "BuildingType.h"
-
+class HealthState;
 
 /**
  * @brief Represents a health service building.
@@ -42,7 +42,7 @@ public:
      * @brief Sets the state of the health service.
      * @param state Pointer to the new health state.
      */
-    void setState(HealthState* state);
+    void setState();
 
     /**
      * @brief Checks the operational status of the health service.

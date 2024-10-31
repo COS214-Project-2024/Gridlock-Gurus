@@ -2,6 +2,7 @@
 #define HIGHFUNDINGEDUCATIONSTATE_H
 #include "EducationService.h"
 #include "EducationState.h"
+#include <string>
 
 /**
  * @brief Represents a high-funding state for education services.
@@ -9,18 +10,16 @@
  * ConcreteState in the State pattern. It extends the EducationState class and implements the methods to manage education service operations when funding is high.
  */
 class HighFundingEducationState : public EducationState {
-private:
-    EducationService* service;
 public:
     /**
      * @brief Constructs a new HighFundingEducationState object.
      */
-    HighFundingEducationState();
+    HighFundingEducationState(EducationService& service) : EducationState(service) {}
 
     /**
      * @brief Destroys the HighFundingEducationState object.
      */
-    virtual ~HighFundingEducationState();
+    ~HighFundingEducationState()override = default;
 
     /**
      * @brief Checks the current state of education services in a high-funding condition.
@@ -33,7 +32,7 @@ public:
      * @return int The quality level of education.
      */
     int getEducationQuality() override;
-    string getName() override;
+    std::string getName() override;
 };
 
 #endif // HIGHFUNDINGEDUCATIONSTATE_H

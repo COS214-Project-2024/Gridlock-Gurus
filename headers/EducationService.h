@@ -6,7 +6,7 @@
 #include "BuildingType.h"
 #include "EducationState.h"
 
-
+class EducationState;
 /**
  * @brief Represents an education service building.
  *
@@ -51,7 +51,7 @@ public:
      * @brief Sets the state of the education service.
      * @param state Pointer to the new education state.
      */
-    void setState(EducationState* state);
+    void setState();
 
     /**
      * @brief Checks the operational status of the education service.

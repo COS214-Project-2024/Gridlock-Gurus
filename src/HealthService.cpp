@@ -3,12 +3,11 @@
 
 HealthService::HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType name, int id) : Service(cost, location, resources, size, owner, name,id){
     this->responseTime = 10;
-    HealthState* highFunding = new HighFundingState();
+    healthState = new HighFundingState(*this);
 }
 
 std::string HealthService::getDetails() const {
     std::string details =  "Health service: \n";
-    details += "Hospital state: " + this->healthState->getName() + "\n";
     details += "Response time: " + std::to_string(responseTime) + " minutes\n";
     details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";
@@ -26,13 +25,14 @@ int HealthService::getResponseTime() {
     return responseTime;
 }
 
-void HealthService::setState(HealthState *state) {
-    healthState = state;
+void HealthService::setState() {
+    /*delete state;
+    state = state
     if(state->getName() == "HighFundingState") {
         benefits += 0.2;
     } else if(state->getName() == "LowFundingState") {
         benefits -= 0.2;
-    }
+    }*/
 }
 
 void HealthService::responseTimeDec(int by) {

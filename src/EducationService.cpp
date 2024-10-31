@@ -3,7 +3,7 @@
 
 EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id){
     this->prestige = 0;
-    educationState = new HighFundingEducationState();
+    educationState = new HighFundingEducationState(*this);
 }
 
 std::string EducationService::getDetails() const {
@@ -20,13 +20,13 @@ int EducationService::pay() {
    return 223000;
 }
 
-void EducationService::setState(EducationState *state) {
-    educationState = state;
+void EducationService::setState() {
+/*    educationState = state;
     if(state->getName() == "HighFundingState") {
         benefits += 0.2;
     } else if(state->getName() == "LowFundingState") {
         benefits -= 0.2;
-    }
+    }*/
 }
 
 

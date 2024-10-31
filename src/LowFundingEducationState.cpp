@@ -1,11 +1,7 @@
 #include "LowFundingEducationState.h"
 
-LowFundingEducationState::LowFundingEducationState() : EducationState() {
-    name = "LowFundingEducationState";
-}
-
 int LowFundingEducationState::getEducationQuality() {
-    int staff = service->getStaff();
+/*    int staff = service->getStaff();
     int maxStaff = service->getMaxStaff();
     double ratio = static_cast<double>(staff) / maxStaff;
     int percentage;
@@ -22,11 +18,12 @@ int LowFundingEducationState::getEducationQuality() {
     } else {
         percentage = 100;
     }
-    return percentage;
+    return percentage;*/
+    return 0;
 }
 
 void LowFundingEducationState::checkEducationState() {
-    if(service) {
+/*    if(service) {
         int quality = getEducationQuality();
         if (quality < 30) {
             cout << "Education quality is far below standard.\n";
@@ -43,11 +40,11 @@ void LowFundingEducationState::checkEducationState() {
         }
     } else {
         cout<< "Error: this state has not been assigned.\n";
-    }
+    }*/
 }
 
-string LowFundingEducationState::getName() {
-    return name;
+std::string LowFundingEducationState::getName() {
+    return "Low Funding";
 }
 
 
