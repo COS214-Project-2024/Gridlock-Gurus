@@ -2,6 +2,7 @@
 #define FACTORYFACTORY_H
 
 #include "BuildingFactory.h"
+#include "BuildingType.h"
 
 /**
  * @brief Factory for creating factories/industrial buildings.
@@ -27,7 +28,7 @@ public:
      *
      * This method overrides the factory method to create a Factory building.
      */
-    Building* createBuilding(std::string& type, Citizen* owner) override;
+    Building* createBuilding(BuildingType type, Citizen& owner) override;
 };
 
 #endif // FACTORYFACTORY_H

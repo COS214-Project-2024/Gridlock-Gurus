@@ -2,14 +2,13 @@
 #define BUILDINGFACTORY_H
 
 #include "Building.h"
-
+#include "BuildingType.h"
 /**
 * @brief Factory class for creating different types of buildings.
 * Creator participant in the Factory Method pattern. It defines the interface for creating buildings but defers the actual creation to subclasses.
 */
 class BuildingFactory {
     protected:
-        Building* building;  ///< A reference to the building being constructed.
         TaxAuthority * taxAuthority;
 
     public:
@@ -40,7 +39,7 @@ class BuildingFactory {
         * @return Pointer to the created Building object.
         * Factory Method function, which must be implemented by concrete factory subclasses.
         */
-        virtual Building* createBuilding(std::string& type, Citizen* owner) = 0;
+        virtual Building* createBuilding(BuildingType type, Citizen& owner) = 0;
 
 
 };

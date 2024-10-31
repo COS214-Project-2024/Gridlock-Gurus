@@ -2,6 +2,7 @@
 #define SERVICEFACTORY_H
 
 #include "BuildingFactory.h"
+#include "BuildingType.h"
 
 /**
  * @brief Factory for creating service buildings.
@@ -18,7 +19,7 @@ public:
     /**
      * @brief Destroys the ServiceFactory object.
      */
-    virtual ~ServiceFactory();
+    ~ServiceFactory() override = default;
     
     /**
      * @brief Creates a service building.
@@ -27,7 +28,7 @@ public:
      *
      * This method overrides the factory method to create a service building.
      */
-    Building* createBuilding(std::string type, Citizen* owner) override;
+    Building* createBuilding(BuildingType type, Citizen& owner) override;
 };
 
 #endif // SERVICEFACTORY_H

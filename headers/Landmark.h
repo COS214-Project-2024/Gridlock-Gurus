@@ -24,12 +24,12 @@ public:
      * @param owner Pointer to the owner of the landmark.
      * @param taxAuthority Pointer to the tax authority associated with the landmark.
      */
-    Landmark(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, std::string name);  ///< Constructor
+    Landmark(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, std::string& name);  ///< Constructor
 
     /**
      * @brief Destroys the Landmark building.
      */
-    virtual ~Landmark() = default;  ///< Destructor
+    ~Landmark() override = default;  ///< Destructor
 
     /**
      * @brief Gets details about the landmark building.
@@ -37,7 +37,7 @@ public:
      */
     std::string getDetails() override;
 
-    int pay(Citizen* citizen) override;
+    int pay() override;
 };
 
 #endif // LANDMARK_H

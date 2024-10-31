@@ -28,7 +28,7 @@ public:
      * @param owner Pointer to the owner of the service building.
      * @param taxAuthority Pointer to the tax authority associated with the service building.
      */
-    Service(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr>TaxAuthority> taxAuthority);
+    Service(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
 
     /**
      * @brief Destroys the Service building.
@@ -36,16 +36,9 @@ public:
     virtual ~Service() = default;
 
     /**
-     * @brief Gets details about the service building.
-     * @return A string containing details about the service building.
-     */
-    virtual std::string getDetails() = 0;  ///< Pure virtual function
-
-    /**
      * @brief Produces resources in the service building.
      */
     virtual void employ(Citizen* employee) = 0;
-    virtual int pay(Citizen* employee) = 0;
     virtual void fire(Citizen* employee) = 0;
     virtual void retire(Citizen* employee) = 0;
 };

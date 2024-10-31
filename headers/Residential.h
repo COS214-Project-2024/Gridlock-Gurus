@@ -2,7 +2,7 @@
 #define RESIDENTIAL_H
 
 #include "Building.h"
-#include <list>
+#include <vector>
 #include <string>
 #include <memory>
 
@@ -17,7 +17,7 @@ class Residential : public Building {
 private:
     int maxCapacity;  ///< The maximum number of citizens the building can house.
     int capacity;  ///< The number of citizens currently in the building.
-    std::list<Citizen*> tenants;  ///< List of tenants living in the building.
+    std::vector<Citizen*> tenants;  ///< List of tenants living in the building.
 
 public:
     /**
@@ -29,12 +29,12 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Residential(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, int capacity);
+    Residential(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int capacity);
 
     /**
      * @brief Destroys the Residential building object.
      */
-    virtual ~Residential() = default;
+    ~Residential() override = default;
 
     /**
      * @brief Gets details about the residential building.
@@ -63,7 +63,7 @@ public:
         */
     void removeTenant(Citizen* tenant);
 
-    int pay(Citizen* employee) override;
+    //int pay(Citizen* employee) override;
 };
 
 #endif // RESIDENTIAL_H

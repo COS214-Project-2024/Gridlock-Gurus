@@ -3,7 +3,7 @@
 
 #include "Service.h"
 #include "HealthState.h"
-#include <list>
+#include <vector>
 #include <memory>
 
 class TaxAuthority;
@@ -17,7 +17,7 @@ class HealthService : public Service {
 private:
     HealthState* healthState;  ///< Current state of the health service.
     int hospitalId;  ///< ID of the hospital.
-    std::list<Citizen*> staff;  ///< List of staff members in the health service.
+    std::vector<Citizen*> staff;  ///< List of staff members in the health service.
     int maxStaff;
     int currentStaff;
     std::string hospitalName;
@@ -32,12 +32,12 @@ public:
      * @param owner Pointer to the owner of the health service.
      * @param taxAuthority Pointer to the tax authority associated with the health service.
      */
-    HealthService(int cost, string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int id, int max, string name);
+    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen *owner, TaxAuthority* taxAuthority, int id, int max, std::string& name);
 
     /**
      * @brief Destroys the HealthService building.
      */
-    virtual ~HealthService() = default;
+     ~HealthService() override = default;
 
     /**
      * @brief Gets details about the health service building.
@@ -60,7 +60,7 @@ public:
      * @brief Pays a staff member in the health service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    int pay(Citizen* staffMember) override;
+    int pay() override;
     void employ(Citizen* employee) override;
     void fire(Citizen* employee) override;
     void retire(Citizen* employee) override;

@@ -2,6 +2,7 @@
 #define LANDMARKFACTORY_H
 
 #include "BuildingFactory.h"
+#include "BuildingType.h"
 
 /**
  * @brief Factory for creating landmarks.
@@ -10,17 +11,16 @@
  */
 class LandmarkFactory : public BuildingFactory {
 private:
- TaxAuthority* tax;
 public:
     /**
      * @brief Constructs a new LandmarkFactory object.
      */
-    LandmarkFactory(TaxAuthority* taxAuthority);
+    LandmarkFactory(TaxAuthority* taxAuthority) : BuildingFactory(taxAuthority) {};
 
     /**
      * @brief Destroys the LandmarkFactory object.
      */
-    virtual ~LandmarkFactory() = default;
+     ~LandmarkFactory() override = default;
     
     /**
      * @brief Creates a Landmark building.
@@ -29,7 +29,7 @@ public:
      *
      * This method overrides the factory method to create a Landmark building.
      */
-    Building* createBuilding(std::string type, Citizen* owner) override;
+    Building* createBuilding(BuildingType type, Citizen& owner) override;
 };
 
 #endif // LANDMARKFACTORY_H

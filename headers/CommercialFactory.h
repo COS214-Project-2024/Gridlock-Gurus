@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "BuildingFactory.h"
-
+#include "BuildingType.h"
 /**
  * @brief Factory for creating commercial buildings.
  * 
@@ -29,7 +29,7 @@ public:
      *
      * This method overrides the factory method to create a commercial building.
      */
-     Building* createBuilding(std::string& type, Citizen* owner) override;
+     Building* createBuilding(BuildingType type, Citizen& owner) override;
 };
 
 #endif // COMMERCIALFACTORY_H

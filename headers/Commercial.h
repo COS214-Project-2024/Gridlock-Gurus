@@ -38,7 +38,7 @@ public:
     /**
      * @brief Destroys the Commercial building.
      */
-    ~Commercial() = default;  ///< Destructor
+    ~Commercial() override = default;
 
     /**
      * @brief Gets details about the commercial building.

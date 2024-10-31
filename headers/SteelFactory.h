@@ -1,8 +1,8 @@
 #ifndef STEELFACTORY_H
 #define STEELFACTORY_H
-
+#include "BuildingType.h"
 #include "Factory.h"
-#include <list>
+#include <vector>
 #include <memory>
 
 /**
@@ -11,9 +11,6 @@
  * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that produces steel.
  */
 class SteelFactory : public Factory {
-private:
-    std::list<Citizen*> employees;  ///< List of employees working at the steel factory.
-    std::string name;
 public:
     /**
      * @brief Constructs a new SteelFactory object.
@@ -24,12 +21,12 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    SteelFactory(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, int productionRate, int max);
+    SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max,BuildingType name) : Factory(cost, location, resources,size,owner,taxAuthority,productionRate,max,name) {};
 
     /**
      * @brief Destroys the SteelFactory object.
      */
-    virtual ~SteelFactory() = default;
+    ~SteelFactory() override = default;
 
     /**
      * @brief Gets details about the steel factory.
@@ -46,13 +43,13 @@ public:
      * @brief Pays an employee working at the steel factory.
      * @param employee Pointer to the employee.
      */
-     int pay(Citizen* employee) override;
+     int pay() override;
 
-     void employ(Citizen* employee) override;
+     void employ(Citizen& employee) override;
 
-     void fire(Citizen* employee) override;
+     void fire(Citizen& employee) override;
 
-     void retire(Citizen* employee) override;
+     void retire(Citizen& employee) override;
 };
 
 #endif // STEELFACTORY_H

@@ -3,7 +3,7 @@
 
 #include "Service.h"
 #include "EducationState.h"
-#include <list>
+#include <vector>
 
 class TaxAuthority;
 
@@ -16,10 +16,10 @@ class EducationService : public Service {
 private:
     EducationState* educationState;  ///< Current state of the education service.
     int schoolId;  ///< ID of the school.
-    std::list<Citizen*> staff;  ///< List of staff members in the education service.
+    std::vector<Citizen*> staff;  ///< List of staff members in the education service.
     int maxStaff;
     int currentStaff;
-    string schoolName;
+    std::string schoolName;
     int prestige;
 
 public:
@@ -32,12 +32,12 @@ public:
      * @param owner Pointer to the owner of the education service.
      * @param taxAuthority Pointer to the tax authority associated with the education service.
      */
-    EducationService(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int id, int max, string name);
+    EducationService(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int id, int max, string& name);
 
     /**
      * @brief Destroys the EducationService building.
      */
-    virtual ~EducationService() = default;
+    ~EducationService() override = default;
 
     /**
      * @brief Gets details about the education service building.
@@ -67,7 +67,7 @@ public:
      * @brief Pays a staff member in the education service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    int pay(Citizen* staffMember) override;
+    int pay() override;
     void employ(Citizen* employee) override;
     void fire(Citizen* employee) override;
     void retire(Citizen* employee) override;
@@ -76,7 +76,6 @@ public:
     void prestigeDec(int by);
     void prestigeInc(int by);
     int getPrestige();
-    // void update() override;
 };
 
 #endif // EDUCATIONSERVICE_H

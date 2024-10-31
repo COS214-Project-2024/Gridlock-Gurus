@@ -23,8 +23,8 @@ protected:
     std::string location;  ///< The location of the building.
     Resources* resources;  ///< Resources used by the building.
     int size;  ///< The size of the building.
-    Citizen* owner;  ///< The owner of the building.
-    TaxAuthority* taxAuthority;  ///< Tax authority associated with the building.
+    Citizen& owner;  ///< The owner of the building.
+    TaxAuthority& taxAuthority;  ///< Tax authority associated with the building.
 
 public:
     /**
@@ -36,7 +36,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Building(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    Building(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority);
 
     /**
      * @brief Destroys the Building object.
