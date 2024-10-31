@@ -3,12 +3,11 @@
 
 #include "Resources.h"
 #include "Citizen.h"
-#include "TaxAuthority.h"
 #include <string>
 #include <memory>
+#include "BuildingType.h"
 
 // Forward Declarations
-class TaxAuthority;
 class Citizen;
 class Resources;
 
@@ -23,8 +22,8 @@ protected:
     std::string location;  ///< The location of the building.
     Resources* resources;  ///< Resources used by the building.
     int size;  ///< The size of the building.
-    Citizen* owner;  ///< The owner of the building.
-    std::weak_ptr<TaxAuthority> taxAuthority;  ///< Tax authority associated with the building.
+    Citizen& owner;  ///< The owner of the building.
+    BuildingType name;
 
 public:
     /**
@@ -36,20 +35,20 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Building(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority);
+    Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name);
 
     /**
      * @brief Destroys the Building object.
      */
-    virtual ~Building() = default;
+    virtual ~Building();
 
     /**
      * @brief Gets details about the building.
      * @return A string containing details about the building.
      */
-    virtual std::string getDetails();
+     virtual std::string getDetails() const;
 
-    virtual int pay(Citizen* employee) = 0;
+     virtual int pay();
   
      /**
      * @brief Pays taxes on the building.
@@ -60,11 +59,13 @@ public:
      /**
      * @brief Getter for the cost of the building.
      */
-     int getCost();
+     int getCost() const;
      
-     std::string getLocation();
+     std::string getLocation() const;
      
-     int getSize();
+     int getSize() const;
+
+     BuildingType getName() const;
      
 };
 

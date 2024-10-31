@@ -2,9 +2,10 @@
 #define LANDMARK_H
 
 #include "Building.h"
+#include "BuildingType.h"
 #include <memory>
+#include <string>
 
-class TaxAuthority;
 
 /**
  * @brief Represents a landmark in the city.
@@ -12,8 +13,7 @@ class TaxAuthority;
  * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and represents a notable landmark structure within the city.
  */
 class Landmark : public Building {
-private:
-    std::string name;
+    
 public:
     /**
      * @brief Constructs a new Landmark building.
@@ -24,20 +24,18 @@ public:
      * @param owner Pointer to the owner of the landmark.
      * @param taxAuthority Pointer to the tax authority associated with the landmark.
      */
-    Landmark(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, std::string name);  ///< Constructor
+    Landmark(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name) : Building(cost,location,resources,size,owner,name) {} 
 
     /**
      * @brief Destroys the Landmark building.
      */
-    virtual ~Landmark() = default;  ///< Destructor
+    ~Landmark() override = default;  ///< Destructor
 
     /**
      * @brief Gets details about the landmark building.
      * @return A string containing details about the landmark.
      */
-    std::string getDetails() override;
-
-    int pay(Citizen* citizen) override;
+    std::string getDetails() const override;
 };
 
 #endif // LANDMARK_H

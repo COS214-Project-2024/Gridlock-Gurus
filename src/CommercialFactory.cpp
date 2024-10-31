@@ -1,50 +1,28 @@
 #include "Commercial.h"
 #include "CommercialFactory.h"
-#include <iostream>
-#include <ostream>
+#include <string>
 
-CommercialFactory::CommercialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(){
-    tax = taxAuthority;
-}
-
-Building *CommercialFactory::createBuilding(std::string type, Citizen* owner) {
-    std::cout<< "Constructing Shops...\n";
-    Commercial* commercial;
-    Resources* resources = nullptr;
+// Made citizen a reference instead of pointer to prevent it being nullptr
+Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
+    Resources* resources = new Resources(100,100,true);
     int maxEmployees;
     int productionRate;
-    Citizen* citizen = owner;
     int cost;
-    if(type != "") {
-        if(type == "Bank") {
-            maxEmployees = 30;
-            cost = 100000;
-            productionRate = 6;
-            if(owner) {
-                int funds = owner->getFunds();
-                if(funds > cost) {
-                    std::string temp = "Business district";
-                    commercial = new Commercial(cost, temp , resources, 1000, citizen, tax, productionRate, maxEmployees);
-                } else {
-                    std::cout<< owner->getName() <<" has insufficient funds.\n";
-                }
-            }
-        } else if(type == "Groceries") {
-            maxEmployees = 60;
-            cost = 120000;
-            productionRate = 12;
-            if(owner) {
-                int funds = owner->getFunds();
-                if(funds > cost) {
-                    std::string temp = "Business district";
-                    commercial = new Commercial(cost, temp, resources, 1000, citizen, tax, productionRate, maxEmployees);
-                } else {
-                    std::cout<< owner->getName() <<" has insufficient funds.\n";
-                }
-            }
-        } else {
-            std::cout <<"Invalid type.\n";
-        }
+    std::string location = "Business district";
+
+    // I changed it because before it returs a nullptr? checks should be done before calling, the function of factory is just to produce
+    if(type == BuildingType::Bank) {
+        maxEmployees = 30;
+        cost = 100000;
+        productionRate = 6;
+        
+    } else {
+        maxEmployees = 60;
+        cost = 120000;
+        productionRate = 12;
     }
-    return commercial;
+
+    Commercial* c = new Commercial(cost, location,resources, 1000, owner, maxEmployees,productionRate);
+    taxAuthority->registerBuilding(*c);
+    return c;
 }

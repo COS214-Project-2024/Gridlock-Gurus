@@ -13,7 +13,7 @@
 
 
 int main() {
-   TransportDepartment department;
+/*   TransportDepartment department;
 
 
     Train* train = new Train(100);
@@ -70,5 +70,6 @@ int main() {
     delete clonedTrain;
 
     std::cout << "\n--- All Tests Completed ---" << std::endl;
+    */
 }
 

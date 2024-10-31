@@ -2,6 +2,10 @@
 #define SERVICEFACTORY_H
 
 #include "BuildingFactory.h"
+#include "BuildingType.h"
+#include "TaxAuthority.h"
+#include <memory>
+
 
 /**
  * @brief Factory for creating service buildings.
@@ -13,12 +17,12 @@ public:
     /**
      * @brief Constructs a new ServiceFactory object.
      */
-    ServiceFactory();
+    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the ServiceFactory object.
      */
-    virtual ~ServiceFactory();
+    ~ServiceFactory() override = default;
     
     /**
      * @brief Creates a service building.
@@ -27,7 +31,7 @@ public:
      *
      * This method overrides the factory method to create a service building.
      */
-    Building* createBuilding(std::string type, Citizen* owner) override;
+    Building* createBuilding(BuildingType type, Citizen& owner) override;
 };
 
 #endif // SERVICEFACTORY_H

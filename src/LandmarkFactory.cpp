@@ -1,52 +1,24 @@
-#include "Landmark.h"
 #include "LandmarkFactory.h"
-#include <iostream>
-#include <ostream>
+#include "Landmark.h"
+#include <string>
 
-LandmarkFactory::LandmarkFactory(TaxAuthority *taxAuthority) : BuildingFactory(){
-    tax = taxAuthority;
-}
 
-Building *LandmarkFactory::createBuilding(string type, Citizen* owner) {
-    cout<< "Constructing Factory...\n";
-    Landmark* landmark;
-    Resources* resources = nullptr;
-    Citizen* citizen = owner;
+Building *LandmarkFactory::createBuilding(BuildingType type, Citizen& owner) {
+    Resources* resources = new Resources(0,0,false);
     int cost;
-    if(type != "") {
-        if(type == "Statue") {
-            cost = 10000;
-            if(owner) {
-                int funds = owner->getFunds();
-                if(funds > cost) {
-                    landmark = new Landmark(cost, "Business district", resources, 1000, citizen, tax, "Statue");
-                } else {
-                    cout<< owner->getName() <<" has insufficient funds.\n";
-                }
-            }
-        } else if(type == "Park") {
-            cost = 12000;
-            if(owner) {
-                int funds = owner->getFunds();
-                if(funds > cost) {
-                    landmark = new Landmark(cost, "Residential district", resources, 1000, citizen, tax, "Park");
-                } else {
-                    cout<< owner->getName() <<" has insufficient funds.\n";
-                }
-            }
-        } else if(type == "Tower") {
-            cost = 300000;
-            if(owner) {
-                int funds = owner->getFunds();
-                if(funds > cost) {
-                    landmark = new Landmark(cost, "Industrial district", resources, 1000, citizen, tax, "Tower");
-                } else {
-                    cout<< owner->getName() <<" has insufficient funds.\n";
-                }
-            }
-        } else {
-            cout <<"Invalid type.\n";
-        }
+    std::string location = "City center";
+    int size = 2000;
+
+    if(type == BuildingType::Statue) {
+        cost = 1000;
+    } else if(type == BuildingType::Park) {
+        cost = 1200;
+    } else {
+        cost = 3000;
     }
-    return landmark;
+
+    Landmark* l = new Landmark(cost,location,resources,size,owner,type);
+    taxAuthority->registerBuilding(*l);
+
+    return l;
 }

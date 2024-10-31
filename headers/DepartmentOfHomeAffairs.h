@@ -4,10 +4,13 @@
 #include "CitizenIterator.h"
 #include "CitizenFactory.h"
 #include "TaxAuthority.h"
-#include <list>
+#include <vector>
+#include <algorithm>
+#include <string>
 #include <memory>
 
 class Citizen;
+class TaxAuthority;
 
 /**
  * @brief Manages citizen registrations and identity-related services.
@@ -18,12 +21,11 @@ class Citizen;
 class DepartmentOfHomeAffairs {
 private:
     std::shared_ptr<TaxAuthority> taxAuthority;
-    CitizenFactory* factory;       ///< Pointer to the CitizenFactory for creating citizens.
-    CitizenIterator* iterator;     ///< Pointer to the CitizenIterator for iterating through citizens.
+    std::unique_ptr<CitizenFactory> factory;
 
 public:
     int population;                ///< The total population of citizens.
-    std::list<Citizen*> citizens;  ///< List of registered citizens.
+    std::vector<Citizen*> citizens;  ///< List of registered citizens.
 
     /**
      * @brief Construct a new DepartmentOfHomeAffairs object.
@@ -37,7 +39,7 @@ public:
      *
      * Cleans up resources and deletes any dynamically allocated components.
      */
-    virtual ~DepartmentOfHomeAffairs();
+     ~DepartmentOfHomeAffairs();
 
     /**
      * @brief Registers a birth in the department.

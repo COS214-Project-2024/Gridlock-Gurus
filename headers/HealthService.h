@@ -3,10 +3,8 @@
 
 #include "Service.h"
 #include "HealthState.h"
-#include <list>
-#include <memory>
-
-class TaxAuthority;
+#include "BuildingType.h"
+class HealthState;
 
 /**
  * @brief Represents a health service building.
@@ -15,12 +13,7 @@ class TaxAuthority;
  */
 class HealthService : public Service {
 private:
-    HealthState* healthState;  ///< Current state of the health service.
-    int hospitalId;  ///< ID of the hospital.
-    std::list<Citizen*> staff;  ///< List of staff members in the health service.
-    int maxStaff;
-    int currentStaff;
-    std::string hospitalName;
+    HealthState* healthState; 
     int responseTime;
 public:
     /**
@@ -32,24 +25,24 @@ public:
      * @param owner Pointer to the owner of the health service.
      * @param taxAuthority Pointer to the tax authority associated with the health service.
      */
-    HealthService(int cost, string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int id, int max, string name);
+    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType name, int id);
 
     /**
      * @brief Destroys the HealthService building.
      */
-    virtual ~HealthService() = default;
+     ~HealthService() override = default;
 
     /**
      * @brief Gets details about the health service building.
      * @return A string containing details about the health service.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Sets the state of the health service.
      * @param state Pointer to the new health state.
      */
-    void setState(HealthState* state);
+    void setState();
 
     /**
      * @brief Checks the operational status of the health service.
@@ -60,12 +53,13 @@ public:
      * @brief Pays a staff member in the health service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    int pay(Citizen* staffMember) override;
-    void employ(Citizen* employee) override;
+    int pay() override;
+/*    void employ(Citizen* employee) override;
     void fire(Citizen* employee) override;
     void retire(Citizen* employee) override;
-    int getStaff();
-    int getMaxStaff();
+*/
+//   int getStaff();
+//    int getMaxStaff();
     void responseTimeDec(int by);
     void responseTimeInc(int by);
     int getResponseTime();

@@ -600,32 +600,32 @@ src/DepartmentOfWaterPowerAndSanitation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.s
 .PHONY : src/DepartmentOfWaterPowerAndSanitation.cpp.s
 
-src/EducationState.o: src/EducationState.cpp.o
-.PHONY : src/EducationState.o
+src/EducationService.o: src/EducationService.cpp.o
+.PHONY : src/EducationService.o
 
 # target to build an object file
-src/EducationState.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/EducationState.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/EducationState.cpp.o
-.PHONY : src/EducationState.cpp.o
+src/EducationService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/EducationService.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/EducationService.cpp.o
+.PHONY : src/EducationService.cpp.o
 
-src/EducationState.i: src/EducationState.cpp.i
-.PHONY : src/EducationState.i
+src/EducationService.i: src/EducationService.cpp.i
+.PHONY : src/EducationService.i
 
 # target to preprocess a source file
-src/EducationState.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/EducationState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/EducationState.cpp.i
-.PHONY : src/EducationState.cpp.i
+src/EducationService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/EducationService.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/EducationService.cpp.i
+.PHONY : src/EducationService.cpp.i
 
-src/EducationState.s: src/EducationState.cpp.s
-.PHONY : src/EducationState.s
+src/EducationService.s: src/EducationService.cpp.s
+.PHONY : src/EducationService.s
 
 # target to generate assembly for a file
-src/EducationState.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/EducationState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/EducationState.cpp.s
-.PHONY : src/EducationState.cpp.s
+src/EducationService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/EducationService.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/EducationService.cpp.s
+.PHONY : src/EducationService.cpp.s
 
 src/Factory.o: src/Factory.cpp.o
 .PHONY : src/Factory.o
@@ -653,6 +653,33 @@ src/Factory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Factory.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Factory.cpp.s
 .PHONY : src/Factory.cpp.s
+
+src/FactoryFactory.o: src/FactoryFactory.cpp.o
+.PHONY : src/FactoryFactory.o
+
+# target to build an object file
+src/FactoryFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/FactoryFactory.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/FactoryFactory.cpp.o
+.PHONY : src/FactoryFactory.cpp.o
+
+src/FactoryFactory.i: src/FactoryFactory.cpp.i
+.PHONY : src/FactoryFactory.i
+
+# target to preprocess a source file
+src/FactoryFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/FactoryFactory.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/FactoryFactory.cpp.i
+.PHONY : src/FactoryFactory.cpp.i
+
+src/FactoryFactory.s: src/FactoryFactory.cpp.s
+.PHONY : src/FactoryFactory.s
+
+# target to generate assembly for a file
+src/FactoryFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/FactoryFactory.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/FactoryFactory.cpp.s
+.PHONY : src/FactoryFactory.cpp.s
 
 src/FlatTaxStrategy.o: src/FlatTaxStrategy.cpp.o
 .PHONY : src/FlatTaxStrategy.o
@@ -761,33 +788,6 @@ src/HealthService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HealthService.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/HealthService.cpp.s
 .PHONY : src/HealthService.cpp.s
-
-src/HealthState.o: src/HealthState.cpp.o
-.PHONY : src/HealthState.o
-
-# target to build an object file
-src/HealthState.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HealthState.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/HealthState.cpp.o
-.PHONY : src/HealthState.cpp.o
-
-src/HealthState.i: src/HealthState.cpp.i
-.PHONY : src/HealthState.i
-
-# target to preprocess a source file
-src/HealthState.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HealthState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/HealthState.cpp.i
-.PHONY : src/HealthState.cpp.i
-
-src/HealthState.s: src/HealthState.cpp.s
-.PHONY : src/HealthState.s
-
-# target to generate assembly for a file
-src/HealthState.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HealthState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/HealthState.cpp.s
-.PHONY : src/HealthState.cpp.s
 
 src/HighFundingEducationState.o: src/HighFundingEducationState.cpp.o
 .PHONY : src/HighFundingEducationState.o
@@ -1058,33 +1058,6 @@ src/PoliceService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceService.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceService.cpp.s
 .PHONY : src/PoliceService.cpp.s
-
-src/PoliceState.o: src/PoliceState.cpp.o
-.PHONY : src/PoliceState.o
-
-# target to build an object file
-src/PoliceState.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceState.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceState.cpp.o
-.PHONY : src/PoliceState.cpp.o
-
-src/PoliceState.i: src/PoliceState.cpp.i
-.PHONY : src/PoliceState.i
-
-# target to preprocess a source file
-src/PoliceState.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceState.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceState.cpp.i
-.PHONY : src/PoliceState.cpp.i
-
-src/PoliceState.s: src/PoliceState.cpp.s
-.PHONY : src/PoliceState.s
-
-# target to generate assembly for a file
-src/PoliceState.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceState.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PoliceState.cpp.s
-.PHONY : src/PoliceState.cpp.s
 
 src/Power.o: src/Power.cpp.o
 .PHONY : src/Power.o
@@ -1729,12 +1702,15 @@ help:
 	@echo "... src/DepartmentOfWaterPowerAndSanitation.o"
 	@echo "... src/DepartmentOfWaterPowerAndSanitation.i"
 	@echo "... src/DepartmentOfWaterPowerAndSanitation.s"
-	@echo "... src/EducationState.o"
-	@echo "... src/EducationState.i"
-	@echo "... src/EducationState.s"
+	@echo "... src/EducationService.o"
+	@echo "... src/EducationService.i"
+	@echo "... src/EducationService.s"
 	@echo "... src/Factory.o"
 	@echo "... src/Factory.i"
 	@echo "... src/Factory.s"
+	@echo "... src/FactoryFactory.o"
+	@echo "... src/FactoryFactory.i"
+	@echo "... src/FactoryFactory.s"
 	@echo "... src/FlatTaxStrategy.o"
 	@echo "... src/FlatTaxStrategy.i"
 	@echo "... src/FlatTaxStrategy.s"
@@ -1747,9 +1723,6 @@ help:
 	@echo "... src/HealthService.o"
 	@echo "... src/HealthService.i"
 	@echo "... src/HealthService.s"
-	@echo "... src/HealthState.o"
-	@echo "... src/HealthState.i"
-	@echo "... src/HealthState.s"
 	@echo "... src/HighFundingEducationState.o"
 	@echo "... src/HighFundingEducationState.i"
 	@echo "... src/HighFundingEducationState.s"
@@ -1780,9 +1753,6 @@ help:
 	@echo "... src/PoliceService.o"
 	@echo "... src/PoliceService.i"
 	@echo "... src/PoliceService.s"
-	@echo "... src/PoliceState.o"
-	@echo "... src/PoliceState.i"
-	@echo "... src/PoliceState.s"
 	@echo "... src/Power.o"
 	@echo "... src/Power.i"
 	@echo "... src/Power.s"

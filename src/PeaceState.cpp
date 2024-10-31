@@ -1,11 +1,7 @@
 #include "PeaceState.h"
 
-PeaceState::PeaceState() {
-    name = "PeaceState";
-}
-
 void PeaceState::checkOperation() {
-    if(service) {
+/*    if(service) {
         int currStaff = service->getStaff();
         int maxStaff = service->getMaxStaff();
         double ratio = static_cast<double>(currStaff) / maxStaff;
@@ -18,11 +14,11 @@ void PeaceState::checkOperation() {
         }
     } else {
         cout<< "Error: this state has not been assigned.\n";
-    }
+    }*/
 }
 
-string PeaceState::getName() {
-    return name;
+std::string PeaceState::getName() {
+    return "Peace State";
 }
 
 

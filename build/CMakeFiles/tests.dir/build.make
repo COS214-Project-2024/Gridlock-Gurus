@@ -293,19 +293,19 @@ CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/DepartmentOfWaterPowerAndSanitation.cpp -o CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.s
 
-CMakeFiles/tests.dir/src/EducationState.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/src/EducationState.cpp.o: ../src/EducationState.cpp
-CMakeFiles/tests.dir/src/EducationState.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/tests.dir/src/EducationState.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/EducationState.cpp.o -MF CMakeFiles/tests.dir/src/EducationState.cpp.o.d -o CMakeFiles/tests.dir/src/EducationState.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/EducationState.cpp
+CMakeFiles/tests.dir/src/EducationService.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/src/EducationService.cpp.o: ../src/EducationService.cpp
+CMakeFiles/tests.dir/src/EducationService.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/tests.dir/src/EducationService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/EducationService.cpp.o -MF CMakeFiles/tests.dir/src/EducationService.cpp.o.d -o CMakeFiles/tests.dir/src/EducationService.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/EducationService.cpp
 
-CMakeFiles/tests.dir/src/EducationState.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/src/EducationState.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/EducationState.cpp > CMakeFiles/tests.dir/src/EducationState.cpp.i
+CMakeFiles/tests.dir/src/EducationService.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/src/EducationService.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/EducationService.cpp > CMakeFiles/tests.dir/src/EducationService.cpp.i
 
-CMakeFiles/tests.dir/src/EducationState.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/EducationState.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/EducationState.cpp -o CMakeFiles/tests.dir/src/EducationState.cpp.s
+CMakeFiles/tests.dir/src/EducationService.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/EducationService.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/EducationService.cpp -o CMakeFiles/tests.dir/src/EducationService.cpp.s
 
 CMakeFiles/tests.dir/src/Factory.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Factory.cpp.o: ../src/Factory.cpp
@@ -321,10 +321,24 @@ CMakeFiles/tests.dir/src/Factory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/Factory.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Factory.cpp -o CMakeFiles/tests.dir/src/Factory.cpp.s
 
+CMakeFiles/tests.dir/src/FactoryFactory.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/src/FactoryFactory.cpp.o: ../src/FactoryFactory.cpp
+CMakeFiles/tests.dir/src/FactoryFactory.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/tests.dir/src/FactoryFactory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/FactoryFactory.cpp.o -MF CMakeFiles/tests.dir/src/FactoryFactory.cpp.o.d -o CMakeFiles/tests.dir/src/FactoryFactory.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/FactoryFactory.cpp
+
+CMakeFiles/tests.dir/src/FactoryFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/src/FactoryFactory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/FactoryFactory.cpp > CMakeFiles/tests.dir/src/FactoryFactory.cpp.i
+
+CMakeFiles/tests.dir/src/FactoryFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/FactoryFactory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/FactoryFactory.cpp -o CMakeFiles/tests.dir/src/FactoryFactory.cpp.s
+
 CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o: ../src/FlatTaxStrategy.cpp
 CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o -MF CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o.d -o CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/FlatTaxStrategy.cpp
 
 CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Functional.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Functional.cpp.o: ../src/Functional.cpp
 CMakeFiles/tests.dir/src/Functional.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/tests.dir/src/Functional.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/tests.dir/src/Functional.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Functional.cpp.o -MF CMakeFiles/tests.dir/src/Functional.cpp.o.d -o CMakeFiles/tests.dir/src/Functional.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Functional.cpp
 
 CMakeFiles/tests.dir/src/Functional.cpp.i: cmake_force
@@ -352,7 +366,7 @@ CMakeFiles/tests.dir/src/Functional.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Government.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Government.cpp.o: ../src/Government.cpp
 CMakeFiles/tests.dir/src/Government.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/tests.dir/src/Government.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/tests.dir/src/Government.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Government.cpp.o -MF CMakeFiles/tests.dir/src/Government.cpp.o.d -o CMakeFiles/tests.dir/src/Government.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Government.cpp
 
 CMakeFiles/tests.dir/src/Government.cpp.i: cmake_force
@@ -366,7 +380,7 @@ CMakeFiles/tests.dir/src/Government.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/HealthService.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/HealthService.cpp.o: ../src/HealthService.cpp
 CMakeFiles/tests.dir/src/HealthService.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/tests.dir/src/HealthService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/tests.dir/src/HealthService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/HealthService.cpp.o -MF CMakeFiles/tests.dir/src/HealthService.cpp.o.d -o CMakeFiles/tests.dir/src/HealthService.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/HealthService.cpp
 
 CMakeFiles/tests.dir/src/HealthService.cpp.i: cmake_force
@@ -376,20 +390,6 @@ CMakeFiles/tests.dir/src/HealthService.cpp.i: cmake_force
 CMakeFiles/tests.dir/src/HealthService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/HealthService.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/HealthService.cpp -o CMakeFiles/tests.dir/src/HealthService.cpp.s
-
-CMakeFiles/tests.dir/src/HealthState.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/src/HealthState.cpp.o: ../src/HealthState.cpp
-CMakeFiles/tests.dir/src/HealthState.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/tests.dir/src/HealthState.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/HealthState.cpp.o -MF CMakeFiles/tests.dir/src/HealthState.cpp.o.d -o CMakeFiles/tests.dir/src/HealthState.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/HealthState.cpp
-
-CMakeFiles/tests.dir/src/HealthState.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/src/HealthState.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/HealthState.cpp > CMakeFiles/tests.dir/src/HealthState.cpp.i
-
-CMakeFiles/tests.dir/src/HealthState.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/HealthState.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/HealthState.cpp -o CMakeFiles/tests.dir/src/HealthState.cpp.s
 
 CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o: ../src/HighFundingEducationState.cpp
@@ -531,24 +531,10 @@ CMakeFiles/tests.dir/src/PoliceService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/PoliceService.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/PoliceService.cpp -o CMakeFiles/tests.dir/src/PoliceService.cpp.s
 
-CMakeFiles/tests.dir/src/PoliceState.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/src/PoliceState.cpp.o: ../src/PoliceState.cpp
-CMakeFiles/tests.dir/src/PoliceState.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/tests.dir/src/PoliceState.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/PoliceState.cpp.o -MF CMakeFiles/tests.dir/src/PoliceState.cpp.o.d -o CMakeFiles/tests.dir/src/PoliceState.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/PoliceState.cpp
-
-CMakeFiles/tests.dir/src/PoliceState.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/src/PoliceState.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/PoliceState.cpp > CMakeFiles/tests.dir/src/PoliceState.cpp.i
-
-CMakeFiles/tests.dir/src/PoliceState.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/src/PoliceState.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/PoliceState.cpp -o CMakeFiles/tests.dir/src/PoliceState.cpp.s
-
 CMakeFiles/tests.dir/src/Power.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Power.cpp.o: ../src/Power.cpp
 CMakeFiles/tests.dir/src/Power.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/tests.dir/src/Power.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/tests.dir/src/Power.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Power.cpp.o -MF CMakeFiles/tests.dir/src/Power.cpp.o.d -o CMakeFiles/tests.dir/src/Power.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Power.cpp
 
 CMakeFiles/tests.dir/src/Power.cpp.i: cmake_force
@@ -562,7 +548,7 @@ CMakeFiles/tests.dir/src/Power.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o: ../src/ProgressiveTaxStrategy.cpp
 CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o -MF CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o.d -o CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/ProgressiveTaxStrategy.cpp
 
 CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.i: cmake_force
@@ -576,7 +562,7 @@ CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Residential.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Residential.cpp.o: ../src/Residential.cpp
 CMakeFiles/tests.dir/src/Residential.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/tests.dir/src/Residential.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/tests.dir/src/Residential.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Residential.cpp.o -MF CMakeFiles/tests.dir/src/Residential.cpp.o.d -o CMakeFiles/tests.dir/src/Residential.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Residential.cpp
 
 CMakeFiles/tests.dir/src/Residential.cpp.i: cmake_force
@@ -590,7 +576,7 @@ CMakeFiles/tests.dir/src/Residential.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o: ../src/ResidentialFactory.cpp
 CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o -MF CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o.d -o CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/ResidentialFactory.cpp
 
 CMakeFiles/tests.dir/src/ResidentialFactory.cpp.i: cmake_force
@@ -604,7 +590,7 @@ CMakeFiles/tests.dir/src/ResidentialFactory.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Resources.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Resources.cpp.o: ../src/Resources.cpp
 CMakeFiles/tests.dir/src/Resources.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/tests.dir/src/Resources.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/tests.dir/src/Resources.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Resources.cpp.o -MF CMakeFiles/tests.dir/src/Resources.cpp.o.d -o CMakeFiles/tests.dir/src/Resources.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Resources.cpp
 
 CMakeFiles/tests.dir/src/Resources.cpp.i: cmake_force
@@ -618,7 +604,7 @@ CMakeFiles/tests.dir/src/Resources.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Sanitation.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Sanitation.cpp.o: ../src/Sanitation.cpp
 CMakeFiles/tests.dir/src/Sanitation.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/tests.dir/src/Sanitation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/tests.dir/src/Sanitation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Sanitation.cpp.o -MF CMakeFiles/tests.dir/src/Sanitation.cpp.o.d -o CMakeFiles/tests.dir/src/Sanitation.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Sanitation.cpp
 
 CMakeFiles/tests.dir/src/Sanitation.cpp.i: cmake_force
@@ -632,7 +618,7 @@ CMakeFiles/tests.dir/src/Sanitation.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Service.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Service.cpp.o: ../src/Service.cpp
 CMakeFiles/tests.dir/src/Service.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/tests.dir/src/Service.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/tests.dir/src/Service.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Service.cpp.o -MF CMakeFiles/tests.dir/src/Service.cpp.o.d -o CMakeFiles/tests.dir/src/Service.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Service.cpp
 
 CMakeFiles/tests.dir/src/Service.cpp.i: cmake_force
@@ -646,7 +632,7 @@ CMakeFiles/tests.dir/src/Service.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/SteelFactory.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/SteelFactory.cpp.o: ../src/SteelFactory.cpp
 CMakeFiles/tests.dir/src/SteelFactory.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/tests.dir/src/SteelFactory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/tests.dir/src/SteelFactory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/SteelFactory.cpp.o -MF CMakeFiles/tests.dir/src/SteelFactory.cpp.o.d -o CMakeFiles/tests.dir/src/SteelFactory.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/SteelFactory.cpp
 
 CMakeFiles/tests.dir/src/SteelFactory.cpp.i: cmake_force
@@ -660,7 +646,7 @@ CMakeFiles/tests.dir/src/SteelFactory.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/TaxAuthority.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/TaxAuthority.cpp.o: ../src/TaxAuthority.cpp
 CMakeFiles/tests.dir/src/TaxAuthority.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/tests.dir/src/TaxAuthority.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/tests.dir/src/TaxAuthority.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/TaxAuthority.cpp.o -MF CMakeFiles/tests.dir/src/TaxAuthority.cpp.o.d -o CMakeFiles/tests.dir/src/TaxAuthority.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/TaxAuthority.cpp
 
 CMakeFiles/tests.dir/src/TaxAuthority.cpp.i: cmake_force
@@ -674,7 +660,7 @@ CMakeFiles/tests.dir/src/TaxAuthority.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Taxi.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Taxi.cpp.o: ../src/Taxi.cpp
 CMakeFiles/tests.dir/src/Taxi.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/tests.dir/src/Taxi.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/tests.dir/src/Taxi.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Taxi.cpp.o -MF CMakeFiles/tests.dir/src/Taxi.cpp.o.d -o CMakeFiles/tests.dir/src/Taxi.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Taxi.cpp
 
 CMakeFiles/tests.dir/src/Taxi.cpp.i: cmake_force
@@ -688,7 +674,7 @@ CMakeFiles/tests.dir/src/Taxi.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Train.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Train.cpp.o: ../src/Train.cpp
 CMakeFiles/tests.dir/src/Train.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/tests.dir/src/Train.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/tests.dir/src/Train.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Train.cpp.o -MF CMakeFiles/tests.dir/src/Train.cpp.o.d -o CMakeFiles/tests.dir/src/Train.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Train.cpp
 
 CMakeFiles/tests.dir/src/Train.cpp.i: cmake_force
@@ -702,7 +688,7 @@ CMakeFiles/tests.dir/src/Train.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/TransportDepartment.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/TransportDepartment.cpp.o: ../src/TransportDepartment.cpp
 CMakeFiles/tests.dir/src/TransportDepartment.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/tests.dir/src/TransportDepartment.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/tests.dir/src/TransportDepartment.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/TransportDepartment.cpp.o -MF CMakeFiles/tests.dir/src/TransportDepartment.cpp.o.d -o CMakeFiles/tests.dir/src/TransportDepartment.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/TransportDepartment.cpp
 
 CMakeFiles/tests.dir/src/TransportDepartment.cpp.i: cmake_force
@@ -716,7 +702,7 @@ CMakeFiles/tests.dir/src/TransportDepartment.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/TransportState.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/TransportState.cpp.o: ../src/TransportState.cpp
 CMakeFiles/tests.dir/src/TransportState.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/tests.dir/src/TransportState.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/tests.dir/src/TransportState.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/TransportState.cpp.o -MF CMakeFiles/tests.dir/src/TransportState.cpp.o.d -o CMakeFiles/tests.dir/src/TransportState.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/TransportState.cpp
 
 CMakeFiles/tests.dir/src/TransportState.cpp.i: cmake_force
@@ -730,7 +716,7 @@ CMakeFiles/tests.dir/src/TransportState.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Truck.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Truck.cpp.o: ../src/Truck.cpp
 CMakeFiles/tests.dir/src/Truck.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/tests.dir/src/Truck.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/tests.dir/src/Truck.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Truck.cpp.o -MF CMakeFiles/tests.dir/src/Truck.cpp.o.d -o CMakeFiles/tests.dir/src/Truck.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Truck.cpp
 
 CMakeFiles/tests.dir/src/Truck.cpp.i: cmake_force
@@ -744,7 +730,7 @@ CMakeFiles/tests.dir/src/Truck.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/UnrestState.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/UnrestState.cpp.o: ../src/UnrestState.cpp
 CMakeFiles/tests.dir/src/UnrestState.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/tests.dir/src/UnrestState.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/tests.dir/src/UnrestState.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/UnrestState.cpp.o -MF CMakeFiles/tests.dir/src/UnrestState.cpp.o.d -o CMakeFiles/tests.dir/src/UnrestState.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/UnrestState.cpp
 
 CMakeFiles/tests.dir/src/UnrestState.cpp.i: cmake_force
@@ -758,7 +744,7 @@ CMakeFiles/tests.dir/src/UnrestState.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Utilities.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Utilities.cpp.o: ../src/Utilities.cpp
 CMakeFiles/tests.dir/src/Utilities.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/tests.dir/src/Utilities.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/tests.dir/src/Utilities.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Utilities.cpp.o -MF CMakeFiles/tests.dir/src/Utilities.cpp.o.d -o CMakeFiles/tests.dir/src/Utilities.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Utilities.cpp
 
 CMakeFiles/tests.dir/src/Utilities.cpp.i: cmake_force
@@ -772,7 +758,7 @@ CMakeFiles/tests.dir/src/Utilities.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Vehicle.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Vehicle.cpp.o: ../src/Vehicle.cpp
 CMakeFiles/tests.dir/src/Vehicle.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/tests.dir/src/Vehicle.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/tests.dir/src/Vehicle.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Vehicle.cpp.o -MF CMakeFiles/tests.dir/src/Vehicle.cpp.o.d -o CMakeFiles/tests.dir/src/Vehicle.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Vehicle.cpp
 
 CMakeFiles/tests.dir/src/Vehicle.cpp.i: cmake_force
@@ -786,7 +772,7 @@ CMakeFiles/tests.dir/src/Vehicle.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/Water.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/Water.cpp.o: ../src/Water.cpp
 CMakeFiles/tests.dir/src/Water.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/tests.dir/src/Water.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/tests.dir/src/Water.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/Water.cpp.o -MF CMakeFiles/tests.dir/src/Water.cpp.o.d -o CMakeFiles/tests.dir/src/Water.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Water.cpp
 
 CMakeFiles/tests.dir/src/Water.cpp.i: cmake_force
@@ -800,7 +786,7 @@ CMakeFiles/tests.dir/src/Water.cpp.s: cmake_force
 CMakeFiles/tests.dir/src/WoodFactory.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/src/WoodFactory.cpp.o: ../src/WoodFactory.cpp
 CMakeFiles/tests.dir/src/WoodFactory.cpp.o: CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/tests.dir/src/WoodFactory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/tests.dir/src/WoodFactory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tests.dir/src/WoodFactory.cpp.o -MF CMakeFiles/tests.dir/src/WoodFactory.cpp.o.d -o CMakeFiles/tests.dir/src/WoodFactory.cpp.o -c /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/WoodFactory.cpp
 
 CMakeFiles/tests.dir/src/WoodFactory.cpp.i: cmake_force
@@ -829,13 +815,13 @@ tests_OBJECTS = \
 "CMakeFiles/tests.dir/src/Damaged.cpp.o" \
 "CMakeFiles/tests.dir/src/DepartmentOfHomeAffairs.cpp.o" \
 "CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.o" \
-"CMakeFiles/tests.dir/src/EducationState.cpp.o" \
+"CMakeFiles/tests.dir/src/EducationService.cpp.o" \
 "CMakeFiles/tests.dir/src/Factory.cpp.o" \
+"CMakeFiles/tests.dir/src/FactoryFactory.cpp.o" \
 "CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o" \
 "CMakeFiles/tests.dir/src/Functional.cpp.o" \
 "CMakeFiles/tests.dir/src/Government.cpp.o" \
 "CMakeFiles/tests.dir/src/HealthService.cpp.o" \
-"CMakeFiles/tests.dir/src/HealthState.cpp.o" \
 "CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o" \
 "CMakeFiles/tests.dir/src/HighFundingState.cpp.o" \
 "CMakeFiles/tests.dir/src/Landmark.cpp.o" \
@@ -846,7 +832,6 @@ tests_OBJECTS = \
 "CMakeFiles/tests.dir/src/NameGenerator.cpp.o" \
 "CMakeFiles/tests.dir/src/PeaceState.cpp.o" \
 "CMakeFiles/tests.dir/src/PoliceService.cpp.o" \
-"CMakeFiles/tests.dir/src/PoliceState.cpp.o" \
 "CMakeFiles/tests.dir/src/Power.cpp.o" \
 "CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o" \
 "CMakeFiles/tests.dir/src/Residential.cpp.o" \
@@ -886,13 +871,13 @@ tests: CMakeFiles/tests.dir/src/CommercialFactory.cpp.o
 tests: CMakeFiles/tests.dir/src/Damaged.cpp.o
 tests: CMakeFiles/tests.dir/src/DepartmentOfHomeAffairs.cpp.o
 tests: CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.o
-tests: CMakeFiles/tests.dir/src/EducationState.cpp.o
+tests: CMakeFiles/tests.dir/src/EducationService.cpp.o
 tests: CMakeFiles/tests.dir/src/Factory.cpp.o
+tests: CMakeFiles/tests.dir/src/FactoryFactory.cpp.o
 tests: CMakeFiles/tests.dir/src/FlatTaxStrategy.cpp.o
 tests: CMakeFiles/tests.dir/src/Functional.cpp.o
 tests: CMakeFiles/tests.dir/src/Government.cpp.o
 tests: CMakeFiles/tests.dir/src/HealthService.cpp.o
-tests: CMakeFiles/tests.dir/src/HealthState.cpp.o
 tests: CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o
 tests: CMakeFiles/tests.dir/src/HighFundingState.cpp.o
 tests: CMakeFiles/tests.dir/src/Landmark.cpp.o
@@ -903,7 +888,6 @@ tests: CMakeFiles/tests.dir/src/Main.cpp.o
 tests: CMakeFiles/tests.dir/src/NameGenerator.cpp.o
 tests: CMakeFiles/tests.dir/src/PeaceState.cpp.o
 tests: CMakeFiles/tests.dir/src/PoliceService.cpp.o
-tests: CMakeFiles/tests.dir/src/PoliceState.cpp.o
 tests: CMakeFiles/tests.dir/src/Power.cpp.o
 tests: CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o
 tests: CMakeFiles/tests.dir/src/Residential.cpp.o
@@ -928,7 +912,7 @@ tests: lib/libgtest.a
 tests: lib/libgtest_main.a
 tests: lib/libgtest.a
 tests: CMakeFiles/tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Linking CXX executable tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Linking CXX executable tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

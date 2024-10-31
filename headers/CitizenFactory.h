@@ -12,23 +12,23 @@
  */
 class CitizenFactory {
 private:
-    Citizen* citizen;
-    std::weak_ptr<TaxAuthority> taxAuthority;
+    std::shared_ptr<TaxAuthority> taxAuthority;
     int citizenCount = 0;
+
 public:
     /**
      * @brief Construct a new CitizenFactory object.
      *
      * Initializes the CitizenFactory with default values.
      */
-    CitizenFactory(std::weak_ptr<TaxAuthority> taxAuthority);
+    CitizenFactory(std::shared_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroy the CitizenFactory object.
      *
      * Cleans up any resources used by the factory.
      */
-    virtual ~CitizenFactory();
+     ~CitizenFactory() = default;
 
     /**
      * @brief Creates a new Citizen object.
@@ -38,7 +38,7 @@ public:
      * @param startingFunds The initial funds available to the citizen.
      * @return Pointer to the newly created Citizen object.
      */
-    Citizen* createCitizen(std::string type, int startingSatisfaction, int startingFunds);
+    Citizen* createCitizen(std::string& type, int startingSatisfaction, int startingFunds);
 };
 
 #endif // CITIZENFACTORY_H

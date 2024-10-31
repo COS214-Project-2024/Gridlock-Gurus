@@ -1,10 +1,10 @@
 #ifndef EDUCATIONSTATE_H
 #define EDUCATIONSTATE_H
 
+#include "EducationService.h"
 #include <string>
 #include <iostream>
-using namespace std;
-
+class EducationService;
 /**
  * @brief Abstract class representing the state of education services.
  *
@@ -12,12 +12,14 @@ using namespace std;
  */
 class EducationState {
 protected:
-    string name;
+    EducationService& service;
+    std::string name;
+
 public:
     /**
      * @brief Constructs a new EducationState object.
      */
-    EducationState();
+    EducationState(EducationService& service) : service(service) {}
 
     /**
      * @brief Destroys the EducationState object.
@@ -36,7 +38,7 @@ public:
      * @return int The quality level of education.
      */
     virtual int getEducationQuality() = 0;
-    virtual string getName() = 0;
+    virtual std::string getName() = 0;
 };
 
 #endif // EDUCATIONSTATE_H

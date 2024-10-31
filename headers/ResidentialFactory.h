@@ -1,9 +1,11 @@
 #ifndef RESIDENTIALFACTORY_H
 #define RESIDENTIALFACTORY_H
 
+#include "BuildingType.h"
 #include "BuildingFactory.h"
-
-class TaxAuthority;
+#include "TaxAuthority.h"
+#include <memory>
+#include <string>
 
 /**
  * @brief Factory for creating residential buildings.
@@ -11,18 +13,16 @@ class TaxAuthority;
  * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create residential buildings.
  */
 class ResidentialFactory : public BuildingFactory {
-private:
-    TaxAuthority* tax;
 public:
     /**
      * @brief Constructs a new ResidentialFactory object.
      */
-    ResidentialFactory(TaxAuthority* taxAuthority);
+    ResidentialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the ResidentialFactory object.
      */
-    virtual ~ResidentialFactory() = default;
+    ~ResidentialFactory() override = default;
 
     /**
      * @brief Creates a residential building.
@@ -31,7 +31,7 @@ public:
      *
      * This method overrides the factory method to create a residential building.
      */
-    Building* createBuilding(std::string type, Citizen* owner) override;
+    Building* createBuilding(BuildingType type, Citizen& owner) override;
 };
 
 #endif // RESIDENTIALFACTORY_H

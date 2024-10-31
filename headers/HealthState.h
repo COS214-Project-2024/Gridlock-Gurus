@@ -3,8 +3,8 @@
 
 #include <string>
 #include <iostream>
-using namespace std;
-
+#include "HealthService.h"
+class HealthService;
 /**
  * @brief Abstract class representing the state of health services.
  *
@@ -12,12 +12,12 @@ using namespace std;
  */
 class HealthState {
 protected:
-    string name;
+    HealthService& service;
 public:
     /**
      * @brief Constructs a new HealthState object.
      */
-    HealthState();
+    HealthState(HealthService& service) : service(service) {}
 
     /**
      * @brief Destroys the HealthState object.
@@ -28,7 +28,7 @@ public:
      * @brief Retrieves the current health status of the services.
      * This method must be implemented by concrete states to provide specific health status information.
      */
-    virtual string getHealthStatus() = 0;
+    virtual std::string getHealthStatus() = 0;
 
     /**
      * @brief Gets the quality of service time in the current state.
@@ -36,7 +36,7 @@ public:
      * @return int The quality level of service time.
      */
     virtual int getQualityOfTime() = 0;
-    virtual string getName() = 0;
+    virtual std::string getName() = 0;
 };
 
 #endif // HEALTHSTATE_H

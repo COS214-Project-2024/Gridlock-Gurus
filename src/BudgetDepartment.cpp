@@ -1,15 +1,18 @@
 #include "BudgetDepartment.h"
 #include "TaxAuthority.h"
 
-BudgetDepartment::BudgetDepartment() : totalAvailable(0), broke(false) {}
+BudgetDepartment::BudgetDepartment(std::shared_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {
+    this->totalAvailable = 0;
+    this->broke = false;
+}
 
 int BudgetDepartment::checkTotal() {
     return totalAvailable;
 }
 
-bool BudgetDepartment::checkAvailability(int amount, TaxAuthority* taxAuthority) {
+bool BudgetDepartment::checkAvailability(int amount) {
     if (totalAvailable < amount){
-        receiveTaxes(taxAuthority);
+        receiveTaxes();
         if (totalAvailable > amount){
             return true;
         }
@@ -39,7 +42,11 @@ void BudgetDepartment::inflation(int percentage) {
     lose(reduction);
 }
 
-void BudgetDepartment::receiveTaxes(TaxAuthority* taxAuthority) {
+void BudgetDepartment::receiveTaxes() {
     int taxesCollected = taxAuthority->collectTaxes();
     gain(taxesCollected);
+}
+
+bool BudgetDepartment::isBroke() {
+    return broke;
 }

@@ -10,25 +10,23 @@
  * ConcreteState in the State pattern. It extends the PoliceState class and provides an implementation for checking the operational status of police services during times of unrest.
  */
 class UnrestState : public PoliceState {
-private:
-    PoliceService* service;
 public:
     /**
      * @brief Constructs a new UnrestState object.
      */
-    UnrestState();
+    UnrestState(PoliceService& service) : PoliceState(service) {}
 
     /**
      * @brief Destroys the UnrestState object.
      */
-    virtual ~UnrestState() = default;
+    ~UnrestState() = default;
 
     /**
      * @brief Checks the operational status of the police service during a state of unrest.
      * This method implements behavior specific to the unrest state.
      */
     void checkOperation() override;
-    string getName() override;
+    std::string getName() override;
 };
 
 #endif // UNRESTSTATE_H

@@ -2,6 +2,7 @@
 #define SANITATION_H
 
 #include "Utilities.h"
+#include "UtilityType.h"
 
 /**
  * @brief Represents a Sanitation utility.
@@ -11,9 +12,9 @@ public:
     /**
      * @brief Constructor for Sanitation utility.
      */
-    Sanitation();
+    Sanitation() : Utilities(UtilityType::Sanitation,300,300) {}
 
-    virtual ~Sanitation();
+    ~Sanitation()override = default;
 
     /**
      * @brief Check the sanitation capacity.
@@ -21,20 +22,6 @@ public:
      */
     void checkCapacity() const override;
 
-    // /**
-    //  * @brief Shed sanitation temporarily.
-    //  */
-    // void shed() override;
-
-    // /**
-    //  * @brief Break the sanitation utility.
-    //  */
-    // void breakUtility() override;
-
-    // /**
-    //  * @brief Repair the sanitation utility.
-    //  */
-    // void repair() override;
 };
 
 #endif // SANITATION_H

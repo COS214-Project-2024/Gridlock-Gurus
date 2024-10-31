@@ -1,17 +1,15 @@
 #include "HighFundingState.h"
 
-HighFundingState::HighFundingState() : HealthState() {
-    name = "HighFundingState";
-}
+std::string HighFundingState::getHealthStatus() {
+/*    string state = "Current state: " + name + "\n";
 
-string HighFundingState::getHealthStatus() {
-    string state = "Current state: " + name + "\n";
     state += "Response time: " + to_string(service->getResponseTime()) + " minutes\n";
-    return state;
+    return state;*/
+    return "State";
 }
 
 int HighFundingState::getQualityOfTime() {
-    if(service) {
+/*    if(service) {
         int currStaff = service->getStaff();
         int maxStaff = service->getMaxStaff();
         double ratio = static_cast<double>(currStaff) / maxStaff;
@@ -24,11 +22,12 @@ int HighFundingState::getQualityOfTime() {
         }
     } else {
         cout<< "Error: this state has not been assigned.\n";
-    }
+    }*/
+    return 0;
 }
 
-string HighFundingState::getName() {
-    return name;
+std::string HighFundingState::getName() {
+    return "High Funding";
 }
 
 

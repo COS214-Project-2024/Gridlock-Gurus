@@ -3,10 +3,10 @@
 
 #include "Service.h"
 #include "EducationState.h"
-#include <list>
+#include "BuildingType.h"
+#include "EducationState.h"
 
-class TaxAuthority;
-
+class EducationState;
 /**
  * @brief Represents an education service building.
  *
@@ -14,12 +14,7 @@ class TaxAuthority;
  */
 class EducationService : public Service {
 private:
-    EducationState* educationState;  ///< Current state of the education service.
-    int schoolId;  ///< ID of the school.
-    std::list<Citizen*> staff;  ///< List of staff members in the education service.
-    int maxStaff;
-    int currentStaff;
-    string schoolName;
+    EducationState* educationState; 
     int prestige;
 
 public:
@@ -32,18 +27,18 @@ public:
      * @param owner Pointer to the owner of the education service.
      * @param taxAuthority Pointer to the tax authority associated with the education service.
      */
-    EducationService(int cost, std::string location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int id, int max, string name);
+    EducationService(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType name);
 
     /**
      * @brief Destroys the EducationService building.
      */
-    virtual ~EducationService() = default;
+    ~EducationService() override = default;
 
     /**
      * @brief Gets details about the education service building.
      * @return A string containing details about the education service.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Pays taxes for the education service building.
@@ -56,7 +51,7 @@ public:
      * @brief Sets the state of the education service.
      * @param state Pointer to the new education state.
      */
-    void setState(EducationState* state);
+    void setState();
 
     /**
      * @brief Checks the operational status of the education service.
@@ -67,16 +62,17 @@ public:
      * @brief Pays a staff member in the education service.
      * @param staffMember Pointer to the staff member being paid.
      */
-    int pay(Citizen* staffMember) override;
-    void employ(Citizen* employee) override;
-    void fire(Citizen* employee) override;
-    void retire(Citizen* employee) override;
-    int getStaff();
-    int getMaxStaff();
+    int pay() override;
+
+//    void employ(Citizen* employee) override;
+//    void fire(Citizen* employee) override;
+//    void retire(Citizen* employee) override;
+//    int getStaff();
+//   int getMaxStaff();
     void prestigeDec(int by);
     void prestigeInc(int by);
     int getPrestige();
-    // void update() override;
+
 };
 
 #endif // EDUCATIONSERVICE_H

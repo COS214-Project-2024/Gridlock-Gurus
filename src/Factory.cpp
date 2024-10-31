@@ -1,7 +1,26 @@
 #include "Factory.h"
+#include "Building.h"
 
-Factory::Factory(int cost, std::string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int productionRate, int max) : Building(cost, location, resources, size, owner, taxAuthority){
-    this->productionRate = productionRate;
-    this->numOfEmployees = 0;
-    this->maxEmployees = max;
+void Factory::fire(Citizen& employee) {
+    auto it = std::find(employees.begin(), employees.end(), &employee);
+
+    if(it != employees.end()) {
+        employees.erase(it);
+        employee.fired();
+    }   
+}
+
+void Factory::retire(Citizen& employee) {
+    auto it = find(employees.begin(), employees.end(), &employee);
+
+    if(it != employees.end()) {
+        employees.erase(it);
+        employee.retireToCountryside();
+    }
+}
+
+void Factory::employ(Citizen& employee) {
+    if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
+        employees.push_back(&employee);
+    }
 }

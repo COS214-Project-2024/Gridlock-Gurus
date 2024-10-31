@@ -2,12 +2,12 @@
 #define SERVICE_H
 
 #include "Building.h"
+#include "BuildingType.h"
 #include <algorithm>
 #include <string>
 #include <iostream>
 #include <memory>
 
-class TaxAuthority;
 
 /**
  * @brief Represents a service building (e.g., hospital, police station).
@@ -16,8 +16,10 @@ class TaxAuthority;
  */
 class Service : public Building {
 protected:
-     std::string type;
-     double benefits;
+    std::vector<Citizen*> employees;
+    double benefits;
+    int maxEmployees;
+    int id;
 public:
     /**
      * @brief Constructs a new Service building.
@@ -26,28 +28,33 @@ public:
      * @param resources Pointer to the resources the building uses.
      * @param size The size of the service building.
      * @param owner Pointer to the owner of the service building.
-     * @param taxAuthority Pointer to the tax authority associated with the service building.
      */
-    Service(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr>TaxAuthority> taxAuthority);
+    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name,int id);
 
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service() = default;
-
-    /**
-     * @brief Gets details about the service building.
-     * @return A string containing details about the service building.
-     */
-    virtual std::string getDetails() = 0;  ///< Pure virtual function
+    virtual ~Service(){
+        employees.clear();
+    };
 
     /**
      * @brief Produces resources in the service building.
      */
-    virtual void employ(Citizen* employee) = 0;
-    virtual int pay(Citizen* employee) = 0;
-    virtual void fire(Citizen* employee) = 0;
-    virtual void retire(Citizen* employee) = 0;
+    void employ(Citizen& employee);
+    void fire(Citizen& employee);
+    void retire(Citizen& employee);
+    int getNumEmployees() {
+        return this->employees.size();
+    }
+
+    int getMaxEmployees() {
+        return maxEmployees;
+    }
+
+    int getId() {
+        return id;
+    }
 };
 
 #endif // SERVICE_H

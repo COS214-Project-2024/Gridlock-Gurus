@@ -3,11 +3,10 @@
 
 #include "Service.h"
 #include "PoliceState.h"
+#include "BuildingType.h"
 #include <set>
-#include <list>
-#include <memory>
-
-class TaxAuthority;
+#include <vector>
+class PoliceState;
 
 /**
  * @brief Represents a police service building.
@@ -17,11 +16,7 @@ class TaxAuthority;
 class PoliceService : public Service {
 private:
     PoliceState* policeState;  ///< Current state of the police service.
-    int stationId;  ///< ID of the police station.
-    std::list<Citizen*> officers;  ///< List of officers in the police service.
-    int maxStaff;
-    int currentStaff;
-    std::string stationName;
+    std::vector<Citizen*> officers;  ///< List of officers in the police service.
     int responseTime;
 
 public:
@@ -32,20 +27,19 @@ public:
      * @param resources Pointer to the resources the police service uses.
      * @param size The size of the police service.
      * @param owner Pointer to the owner of the police service.
-     * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int id, int max, std::string name);
+    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType name);
 
     /**
      * @brief Destroys the PoliceService building.
      */
-    virtual ~PoliceService() = default;
+    ~PoliceService() override = default;
 
     /**
      * @brief Gets details about the police service building.
      * @return A string containing details about the police service.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Pays taxes for the police service building.
@@ -56,7 +50,7 @@ public:
      * @brief Sets the state of the police service.
      * @param state Pointer to the new police state.
      */
-    void setState(PoliceState* state);
+    void setState();
 
     /**
      * @brief Checks the operational status of the police service.
@@ -67,15 +61,14 @@ public:
      * @brief Pays an officer in the police service.
      * @param officer Pointer to the officer being paid.
      */
-    int pay(Citizen* officer) override;
-    void employ(Citizen* employee) override;
+    int pay() override;
+/*    void employ(Citizen* employee) override;
     void fire(Citizen* employee) override;
     void retire(Citizen* employee) override;
     int getStaff();
-    int getMaxStaff();
+    int getMaxStaff();*/
     void responseTimeDec(int by);
     void responseTimeInc(int by);
-    // void update() override;
 };
 
 #endif // POLICESERVICE_H

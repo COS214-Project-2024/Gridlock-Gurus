@@ -1,19 +1,15 @@
 #include "CitizenFactory.h"
 #include <iostream>
 
-CitizenFactory::CitizenFactory(std::weak_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {
-    createCitizen("citizen", 100, 5000);
-}
+CitizenFactory::CitizenFactory(std::shared_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority){}
 
-Citizen* CitizenFactory::createCitizen(std::string type, int startingSatisfaction, int startingFunds) {
-    std::cout << "New citizen has arrived.\n";
-
+Citizen* CitizenFactory::createCitizen(std::string& type, int startingSatisfaction, int startingFunds) {
     int id = citizenCount;
-    Citizen* newCitizen = new Citizen(id,type, startingSatisfaction, startingFunds, this->taxAuthority);
-    this->citizen = newCitizen;
+    citizenCount++;
 
-    this->citizenCount++;
-    
-    std::cout << "Citizen " + newCitizen->getName() + " has been registered\n";
+    Citizen * newCitizen = new Citizen(id,type, startingSatisfaction, startingFunds, taxAuthority);
+
+    taxAuthority->registerCitizen(*newCitizen);
+
     return newCitizen;
 }

@@ -4,11 +4,11 @@
 #include "Building.h"
 #include <algorithm>
 #include <string>
-#include <list>
+#include <vector>
 #include <iostream>
 #include <memory>
+#include "BuildingType.h"
 
-class TaxAuthority;
 
 /**
  * @brief Represents a commercial building.
@@ -17,11 +17,9 @@ class TaxAuthority;
  */
 class Commercial : public Building {
 private:
-    int productionRate;  ///< The rate at which the commercial building generates money.
+    int productionRate;  
     int maxEmployees;
-    int numEmployees;
-    std::string name;
-    std::list<Citizen*> employees;  ///< List of staff members in the education service.
+    std::vector<Citizen*> employees;  
 
 public:
     /**
@@ -33,27 +31,34 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, int max, int rate);  ///< Constructor
+    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int max, int rate); 
 
     /**
      * @brief Destroys the Commercial building.
      */
-    virtual ~Commercial() = default;  ///< Destructor
+    ~Commercial() override = default;
 
-    /**
-     * @brief Gets details about the commercial building.
-     * @return A string containing details about the commercial building.
-     */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Generates money in the commercial building.
      */
-    void produceMoney();
-    void employ(Citizen* employee);
-    int pay(Citizen* employee);
-    void fire(Citizen* employee);
-    void retire(Citizen* employee);
+    int produceMoney();
+
+    void employ(Citizen& employee);
+
+    int pay() override;
+
+    void fire(Citizen& employee);
+
+    void retire(Citizen& employee);
+
+    int getNumberOfEmployees(); 
+
+    int getProductionRate();
+
+    int getMaxEmployees(); 
+
 };
 
 #endif // COMMERCIAL_H
