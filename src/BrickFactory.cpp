@@ -1,6 +1,6 @@
 #include "BrickFactory.h"
 
-BrickFactory::BrickFactory(int cost, std::string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max){
+BrickFactory::BrickFactory(int cost, std::string& location, Resources *resources, int size, Citizen *owner, TaxAuthority* taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max){
     name = "BrickFactory";
 }
 
@@ -13,71 +13,41 @@ std::string BrickFactory::getDetails() {
     details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
-// Building taxes are implemented by Building
-/*void BrickFactory::payTax(int amount) {
-    owner->payTaxes(amount);
-}*/
 
 void BrickFactory::produceResource() {
     //impliment
 }
 
 void BrickFactory::employ(Citizen *employee) {
-    if(employee->getEmploymentStatus() != true) {
+    if(!employee->getEmploymentStatus()) {
         if(numOfEmployees+1 <= maxEmployees) {
-            if(find(employees.begin(), employees.end(), employee) != employees.end()) {
-                employees.push_back(employee);
-            } else {
-                std::cout<< employee->getName() << " is already employed.\n";
-            }
+            employees.push_back(employee);
             numOfEmployees++;
-        } else {
-            std::cout<< "This factory is fully staffed, " + employee->getName() + " can't apply here.\n";
-        }
-    } else {
-        std::cout<< employee->getName() << " is already employed.\n";
-    }
+        } 
+    } 
 }
 
-int BrickFactory::pay(Citizen *employee) {
-    int amount = 163;
-    auto it = find(employees.begin(), employees.end(), employee);
-    if(it != employees.end()) {
-        double salary;
-        //benefits are affected by the state of education
-        std::cout<< employee->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
-        return amount;
-    } else {
-        std::cout << employee->getName() << "? Who the heck are you? Youdon't work here!\n";
-    }
-    return amount;
+int BrickFactory::pay() {
+    return 163;
 }
 
 void BrickFactory::fire(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
+
     if(it != employees.end()) {
-        employees.erase(it);
-        std::cout<< employee->getName() << " was fired from their job.\n";
         employee->fired();
+        employees.erase(it);
         numOfEmployees--;
-    } else {
-        std::cout << employee->getName() << " was not found. How did they get in?\n";
     }
 }
 
 
 void BrickFactory::retire(Citizen *employee) {
     auto it = find(employees.begin(), employees.end(), employee);
+
     if(it != employees.end()) {
         employees.erase(it);
-        std::cout<< employee->getName() << " retired from their job.\n";
         employee->retireToCountryside();
         numOfEmployees--;
-    } else {
-        std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
 }
-
-// void BrickFactory::update(){
-//     // payTax();
-// }

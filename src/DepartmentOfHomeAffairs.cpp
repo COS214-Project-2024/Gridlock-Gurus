@@ -1,17 +1,27 @@
 #include "DepartmentOfHomeAffairs.h"
 
-DepartmentOfHomeAffairs::DepartmentOfHomeAffairs(std::shared_ptr<TaxAuthority>) : population(0), factory(new CitizenFactory()), iterator(nullptr) {
-    // iterator = new CitizenIterator(citizens);
+DepartmentOfHomeAffairs::DepartmentOfHomeAffairs(TaxAuthority* taxAuth) {
+    this->population = 0;
     this->taxAuthority = taxAuth;
+    this->faxtory = new CitizenFactory(taxAuth);
+    //this->iterator = nullptr;
 }
 
 DepartmentOfHomeAffairs::~DepartmentOfHomeAffairs() {
-    delete factory;
-    delete iterator;
+    if(factory) {
+        delete factory;
+    }
+
+    if(iterator) {
+        delete iterator;
+    }
 
     for (Citizen* citizen : citizens) {
-        delete citizen;
+        if(citizen) {
+            delete citizen;
+        }
     }
+
     citizens.clear();
 }
 
@@ -20,7 +30,7 @@ void DepartmentOfHomeAffairs::registerBirth() {
     int startingSatisfaction = 100;
     int startingFunds = 1000;
 
-    Citizen* newCitizen = factory->createCitizen(type, startingSatisfaction, startingFunds);
+    Citizen* newCitizen = factory->createCitizen(type, startingSatisfaction, startingFund);
 
     citizens.push_back(newCitizen);
     ++population;

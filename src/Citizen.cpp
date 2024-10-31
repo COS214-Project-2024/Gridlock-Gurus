@@ -2,7 +2,7 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(int id,std::string type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority){
+Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,TaxAuthority* taxAuthority){
     this->id = id;
     this->type = type;
     this->satisfactionLevel = satisfactionLevel;
@@ -42,9 +42,8 @@ void Citizen::workDay(){
 
 void Citizen::collectSalary(Building* placeOfWork){
     if (placeOfWork) {
-        int salary = placeOfWork->pay(this);
-        funds += salary;
-        // satisfactionLevel += 1;
+        int salary = placeOfWork->pay();
+        this->funds += salary;
     }
 }
 
@@ -52,8 +51,8 @@ void Citizen::payTaxes(int amount){
     if (employmentStatus) {
         if (funds >= amount) {
             funds -= amount;
-            if(auto taxAuth = taxAuthority.lock()) {
-                taxAuth->sendTax(amount);
+            if(taxAuthority) {
+                taxAuthority->sendTax(amount);
             }
         } 
     }
@@ -89,26 +88,6 @@ void Citizen::fired(){
     satisfactionLevel -= 5;
 }
 
-bool Citizen::getEmploymentStatus() {
-    if(employmentStatus == true || retired == true) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-int Citizen::getFunds() {
-    return funds;
-}
-
-std::string Citizen::getName() const {
-    return name;
-}
-
-int Citizen::getId() const {
-    return id;
-}
-
 void Citizen::callTransport(TransportDepartment& department, const std::string& type) {
     try {
         Vehicle* vehicle = department.getAvailableVehicle(type);
@@ -142,6 +121,4 @@ bool Citizen::isInVehicle() const {
     return currentVehicle != nullptr;
 }
 
-std::string Citizen::getType() {
-    return this->type;
-}
+
