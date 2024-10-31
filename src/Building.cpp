@@ -1,7 +1,7 @@
 #include "Building.h"
 
-Building::Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, BuildingType name)
-    : cost(cost), location(location), resources(resources), size(size), owner(owner), taxAuthority(taxAuthority), name(name) {}
+Building::Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name)
+    : cost(cost), location(location), resources(resources), size(size), owner(owner), name(name) {}
 
 Building::~Building() {
     delete resources;

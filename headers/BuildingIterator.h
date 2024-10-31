@@ -10,17 +10,16 @@ class Building;
 * @brief Provides functionality to iterate through BuildingCollection.
 */
 class BuildingIterator {
-    friend class Building;
+    //friend class Building;
 
 public:
-    using BuildingPtr = std::shared_ptr<Building>;
 
     /**
      * @brief Constructs an iterator for the given collection of buildings.
      * @param buildings Reference to the vector of buildings.
      * @param pos Initial position of the iterator.
      */ 
-    BuildingIterator(std::vector<BuildingPtr>& buildings, size_t pos) : buildings(buildings), position(pos){}
+    BuildingIterator(std::vector<Building*>& buildings, size_t pos) : buildings(buildings), position(pos){}
     
     /**
      * @brief Destroys the BuildingIterator object.
@@ -31,7 +30,7 @@ public:
      * @brief Dereference operator to access the current building.
      * @return Shared pointer to the current building.
      */
-    BuildingPtr operator*() const ;
+    Building* operator*() const ;
 
     /**
      * @brief Prefix increment operator to advance to the next building.
@@ -54,7 +53,7 @@ public:
     bool operator==(const BuildingIterator& other) const;
 
 private:
-    std::vector<BuildingPtr>& buildings;    ///< Reference to the vector of buildings.
+    std::vector<Building*>& buildings;    ///< Reference to the vector of buildings.
     size_t position;                        ///< Current position of the iterator.
 };
 

@@ -8,12 +8,12 @@ TaxAuthority::TaxAuthority(){
     this->collectedTax = 0;
 }
 
-void TaxAuthority::registerBuilding(std::shared_ptr<Building> building) {
+void TaxAuthority::registerBuilding(Building& building) {
     this->buildings->addBuilding(building);
 }
 
-void TaxAuthority::registerCitizen(std::shared_ptr<Citizen> citizen) {
-    this->citizens.push_back(citizen);
+void TaxAuthority::registerCitizen(Citizen& citizen) {
+    this->citizens.push_back(&citizen);
 }
 
 int TaxAuthority::collectTaxes() {

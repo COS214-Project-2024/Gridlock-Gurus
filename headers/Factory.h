@@ -8,7 +8,6 @@
 #include <memory>
 #include <vector>
 
-class TaxAuthority;
 
 /**
  * @brief Represents an industrial factory building.
@@ -31,8 +30,8 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    Factory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int productionRate, int max) 
-    : Building(cost,location,resources,size,owner,taxAuthority,name) {
+    Factory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) 
+    : Building(cost,location,resources,size,owner,name) {
         this->productionRate = productionRate;
         this->maxEmployees = max;
     };
@@ -47,7 +46,7 @@ public:
      *
      * This is an abstract method that must be implemented by concrete factory subclasses.
      */
-    virtual void produceResource() = 0;
+    virtual int produceResource() = 0;
     void employ(Citizen& employee);
     void fire(Citizen& employee) ;
     void retire(Citizen& employee);

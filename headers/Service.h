@@ -8,7 +8,6 @@
 #include <iostream>
 #include <memory>
 
-class TaxAuthority;
 
 /**
  * @brief Represents a service building (e.g., hospital, police station).
@@ -29,9 +28,8 @@ public:
      * @param resources Pointer to the resources the building uses.
      * @param size The size of the service building.
      * @param owner Pointer to the owner of the service building.
-     * @param taxAuthority Pointer to the tax authority associated with the service building.
      */
-    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name,int id);
+    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name,int id);
 
     /**
      * @brief Destroys the Service building.

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-Residential::Residential(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int capacity) : Building(cost, location, resources, size, owner, taxAuthority,name) {
+Residential::Residential(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name, int capacity) : Building(cost, location, resources, size, owner,name) {
     this->maxCapacity = capacity;
 }
 
@@ -16,14 +16,6 @@ std::string Residential::getDetails() const {
     return details;
 }
 
-/*void Residential::householdTax() {
-    for (Citizen* tenant : tenants) {
-        if (tenant) {
-            tenant->payTaxes();
-        }
-    }
-}*/
-
 void Residential::addTenant(Citizen& tenant) {
     if(tenants.size() < maxCapacity) {
         tenants.push_back(&tenant);
@@ -35,9 +27,6 @@ void Residential::removeTenant(Citizen& tenant) {
 
     if(it != tenants.end()) {
         tenants.erase(it);
-        //std::cout<< tenant->getName() << " moved out after giving their notice.\n";
-    } else {
-        //std::cout << tenant->getName() << " was not found. Perhaps they were a squatter?\n";
     }
 }
 

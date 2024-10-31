@@ -22,5 +22,7 @@ Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
         productionRate = 12;
     }
 
-    return new Commercial(cost, temp,resources, 1000, owner, taxAuthority, maxEmployees,productionRate);
+    Commercial* c = new Commercial(cost, location,resources, 1000, owner, maxEmployees,productionRate);
+    taxAuthority->registerBuilding(*c);
+    return c;
 }

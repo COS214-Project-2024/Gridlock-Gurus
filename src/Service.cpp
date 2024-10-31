@@ -1,6 +1,6 @@
 #include "Service.h"
 
-Service::Service(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name,int id) : Building(cost, location, resources, size, owner, taxAuthority,name) {
+Service::Service(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name,int id) : Building(cost, location, resources, size, owner,name) {
     this->id = id;
     this->maxEmployees = 30;
     this->benefits = 0.5;

@@ -16,8 +16,6 @@ class Building;
  */
 class BuildingCollection {
 public:
-     /// Alias for a shared pointer to a Building object.
-    using BuildingPtr = std::shared_ptr<Building>;
 
     /**
      * @brief Constructs a new BuildingCollection object.
@@ -33,7 +31,7 @@ public:
      * @brief Adds a building to the collection.
      * @param building Shared pointer to the building to add.
      */
-    void addBuilding(BuildingPtr building);
+    void addBuilding(Building& building);
 
     /**
      * @brief Returns an iterator pointing to the beginning of the collection.
@@ -50,7 +48,7 @@ public:
     int getSize();
 
 private:
-    std::vector<BuildingPtr> buildings;                 ///< The collection of buildings in the city.
+    std::vector<Building*> buildings;                 ///< The collection of buildings in the city.
 
 };
 

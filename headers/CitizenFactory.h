@@ -12,15 +12,16 @@
  */
 class CitizenFactory {
 private:
-    TaxAuthority* taxAuthority;
+    std::shared_ptr<TaxAuthority> taxAuthority;
     int citizenCount = 0;
+
 public:
     /**
      * @brief Construct a new CitizenFactory object.
      *
      * Initializes the CitizenFactory with default values.
      */
-    CitizenFactory(TaxAuthority* taxAuthority);
+    CitizenFactory(std::shared_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroy the CitizenFactory object.

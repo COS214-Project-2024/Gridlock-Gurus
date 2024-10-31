@@ -6,8 +6,6 @@
 #include <string>
 #include <memory>
 
-class TaxAuthority;
-
 /**
  * @brief Represents a residential building.
  *
@@ -28,7 +26,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int capacity);
+    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int capacity);
 
     /**
      * @brief Destroys the Residential building object.

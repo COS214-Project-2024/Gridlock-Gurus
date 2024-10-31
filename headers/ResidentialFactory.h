@@ -3,8 +3,9 @@
 
 #include "BuildingType.h"
 #include "BuildingFactory.h"
+#include "TaxAuthority.h"
+#include <memory>
 
-class TaxAuthority;
 
 /**
  * @brief Factory for creating residential buildings.
@@ -16,7 +17,7 @@ public:
     /**
      * @brief Constructs a new ResidentialFactory object.
      */
-    ResidentialFactory(TaxAuthority& taxAuthority) : BuildingFactory(taxAuthority) {};
+    ResidentialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the ResidentialFactory object.

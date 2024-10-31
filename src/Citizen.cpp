@@ -2,16 +2,11 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,TaxAuthority* taxAuthority){
-    this->id = id;
-    this->type = type;
-    this->satisfactionLevel = satisfactionLevel;
-    this->funds = funds;
-    this->employmentStatus = false;
-    this->retired = false;
+Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
+: taxAuthority(taxAuthority),id(id),type(type), satisfactionLevel(satisfactionLevel), funds(funds),employmentStatus(false),retired(false){
+
     this->home = nullptr;
     this->placeOfWork = nullptr;
-    this->taxAuthority = taxAuthority;
     this->currentVehicle = nullptr;
     this->name = NameGenerator::getInstance().getRandomName();
     this->id = NameGenerator::getInstance().getRandomID();
@@ -51,8 +46,8 @@ void Citizen::payTaxes(int amount){
     if (employmentStatus) {
         if (funds >= amount) {
             funds -= amount;
-            if(taxAuthority) {
-                taxAuthority->sendTax(amount);
+            if(auto taxAuth = taxAuthority.lock()) {
+                taxAuth->sendTax(amount);
             }
         } 
     }

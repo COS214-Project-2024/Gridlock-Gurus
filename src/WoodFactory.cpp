@@ -1,6 +1,6 @@
 #include "WoodFactory.h"
 
-WoodFactory::WoodFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, BuildingType name, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority,name, productionRate, max){}
+WoodFactory::WoodFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) : Factory(cost, location, resources, size, owner,name, productionRate, max){}
 
 
 std::string WoodFactory::getDetails() const {
@@ -13,8 +13,8 @@ std::string WoodFactory::getDetails() const {
     return details;
 }
 
-void WoodFactory::produceResource() {
-    //impliment
+int WoodFactory::produceResource() {
+    return 100;
 }
 
 int WoodFactory::pay() {

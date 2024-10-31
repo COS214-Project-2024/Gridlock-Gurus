@@ -1,6 +1,6 @@
 #include "Commercial.h"
 
-Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner,TaxAuthority& taxAuthority, int max, int rate) : Building(cost, location, resources, size, owner, taxAuthority, BuildingType::Shop) {
+Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int max, int rate) : Building(cost, location, resources, size, owner , BuildingType::Shop) {
     this->maxEmployees = max;
     this->productionRate = rate;
 }
@@ -15,8 +15,8 @@ std::string Commercial::getDetails() const {
     return details;
 }
 
-void Commercial::produceMoney() {
-    //implement
+int Commercial::produceMoney() {
+    return 100;
 }
 
 void Commercial::employ(Citizen& employee) {
@@ -47,3 +47,14 @@ void Commercial::retire(Citizen& employee) {
     }
 }
 
+int Commercial::getProductionRate() {
+    return productionRate;
+}
+
+int Commercial::getNumberOfEmployees() {
+    return employees.size();
+}
+
+int Commercial::getMaxEmployees() {
+    return maxEmployees;
+}

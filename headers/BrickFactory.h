@@ -6,7 +6,7 @@
 #include "BuildingType.h"
 
 #include <vector>
-#include <size>
+#include <string>
 
 /**
  * @brief Represents a brick manufacturing factory.
@@ -24,7 +24,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int productionRate, int max);
+    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner ,BuildingType name, int productionRate, int max);
 
     /**
      * @brief Destroys the BrickFactory object.
@@ -45,7 +45,7 @@ public:
     /**
      * @brief Produces bricks in the factory.
      */
-    void produceResource() override;
+    int produceResource() override;
 
     /**
      * @brief Pays an employee working at the brick factory.

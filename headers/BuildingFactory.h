@@ -2,23 +2,23 @@
 #define BUILDINGFACTORY_H
 
 #include "Building.h"
-#include "TaxAuthority.h"
 #include "BuildingType.h"
+#include "TaxAuthority.h"
+#include <memory>
 /**
 * @brief Factory class for creating different types of buildings.
 * Creator participant in the Factory Method pattern. It defines the interface for creating buildings but defers the actual creation to subclasses.
 */
 class BuildingFactory {
-    protected:
-        TaxAuthority&  taxAuthority;
-
+    
     public:
+        std::shared_ptr<TaxAuthority> taxAuthority;
+
         /**
         * @brief Constructs a new BuildingFactory object.
         */
-        BuildingFactory(TaxAuthority& taxAuthority) {
-            this->taxAuthority = taxAuthority;
-        };
+        BuildingFactory(std::shared_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {}
+
 
         /**
         * @brief Destroys the BuildingFactory object.

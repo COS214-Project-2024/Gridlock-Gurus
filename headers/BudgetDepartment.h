@@ -2,6 +2,7 @@
 #define BUDGETDEPARTMENT_H
 
 class TaxAuthority;
+#include <memory>
 
 
 /**
@@ -14,13 +15,13 @@ class BudgetDepartment {
 private:
     int totalAvailable;  ///< The total available budget.
     bool broke;  ///< Indicates whether the budget department is out of funds.
-    TaxAuthority* taxAuthority;
+    std::shared_ptr<TaxAuthority> taxAuthority;
 
 public:
     /**
      * @brief Constructs a new BudgetDepartment object.
      */
-    BudgetDepartment(TaxAuthority* taxAuthority);
+    BudgetDepartment(std::shared_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroys the BudgetDepartment object.
@@ -59,6 +60,8 @@ public:
     void inflation(int percentage);
 
     void receiveTaxes();
+
+    bool isBroke(); 
 
 };
 

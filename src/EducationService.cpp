@@ -1,8 +1,8 @@
 #include "EducationService.h"
 #include "HighFundingEducationState.h"
 
-EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id, BuildingType name) : Service(cost, location, resources, size, owner, taxAuthority,name,id){
-    this->responseTime = 10;
+EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id){
+    this->prestige = 0;
     educationState = new HighFundingEducationState();
 }
 
@@ -16,68 +16,12 @@ std::string EducationService::getDetails() const {
     return details;
 }
 
-/*void EducationService::employ(Citizen& employee) {
-    if(employee->getEmploymentStatus() != true) {
-        if(currentStaff+1 <= maxStaff) {
-            if(find(staff.begin(), staff.end(), employee) != staff.end()) {
-                staff.push_back(employee);
-            } else {
-                std::cout<< employee->getName() << " is already employed.\n";
-            }
-            currentStaff++;
-        } else {
-            std::cout<< "This institution is fully staffed, " + employee->getName() + " can't apply here.\n";
-        }
-    } else {
-        std::cout<< employee->getName() << " is already employed.\n";
-    }
-}*/
-
-/*void HealthService::fire(Citizen *employee) {
-    auto it = find(staff.begin(), staff.end(), employee);
-    if(it != staff.end()) {
-        staff.erase(it);
-        std::cout<< employee->getName() << " was fired from their job. Their patients breathe a sigh of relief.\n";
-        employee->fired();
-        currentStaff--;
-    } else {
-        std::cout << employee->getName() << " was not found. Perhaps we should call security?\n";
-    }
-}*/
-
-/*void HealthService::retire(Citizen *employee) {
-    auto it = find(staff.begin(), staff.end(), employee);
-    if(it != staff.end()) {
-        staff.erase(it);
-        std::cout<< employee->getName() << " retired from their job. Their regular patients will miss them.\n";
-        employee->retireToCountryside();
-        currentStaff--;
-    } else {
-        std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
-    }
-}*/
-
 int EducationService::pay() {
-/*    auto it = find(staff.begin(), staff.end(), staffMember);
-    if(it != staff.end()) {
-        double salary;
-        int amount = 223000;
-        //benefits are affected by the state of education
-        salary = amount*benefits;
-        std::cout<< staffMember->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
-        return salary;
-    } else {
-        std::cout << staffMember->getName() << "? Who the heck are you? You're not a doctor!\n";
-    }*/
-    return 223000;
+   return 223000;
 }
 
-int EducationService::getResponseTime() {
-    return responseTime;
-}
-
-void EducationService::setState(HealthState *state) {
-    healthState = state;
+void EducationService::setState(EducationState *state) {
+    educationState = state;
     if(state->getName() == "HighFundingState") {
         benefits += 0.2;
     } else if(state->getName() == "LowFundingState") {
@@ -85,11 +29,19 @@ void EducationService::setState(HealthState *state) {
     }
 }
 
-void HealthService::responseTimeDec(int by) {
-    responseTime -= by;
+
+void EducationService::checkOperation() {
+
 }
 
-void HealthService::responseTimeInc(int by) {
-    responseTime += by;
+void EducationService::prestigeDec(int by) {
+    prestige -= by;
 }
 
+void EducationService::prestigeInc(int by) {
+    prestige += by;
+}
+
+int EducationService::getPrestige() {
+    return prestige;
+}

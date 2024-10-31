@@ -48,14 +48,14 @@ public:
      *
      * @param building Pointer to the Building object to be registered.
      */
-    void registerBuilding(std::shared_ptr<Building> building);
+    void registerBuilding(Building& building);
 
     /**
      * @brief Registers a citizen with the tax authority.
      *
      * @param citizen A shared_ptr to a citizen object.
      */
-    void registerCitizen(std::shared_ptr<Citizen> citizen);
+    void registerCitizen(Citizen& citizen);
   
     /**
      * @brief Notifies all registered members to pay taxes.

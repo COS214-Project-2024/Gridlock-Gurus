@@ -1,7 +1,7 @@
 #include "HealthService.h"
 #include "HighFundingState.h"
 
-HealthService::HealthService(int cost, std::string location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id, std::string name) : Service(cost, location, resources, size, owner, taxAuthority,name,id){
+HealthService::HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType name, int id) : Service(cost, location, resources, size, owner, name,id){
     this->responseTime = 10;
     HealthState* highFunding = new HighFundingState();
 }
@@ -19,17 +19,6 @@ std::string HealthService::getDetails() const {
 }
 
 int HealthService::pay() {
-/*    auto it = find(staff.begin(), staff.end(), staffMember);
-    if(it != staff.end()) {
-        double salary;
-        int amount = 223000;
-        //benefits are affected by the state of education
-        salary = amount*benefits;
-        std::cout<< staffMember->getName() << " was paid their salary. R" << salary << " was paid into their account\n";
-        return salary;
-    } else {
-        std::cout << staffMember->getName() << "? Who the heck are you? You're not a doctor!\n";
-    }*/
     return 223000;
 }
 

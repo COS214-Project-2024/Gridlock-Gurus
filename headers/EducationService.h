@@ -6,7 +6,6 @@
 #include "BuildingType.h"
 #include "EducationState.h"
 
-class TaxAuthority;
 
 /**
  * @brief Represents an education service building.
@@ -28,7 +27,7 @@ public:
      * @param owner Pointer to the owner of the education service.
      * @param taxAuthority Pointer to the tax authority associated with the education service.
      */
-    EducationService(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int id, BuildingType name);
+    EducationService(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType name);
 
     /**
      * @brief Destroys the EducationService building.
@@ -73,6 +72,7 @@ public:
     void prestigeDec(int by);
     void prestigeInc(int by);
     int getPrestige();
+
 };
 
 #endif // EDUCATIONSERVICE_H

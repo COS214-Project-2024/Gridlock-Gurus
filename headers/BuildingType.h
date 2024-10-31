@@ -1,5 +1,8 @@
+#ifndef BUILDINGTYPE_H
+#define BUILDINGTYPE_H
 #include <iostream>
 #include <string>
+#include <ostream>
 
 enum class BuildingType {
     Residential,
@@ -22,12 +25,14 @@ std::ostream& operator<<(std::ostream& os, BuildingType type) {
         case BuildingType::BrickFactory:os << "Brick Factory"; break;
         case BuildingType::WoodFactory: os << "Wood Factory"; break;
         case BuildingType::SteelFactory:os << "Steel Factory"; break;
-
-        case BuildingType::Office:     os << "Office"; break;
-        case BuildingType::Bank:       os << "Bank"; break;
-        default:                       os << "Unknown"; break;
+        case BuildingType::Office:      os << "Office"; break;
+        case BuildingType::Bank:        os << "Bank"; break;
+        case BuildingType::House:       os << "House"; break;
+        case BuildingType::Flat:        os << "Flat"; break;
+        case BuildingType::Estate:      os << "Estate"; break;
+        default:                        os << "Building"; break;
     }
     return os;
 }
 
-
+#endif // BUILDINGTYPE_H

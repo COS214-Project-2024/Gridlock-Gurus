@@ -6,9 +6,7 @@
 #include "BuildingType.h"
 #include <set>
 #include <vector>
-#include <memory>
 
-class TaxAuthority;
 
 /**
  * @brief Represents a police service building.
@@ -29,9 +27,8 @@ public:
      * @param resources Pointer to the resources the police service uses.
      * @param size The size of the police service.
      * @param owner Pointer to the owner of the police service.
-     * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id,BuildingType name);
+    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType name);
 
     /**
      * @brief Destroys the PoliceService building.

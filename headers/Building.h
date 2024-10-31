@@ -3,13 +3,11 @@
 
 #include "Resources.h"
 #include "Citizen.h"
-#include "TaxAuthority.h"
 #include <string>
 #include <memory>
 #include "BuildingType.h"
 
 // Forward Declarations
-class TaxAuthority;
 class Citizen;
 class Resources;
 
@@ -25,7 +23,6 @@ protected:
     Resources* resources;  ///< Resources used by the building.
     int size;  ///< The size of the building.
     Citizen& owner;  ///< The owner of the building.
-    TaxAuthority& taxAuthority;  ///< Tax authority associated with the building.
     BuildingType name;
 
 public:
@@ -38,7 +35,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name);
+    Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name);
 
     /**
      * @brief Destroys the Building object.

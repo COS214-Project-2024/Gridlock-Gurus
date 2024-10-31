@@ -7,9 +7,8 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "BuidingType.h"
+#include "BuildingType.h"
 
-class TaxAuthority;
 
 /**
  * @brief Represents a commercial building.
@@ -32,7 +31,7 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int max, int rate); 
+    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int max, int rate); 
 
     /**
      * @brief Destroys the Commercial building.
@@ -44,7 +43,7 @@ public:
     /**
      * @brief Generates money in the commercial building.
      */
-    void produceMoney();
+    int produceMoney();
 
     void employ(Citizen& employee);
 
@@ -54,17 +53,11 @@ public:
 
     void retire(Citizen& employee);
 
-    int getNumberOfEmployees() {
-        return this->employees.size();
-    }
+    int getNumberOfEmployees(); 
 
-    int getProductionRate() {
-        return this->productionRate;
-    }
+    int getProductionRate();
 
-    int getMaxEmployees() {
-        return this->maxEmployees;
-    }
+    int getMaxEmployees(); 
 
 };
 

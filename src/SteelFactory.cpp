@@ -10,8 +10,8 @@ std::string SteelFactory::getDetails() {
     return details;
 }
 
-void SteelFactory::produceResource() {
-    //impliment
+int SteelFactory::produceResource() {
+    return 100;
 }
 
 

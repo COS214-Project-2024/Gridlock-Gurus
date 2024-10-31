@@ -5,7 +5,6 @@
 #include "HealthState.h"
 #include "BuildingType.h"
 
-class TaxAuthority;
 
 /**
  * @brief Represents a health service building.
@@ -26,7 +25,7 @@ public:
      * @param owner Pointer to the owner of the health service.
      * @param taxAuthority Pointer to the tax authority associated with the health service.
      */
-    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id, BuildingType name);
+    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType name, int id);
 
     /**
      * @brief Destroys the HealthService building.

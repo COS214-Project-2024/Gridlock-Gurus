@@ -3,6 +3,9 @@
 
 #include "BuildingFactory.h"
 #include "BuildingType.h"
+#include "TaxAuthority.h"
+#include <memory>
+
 
 /**
  * @brief Factory for creating service buildings.
@@ -14,7 +17,7 @@ public:
     /**
      * @brief Constructs a new ServiceFactory object.
      */
-    ServiceFactory(TaxAuthority& taxAuthority) : BuildingFactory(taxAuthority) {}
+    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the ServiceFactory object.
