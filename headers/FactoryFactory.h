@@ -13,12 +13,12 @@ public:
     /**
      * @brief Constructs a new FactoryFactory object.
      */
-    FactoryFactory();
+    FactoryFactory(TaxAuthority* taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the FactoryFactory object.
      */
-    virtual ~FactoryFactory();
+    ~FactoryFactory() override = default;
     
     /**
      * @brief Creates a Factory building.
@@ -27,7 +27,7 @@ public:
      *
      * This method overrides the factory method to create a Factory building.
      */
-    Building* createBuilding(std::string type, Citizen* owner) override;
+    Building* createBuilding(std::string& type, Citizen* owner) override;
 };
 
 #endif // FACTORYFACTORY_H

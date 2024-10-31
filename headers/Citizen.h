@@ -14,7 +14,7 @@ class Building;
 
 class Citizen {
 private:
-  std::weak_ptr<TaxAuthority> taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
+  TaxAuthority* taxAuthority;    ///< Pointer to the TaxAuthority managing taxes for this citizen.
 
 protected:
     std::string name;
@@ -36,14 +36,14 @@ public:
      * @param satisfactionLevel The initial satisfaction level of the citizen.
      * @param funds The initial funds available to the citizen.
      */
-    Citizen(int id,std::string type, int satisfactionLevel, int funds, std::weak_ptr<TaxAuthority> taxAuthority);
+    Citizen(int id,std::string& type, int satisfactionLevel, int funds, TaxAuthority* taxAuthority);
 
     /**
      * @brief Destroy the Citizen object.
      *
      * Cleans up resources related to the citizen.
      */
-     ~Citizen();
+     ~Citizen() = default;
 
     /**
      * @brief Finds employment at a specified building.
@@ -79,12 +79,7 @@ public:
      * This function handles the tax payment process for the citizen.
      */
     void payTaxes(int amount);
-
-
-    std::string getName() const;
-    int getId() const;
-
-
+    
     void callTransport(TransportDepartment& department, const std::string& type);
     void boardVehicle(Vehicle* vehicle);
     void offloadVehicle();
@@ -107,23 +102,43 @@ public:
     void quitJob();
     void fired();
 
+
+//GETTERS
     /**
      * @brief Checks if the citizen is currently employed.
      *
      * @return A boolean value indicating the employment status.
      */
-    bool getEmploymentStatus();
+    bool getEmploymentStatus() const {
+        return this->employmentStatus;
+    };
+
+    std::string getName() const {
+        return this->name;
+    }
+
+    int getId() const {
+        return this->id;
+    }
+
 
     /**
     * @brief Getter for the funds to the citizen.
     *
     * @return The funds of the citizen.
     */
-    int getFunds();
+    int getFunds() const {
+        return this->funds;
+    }
     
-    int getSatisfactionLevel();
+    int getSatisfactionLevel() const {
+        return this->satisfactionLevel;
+    }
     
-    std::string getType();
+    std::string getType() const {
+        return this->type;
+    }
+
 };
 
 #endif // CITIZEN_H

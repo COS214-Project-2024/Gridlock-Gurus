@@ -8,6 +8,7 @@
 #include <memory>
 
 class Citizen;
+class TaxAuthority;
 
 /**
  * @brief Manages citizen registrations and identity-related services.
@@ -17,9 +18,9 @@ class Citizen;
  */
 class DepartmentOfHomeAffairs {
 private:
-    std::shared_ptr<TaxAuthority> taxAuthority;
+    TaxAuthority taxAuthority;
     CitizenFactory* factory;       ///< Pointer to the CitizenFactory for creating citizens.
-    CitizenIterator* iterator;     ///< Pointer to the CitizenIterator for iterating through citizens.
+    //CitizenIterator* iterator;     ///< Pointer to the CitizenIterator for iterating through citizens.
 
 public:
     int population;                ///< The total population of citizens.
@@ -30,14 +31,14 @@ public:
      *
      * Initializes the Department of Home Affairs and sets up necessary components.
      */
-    DepartmentOfHomeAffairs(std::shared_ptr<TaxAuthority> taxAuth);
+    DepartmentOfHomeAffairs(TaxAuthority* taxAuth);
 
     /**
      * @brief Destroy the DepartmentOfHomeAffairs object.
      *
      * Cleans up resources and deletes any dynamically allocated components.
      */
-    virtual ~DepartmentOfHomeAffairs();
+     ~DepartmentOfHomeAffairs();
 
     /**
      * @brief Registers a birth in the department.

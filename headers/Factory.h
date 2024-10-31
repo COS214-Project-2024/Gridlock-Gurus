@@ -29,7 +29,11 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    Factory(int cost, std::string location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, int productionRate, int max);
+    Factory(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max) : Building(cost,location,resources,size,owner,taxAuthority) {
+        this->productionRate = productionRate;
+        this->maxEmployees = max;
+        this->numOfEmployees = 0;
+    };
 
     /**
      * @brief Destroys the Factory object.
@@ -42,7 +46,7 @@ public:
      *
      * This is an abstract method that must be implemented by concrete factory subclasses.
      */
-    virtual std::string getDetails() = 0;
+    //virtual std::string getDetails() = 0;
 
     /**
      * @brief Produces resources in the factory.
@@ -51,7 +55,7 @@ public:
      */
     virtual void produceResource() = 0;
     virtual void employ(Citizen* employee) = 0;
-    virtual int pay(Citizen* employee) = 0;
+    //virtual int pay(Citizen* employee) = 0;
     virtual void fire(Citizen* employee) = 0;
     virtual void retire(Citizen* employee) = 0;
 };

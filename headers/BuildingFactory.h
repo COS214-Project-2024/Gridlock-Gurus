@@ -10,29 +10,39 @@
 class BuildingFactory {
     protected:
         Building* building;  ///< A reference to the building being constructed.
+        TaxAuthority * taxAuthority;
+
+    public:
+        /**
+        * @brief Constructs a new BuildingFactory object.
+        */
+        BuildingFactory(TaxAuthority* taxAuthority) {
+            this->taxAuthority = taxAuthority;
+        };
+
+        /**
+        * @brief Destroys the BuildingFactory object.
+        */
+        virtual ~BuildingFactory() = default;
+
+        /**
+        * @brief Starts the construction process for a building.
+        *
+        * This method invokes the factory method to create a building and then begins its construction.
+        */
+        void startConstruction() {
+            
+        }
+
         /**
         * @brief Creates a building of a specific type.
         * @param type The type of building to create.
         * @return Pointer to the created Building object.
         * Factory Method function, which must be implemented by concrete factory subclasses.
         */
-        virtual Building* createBuilding(std::string type, Citizen* owner) = 0;
+        virtual Building* createBuilding(std::string& type, Citizen* owner) = 0;
 
-    public:
-        /**
-        * @brief Constructs a new BuildingFactory object.
-        */
-        BuildingFactory() = default;
-        /**
-        * @brief Destroys the BuildingFactory object.
-        */
-        virtual ~BuildingFactory() = default;
-        /**
-        * @brief Starts the construction process for a building.
-        *
-        * This method invokes the factory method to create a building and then begins its construction.
-        */
-        void startConstruction();
+
 };
 
 #endif // BUILDINGFACTORY_H

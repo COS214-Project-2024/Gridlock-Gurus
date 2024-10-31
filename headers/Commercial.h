@@ -4,7 +4,7 @@
 #include "Building.h"
 #include <algorithm>
 #include <string>
-#include <list>
+#include <vector>
 #include <iostream>
 #include <memory>
 
@@ -21,7 +21,7 @@ private:
     int maxEmployees;
     int numEmployees;
     std::string name;
-    std::list<Citizen*> employees;  ///< List of staff members in the education service.
+    std::vector<Citizen*> employees;  ///< List of staff members in the education service.
 
 public:
     /**
@@ -33,12 +33,12 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen* owner, std::weak_ptr<TaxAuthority> taxAuthority, int max, int rate);  ///< Constructor
+    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int max, int rate);  ///< Constructor
 
     /**
      * @brief Destroys the Commercial building.
      */
-    virtual ~Commercial() = default;  ///< Destructor
+    ~Commercial() = default;  ///< Destructor
 
     /**
      * @brief Gets details about the commercial building.
@@ -51,7 +51,7 @@ public:
      */
     void produceMoney();
     void employ(Citizen* employee);
-    int pay(Citizen* employee);
+    int pay() override;
     void fire(Citizen* employee);
     void retire(Citizen* employee);
 };
