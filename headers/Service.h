@@ -2,6 +2,7 @@
 #define SERVICE_H
 
 #include "Building.h"
+#include "BuildingType.h"
 #include <algorithm>
 #include <string>
 #include <iostream>
@@ -16,8 +17,10 @@ class TaxAuthority;
  */
 class Service : public Building {
 protected:
-     std::string type;
+     std::vector<Citizen*> employees;
      double benefits;
+    int maxEmployees;
+    int id;
 public:
     /**
      * @brief Constructs a new Service building.
@@ -28,19 +31,32 @@ public:
      * @param owner Pointer to the owner of the service building.
      * @param taxAuthority Pointer to the tax authority associated with the service building.
      */
-    Service(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority);
+    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name,int id);
 
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service() = default;
+    virtual ~Service(){
+        employees.clear();
+    };
 
     /**
      * @brief Produces resources in the service building.
      */
-    virtual void employ(Citizen* employee) = 0;
-    virtual void fire(Citizen* employee) = 0;
-    virtual void retire(Citizen* employee) = 0;
+    void employ(Citizen& employee);
+    void fire(Citizen& employee);
+    void retire(Citizen& employee);
+    int getNumEmployees() {
+        return this->employees.size();
+    }
+
+    int getMaxEmployees() {
+        return maxEmployees;
+    }
+
+    int getId() {
+        return id;
+    }
 };
 
 #endif // SERVICE_H

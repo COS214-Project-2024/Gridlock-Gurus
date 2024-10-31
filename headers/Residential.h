@@ -16,7 +16,6 @@ class TaxAuthority;
 class Residential : public Building {
 private:
     int maxCapacity;  ///< The maximum number of citizens the building can house.
-    int capacity;  ///< The number of citizens currently in the building.
     std::vector<Citizen*> tenants;  ///< List of tenants living in the building.
 
 public:
@@ -29,7 +28,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Residential(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int capacity);
+    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int capacity);
 
     /**
      * @brief Destroys the Residential building object.
@@ -42,26 +41,26 @@ public:
      *
      * This method overrides the base `getDetails()` method to provide specific details for residential buildings.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Calculates household tax for the residential building.
      * 
      * The calculated household tax.
      */
-    void householdTax();
+    //void householdTax();
 
     /**
      * @brief Adds a tenant to the residential building.
      * @param tenant Pointer to the citizen to add as a tenant.
      */
-    void addTenant(Citizen* tenant);
+    void addTenant(Citizen& tenant);
 
     /**
         * @brief Adds a tenant to the residential building.
         * @param tenant Pointer to the citizen to add as a tenant.
         */
-    void removeTenant(Citizen* tenant);
+    void removeTenant(Citizen& tenant);
 
     //int pay(Citizen* employee) override;
 };

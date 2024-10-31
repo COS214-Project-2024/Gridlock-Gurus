@@ -22,7 +22,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    WoodFactory(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int productionRate, int max,BuildingType name);
+    WoodFactory(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int productionRate, int max);
 
     /**
      * @brief Destroys the WoodFactory object.
@@ -33,7 +33,7 @@ public:
      * @brief Gets details about the wood factory.
      * @return A string containing details about the wood factory.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Produces wood in the factory.

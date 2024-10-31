@@ -14,7 +14,7 @@ public:
     /**
      * @brief Constructs a new ServiceFactory object.
      */
-    ServiceFactory();
+    ServiceFactory(TaxAuthority& taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the ServiceFactory object.

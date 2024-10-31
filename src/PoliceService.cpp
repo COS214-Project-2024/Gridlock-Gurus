@@ -2,31 +2,24 @@
 #include "PeaceState.h"
 #include "UnrestState.h"
 
-PoliceService::PoliceService(int cost, std::string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int id, int max, std::string name) : Service(cost, location, resources, size, owner, taxAuthority) {
-    this->stationId = id;
-    this->benefits = 1.5;
-    this->maxStaff = max;
-    this->currentStaff = 0;
-    this->stationName = name;
+PoliceService::PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id, BuildingType name) : Service(cost, location, resources, size, owner, taxAuthority,name,id) {
     this->responseTime = 10;
     PeaceState* peaceState = new PeaceState();
-    setState(peaceState);
 }
 
-std::string PoliceService::getDetails() {
+std::string PoliceService::getDetails() const{
     std::string details =  "Police service: \n";
-    details += "Name: " + stationName + "\n";
     details += "Police state: " + this->policeState->getName() + "\n";
     details += "Response time: " + std::to_string(responseTime) + " minutes\n";
-    details += "Owner: " + owner->getName() + "\n";
+    details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Capacity: " + std::to_string(currentStaff) + "/" + std::to_string(maxStaff) + "\n";
+    details += "Capacity: " + std::to_string(employees.size()) + "/" + std::to_string(maxEmployees) + "\n";
     details += "Cost: " + std::to_string(cost) + "\n";
     details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
 
-void PoliceService::employ(Citizen *employee) {
+/*void PoliceService::employ(Citizen *employee) {
     if(employee->getEmploymentStatus() != true) {
         if(currentStaff+1 <= maxStaff) {
             if(find(officers.begin(), officers.end(), employee) != officers.end()) {
@@ -65,10 +58,10 @@ void PoliceService::retire(Citizen *employee) {
     } else {
         std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
-}
+}*/
 
-int PoliceService::pay(Citizen *staffMember) {
-    auto it = find(officers.begin(), officers.end(), staffMember);
+int PoliceService::pay() {
+/*    auto it = find(officers.begin(), officers.end(), staffMember);
     if(it != officers.end()) {
         double salary;
         int amount = 33000;
@@ -79,16 +72,8 @@ int PoliceService::pay(Citizen *staffMember) {
     } else {
         std::cout << staffMember->getName() << "? Who the heck are you? Where did you get that badge?\n";
     }
-
-    return 0;
-}
-
-int PoliceService::getStaff() {
-    return currentStaff;
-}
-
-int PoliceService::getMaxStaff() {
-    return maxStaff;
+*/
+    return 33000;
 }
 
 void PoliceService::responseTimeDec(int by) {
@@ -117,12 +102,15 @@ void PoliceService::checkOperation() {
     }
 }
 
-void PoliceService::setState(PoliceState *state) {
-    policeState = state;
-    if(state->getName() == "UnrestState") {
+void PoliceService::setState(PoliceState& state) {
+    delete policeState;
+
+    policeState = &state;
+
+/*    if(state->getName() == "UnrestState") {
         benefits -= 0.2;
     } else if(state->getName() == "PeaceState") {
         benefits += 0.2;
-    }
+    }*/
 }
 

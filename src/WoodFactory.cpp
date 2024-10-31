@@ -1,12 +1,13 @@
 #include "WoodFactory.h"
 
-WoodFactory::WoodFactory(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int productionRate, int max, BuildingType name) : Factory(cost, location, resources, size, owner, taxAuthority, productionRate, max,name){}
+WoodFactory::WoodFactory(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority, BuildingType name, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority,name, productionRate, max){}
 
-std::string WoodFactory::getDetails() {
+
+std::string WoodFactory::getDetails() const {
     std::string details =  "Wood factory: \n";
     details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Employees: " + std::to_string(numOfEmployees) + "/" + std::to_string(maxEmployees) + "\n";
+    details += "Employees: " + std::to_string(employees.size()) + "/" + std::to_string(maxEmployees) + "\n";
     details += "Cost: " + std::to_string(cost) + "\n";
     details += "Size: " + std::to_string(size) + "\n";
     return details;
@@ -17,11 +18,8 @@ void WoodFactory::produceResource() {
 }
 
 void WoodFactory::employ(Citizen& employee) {
-    if(!employee.getEmploymentStatus()) {
-        if(numOfEmployees < maxEmployees) {
-            employees.push_back(&employee);
-            numOfEmployees++;
-        }     
+    if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
+        employees.push_back(&employee);
     }
 }
 
@@ -44,13 +42,10 @@ void WoodFactory::fire(Citizen& employee) {
 
     if(it != employees.end()) {
         employees.erase(it);
-        //std::cout<< employee->getName() << " was fired from their job.\n";
         employee.fired();
-        numOfEmployees--;
-    } else {
-        //std::cout << employee->getName() << " was not found. How did they get in?\n";
-    }
+    }   
 }
+
 
 
 void WoodFactory::retire(Citizen& employee) {
@@ -58,10 +53,6 @@ void WoodFactory::retire(Citizen& employee) {
 
     if(it != employees.end()) {
         employees.erase(it);
-        //std::cout<< employee->getName() << " retired from their job.\n";
         employee.retireToCountryside();
-        numOfEmployees--;
-    } else {
-        //std::cout << employee->getName() << " was not found. Perhaps they were commiting tax fraud?\n";
     }
 }

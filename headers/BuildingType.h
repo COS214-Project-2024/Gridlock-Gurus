@@ -8,7 +8,10 @@ enum class BuildingType {
     SteelFactory,
     WoodFactory,
     Office,
-    Bank
+    Bank,
+    Flat,
+    Estate,
+    House,
 };
 
 // Overload operator<< to allow printing of BuildingType

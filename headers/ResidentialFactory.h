@@ -16,7 +16,7 @@ public:
     /**
      * @brief Constructs a new ResidentialFactory object.
      */
-    ResidentialFactory(TaxAuthority* taxAuthority) : BuildingFactory(taxAuthority) {};
+    ResidentialFactory(TaxAuthority& taxAuthority) : BuildingFactory(taxAuthority) {};
 
     /**
      * @brief Destroys the ResidentialFactory object.

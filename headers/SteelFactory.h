@@ -21,7 +21,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int productionRate, int max,BuildingType name) : Factory(cost, location, resources,size,owner,taxAuthority,productionRate,max,name) {};
+    SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, TaxAuthority& taxAuthority, BuildingType name, int productionRate, int max) : Factory(cost, location, resources,size,owner,taxAuthority,name,productionRate,max) {};
 
     /**
      * @brief Destroys the SteelFactory object.
@@ -32,7 +32,7 @@ public:
      * @brief Gets details about the steel factory.
      * @return A string containing details about the steel factory.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Produces steel in the factory.

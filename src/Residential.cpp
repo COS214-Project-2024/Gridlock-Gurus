@@ -2,49 +2,42 @@
 #include <algorithm>
 #include <iostream>
 
-Residential::Residential(int cost, std::string location, Resources *resources, int size, Citizen *owner, std::weak_ptr<TaxAuthority> taxAuthority, int capacity) : Building(cost, location, resources, size, owner, taxAuthority) {
+Residential::Residential(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int capacity) : Building(cost, location, resources, size, owner, taxAuthority,name) {
     this->maxCapacity = capacity;
 }
 
-std::string Residential::getDetails() {
+std::string Residential::getDetails() const {
     std::string details =  "Residential: \n";
-    details += "Owner: " + owner->getName() + "\n";
+    details += "Owner: " + owner.getName() + "\n";
     details += "Location: " + location + "\n";
-    details += "Capacity: " + std::to_string(capacity) + "/" + std::to_string(maxCapacity) + "\n";
+    details += "Capacity: " + std::to_string(tenants.size()) + "/" + std::to_string(maxCapacity) + "\n";
     details += "Cost: " + std::to_string(cost) + "\n";
     details += "Size: " + std::to_string(size) + "\n";
     return details;
 }
 
-void Residential::householdTax() {
+/*void Residential::householdTax() {
     for (Citizen* tenant : tenants) {
         if (tenant) {
             tenant->payTaxes();
         }
     }
-}
+}*/
 
-void Residential::addTenant(Citizen* tenant) {
-    if(capacity+1 <= maxCapacity) {
-        if(find(tenants.begin(), tenants.end(), tenant) != tenants.end()) {
-            tenants.push_back(tenant);
-        } else {
-            std::cout<< tenant->getName() << " is already a resident.\n";
-        }
-        capacity++;
-    } else {
-        std::cout<< "This building is full, " + tenant->getName() + " can't move in.\n";
+void Residential::addTenant(Citizen& tenant) {
+    if(tenants.size() < maxCapacity) {
+        tenants.push_back(&tenant);
     }
 }
 
-void Residential::removeTenant(Citizen *tenant) {
-    auto it = find(tenants.begin(), tenants.end(), tenant);
+void Residential::removeTenant(Citizen& tenant) {
+    auto it = std::find(tenants.begin(), tenants.end(), &tenant);
+
     if(it != tenants.end()) {
         tenants.erase(it);
-        std::cout<< tenant->getName() << " moved out after giving their notice.\n";
-        capacity--;
+        //std::cout<< tenant->getName() << " moved out after giving their notice.\n";
     } else {
-        std::cout << tenant->getName() << " was not found. Perhaps they were a squatter?\n";
+        //std::cout << tenant->getName() << " was not found. Perhaps they were a squatter?\n";
     }
 }
 

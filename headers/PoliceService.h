@@ -3,6 +3,7 @@
 
 #include "Service.h"
 #include "PoliceState.h"
+#include "BuildingType.h"
 #include <set>
 #include <vector>
 #include <memory>
@@ -17,11 +18,7 @@ class TaxAuthority;
 class PoliceService : public Service {
 private:
     PoliceState* policeState;  ///< Current state of the police service.
-    int stationId;  ///< ID of the police station.
     std::vector<Citizen*> officers;  ///< List of officers in the police service.
-    int maxStaff;
-    int currentStaff;
-    std::string stationName;
     int responseTime;
 
 public:
@@ -34,7 +31,7 @@ public:
      * @param owner Pointer to the owner of the police service.
      * @param taxAuthority Pointer to the tax authority associated with the police service.
      */
-    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen *owner, TaxAuthority* taxAuthority, int id, int max, std::string& name);
+    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int id,BuildingType name);
 
     /**
      * @brief Destroys the PoliceService building.
@@ -45,7 +42,7 @@ public:
      * @brief Gets details about the police service building.
      * @return A string containing details about the police service.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Pays taxes for the police service building.
@@ -68,11 +65,11 @@ public:
      * @param officer Pointer to the officer being paid.
      */
     int pay() override;
-    void employ(Citizen* employee) override;
+/*    void employ(Citizen* employee) override;
     void fire(Citizen* employee) override;
     void retire(Citizen* employee) override;
     int getStaff();
-    int getMaxStaff();
+    int getMaxStaff();*/
     void responseTimeDec(int by);
     void responseTimeInc(int by);
 };

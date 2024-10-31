@@ -1,6 +1,6 @@
 #include "BrickFactory.h"
 
-BrickFactory::BrickFactory(int cost, std::string& location, Resources *resources, int size, Citizen *owner, TaxAuthority* taxAuthority, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority,BuildingType::BrickFactory, productionRate, max){}
+BrickFactory::BrickFactory(int cost, std::string& location, Resources *resources, int size, Citizen& owner, TaxAuthority& taxAuthority,BuildingType name, int productionRate, int max) : Factory(cost, location, resources, size, owner, taxAuthority,name, productionRate, max){}
 
 std::string BrickFactory::getDetails() const {
     std::string details =  "Brick factory: \n";
