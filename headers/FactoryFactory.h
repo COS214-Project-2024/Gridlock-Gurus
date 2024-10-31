@@ -3,6 +3,7 @@
 
 #include "BuildingFactory.h"
 #include "BuildingType.h"
+#include "TaxAuthority.h"
 
 /**
  * @brief Factory for creating factories/industrial buildings.
@@ -14,7 +15,7 @@ public:
     /**
      * @brief Constructs a new FactoryFactory object.
      */
-    FactoryFactory(TaxAuthority* taxAuthority) : BuildingFactory(taxAuthority) {}
+    FactoryFactory(TaxAuthority& taxAuthority) : BuildingFactory(taxAuthority) {}
 
     /**
      * @brief Destroys the FactoryFactory object.

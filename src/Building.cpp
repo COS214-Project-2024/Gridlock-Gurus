@@ -1,16 +1,17 @@
 #include "Building.h"
 
-Building::Building(int cost,std::string& location, Resources* resources, int size,Citizen* owner,TaxAuthority* taxAuthority) {
+Building::Building(int cost,std::string& location, Resources& resources, int size,Citizen& owner,TaxAuthority& taxAuthority) {
     this->cost = cost;
     this->location = location;
-    this->resources = resources;
+    // keep as pointer for now
+    this->resources = &resources;
     this->size = size;
     this->owner = owner;
     this->taxAuthority = taxAuthority;
 }
 
 std::string Building::getDetails() {
-
+    return "";
 }
 
 int Building::pay() {

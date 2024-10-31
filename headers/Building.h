@@ -47,7 +47,7 @@ public:
      * @brief Gets details about the building.
      * @return A string containing details about the building.
      */
-    virtual std::string getDetails();
+    virtual std::string getDetails() const;
 
     virtual int pay();
   

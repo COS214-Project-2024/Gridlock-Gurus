@@ -2,6 +2,7 @@
 #define BUILDINGFACTORY_H
 
 #include "Building.h"
+#include "TaxAuthority.h"
 #include "BuildingType.h"
 /**
 * @brief Factory class for creating different types of buildings.
@@ -9,13 +10,13 @@
 */
 class BuildingFactory {
     protected:
-        TaxAuthority * taxAuthority;
+        TaxAuthority&  taxAuthority;
 
     public:
         /**
         * @brief Constructs a new BuildingFactory object.
         */
-        BuildingFactory(TaxAuthority* taxAuthority) {
+        BuildingFactory(TaxAuthority& taxAuthority) {
             this->taxAuthority = taxAuthority;
         };
 

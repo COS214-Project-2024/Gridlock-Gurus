@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include "BuidingType.h"
 
 class TaxAuthority;
 
@@ -17,11 +18,10 @@ class TaxAuthority;
  */
 class Commercial : public Building {
 private:
-    int productionRate;  ///< The rate at which the commercial building generates money.
+    int productionRate;  
     int maxEmployees;
-    int numEmployees;
-    std::string name;
-    std::vector<Citizen*> employees;  ///< List of staff members in the education service.
+    BuildingType name;
+    std::vector<Citizen*> employees;  
 
 public:
     /**
@@ -33,7 +33,7 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen* owner, TaxAuthority* taxAuthority, int max, int rate);  ///< Constructor
+    Commercial(int cost, std::string& location, Resources& resources, int size, Citizen& owner, TaxAuthority& taxAuthority, int max, int rate);  ///< Constructor
 
     /**
      * @brief Destroys the Commercial building.
@@ -44,16 +44,29 @@ public:
      * @brief Gets details about the commercial building.
      * @return A string containing details about the commercial building.
      */
-    std::string getDetails() override;
+    std::string getDetails() const override;
 
     /**
      * @brief Generates money in the commercial building.
      */
     void produceMoney();
-    void employ(Citizen* employee);
+    void employ(Citizen& employee);
     int pay() override;
-    void fire(Citizen* employee);
-    void retire(Citizen* employee);
+    void fire(Citizen& employee);
+    void retire(Citizen& employee);
+
+    int getNumberOfEmployees() {
+        return this->employees.size();
+    }
+
+    int getProductionRate() {
+        return this->productionRate;
+    }
+
+    int getMaxEmployees() {
+        return this->maxEmployees;
+    }
+
 };
 
 #endif // COMMERCIAL_H
