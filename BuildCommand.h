@@ -24,6 +24,11 @@ public:
      * @brief Executes the command to construct a building.
      */
     void execute() override;
+
+     /**
+     * @brief Undo functionality.
+     */
+    void undo();
 };
 
 #endif // BUILDCOMMAND_H
