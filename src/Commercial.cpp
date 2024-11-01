@@ -1,6 +1,6 @@
 #include "Commercial.h"
 
-Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int max, int rate) : Building(cost, location, resources, size, owner , BuildingType::Shop) {
+Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int max, int rate) : Building(cost, location, resources, size, owner , name) {
     this->maxEmployees = max;
     this->productionRate = rate;
 }

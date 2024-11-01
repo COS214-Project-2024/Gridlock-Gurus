@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "Citizen.h"
+#include "CitizenType.h"
 
 /**
  * @brief Factory class to create Citizen objects.
@@ -38,7 +39,7 @@ public:
      * @param startingFunds The initial funds available to the citizen.
      * @return Pointer to the newly created Citizen object.
      */
-    Citizen* createCitizen(std::string& type, int startingSatisfaction, int startingFunds);
+    Citizen* createCitizen(CitizenType type, int startingSatisfaction, int startingFunds);
 };
 
 #endif // CITIZENFACTORY_H

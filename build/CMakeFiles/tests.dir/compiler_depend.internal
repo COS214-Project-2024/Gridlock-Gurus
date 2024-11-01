@@ -223,6 +223,7 @@ CMakeFiles/tests.dir/src/BrickFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -645,6 +646,7 @@ CMakeFiles/tests.dir/src/BudgetDepartment.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportState.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportDepartment.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxAuthority.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
@@ -870,6 +872,7 @@ CMakeFiles/tests.dir/src/Building.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
 
 CMakeFiles/tests.dir/src/BuildingCollection.cpp.o
@@ -1092,6 +1095,7 @@ CMakeFiles/tests.dir/src/BuildingCollection.cpp.o
  /usr/include/c++/11/bits/istream.tcc
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
 
@@ -1458,6 +1462,7 @@ CMakeFiles/tests.dir/src/Citizen.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/NameGenerator.h
  /usr/include/c++/11/ctime
 
@@ -1683,6 +1688,7 @@ CMakeFiles/tests.dir/src/CitizenFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
 
 CMakeFiles/tests.dir/src/Commercial.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Commercial.cpp
@@ -1905,6 +1911,7 @@ CMakeFiles/tests.dir/src/Commercial.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -2143,6 +2150,7 @@ CMakeFiles/tests.dir/src/CommercialFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -2570,6 +2578,7 @@ CMakeFiles/tests.dir/src/DepartmentOfHomeAffairs.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenFactory.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -2586,6 +2595,7 @@ CMakeFiles/tests.dir/src/DepartmentOfHomeAffairs.cpp.o
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
 
 CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/DepartmentOfWaterPowerAndSanitation.cpp
@@ -3000,6 +3010,7 @@ CMakeFiles/tests.dir/src/EducationService.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -3241,6 +3252,7 @@ CMakeFiles/tests.dir/src/Factory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -3481,6 +3493,7 @@ CMakeFiles/tests.dir/src/FactoryFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Building.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Factory.h
@@ -3914,6 +3927,7 @@ CMakeFiles/tests.dir/src/Government.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Vehicle.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportState.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportDepartment.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
@@ -4162,6 +4176,7 @@ CMakeFiles/tests.dir/src/HealthService.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -4405,6 +4420,7 @@ CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -4646,6 +4662,7 @@ CMakeFiles/tests.dir/src/HighFundingState.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -4885,6 +4902,7 @@ CMakeFiles/tests.dir/src/Landmark.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
 
 CMakeFiles/tests.dir/src/LandmarkFactory.cpp.o
@@ -5109,6 +5127,7 @@ CMakeFiles/tests.dir/src/LandmarkFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Landmark.h
 
@@ -5335,6 +5354,7 @@ CMakeFiles/tests.dir/src/LowFundingEducationState.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -5576,6 +5596,7 @@ CMakeFiles/tests.dir/src/LowFundingState.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -5817,6 +5838,7 @@ CMakeFiles/tests.dir/src/Main.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Train.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Taxi.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Truck.h
@@ -6264,6 +6286,7 @@ CMakeFiles/tests.dir/src/PeaceState.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -6507,6 +6530,7 @@ CMakeFiles/tests.dir/src/PoliceService.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -6944,6 +6968,7 @@ CMakeFiles/tests.dir/src/Residential.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -7184,6 +7209,7 @@ CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/City.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Government.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BudgetDepartment.h
@@ -7799,6 +7825,7 @@ CMakeFiles/tests.dir/src/Service.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -8038,6 +8065,7 @@ CMakeFiles/tests.dir/src/SteelFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -8274,6 +8302,7 @@ CMakeFiles/tests.dir/src/TaxAuthority.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportState.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportDepartment.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxAuthority.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
@@ -9404,6 +9433,7 @@ CMakeFiles/tests.dir/src/UnrestState.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -10201,6 +10231,7 @@ CMakeFiles/tests.dir/src/WoodFactory.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Factory.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/bits/stl_algo.h
@@ -10564,16 +10595,23 @@ CMakeFiles/tests.dir/tests/building_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportState.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportDepartment.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxAuthority.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Building.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingFactory.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/SteelFactory.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Factory.h
  /usr/include/c++/11/algorithm
  /usr/include/c++/11/pstl/glue_algorithm_defs.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Citizen.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Resources.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Commercial.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CommercialFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
 
 CMakeFiles/tests.dir/tests/citizen_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/citizen_test.cpp
@@ -10924,6 +10962,7 @@ CMakeFiles/tests.dir/tests/citizen_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxAuthority.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Building.h
 
@@ -11273,6 +11312,7 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportState.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TransportDepartment.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxAuthority.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
