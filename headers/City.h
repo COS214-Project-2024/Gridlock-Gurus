@@ -3,6 +3,13 @@
 
 #include "Government.h"
 #include "BuildingCollection.h"
+#include "TaxAuthority.h"
+#include "FactoryFactory.h"
+#include "LandmarkFactory.h"
+#include "ResidentialFactory.h"
+#include "CommercialFactory.h"
+#include "ServiceFactory.h"
+#include <memory>
 
 /**
  * @brief Represents the entire city, managing citizens, buildings, and services.
@@ -11,19 +18,41 @@
  */
 class City {
 private:
-    Government* government;  ///< Pointer to the government managing the city.
-    BuildingCollection* buildings;  ///< Collection of buildings in the city.
+    Government& government;  ///< Pointer to the government managing the city.
+    //BuildingCollection* buildings;  ///< Collection of buildings in the city.
+
+    std::shared_ptr<TaxAuthority> taxAuthority;
+
+    FactoryFactory* factory_factory;
+    LandmarkFactory* landmark_factory;
+    ResidentialFactory* residential_factory;
+    CommercialFactory* commercial_factory;
+    ServiceFactory* service_factory;
+    int happiness;
 
 public:
     /**
      * @brief Constructs a new City object.
      */
-    City();
+    City(Government& gov,std::shared_ptr<TaxAuthority> taxAuth): government(gov), taxAuthority(taxAuth){
+        this->factory_factory = new FactoryFactory(taxAuth);
+        this->landmark_factory = new LandmarkFactory(taxAuth);
+        this->residential_factory = new ResidentialFactory(taxAuth);
+        this->commercial_factory = new CommercialFactory(taxAuth);
+        this->service_factory = new ServiceFactory(taxAuth);
+
+    };
     
     /**
      * @brief Destroys the City object.
      */
-    virtual ~City();
+     ~City(){
+        delete factory_factory;
+        delete landmark_factory;
+        delete residential_factory;
+        delete commercial_factory;
+        delete service_factory;
+    }
 
     /**
      * @brief Adds an observer (Government) to the city.
@@ -47,7 +76,7 @@ public:
     /**
      * @brief Adds a new building to the city's collection of buildings.
      */
-    void addBuilding();
+    void addBuilding(Building& building){}
 
     /**
      * @brief Updates citizen happiness based on city conditions.
@@ -65,6 +94,17 @@ public:
      * @return The current citizen happiness level.
      */
     int getState() const;
+
+    void removeLastBuilding(){}
+
+    int getCitizenHappiness() {
+        return happiness;
+    }
+
+    void setCitizenHappiness(int happiness) {
+        this->happiness = happiness;
+    }
+
 };
 
 #endif // CITY_H

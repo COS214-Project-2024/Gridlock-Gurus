@@ -28,6 +28,8 @@ public:
      * This function orchestrates the steps defined in CityBuilder to create the final city.
      */
     City* construct();
+
+    void setBuilding(Building& building) {}
 };
 
 #endif // DIRECTOR_H
