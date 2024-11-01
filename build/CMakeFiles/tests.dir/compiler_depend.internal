@@ -10963,8 +10963,19 @@ CMakeFiles/tests.dir/tests/citizen_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingIterator.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxStrategy.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/TaxAuthority.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Building.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Factory.h
+ /usr/include/c++/11/algorithm
+ /usr/include/c++/11/pstl/glue_algorithm_defs.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BrickFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Factory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/FactoryFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingType.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Residential.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/ResidentialFactory.h
 
 CMakeFiles/tests.dir/tests/tax_system_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/tax_system_test.cpp

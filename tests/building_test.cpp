@@ -55,8 +55,6 @@ TEST_F(building_test, commercial_test_construction) {
     EXPECT_EQ(b1->getSize(),1000);
     EXPECT_EQ(b1->getName(),BuildingType::Bank);
     EXPECT_EQ(taxAuth->getSize(),1);
-
-
 }
 
 TEST(SimpleTest, AlwaysPass) {

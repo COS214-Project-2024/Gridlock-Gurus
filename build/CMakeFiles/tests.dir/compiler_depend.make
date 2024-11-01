@@ -10912,8 +10912,19 @@ CMakeFiles/tests.dir/tests/citizen_test.cpp.o: ../tests/citizen_test.cpp \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
   ../headers/CitizenType.h \
+  ../headers/CitizenType.h \
   ../headers/TaxAuthority.h \
-  ../headers/Building.h
+  ../headers/Building.h \
+  ../headers/Factory.h \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+  ../headers/BrickFactory.h \
+  ../headers/Factory.h \
+  ../headers/FactoryFactory.h \
+  ../headers/BuildingFactory.h \
+  ../headers/BuildingType.h \
+  ../headers/Residential.h \
+  ../headers/ResidentialFactory.h
 
 CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
   /usr/include/stdc-predef.h \
