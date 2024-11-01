@@ -53,14 +53,14 @@ public:
      *
      * @param placeOfEmployment Pointer to the building where the citizen will work.
      */
-    void findWork(Building* placeOfEmployment);
+    void setWork(Building& work);
 
     /**
      * @brief Finds a home in a specified building.
      *
      * @param home Pointer to the building that will be the citizen's home.
      */
-    void findHome(Building* home);
+    void setHome(Building& home);
 
     /**
      * @brief Simulates a workday for the citizen.
@@ -74,7 +74,7 @@ public:
      *
      * @param placeOfWork Pointer to the building where the citizen works.
      */
-    void collectSalary(Building* placeOfWork);
+    void collectSalary();
 
     /**
      * @brief Pays taxes based on the citizen's income.
@@ -92,7 +92,6 @@ public:
     void retire();
     void retireToCountryside();
 
-    void quitJob();
     void fired();
 
 
@@ -109,7 +108,6 @@ public:
         return this->id;
     }
 
-
     int getFunds() const {
         return this->funds;
     }
@@ -121,6 +119,11 @@ public:
     CitizenType getType() const {
         return this->type;
     }
+
+    bool hasHome() const {
+        return this->home != nullptr;
+    }
+
 
 };
 

@@ -12,7 +12,6 @@
  * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create factories/industrial buildings.
  */
 class FactoryFactory : public BuildingFactory {
-    std::shared_ptr<TaxAuthority> taxAuthority;
 public:
     /**
      * @brief Constructs a new FactoryFactory object.

@@ -19,6 +19,7 @@ std::string Residential::getDetails() const {
 void Residential::addTenant(Citizen& tenant) {
     if(tenants.size() < maxCapacity) {
         tenants.push_back(&tenant);
+        tenant.setHome(*this);
     }
 }
 
@@ -30,3 +31,6 @@ void Residential::removeTenant(Citizen& tenant) {
     }
 }
 
+bool Residential::isFull() const {
+    return tenants.size() >= maxCapacity;
+}
