@@ -222,6 +222,7 @@ CMakeFiles/tests.dir/src/BrickFactory.cpp.o: ../src/BrickFactory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -642,6 +643,7 @@ CMakeFiles/tests.dir/src/BudgetDepartment.cpp.o: ../src/BudgetDepartment.cpp \
   ../headers/TransportState.h \
   ../headers/TransportDepartment.h \
   ../headers/TaxAuthority.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h
@@ -866,6 +868,7 @@ CMakeFiles/tests.dir/src/Building.cpp.o: ../src/Building.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h
 
 CMakeFiles/tests.dir/src/BuildingCollection.cpp.o: ../src/BuildingCollection.cpp \
@@ -1087,6 +1090,7 @@ CMakeFiles/tests.dir/src/BuildingCollection.cpp.o: ../src/BuildingCollection.cpp
   /usr/include/c++/11/bits/istream.tcc \
   ../headers/BuildingCollection.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/BuildingIterator.h
 
@@ -1451,6 +1455,7 @@ CMakeFiles/tests.dir/src/Citizen.cpp.o: ../src/Citizen.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/NameGenerator.h \
   /usr/include/c++/11/ctime
 
@@ -1674,7 +1679,8 @@ CMakeFiles/tests.dir/src/CitizenFactory.cpp.o: ../src/CitizenFactory.cpp \
   ../headers/TaxAuthority.h \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
-  ../headers/TaxStrategy.h
+  ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h
 
 CMakeFiles/tests.dir/src/Commercial.cpp.o: ../src/Commercial.cpp \
   /usr/include/stdc-predef.h \
@@ -1896,6 +1902,7 @@ CMakeFiles/tests.dir/src/Commercial.cpp.o: ../src/Commercial.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -2133,6 +2140,7 @@ CMakeFiles/tests.dir/src/CommercialFactory.cpp.o: ../src/CommercialFactory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -2558,6 +2566,7 @@ CMakeFiles/tests.dir/src/DepartmentOfHomeAffairs.cpp.o: ../src/DepartmentOfHomeA
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/CitizenFactory.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -2573,7 +2582,8 @@ CMakeFiles/tests.dir/src/DepartmentOfHomeAffairs.cpp.o: ../src/DepartmentOfHomeA
   /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
-  /usr/include/c++/11/bits/erase_if.h
+  /usr/include/c++/11/bits/erase_if.h \
+  ../headers/CitizenType.h
 
 CMakeFiles/tests.dir/src/DepartmentOfWaterPowerAndSanitation.cpp.o: ../src/DepartmentOfWaterPowerAndSanitation.cpp \
   /usr/include/stdc-predef.h \
@@ -2986,6 +2996,7 @@ CMakeFiles/tests.dir/src/EducationService.cpp.o: ../src/EducationService.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -3226,6 +3237,7 @@ CMakeFiles/tests.dir/src/Factory.cpp.o: ../src/Factory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -3465,6 +3477,7 @@ CMakeFiles/tests.dir/src/FactoryFactory.cpp.o: ../src/FactoryFactory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/Building.h \
   ../headers/Factory.h \
@@ -3895,6 +3908,7 @@ CMakeFiles/tests.dir/src/Government.cpp.o: ../src/Government.cpp \
   ../headers/Vehicle.h \
   ../headers/TransportState.h \
   ../headers/TransportDepartment.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
@@ -4142,6 +4156,7 @@ CMakeFiles/tests.dir/src/HealthService.cpp.o: ../src/HealthService.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -4384,6 +4399,7 @@ CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o: ../src/HighFundingEduc
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -4624,6 +4640,7 @@ CMakeFiles/tests.dir/src/HighFundingState.cpp.o: ../src/HighFundingState.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -4862,6 +4879,7 @@ CMakeFiles/tests.dir/src/Landmark.cpp.o: ../src/Landmark.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h
 
 CMakeFiles/tests.dir/src/LandmarkFactory.cpp.o: ../src/LandmarkFactory.cpp \
@@ -5085,6 +5103,7 @@ CMakeFiles/tests.dir/src/LandmarkFactory.cpp.o: ../src/LandmarkFactory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/Landmark.h
 
@@ -5310,6 +5329,7 @@ CMakeFiles/tests.dir/src/LowFundingEducationState.cpp.o: ../src/LowFundingEducat
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -5550,6 +5570,7 @@ CMakeFiles/tests.dir/src/LowFundingState.cpp.o: ../src/LowFundingState.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -5790,6 +5811,7 @@ CMakeFiles/tests.dir/src/Main.cpp.o: ../src/Main.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/Train.h \
   ../headers/Taxi.h \
   ../headers/Truck.h \
@@ -6235,6 +6257,7 @@ CMakeFiles/tests.dir/src/PeaceState.cpp.o: ../src/PeaceState.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -6477,6 +6500,7 @@ CMakeFiles/tests.dir/src/PoliceService.cpp.o: ../src/PoliceService.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -6911,6 +6935,7 @@ CMakeFiles/tests.dir/src/Residential.cpp.o: ../src/Residential.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -7150,6 +7175,7 @@ CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o: ../src/ResidentialFactory.cpp
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/City.h \
   ../headers/Government.h \
   ../headers/BudgetDepartment.h \
@@ -7762,6 +7788,7 @@ CMakeFiles/tests.dir/src/Service.cpp.o: ../src/Service.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -8000,6 +8027,7 @@ CMakeFiles/tests.dir/src/SteelFactory.cpp.o: ../src/SteelFactory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -8235,6 +8263,7 @@ CMakeFiles/tests.dir/src/TaxAuthority.cpp.o: ../src/TaxAuthority.cpp \
   ../headers/TransportState.h \
   ../headers/TransportDepartment.h \
   ../headers/TaxAuthority.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
@@ -9359,6 +9388,7 @@ CMakeFiles/tests.dir/src/UnrestState.cpp.o: ../src/UnrestState.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -10152,6 +10182,7 @@ CMakeFiles/tests.dir/src/WoodFactory.cpp.o: ../src/WoodFactory.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/Factory.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
@@ -10514,16 +10545,23 @@ CMakeFiles/tests.dir/tests/building_test.cpp.o: ../tests/building_test.cpp \
   ../headers/TransportState.h \
   ../headers/TransportDepartment.h \
   ../headers/TaxAuthority.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
   ../headers/Building.h \
+  ../headers/BuildingFactory.h \
   ../headers/SteelFactory.h \
   ../headers/Factory.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/pstl/glue_algorithm_defs.h \
   ../headers/Citizen.h \
-  ../headers/Resources.h
+  ../headers/Resources.h \
+  ../headers/Commercial.h \
+  ../headers/CommercialFactory.h \
+  ../headers/BuildingFactory.h \
+  ../headers/BuildingType.h \
+  ../headers/CitizenType.h
 
 CMakeFiles/tests.dir/tests/citizen_test.cpp.o: ../tests/citizen_test.cpp \
   /usr/include/stdc-predef.h \
@@ -10873,6 +10911,7 @@ CMakeFiles/tests.dir/tests/citizen_test.cpp.o: ../tests/citizen_test.cpp \
   ../headers/BuildingCollection.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
+  ../headers/CitizenType.h \
   ../headers/TaxAuthority.h \
   ../headers/Building.h
 
@@ -11221,6 +11260,7 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
   ../headers/TransportState.h \
   ../headers/TransportDepartment.h \
   ../headers/TaxAuthority.h \
+  ../headers/CitizenType.h \
   ../headers/BuildingType.h \
   ../headers/BuildingIterator.h \
   ../headers/TaxStrategy.h \
@@ -11475,8 +11515,6 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
 
 ../src/HighFundingState.cpp:
 
-../headers/HealthState.h:
-
 ../headers/HealthService.h:
 
 ../src/HealthService.cpp:
@@ -11500,6 +11538,10 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
 ../src/DepartmentOfWaterPowerAndSanitation.cpp:
 
 ../headers/DepartmentOfHomeAffairs.h:
+
+../src/PoliceService.cpp:
+
+../src/DepartmentOfHomeAffairs.cpp:
 
 ../src/Government.cpp:
 
@@ -11843,6 +11885,10 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
 
 ../src/Broken.cpp:
 
+../headers/HealthState.h:
+
+../headers/CitizenType.h:
+
 /usr/include/asm-generic/bitsperlong.h:
 
 /usr/include/asm-generic/types.h:
@@ -12164,7 +12210,3 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
 ../headers/BuildingFactory.h:
 
 ../src/Damaged.cpp:
-
-../src/PoliceService.cpp:
-
-../src/DepartmentOfHomeAffairs.cpp:

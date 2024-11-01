@@ -13,16 +13,16 @@ Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
     // I changed it because before it returs a nullptr? checks should be done before calling, the function of factory is just to produce
     if(type == BuildingType::Bank) {
         maxEmployees = 30;
-        cost = 100000;
+        cost = 200;
         productionRate = 6;
         
     } else {
         maxEmployees = 60;
-        cost = 120000;
+        cost = 100;
         productionRate = 12;
     }
 
-    Commercial* c = new Commercial(cost, location,resources, 1000, owner, maxEmployees,productionRate);
+    Commercial* c = new Commercial(cost, location,resources, 1000, owner, type,maxEmployees,productionRate);
     taxAuthority->registerBuilding(*c);
     return c;
 }

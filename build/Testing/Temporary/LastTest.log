@@ -1,0 +1,32 @@
+Start testing: Nov 01 08:57 SAST
+----------------------------------------------------------
+1/1 Testing: all_tests
+1/1 Test: all_tests
+Command: "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/tests"
+Directory: /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build
+"all_tests" start time: Nov 01 08:57 SAST
+Output:
+----------------------------------------------------------
+Running all tests...
+[==========] Running 4 tests from 4 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from tax_system_test
+[ RUN      ] tax_system_test.ConstructorSetCorrectValues
+/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/tax_system_test.cpp:23: Failure
+Expected: (taxAuth->getSize()) != (0), actual: 0 vs 0
+
+[  FAILED  ] tax_system_test.ConstructorSetCorrectValues (0 ms)
+[----------] 1 test from tax_system_test (0 ms total)
+
+[----------] 1 test from building_test
+[ RUN      ] building_test.commercial_test
+Running SetUp
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Failed.
+"all_tests" end time: Nov 01 08:57 SAST
+"all_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 01 08:57 SAST

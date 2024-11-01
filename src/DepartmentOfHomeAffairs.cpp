@@ -1,4 +1,5 @@
 #include "DepartmentOfHomeAffairs.h"
+#include "CitizenType.h"
 
 DepartmentOfHomeAffairs::DepartmentOfHomeAffairs(std::shared_ptr<TaxAuthority> taxAuth) : taxAuthority(taxAuth){
     this->population = 0;
@@ -16,7 +17,7 @@ DepartmentOfHomeAffairs::~DepartmentOfHomeAffairs() {
 }
 
 void DepartmentOfHomeAffairs::registerBirth() {
-    std::string type = "worker";
+    CitizenType type = CitizenType::Worker;
     int startingSatisfaction = 100;
     int startingFunds = 1000;
 

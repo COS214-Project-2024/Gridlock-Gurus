@@ -2,7 +2,7 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
+Citizen::Citizen(int id,CitizenType type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
 : taxAuthority(taxAuthority),id(id),type(type), satisfactionLevel(satisfactionLevel), funds(funds),employmentStatus(false),retired(false){
 
     this->home = nullptr;
@@ -54,7 +54,7 @@ void Citizen::payTaxes(int amount){
 }
 
 void Citizen::retire(){
-    type = "retiree";
+   type = CitizenType::Retired;
     employmentStatus = false;
     retired = true;
     placeOfWork = nullptr;
@@ -70,14 +70,14 @@ void Citizen::retireToCountryside(){
 }
 
 void Citizen::quitJob(){
-    type = "citizen";
+    type = CitizenType::Citizen;
     employmentStatus = false;
     placeOfWork = nullptr;
     satisfactionLevel -= 5;
 }
 
 void Citizen::fired(){
-    type = "citizen";
+    type = CitizenType::Citizen;
     employmentStatus = false;
     placeOfWork = nullptr;
     satisfactionLevel -= 5;

@@ -12,7 +12,8 @@
 #include <iostream>
 
 
-int main() {
+int main2() {
+    return 0;
 /*   TransportDepartment department;
 
 
