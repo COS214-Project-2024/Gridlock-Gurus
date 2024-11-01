@@ -17,22 +17,25 @@
 
 class building_test : public ::testing::Test {
     protected:
-        
-        std::shared_ptr<TaxAuthority> taxAuth = std::make_shared<TaxAuthority>();
+        std::shared_ptr<TaxAuthority> taxAuth;
         BuildingFactory* factory;
         Building* b1;
         //Building* b2;
         //Building* b3;
-        Citizen* citizen = new Citizen(0,CitizenType::Citizen,100,10000,taxAuth);
+        Citizen* citizen;
 
         void SetUp() override {
+            taxAuth = std::make_shared<TaxAuthority>();
+            citizen = new Citizen(0,CitizenType::Citizen,100,10000,taxAuth);
             factory = new CommercialFactory(taxAuth);
             b1 = factory->createBuilding(BuildingType::Bank, *citizen);
         }
 
         void TearDown() override {
+            // Buildings are deleted in the building collection so do not need to be deleted manually
             //delete b1;
             delete factory;
+            delete citizen;
         }
 };
 
