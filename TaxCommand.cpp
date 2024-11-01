@@ -1,14 +1,15 @@
 #include "TaxCommand.h"
+#include "TaxAuthority.h"
 #include <iostream>
 
-TaxCommand::TaxCommand() {
-    // Any initialization needed for TaxCommand
-}
+TaxCommand::TaxCommand(TaxAuthority* taxAuthority, int taxRate)
+    : taxAuthority(taxAuthority), taxRate(taxRate) {}
 
 TaxCommand::~TaxCommand() {
     // Cleanup resources if necessary
 }
 
 void TaxCommand::execute() {
-    std::cout << "Adjusting tax rates for the city." << std::endl;
+    taxAuthority->adjustTaxRate(taxRate);
+    std::cout << "Adjusted tax rate to " << taxRate << "%" << std::endl;
 }
