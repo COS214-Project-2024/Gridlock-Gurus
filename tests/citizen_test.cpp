@@ -85,3 +85,14 @@ TEST_F(citizen_test, citizen_fire_test) {
     EXPECT_EQ(c->getType(),CitizenType::Citizen);
 
 }
+
+TEST_F(citizen_test, citizen_Retire_test) {
+    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+    workPtr->employ(*c);
+    EXPECT_EQ(c->getEmploymentStatus(),true);
+    EXPECT_EQ(c->getType(),CitizenType::Worker);
+    workPtr->retire(*c);
+    EXPECT_EQ(c->getEmploymentStatus(),false);
+    EXPECT_EQ(c->getType(),CitizenType::Retired);
+    EXPECT_EQ(c->hasHome(),false);
+}
