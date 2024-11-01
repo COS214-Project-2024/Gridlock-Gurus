@@ -96,5 +96,5 @@ jobs:
           make clean
           cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON ..
           make
-          ./main # Run tests to generate coverage data
+          ./tests # Run tests to generate coverage data
           gcovr -r .. --xml-pretty --output coverage.xml # Generate coverage report
