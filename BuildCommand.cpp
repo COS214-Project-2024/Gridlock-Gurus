@@ -7,11 +7,10 @@
 BuildCommand::BuildCommand(City* city, Director* director, BuildingFactory* factory, const std::string& buildingType)
     : city(city), director(director), buildingFactory(factory), buildingType(buildingType) {}
 
-BuildCommand::~BuildCommand() {
-    // Cleanup resources if necessary
-}
+BuildCommand::~BuildCommand() {}
 
 void BuildCommand::execute() {
+    Command::execute();  // Update status
     Building* building = buildingFactory->createBuilding(buildingType);
     if (building != NULL) {
         CityBuilder CityBuilder(building);
