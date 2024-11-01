@@ -30,3 +30,15 @@ void BuildCommand::execute() {
         city->addBuilding(building);
     }
 }
+
+void BuildCommand::undo() {
+    Command::undo();
+    std::cout << "Undoing last constructed building" << std::endl;
+    city->removeLastBuilding();
+}
+
+void BuildCommand::redo() {
+    Command::redo();
+    std::cout << "Redoing the construction of the last building." << std::endl;
+    execute(); 
+}
