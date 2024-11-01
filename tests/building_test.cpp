@@ -31,15 +31,13 @@ class building_test : public ::testing::Test {
         }
 
         void TearDown() override {
-            delete b1;
+            //delete b1;
             delete factory;
         }
 };
 
 // Test Constructor
-TEST_F(building_test, commercial_test) {
-    // Construction 
-     std::cout << "Running commercial_test..." << std::endl;
+TEST_F(building_test, commercial_test_construction) {
     Commercial* commercialPtr = dynamic_cast<Commercial*>(b1);
     if (commercialPtr) {
         EXPECT_EQ(commercialPtr->getMaxEmployees(), 30);
@@ -53,6 +51,7 @@ TEST_F(building_test, commercial_test) {
     EXPECT_EQ(b1->getLocation(),"Business district");
     EXPECT_EQ(b1->getSize(),1000);
     EXPECT_EQ(b1->getName(),BuildingType::Bank);
+    EXPECT_EQ(taxAuth->getSize(),1);
 
 
 }
@@ -63,6 +62,5 @@ TEST(SimpleTest, AlwaysPass) {
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
-    std::cout << "Running all tests..." << std::endl;
     return RUN_ALL_TESTS();
 }

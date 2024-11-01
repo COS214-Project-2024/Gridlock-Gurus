@@ -1,13 +1,12 @@
-Start testing: Nov 01 09:18 SAST
+Start testing: Nov 01 09:25 SAST
 ----------------------------------------------------------
 1/1 Testing: all_tests
 1/1 Test: all_tests
 Command: "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build/tests"
 Directory: /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/build
-"all_tests" start time: Nov 01 09:18 SAST
+"all_tests" start time: Nov 01 09:25 SAST
 Output:
 ----------------------------------------------------------
-Running all tests...
 [==========] Running 4 tests from 4 test suites.
 [----------] Global test environment set-up.
 [----------] 1 test from tax_system_test
@@ -16,9 +15,8 @@ Running all tests...
 [----------] 1 test from tax_system_test (0 ms total)
 
 [----------] 1 test from building_test
-[ RUN      ] building_test.commercial_test
-Running commercial_test...
-[       OK ] building_test.commercial_test (0 ms)
+[ RUN      ] building_test.commercial_test_construction
+[       OK ] building_test.commercial_test_construction (0 ms)
 [----------] 1 test from building_test (0 ms total)
 
 [----------] 1 test from SimpleTest
@@ -38,8 +36,8 @@ Running commercial_test...
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"all_tests" end time: Nov 01 09:18 SAST
+"all_tests" end time: Nov 01 09:25 SAST
 "all_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Nov 01 09:18 SAST
+End testing: Nov 01 09:25 SAST
