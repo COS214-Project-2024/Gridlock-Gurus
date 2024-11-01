@@ -17,6 +17,6 @@ int BrickFactory::produceResource() {
 }
 
 int BrickFactory::pay() {
-    return 163;
+    return 100;
 }
 

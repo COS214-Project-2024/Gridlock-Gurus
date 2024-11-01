@@ -2,43 +2,40 @@
 #include "NameGenerator.h"
 #include <iostream>
 
-Citizen::Citizen(int id,std::string& type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
+Citizen::Citizen(int id,CitizenType type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
 : taxAuthority(taxAuthority),id(id),type(type), satisfactionLevel(satisfactionLevel), funds(funds),employmentStatus(false),retired(false){
 
     this->home = nullptr;
     this->placeOfWork = nullptr;
     this->currentVehicle = nullptr;
     this->name = NameGenerator::getInstance().getRandomName();
-    this->id = NameGenerator::getInstance().getRandomID();
 }
 
-void Citizen::findWork(Building* placeOfEmployment){
-    if (placeOfEmployment) {
-        placeOfWork = placeOfEmployment;
-        employmentStatus = true;
-        if(satisfactionLevel < 100)
-            satisfactionLevel += 10;
+void Citizen::setWork(Building& work){
+    placeOfWork = &work;
+    employmentStatus = true;
+    type = CitizenType::Worker;
+    if(satisfactionLevel < 100) {
+        satisfactionLevel += 10;
     }
 }
 
-void Citizen::findHome(Building* home){
-    if (home) {
-        this->home = home;
-        if(satisfactionLevel < 100)
-            satisfactionLevel += 10;
+void Citizen::setHome(Building& home){
+    this->home = &home;
+    if(satisfactionLevel < 100) {
+        satisfactionLevel += 10;
     }
 }
 
 void Citizen::workDay(){
     if (employmentStatus && placeOfWork) {
-        collectSalary(placeOfWork);
+        collectSalary();
     }
 }
 
-void Citizen::collectSalary(Building* placeOfWork){
+void Citizen::collectSalary(){
     if (placeOfWork) {
-        int salary = placeOfWork->pay();
-        this->funds += salary;
+        this->funds += placeOfWork->pay();
     }
 }
 
@@ -54,7 +51,7 @@ void Citizen::payTaxes(int amount){
 }
 
 void Citizen::retire(){
-    type = "retiree";
+    type = CitizenType::Retired;
     employmentStatus = false;
     retired = true;
     placeOfWork = nullptr;
@@ -69,15 +66,8 @@ void Citizen::retireToCountryside(){
             satisfactionLevel += 5;
 }
 
-void Citizen::quitJob(){
-    type = "citizen";
-    employmentStatus = false;
-    placeOfWork = nullptr;
-    satisfactionLevel -= 5;
-}
-
 void Citizen::fired(){
-    type = "citizen";
+    type = CitizenType::Citizen;
     employmentStatus = false;
     placeOfWork = nullptr;
     satisfactionLevel -= 5;

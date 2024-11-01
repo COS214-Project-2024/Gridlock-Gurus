@@ -5,6 +5,7 @@
 #include "TransportDepartment.h"
 #include "Building.h"
 #include "TaxAuthority.h"
+#include "CitizenType.h"
 #include <string>
 #include <memory>
 
@@ -18,7 +19,7 @@ private:
 
 protected:
     std::string name;
-    std::string type;              ///< The type of the citizen (e.g., worker, retiree).
+    CitizenType type;              ///< The type of the citizen (e.g., worker, retiree).
     int satisfactionLevel;         ///< The satisfaction level of the citizen.
     int funds;                     ///< The amount of funds available to the citizen.
     bool employmentStatus;         ///< Employment status of the citizen (employed or not).
@@ -38,7 +39,7 @@ public:
      * @param satisfactionLevel The initial satisfaction level of the citizen.
      * @param funds The initial funds available to the citizen.
      */
-    Citizen(int id,std::string& type, int satisfactionLevel, int funds, std::weak_ptr<TaxAuthority> taxAuthority);
+    Citizen(int id,CitizenType type, int satisfactionLevel, int funds, std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
      * @brief Destroy the Citizen object.
@@ -52,14 +53,14 @@ public:
      *
      * @param placeOfEmployment Pointer to the building where the citizen will work.
      */
-    void findWork(Building* placeOfEmployment);
+    void setWork(Building& work);
 
     /**
      * @brief Finds a home in a specified building.
      *
      * @param home Pointer to the building that will be the citizen's home.
      */
-    void findHome(Building* home);
+    void setHome(Building& home);
 
     /**
      * @brief Simulates a workday for the citizen.
@@ -73,7 +74,7 @@ public:
      *
      * @param placeOfWork Pointer to the building where the citizen works.
      */
-    void collectSalary(Building* placeOfWork);
+    void collectSalary();
 
     /**
      * @brief Pays taxes based on the citizen's income.
@@ -91,7 +92,6 @@ public:
     void retire();
     void retireToCountryside();
 
-    void quitJob();
     void fired();
 
 
@@ -108,7 +108,6 @@ public:
         return this->id;
     }
 
-
     int getFunds() const {
         return this->funds;
     }
@@ -117,9 +116,14 @@ public:
         return this->satisfactionLevel;
     }
     
-    std::string getType() const {
+    CitizenType getType() const {
         return this->type;
     }
+
+    bool hasHome() const {
+        return this->home != nullptr;
+    }
+
 
 };
 

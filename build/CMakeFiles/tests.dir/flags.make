@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers -isystem /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/googletest/googletest/include -isystem /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/googletest/googletest
+CXX_INCLUDES = -I/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers -I/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src -I/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests -isystem /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/googletest/googletest/include -isystem /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/googletest/googletest
 
-CXX_FLAGS = -std=gnu++17
+CXX_FLAGS = -g -std=gnu++17
 

@@ -60,6 +60,7 @@ public:
         */
     void removeTenant(Citizen& tenant);
 
+    bool isFull() const;
 };
 
 #endif // RESIDENTIAL_H

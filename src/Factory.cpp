@@ -22,5 +22,7 @@ void Factory::retire(Citizen& employee) {
 void Factory::employ(Citizen& employee) {
     if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
         employees.push_back(&employee);
+        employee.setWork(*this);
     }
 }
+

@@ -25,7 +25,7 @@ public:
     /**
      * @brief Destroys the BuildingCollection object.
      */
-    ~BuildingCollection() = default;
+    ~BuildingCollection();
 
     /**
      * @brief Adds a building to the collection.
