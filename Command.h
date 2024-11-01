@@ -18,12 +18,27 @@ public:
      */
     virtual ~Command();
 
+    
+    /**
+     * @brief Enum for command status.
+     */
+    enum Status {
+        PENDING,
+        EXECUTED,
+        UNDONE
+    };
+
     /**
      * @brief Executes the command.
      *
      * This is a pure virtual function that concrete command classes must implement.
      */
     virtual void execute() = 0;
+
+    private:
+        Status status;
+        int executionCount;
+        
 };
 
 #endif // COMMAND_H
