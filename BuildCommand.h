@@ -9,6 +9,13 @@
  * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle building construction.
  */
 class BuildCommand : public Command {
+private:
+    City* city;
+    Director* director;
+    BuildingFactory* buildingFactory;
+    std::string buildingType;
+    Building* constructedBuilding;
+
 public:
     /**
      * @brief Constructs a new BuildCommand object.
@@ -29,6 +36,11 @@ public:
      * @brief Undo functionality.
      */
     void undo();
+
+    /**
+     * @brief Redo functionality.
+     */
+    void redo();
 };
 
 #endif // BUILDCOMMAND_H
