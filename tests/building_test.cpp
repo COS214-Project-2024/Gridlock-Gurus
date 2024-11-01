@@ -21,13 +21,12 @@ class building_test : public ::testing::Test {
         std::shared_ptr<TaxAuthority> taxAuth = std::make_shared<TaxAuthority>();
         BuildingFactory* factory;
         Building* b1;
-        Building* b2;
-        Building* b3;
+        //Building* b2;
+        //Building* b3;
         Citizen* citizen = new Citizen(0,CitizenType::Citizen,100,10000,taxAuth);
 
         void SetUp() override {
-            std::cout << "Running SetUp" << std::endl;
-
+            factory = new CommercialFactory(taxAuth);
             b1 = factory->createBuilding(BuildingType::Bank, *citizen);
         }
 
@@ -51,7 +50,7 @@ TEST_F(building_test, commercial_test) {
     }
 
     EXPECT_EQ(b1->getCost(),200);
-    EXPECT_EQ(b1->getLocation(),"Buisiness district");
+    EXPECT_EQ(b1->getLocation(),"Business district");
     EXPECT_EQ(b1->getSize(),1000);
     EXPECT_EQ(b1->getName(),BuildingType::Bank);
 
