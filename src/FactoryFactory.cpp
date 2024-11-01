@@ -16,7 +16,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
 
     if(type == BuildingType::WoodFactory) {
         maxEmployees = 100;
-        cost = 500;
+        cost = 100;
         productionRate = 4;
 
         Building* b = new WoodFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
@@ -33,7 +33,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
 
     } else {
         maxEmployees = 1000;
-        cost = 1500;
+        cost = 500;
         productionRate = 12;
 
         Building* b = new BrickFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);

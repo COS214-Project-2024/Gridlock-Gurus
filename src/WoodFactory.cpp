@@ -18,7 +18,7 @@ int WoodFactory::produceResource() {
 }
 
 int WoodFactory::pay() {
-    return 163;
+    return 90;
 }
 
 

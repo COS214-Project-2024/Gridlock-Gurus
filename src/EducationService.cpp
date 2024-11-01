@@ -17,7 +17,7 @@ std::string EducationService::getDetails() const {
 }
 
 int EducationService::pay() {
-   return 223000;
+   return 2200;
 }
 
 void EducationService::setState() {

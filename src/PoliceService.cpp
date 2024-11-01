@@ -19,7 +19,7 @@ std::string PoliceService::getDetails() const{
 }
 
 int PoliceService::pay() {
-    return 33000;
+    return 3300;
 }
 
 void PoliceService::responseTimeDec(int by) {

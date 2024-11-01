@@ -19,7 +19,7 @@ std::string HealthService::getDetails() const {
 }
 
 int HealthService::pay() {
-    return 223000;
+    return 2200;
 }
 
 int HealthService::getResponseTime() {

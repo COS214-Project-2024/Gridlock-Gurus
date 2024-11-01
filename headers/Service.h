@@ -42,7 +42,8 @@ public:
     void employ(Citizen& employee);
     void fire(Citizen& employee);
     void retire(Citizen& employee);
-    int getNumEmployees() {
+
+    int getNumberOfEmployees() {
         return this->employees.size();
     }
 

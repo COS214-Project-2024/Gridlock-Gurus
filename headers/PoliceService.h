@@ -16,7 +16,6 @@ class PoliceState;
 class PoliceService : public Service {
 private:
     std::unique_ptr<PoliceState> policeState;  ///< Current state of the police service.
-    std::vector<Citizen*> officers;  ///< List of officers in the police service.
     int responseTime;
 
 public:
