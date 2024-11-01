@@ -29,7 +29,7 @@ jobs:
       - name: Branch Protection Checks
         run: |
           # Prevent direct pushes to the main branch
-          if [[ "${GITHUB_REF}" == "refs/heads/main" && "${GITHUB_EVENT_NAME}" != "pull_request" ]]; then
+          if [[ "${GITHUB_REF}" == "refs/heads/main" && "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
             echo "Direct pushes to main are not allowed."
             exit 1
           fi
