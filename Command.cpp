@@ -1,9 +1,37 @@
 #include "Command.h"
+#include <iostream>
 
-Command::Command() {
-    // You can initialize any necessary resources here if needed.
+Command::Command() 
+    : status(PENDING), executionCount(0) {}
+
+Command::~Command() {}
+
+void Command::executed() {
+    status = EXECUTED;
+    executionCount++;
+
 }
 
-Command::~Command() {
-    // Release resources, if any.
+void Command::undo() {
+    // Set status to UNDONE and log the undo action
+    if (status == EXECUTED) {
+        status = UNDONE;
+        std::cout << "Command undone" << std::endl;
+    }
+}
+
+void Command::redo() {
+    if (status == UNDONE) {
+        // Re-execute the command and set status back to EXECUTED
+        execute();
+        std::cout << "Command redone" << std::endl;
+    }
+}
+
+Command::Status Command::getStatus() const {
+    return status;
+}
+
+int Command::getExecutionCount() const {
+    return executionCount;
 }
