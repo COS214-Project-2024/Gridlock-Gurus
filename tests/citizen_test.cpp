@@ -27,7 +27,6 @@ class citizen_test : public ::testing::Test {
             homeFactory = new ResidentialFactory(taxAuth);
             c = new Citizen(0,CitizenType::Citizen,100,300,taxAuth);
             work = factory->createBuilding(BuildingType::BrickFactory,*c);
-
             home = homeFactory->createBuilding(BuildingType::House,*c);     
         }
         

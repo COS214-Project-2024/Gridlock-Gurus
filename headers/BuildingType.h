@@ -16,7 +16,10 @@ enum class BuildingType {
     Estate,
     House,
     Statue,
-    Park
+    Park,
+    PoliceStation,
+    Hospital,
+    School
 };
 
 // Overload operator<< to allow printing of BuildingType

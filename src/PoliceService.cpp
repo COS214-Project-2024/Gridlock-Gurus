@@ -4,7 +4,7 @@
 
 PoliceService::PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id) {
     this->responseTime = 10;
-    policeState = new PeaceState(*this);
+    policeState =std::make_unique<PeaceState>(*this);
 }
 
 std::string PoliceService::getDetails() const{

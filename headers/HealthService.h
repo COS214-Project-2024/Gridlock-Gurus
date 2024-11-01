@@ -4,6 +4,7 @@
 #include "Service.h"
 #include "HealthState.h"
 #include "BuildingType.h"
+#include <memory>
 class HealthState;
 
 /**
@@ -13,7 +14,7 @@ class HealthState;
  */
 class HealthService : public Service {
 private:
-    HealthState* healthState; 
+    std::unique_ptr<HealthState> healthState; 
     int responseTime;
 public:
     /**
@@ -54,12 +55,6 @@ public:
      * @param staffMember Pointer to the staff member being paid.
      */
     int pay() override;
-/*    void employ(Citizen* employee) override;
-    void fire(Citizen* employee) override;
-    void retire(Citizen* employee) override;
-*/
-//   int getStaff();
-//    int getMaxStaff();
     void responseTimeDec(int by);
     void responseTimeInc(int by);
     int getResponseTime();

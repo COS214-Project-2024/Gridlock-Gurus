@@ -3,7 +3,7 @@
 
 EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id){
     this->prestige = 0;
-    educationState = new HighFundingEducationState(*this);
+    educationState =std::make_unique<HighFundingEducationState>(*this);
 }
 
 std::string EducationService::getDetails() const {

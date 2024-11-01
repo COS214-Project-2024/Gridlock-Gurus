@@ -34,9 +34,7 @@ public:
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service(){
-        employees.clear();
-    };
+    virtual ~Service() = default;
 
     /**
      * @brief Produces resources in the service building.

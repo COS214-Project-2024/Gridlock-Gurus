@@ -5,7 +5,7 @@
 #include "EducationState.h"
 #include "BuildingType.h"
 #include "EducationState.h"
-
+#include <memory>
 class EducationState;
 /**
  * @brief Represents an education service building.
@@ -14,7 +14,7 @@ class EducationState;
  */
 class EducationService : public Service {
 private:
-    EducationState* educationState; 
+    std::unique_ptr<EducationState> educationState; 
     int prestige;
 
 public:
@@ -64,11 +64,6 @@ public:
      */
     int pay() override;
 
-//    void employ(Citizen* employee) override;
-//    void fire(Citizen* employee) override;
-//    void retire(Citizen* employee) override;
-//    int getStaff();
-//   int getMaxStaff();
     void prestigeDec(int by);
     void prestigeInc(int by);
     int getPrestige();

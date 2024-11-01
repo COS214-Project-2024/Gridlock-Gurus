@@ -3,7 +3,8 @@
 
 HealthService::HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType name, int id) : Service(cost, location, resources, size, owner, name,id){
     this->responseTime = 10;
-    healthState = new HighFundingState(*this);
+    healthState =std::make_unique<HighFundingState>(*this);
+
 }
 
 std::string HealthService::getDetails() const {

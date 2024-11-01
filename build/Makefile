@@ -1124,6 +1124,30 @@ src/Service.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Service.cpp.s
 .PHONY : src/Service.cpp.s
 
+src/ServiceFactory.o: src/ServiceFactory.cpp.o
+.PHONY : src/ServiceFactory.o
+
+# target to build an object file
+src/ServiceFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ServiceFactory.cpp.o
+.PHONY : src/ServiceFactory.cpp.o
+
+src/ServiceFactory.i: src/ServiceFactory.cpp.i
+.PHONY : src/ServiceFactory.i
+
+# target to preprocess a source file
+src/ServiceFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ServiceFactory.cpp.i
+.PHONY : src/ServiceFactory.cpp.i
+
+src/ServiceFactory.s: src/ServiceFactory.cpp.s
+.PHONY : src/ServiceFactory.s
+
+# target to generate assembly for a file
+src/ServiceFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ServiceFactory.cpp.s
+.PHONY : src/ServiceFactory.cpp.s
+
 src/SteelFactory.o: src/SteelFactory.cpp.o
 .PHONY : src/SteelFactory.o
 
@@ -1613,6 +1637,9 @@ help:
 	@echo "... src/Service.o"
 	@echo "... src/Service.i"
 	@echo "... src/Service.s"
+	@echo "... src/ServiceFactory.o"
+	@echo "... src/ServiceFactory.i"
+	@echo "... src/ServiceFactory.s"
 	@echo "... src/SteelFactory.o"
 	@echo "... src/SteelFactory.i"
 	@echo "... src/SteelFactory.s"
