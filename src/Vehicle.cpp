@@ -1,54 +1,57 @@
 #include "Vehicle.h"
 #include <iostream>
 
-Vehicle::Vehicle(const std::string& type, int capacity)
-    : type(type), capacity(capacity), currentPassengers(0), state(nullptr) {}
-
-void Vehicle::setState(TransportState* newState) {
-    state = newState;
+Vehicle::Vehicle(VehicleType type, int capacity, TransportDepartment& transportDep): department(transportDep) {
+    type = type;
+    capacity = capacity;
+    currentPassengers = 0;
+    state = std::make_unique<Functional>();
+    vehicle_state = VehicleState::Functional;
+    int usageCount = 0;
 }
 
-TransportState* Vehicle::getState() const {
-    return state;
+Vehicle* Vehicle::clone() {
+    return new Vehicle(type,capacity,department);
 }
 
-std::string Vehicle::getType() const {
-    return type;
+bool Vehicle::run() {
+    state->run();
 }
 
-void Vehicle::load(int passengers) {
-    if (currentPassengers + passengers <= capacity) {
-        currentPassengers += passengers;
-        std::cout << passengers << " passengers loaded into "
-            << type << ". Current: " << currentPassengers
-            << "/" << capacity << std::endl;
-    }
-    else {
-        std::cout << "Cannot load passengers: Over capacity!" << std::endl;
+void Vehicle::setState() {
+    if(vehicle_state == VehicleState::Functional) {
+        state = std::make_unique<BrokenState>();
+        vehicle_state = VehicleState::Broken;
+        requestRepair();
+    } else {
+        state = std::make_unique<FunctionalState>();
+        vehicle_state = VehicleState::Functional;
     }
 }
 
 void Vehicle::offload() {
-    std::cout << "Offloading all passengers from " << type
-        << ". Previous: " << currentPassengers << "/" << capacity << std::endl;
     currentPassengers = 0;
 }
 
-void Vehicle::collect(int amount) {
-    std::cout << "Collected " << amount << " units of cargo in " << type << "." << std::endl;
-}
-
-void Vehicle::run() {
-    std::cout << type << " is running." << std::endl;
-}
-
-void Vehicle::breakDown() {
-    std::cout << type << " has broken down!" << std::endl;
-    if (state) {
-        state->breakTransport(this);
+void Vehicle::collect(int passengers) {
+    if (currentPassengers + passengers <= capacity) {
+        currentPassengers += passengers;
+        usageCount++;
+        run();
+    } else {
+        // else just break
+        setState();
     }
 }
 
-void Vehicle::delay() {
-    std::cout << type << " is delayed." << std::endl;
+void Vehicle::requestRepair() {
+    department.manage();
 }
+
+void Vehicle::repair() {
+    usageCount = 0;
+    state = std::make_unique<FunctionalState>();
+    vehicle_state = VehicleState::Functional;
+}
+
+

@@ -5,13 +5,8 @@
 
 class Train : public Vehicle {
 public:
-    Train(int capacity);
+    Train(int capacity,TransportDepartment& department) : Vehicle(VehicleType::Train, capacity,department) {}
 
-    void checkState() override;
-    void collect(int amount) override;
-    void run() override;
-    void breakDown() override;
-    void delay() override;
     Vehicle* clone() override;
 };
 

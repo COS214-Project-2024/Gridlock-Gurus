@@ -3,31 +3,49 @@
 
 #include <string>
 #include "TransportState.h"
+#include "TransportDepartment.h"
+#include "VehicleType.h"
+#include <memory>
+class TransportDepartment;
+class TransportState;
+
+
+
+enum VehicleState {
+    Functional,
+    Broken
+};
 
 class Vehicle {
 protected:
-    std::string type;
+    VehicleType type;
     int capacity;
     int currentPassengers;
-    TransportState* state;
+    std::unique_ptr<TransportState> state;
+    VehicleState vehicle_state;
+    int usageCount;
+    TransportDepartment& department;
 
 public:
-    Vehicle(const std::string& type, int capacity);
-    virtual ~Vehicle() = default;
+    Vehicle(VehicleType type, int capacity, TransportDepartment& transportDept);
+    ~Vehicle() = default;
 
-    virtual void checkState() = 0;    
-    virtual void collect(int amount) = 0; 
-    virtual void run() = 0;           
-    virtual void breakDown() = 0;     
-    virtual void delay() = 0;         
-    virtual Vehicle* clone() = 0;     
+    void collect(int passengers); 
+    bool run();           
+    void setState();
+    virtual Vehicle* clone();     
 
-    void setState(TransportState* newState);
-    TransportState* getState() const;
-    std::string getType() const;
+    VehicleType getType() const {
+        return type;
+    }
 
-    void load(int passengers);
+    VehicleState getState() const {
+        return vehicle_state;
+    }
+
     void offload();
+    void repair();
+    void requestRepair();
 };
 
 #endif
