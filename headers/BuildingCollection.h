@@ -47,6 +47,8 @@ public:
     
     int getSize();
 
+    void removeLastBuilding();
+
 private:
     std::vector<Building*> buildings;                 ///< The collection of buildings in the city.
 

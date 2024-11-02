@@ -23,3 +23,10 @@ BuildingIterator BuildingCollection::end() {
 int BuildingCollection::getSize() {
 return this->buildings.size();
 }
+
+void BuildingCollection::removeLastBuilding() {
+    if (!buildings.empty()) {
+        delete buildings.back(); 
+        buildings.pop_back();     
+    }
+}

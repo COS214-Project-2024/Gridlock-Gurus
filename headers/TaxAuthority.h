@@ -84,6 +84,8 @@ public:
         return citizens.size();
     }
 
+    void removeLastBuilding();
+
 private:
     /**
      * @brief Notifies citizens about tax obligations.

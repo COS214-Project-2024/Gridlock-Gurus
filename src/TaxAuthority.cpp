@@ -64,3 +64,7 @@ int TaxAuthority::getCollectedTax() {
 int TaxAuthority::getSize() {
     return this->buildings->getSize();
 }
+
+void TaxAuthority::removeLastBuilding() {
+    buildings->removeLastBuilding();
+}
