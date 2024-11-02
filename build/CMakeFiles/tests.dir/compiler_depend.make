@@ -12717,7 +12717,17 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
   ../headers/TaxStrategy.h \
   ../headers/Building.h \
   ../headers/Citizen.h \
-  ../headers/BuildingCollection.h
+  ../headers/BuildingCollection.h \
+  ../headers/FlatTaxStrategy.h \
+  ../headers/ProgressiveTaxStrategy.h \
+  ../headers/FactoryFactory.h \
+  ../headers/BuildingFactory.h \
+  ../headers/CitizenFactory.h \
+  ../headers/CitizenType.h \
+  ../headers/BrickFactory.h \
+  ../headers/Factory.h \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/pstl/glue_algorithm_defs.h
 
 
 ../tests/tax_system_test.cpp:
