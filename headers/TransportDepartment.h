@@ -16,6 +16,7 @@ public:
     void manage();
     Vehicle* getAvailableVehicle(const std::string& type);
     void repairVehicles(Vehicle* vehicle);
+    ~TransportDepartment();
 };
 
 #endif
