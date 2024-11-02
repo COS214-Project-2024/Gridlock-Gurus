@@ -22,6 +22,10 @@ public:
      */
     void checkCapacity() const override;
 
+    void shed() override;
+    void breakUtility() override;
+    void repair() override;
+
 };
 
 #endif // SANITATION_H
