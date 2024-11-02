@@ -21,6 +21,8 @@ public:
      * @return The current power capacity.
      */
     void checkCapacity() const override;
+    void shed() override;
+    void repair() override;
 
     // /**
     //  * @brief Shed power temporarily.

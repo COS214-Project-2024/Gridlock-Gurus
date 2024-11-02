@@ -21,6 +21,8 @@ public:
      * @return The current sanitation capacity.
      */
     void checkCapacity() const override;
+    void shed() override;
+    void repair() override;
 
 };
 

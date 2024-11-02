@@ -29,7 +29,7 @@ public:
     /**
      * @brief Shed the utility, temporarily shutting it down.
      */
-     void shed();
+     virtual void shed();
 
     /**
      * @brief Break the utility, making it non-functional.
@@ -39,9 +39,11 @@ public:
     /**
      * @brief Repair the utility, making it functional again.
      */
-     void repair();
+     virtual void repair();
 
     virtual ~Utilities() = default;
+
+    std::string getTypeName() const;
 };
 
 #endif // UTILITIES_H

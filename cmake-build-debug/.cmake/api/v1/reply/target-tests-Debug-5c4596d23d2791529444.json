@@ -161,7 +161,8 @@
 				55,
 				56,
 				57,
-				58
+				58,
+				59
 			]
 		}
 	],
@@ -287,14 +288,14 @@
 				55,
 				56,
 				57,
-				58
+				58,
+				59
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				59,
 				60,
 				61,
 				62,
@@ -359,7 +360,8 @@
 				121,
 				122,
 				123,
-				124
+				124,
+				125
 			]
 		}
 	],
@@ -386,7 +388,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "tests/transport-test.cpp",
+			"path" : "tests/transport_test.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "tests/utilities_test.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

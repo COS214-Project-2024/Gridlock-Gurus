@@ -21,6 +21,8 @@ public:
      * @return The current water capacity.
      */
     void checkCapacity() const override;
+    void shed() override;
+    void repair() override;
 };
 
 #endif // WATER_H
