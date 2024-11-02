@@ -3,7 +3,7 @@
 
 #include "Broken.h"
 
-Train::Train(int capacity, TransportDepartment* department) : Vehicle("Train", capacity, department) {}
+Train::Train(int capacity, TransportDepartment& department) : Vehicle("Train", capacity, department) {}
 
 void Train::checkState() {
     if (getState()) {
