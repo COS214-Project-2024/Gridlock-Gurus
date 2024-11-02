@@ -149,20 +149,21 @@ TEST_F(TransportDepartmentTest, ManagePartialFunctionalVehicles) {
     transportDept->addVehicle(truck);
 
     EXPECT_NO_THROW(transportDept->manage());
-    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr); // Taxi should be repaired
+    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
 }
 
 TEST_F(TransportDepartmentTest, RequestAfterAllBroken) {
-    taxi->breakDown();
-    truck->breakDown();
-    train->breakDown();
-
     transportDept->addVehicle(taxi);
     transportDept->addVehicle(truck);
     transportDept->addVehicle(train);
 
-    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error); // Taxi should not be available
+    taxi->breakDown();
+    truck->breakDown();
+    train->breakDown();
+
+    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error);
 }
+
 
 TEST_F(TransportDepartmentTest, RepairAllVehicles) {
     taxi->breakDown();

@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "TransportState.h"
 #include "Broken.h"
+#include "Damaged.h"
 #include "Functional.h"
 
 void TransportDepartment::addVehicle(Vehicle* vehicle) {
@@ -32,11 +33,16 @@ void TransportDepartment::manage() {
 
 Vehicle* TransportDepartment::getAvailableVehicle(const std::string& type) {
     for (auto& vehicle : vehicles) {
-        if (vehicle->getType() == type && vehicle->getState() &&
-            !dynamic_cast<Broken*>(vehicle->getState())) {
-            return vehicle; // Found an available vehicle, return it
+        if (vehicle->getType() == type) {
+            if (vehicle->getState() && dynamic_cast<Functional*>(vehicle->getState())) {
+                return vehicle;
             }
+            if(vehicle->getState() && dynamic_cast<Damaged*>(vehicle->getState())) {
+                return vehicle;
+            }
+        }
     }
+    std::cout<<"No drivers were found."<<std::endl;
     throw std::runtime_error("No available vehicle of type: " + type);
 }
 

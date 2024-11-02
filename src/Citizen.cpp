@@ -81,6 +81,7 @@ void Citizen::callTransport(TransportDepartment& department, const std::string& 
     }
     catch (const std::runtime_error& e) {
         std::cerr << e.what() << std::endl;
+        throw;
     }
 }
 
