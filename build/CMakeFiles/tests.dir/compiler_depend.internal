@@ -12776,4 +12776,14 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Building.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Citizen.h
  /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingCollection.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/FlatTaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/ProgressiveTaxStrategy.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/FactoryFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BuildingFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/CitizenType.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/BrickFactory.h
+ /home/hayley/Documents/COS_214/Gridlock-Gurus-dev/headers/Factory.h
+ /usr/include/c++/11/algorithm
+ /usr/include/c++/11/pstl/glue_algorithm_defs.h
 

@@ -79,7 +79,10 @@ public:
     int getCollectedTax();
     
     int getSize();
-
+    
+    int getAmountOfCitizens() const {
+        return citizens.size();
+    }
 
 private:
     /**
