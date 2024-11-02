@@ -88,6 +88,12 @@ public:
     void checkUtilityUsage();
 
     void repairUtilities();
+
+    int checkCityFunds() const;
+
+    void startTaxCycle();
+
+
 };
 
 #endif // CITY_H

@@ -92,3 +92,12 @@ void City::repairUtilities() {
     int bill = government->getDepartmentOfWaterPowerAndSanitation()->repair();
     std::cout << "City spent $" << bill << " to repair utilities\n";
 }
+
+int City::checkCityFunds() const {
+    return government->getBudgetDepartment()->checkTotal();
+}
+
+void City::startTaxCycle() {
+    government->getBudgetDepartment()->receiveTaxes();
+}
+
