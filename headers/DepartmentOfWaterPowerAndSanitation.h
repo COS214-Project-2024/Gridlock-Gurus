@@ -3,15 +3,21 @@
 
 #include <vector>
 #include "Utilities.h"
+#include "Water.h"
+#include "Sanitation.h"
+#include "Power.h"
 #include "Resources.h"
+#include <memory>
+#include <string>
 
 /**
  * @brief Department managing water, power, and sanitation utilities.
  */
 class DepartmentOfWaterPowerAndSanitation {
 private:
-    std::vector<Utilities*> utilities;
-    Resources* resources;
+    std::unique_ptr<Water> water;
+    std::unique_ptr<Power> power;
+    std::unique_ptr<Sanitation> sanitation;
 
 public:
 
@@ -20,36 +26,32 @@ public:
      *
      * Initializes the DepartmentOfWaterPowerAndSanitation and prepares the resources and utilities.
      */
-    DepartmentOfWaterPowerAndSanitation(Resources* resources);
+    DepartmentOfWaterPowerAndSanitation() {
+        water = std::make_unique<Water>();
+        power = std::make_unique<Power>();
+        sanitation = std::make_unique<Sanitation>();
+    }
 
     /**
      * @brief Destroy the DepartmentOfWaterPowerAndSanitation object.
      *
      * Cleans up resources and deletes the utilities.
      */
-    virtual ~DepartmentOfWaterPowerAndSanitation();
+     ~DepartmentOfWaterPowerAndSanitation() = default;
     
-    /**
-     * @brief Update the number of citizens in the network.
-     * @param count The number of citizens.
-     */
-    void updateCitizenCount(int count);
-
     /**
      * @brief Repair the utilities managed by the department.
      */
-    void repair();
+    int repair();
 
     /**
      * @brief Check the utility network capacity.
      */
-    void checkNetwork() const;
+    std::string checkNetwork() const;
 
-    /**
-     * @brief Add a new utility to the department.
-     * @param utility Pointer to the utility to add.
-     */
-    void addUtilities(Utilities* utility);
+    void reviewWaterUsage(int totalWater);
+
+    void reviewPowerUsage(int totalPower);
 };
 
 #endif // DEPARTMENTOFWATERPOWERANDSANITATION_H

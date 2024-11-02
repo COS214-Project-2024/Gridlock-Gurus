@@ -58,6 +58,10 @@ public:
     int getMaxEmployees() {
         return maxEmployees;
     }
+
+    bool isFull() {
+        return maxEmployees <= employees.size();
+    }
 };
 
 #endif // FACTORY_H

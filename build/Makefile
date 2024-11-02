@@ -452,6 +452,30 @@ src/CitizenFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/CitizenFactory.cpp.s
 .PHONY : src/CitizenFactory.cpp.s
 
+src/City.o: src/City.cpp.o
+.PHONY : src/City.o
+
+# target to build an object file
+src/City.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/City.cpp.o
+.PHONY : src/City.cpp.o
+
+src/City.i: src/City.cpp.i
+.PHONY : src/City.i
+
+# target to preprocess a source file
+src/City.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/City.cpp.i
+.PHONY : src/City.cpp.i
+
+src/City.s: src/City.cpp.s
+.PHONY : src/City.s
+
+# target to generate assembly for a file
+src/City.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/City.cpp.s
+.PHONY : src/City.cpp.s
+
 src/Command.o: src/Command.cpp.o
 .PHONY : src/Command.o
 
@@ -1673,6 +1697,9 @@ help:
 	@echo "... src/CitizenFactory.o"
 	@echo "... src/CitizenFactory.i"
 	@echo "... src/CitizenFactory.s"
+	@echo "... src/City.o"
+	@echo "... src/City.i"
+	@echo "... src/City.s"
 	@echo "... src/Command.o"
 	@echo "... src/Command.i"
 	@echo "... src/Command.s"

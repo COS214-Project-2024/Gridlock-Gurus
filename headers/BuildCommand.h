@@ -4,13 +4,11 @@
 #include "Command.h"
 #include "City.h"
 #include "Director.h"
-#include "BuildingFactory.h"
 #include "BuildingType.h"
 #include "Citizen.h"
 #include <iostream>
 
 class Director;
-class BuildingFactory;
 class Building;
 class Citizen;
 class City;
@@ -22,15 +20,12 @@ class City;
 class BuildCommand : public Command {
     City& city;
     Director& director;
-    BuildingFactory& buildingFactory;
     BuildingType buildingType;
-    Building* constructedBuilding;
-    Citizen& citizen;
 public:
     /**
      * @brief Constructs a new BuildCommand object.
      */
-    BuildCommand(City& city, Director& director, BuildingFactory& factory, BuildingType buildingType,Citizen& citizen) : city(city), director(director), buildingFactory(factory), buildingType(buildingType), citizen(citizen) {}
+    BuildCommand(City& city, Director& director, BuildingType buildingType) : city(city), director(director), buildingType(buildingType){}
 
 
     /**

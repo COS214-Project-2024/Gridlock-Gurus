@@ -38,8 +38,6 @@ public:
      */
     ~Commercial() override = default;
 
-    std::string getDetails() const override;
-
     /**
      * @brief Generates money in the commercial building.
      */
@@ -59,6 +57,9 @@ public:
 
     int getMaxEmployees(); 
 
+    bool isFull() {
+        return maxEmployees <= employees.size();
+    }
 };
 
 #endif // COMMERCIAL_H
