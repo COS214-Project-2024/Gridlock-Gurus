@@ -4,7 +4,7 @@
 #include "Broken.h"
 #include "Damaged.h"
 
-Taxi::Taxi(int capacity, TransportDepartment* department) : Vehicle("Taxi", capacity, department) {}
+Taxi::Taxi(int capacity, TransportDepartment& department) : Vehicle("Taxi", capacity, department) {}
 
 void Taxi::checkState() {
     if (getState()) {
