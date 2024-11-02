@@ -11,6 +11,14 @@ void TransportDepartment::addVehicle(Vehicle* vehicle) {
     vehicles.push_back(vehicle);
 }
 
+TransportDepartment::~TransportDepartment() {
+    for (Vehicle* v : vehicles) {
+            delete v;
+    }
+
+    //buildings.clear();
+}
+
 void TransportDepartment::manage() {
     std::map<std::string, int> functionalCounts;
 
