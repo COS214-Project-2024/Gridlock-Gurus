@@ -14,13 +14,17 @@ public:
      */
     Water() : Utilities(UtilityType::Water, 500, 300) {}
 
-     ~Water()override = default;
+    ~Water()override = default;
 
     /**
      * @brief Check the water capacity.
      * @return The current water capacity.
      */
     void checkCapacity() const override;
+
+    void shed() override;
+    void breakUtility() override;
+    void repair() override;
 };
 
 #endif // WATER_H

@@ -22,20 +22,20 @@ public:
      */
     void checkCapacity() const override;
 
-    // /**
-    //  * @brief Shed power temporarily.
-    //  */
-    // void shed() override;
+    /**
+     * @brief Shed power temporarily.
+     */
+     void shed() override;
 
-    // /**
-    //  * @brief Break the power utility.
-    //  */
-    // void breakUtility() override;
+     /**
+      * @brief Break the power utility.
+      */
+     void breakUtility() override;
 
-    // /**
-    //  * @brief Repair the power utility.
-    //  */
-    // void repair() override;
+     /**
+      * @brief Repair the power utility.
+      */
+     void repair() override;
 };
 
 #endif // POWER_H

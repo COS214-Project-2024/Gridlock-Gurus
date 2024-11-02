@@ -29,19 +29,23 @@ public:
     /**
      * @brief Shed the utility, temporarily shutting it down.
      */
-     void shed();
+     virtual void shed();
 
     /**
      * @brief Break the utility, making it non-functional.
      */
-     void breakUtility();
+     virtual void breakUtility();
 
     /**
      * @brief Repair the utility, making it functional again.
      */
-     void repair();
+     virtual void repair();
 
     virtual ~Utilities() = default;
+
+    UtilityType getType() const { return type; }
+    bool isShedding() const { return shedding; }
+    bool isBroken() const { return isRepair; }
 };
 
 #endif // UTILITIES_H
