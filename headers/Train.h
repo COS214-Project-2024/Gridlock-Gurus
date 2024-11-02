@@ -5,7 +5,7 @@
 
 class Train : public Vehicle {
 public:
-    Train(int capacity);
+    Train(int capacity, TransportDepartment* department);
 
     void checkState() override;
     void collect(int amount) override;

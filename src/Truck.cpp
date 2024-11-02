@@ -1,7 +1,7 @@
 #include "Truck.h"
 #include <iostream>
 
-Truck::Truck(int capacity) : Vehicle("Truck", capacity) {}
+Truck::Truck(int capacity, TransportDepartment* department) : Vehicle("Truck", capacity, department) {}
 
 void Truck::checkState() {
     if (getState()) {
@@ -32,5 +32,5 @@ void Truck::delay() {
 }
 
 Vehicle* Truck::clone() {
-    return new Truck(capacity);
+    return new Truck(capacity, department);
 }

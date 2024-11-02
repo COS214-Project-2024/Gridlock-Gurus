@@ -23,7 +23,8 @@ add_subdirectory(googletest)
 enable_testing()
 
 # Add test executable
-add_executable(tests tests/tax_system_test.cpp tests/building_test.cpp tests/citizen_test.cpp ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(tests tests/tax_system_test.cpp tests/building_test.cpp tests/citizen_test.cpp ${SOURCE_FILES} ${HEADER_FILES}
+        tests/transport-test.cpp)
 #add_executable(main src/Main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
 target_link_libraries(tests gtest gtest_main pthread)

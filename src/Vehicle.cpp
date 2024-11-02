@@ -1,8 +1,12 @@
 #include "Vehicle.h"
 #include <iostream>
+#include "Damaged.h"
+#include "Functional.h"
+#include "Broken.h"
 
-Vehicle::Vehicle(const std::string& type, int capacity)
-    : type(type), capacity(capacity), currentPassengers(0), state(nullptr) {}
+Vehicle::Vehicle(const std::string& type, int capacity, TransportDepartment* transportDept)
+    : type(type), capacity(capacity), currentPassengers(0), state(new Functional()),
+      department(transportDept), usageCount(0) {}
 
 void Vehicle::setState(TransportState* newState) {
     state = newState;
@@ -16,9 +20,35 @@ std::string Vehicle::getType() const {
     return type;
 }
 
+void Vehicle::updateState() {
+    if(usageCount > 10) {
+        if(dynamic_cast<Functional*>(state)) {
+            delay();
+        } else if(dynamic_cast<Damaged*>(state)){
+            breakDown();
+        }
+    }
+    if(dynamic_cast<Damaged*>(state)){
+        requestRepair();
+    }
+}
+
+void Vehicle::requestRepair() {
+    if (department) {
+        std::cout << "Requesting repair for " << type << "." << std::endl;
+        department->manage();
+    }
+}
+
+void Vehicle::incrementUsage() {
+    currentPassengers++;
+    updateState();
+}
+
 void Vehicle::load(int passengers) {
     if (currentPassengers + passengers <= capacity) {
         currentPassengers += passengers;
+        incrementUsage();
         std::cout << passengers << " passengers loaded into "
             << type << ". Current: " << currentPassengers
             << "/" << capacity << std::endl;
@@ -47,6 +77,10 @@ void Vehicle::breakDown() {
     if (state) {
         state->breakTransport(this);
     }
+}
+
+void Vehicle::repair() {
+    usageCount = 0;
 }
 
 void Vehicle::delay() {

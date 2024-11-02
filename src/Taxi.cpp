@@ -1,7 +1,7 @@
 #include "Taxi.h"
 #include <iostream>
 
-Taxi::Taxi(int capacity) : Vehicle("Taxi", capacity) {}
+Taxi::Taxi(int capacity, TransportDepartment* department) : Vehicle("Taxi", capacity, department) {}
 
 void Taxi::checkState() {
     if (getState()) {
@@ -32,7 +32,7 @@ void Taxi::delay() {
 }
 
 Vehicle* Taxi::clone() {
-    return new Taxi(capacity);
+    return new Taxi(capacity, department);
 }
 
 void Taxi::repair() {

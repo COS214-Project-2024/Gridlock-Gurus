@@ -5,7 +5,7 @@
 
 class Taxi : public Vehicle {
 public:
-    Taxi(int capacity);
+    Taxi(int capacity, TransportDepartment* department);
 
     void checkState() override;
     void collect(int amount) override;
