@@ -35,7 +35,7 @@ public:
      * @brief Gets details about the brick factory.
      * @return A string containing details about the brick factory.
      */
-    std::string getDetails() const override;
+    //std::string getDetails() const override;
 
     /**
      * @brief Pays taxes for the brick factory.

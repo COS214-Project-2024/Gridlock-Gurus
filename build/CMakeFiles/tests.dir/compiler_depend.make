@@ -3453,7 +3453,8 @@ CMakeFiles/tests.dir/src/EducationService.cpp.o: ../src/EducationService.cpp \
   /usr/include/c++/11/bits/erase_if.h \
   ../headers/EducationState.h \
   ../headers/EducationService.h \
-  ../headers/HighFundingEducationState.h
+  ../headers/HighFundingEducationState.h \
+  ../headers/LowFundingEducationState.h
 
 CMakeFiles/tests.dir/src/Factory.cpp.o: ../src/Factory.cpp \
   /usr/include/stdc-predef.h \
@@ -4613,7 +4614,8 @@ CMakeFiles/tests.dir/src/HealthService.cpp.o: ../src/HealthService.cpp \
   /usr/include/c++/11/bits/erase_if.h \
   ../headers/HealthState.h \
   ../headers/HealthService.h \
-  ../headers/HighFundingState.h
+  ../headers/HighFundingState.h \
+  ../headers/LowFundingState.h
 
 CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o: ../src/HighFundingEducationState.cpp \
   /usr/include/stdc-predef.h \
@@ -12950,10 +12952,6 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
 
 ../src/Main.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-../headers/LowFundingEducationState.h:
-
 ../src/LowFundingEducationState.cpp:
 
 ../src/LandmarkFactory.cpp:
@@ -12969,6 +12967,10 @@ CMakeFiles/tests.dir/tests/tax_system_test.cpp.o: ../tests/tax_system_test.cpp \
 ../src/HealthService.cpp:
 
 ../headers/WoodFactory.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
+
+../headers/LowFundingEducationState.h:
 
 ../headers/EducationState.h:
 

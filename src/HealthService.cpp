@@ -1,39 +1,25 @@
 #include "HealthService.h"
 #include "HighFundingState.h"
+#include "LowFundingState.h"
 
 HealthService::HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType name, int id) : Service(cost, location, resources, size, owner, name,id){
     this->responseTime = 10;
     healthState =std::make_unique<HighFundingState>(*this);
-
-}
-
-std::string HealthService::getDetails() const {
-    std::string details =  "Health service: \n";
-    details += "Response time: " + std::to_string(responseTime) + " minutes\n";
-    details += "Owner: " + owner.getName() + "\n";
-    details += "Location: " + location + "\n";
-    details += "Capacity: " + std::to_string(employees.size()) + "/" + std::to_string(maxEmployees) + "\n";
-    details += "Cost: " + std::to_string(cost) + "\n";
-    details += "Size: " + std::to_string(size) + "\n";
-    return details;
+    state = HealthStateType::HighFunding;
 }
 
 int HealthService::pay() {
-    return 2200;
-}
-
-int HealthService::getResponseTime() {
-    return responseTime;
+    return 5000;
 }
 
 void HealthService::setState() {
-    /*delete state;
-    state = state
-    if(state->getName() == "HighFundingState") {
-        benefits += 0.2;
-    } else if(state->getName() == "LowFundingState") {
-        benefits -= 0.2;
-    }*/
+    if(state == HealthStateType::LowFunding) {
+        healthState = std::make_unique<HighFundingState>(*this);
+        state = HealthStateType::HighFunding;
+    } else {
+        healthState = std::make_unique<LowFundingState>(*this);
+        state = HealthStateType::LowFunding;
+    }
 }
 
 void HealthService::responseTimeDec(int by) {
@@ -42,5 +28,18 @@ void HealthService::responseTimeDec(int by) {
 
 void HealthService::responseTimeInc(int by) {
     responseTime += by;
+}
+
+int HealthService::getResponseTime() const {
+    return this->responseTime;
+}
+
+
+std::string HealthService::getState() const {
+    if(state == HealthStateType::HighFunding) {
+        return "High funding";
+    } else {
+        return "Low funding";
+    }
 }
 

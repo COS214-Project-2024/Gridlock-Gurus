@@ -32,7 +32,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         return b; 
 
     } else {
-        maxEmployees = 1000;
+        maxEmployees = 100;
         cost = 500;
         productionRate = 12;
 

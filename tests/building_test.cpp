@@ -91,7 +91,7 @@ class building_test : public ::testing::Test {
 };
 
 // Test Constructor
-TEST_F(building_test, commercial_test_construction) {
+TEST_F(building_test, test_construction) {
 
     Commercial* commercialPtr = dynamic_cast<Commercial*>(b1);
     if (commercialPtr) {
@@ -113,6 +113,7 @@ TEST_F(building_test, commercial_test_construction) {
         EXPECT_EQ(brickPtr->produceResource(), 100);
         EXPECT_EQ(brickPtr->pay(), 100);
         EXPECT_EQ(brickPtr->getNumberOfEmployees(), 0);
+        EXPECT_EQ(brickPtr->getMaxEmployees(), 100);
     } else {
         FAIL() << "building brick_factory is not a BrickFactory type";
     }
@@ -128,6 +129,7 @@ TEST_F(building_test, commercial_test_construction) {
         EXPECT_EQ(steelPtr->produceResource(), 100);
         EXPECT_EQ(steelPtr->pay(), 163);
         EXPECT_EQ(steelPtr->getNumberOfEmployees(), 0);
+        EXPECT_EQ(steelPtr->getMaxEmployees(), 100);
     } else {
         FAIL() << "building steel_factory is not a SteelFactory type";
     }
@@ -143,6 +145,7 @@ TEST_F(building_test, commercial_test_construction) {
         EXPECT_EQ(woodPtr->produceResource(), 100);
         EXPECT_EQ(woodPtr->pay(), 90);
         EXPECT_EQ(woodPtr->getNumberOfEmployees(), 0);
+        EXPECT_EQ(woodPtr->getMaxEmployees(), 100);
     } else {
         FAIL() << "building wood_factory is not a WoodFactory type";
     }
@@ -159,6 +162,17 @@ TEST_F(building_test, commercial_test_construction) {
         EXPECT_EQ(PolicePtr->getId(), 0);
         EXPECT_EQ(PolicePtr->getNumberOfEmployees(), 0);
         EXPECT_EQ(PolicePtr->pay(), 3300);
+        EXPECT_EQ(PolicePtr->getState(), "Peace");
+
+        PolicePtr->responseTimeInc(6);
+        EXPECT_EQ(PolicePtr->getResponseTime(), 16);
+        PolicePtr->responseTimeDec(10);
+        EXPECT_EQ(PolicePtr->getResponseTime(), 6);
+
+        PolicePtr->setState();
+        EXPECT_EQ(PolicePtr->getState(), "Unrest");
+        EXPECT_EQ(PolicePtr->pay(), 3500);
+
     } else {
         FAIL() << "building police is not a PoliceService type";
     }
@@ -176,7 +190,16 @@ TEST_F(building_test, commercial_test_construction) {
         EXPECT_EQ(schoolPtr->getNumberOfEmployees(), 0);
         EXPECT_EQ(schoolPtr->pay(), 2200);
         EXPECT_EQ(schoolPtr->getPrestige(), 0);
+        EXPECT_EQ(schoolPtr->getState(), "High Funding");
 
+        schoolPtr->prestigeInc(4);
+        EXPECT_EQ(schoolPtr->getPrestige(), 4);
+        schoolPtr->prestigeDec(2);
+        EXPECT_EQ(schoolPtr->getPrestige(), 2);
+
+        schoolPtr->setState();
+        EXPECT_EQ(schoolPtr->getState(), "Low Funding");
+        EXPECT_EQ(schoolPtr->pay(), 1100);
     } else {
         FAIL() << "building school is not a EducationService type";
     }
@@ -192,9 +215,17 @@ TEST_F(building_test, commercial_test_construction) {
         EXPECT_EQ(healthPtr->getMaxEmployees(), 30);
         EXPECT_EQ(healthPtr->getId(), 0);
         EXPECT_EQ(healthPtr->getNumberOfEmployees(), 0);
-        EXPECT_EQ(healthPtr->pay(), 2200);
+        EXPECT_EQ(healthPtr->pay(), 5000);
         EXPECT_EQ(healthPtr->getResponseTime(), 10);
+        EXPECT_EQ(healthPtr->getState(), "High funding");
 
+        healthPtr->responseTimeInc(6);
+        EXPECT_EQ(healthPtr->getResponseTime(), 16);
+        healthPtr->responseTimeDec(10);
+        EXPECT_EQ(healthPtr->getResponseTime(), 6);
+
+        healthPtr->setState();
+        EXPECT_EQ(healthPtr->getState(), "Low funding");
     } else {
         FAIL() << "building health is not a HealthService type";
     }
@@ -210,6 +241,7 @@ TEST_F(building_test, commercial_test_construction) {
     if (homePtr) {
         EXPECT_EQ(homePtr->isFull(), false);
         EXPECT_EQ(homePtr->getNumberOfTenants(), 0);
+
     } else {
         FAIL() << "building home is not a Residential type";
     }

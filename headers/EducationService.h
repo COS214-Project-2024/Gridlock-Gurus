@@ -7,6 +7,11 @@
 #include "EducationState.h"
 #include <memory>
 class EducationState;
+
+enum EducationStateType{
+    HighFundingEducation,
+    LowFundingEducation
+};
 /**
  * @brief Represents an education service building.
  *
@@ -14,6 +19,7 @@ class EducationState;
  */
 class EducationService : public Service {
 private:
+    EducationStateType state;
     std::unique_ptr<EducationState> educationState; 
     int prestige;
 
@@ -35,28 +41,10 @@ public:
     ~EducationService() override = default;
 
     /**
-     * @brief Gets details about the education service building.
-     * @return A string containing details about the education service.
-     */
-    std::string getDetails() const override;
-
-    /**
-     * @brief Pays taxes for the education service building.
-     * @param amount The amount of tax to be paid.
-     * @param owner Pointer to the building's owner.
-     */
-    // void payTax(int amount) override;
-
-    /**
      * @brief Sets the state of the education service.
      * @param state Pointer to the new education state.
      */
     void setState();
-
-    /**
-     * @brief Checks the operational status of the education service.
-     */
-    void checkOperation();
 
     /**
      * @brief Pays a staff member in the education service.
@@ -66,7 +54,10 @@ public:
 
     void prestigeDec(int by);
     void prestigeInc(int by);
+
     int getPrestige();
+
+    std::string getState() const;
 
 };
 

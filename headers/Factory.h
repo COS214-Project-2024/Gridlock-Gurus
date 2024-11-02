@@ -54,6 +54,10 @@ public:
     int getNumberOfEmployees() {
         return employees.size();
     }
+
+    int getMaxEmployees() {
+        return maxEmployees;
+    }
 };
 
 #endif // FACTORY_H

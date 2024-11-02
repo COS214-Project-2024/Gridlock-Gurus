@@ -8,6 +8,10 @@
 #include <vector>
 class PoliceState;
 
+enum PoliceStateType{
+    Peace,
+    Unrest
+};
 /**
  * @brief Represents a police service building.
  *
@@ -15,6 +19,7 @@ class PoliceState;
  */
 class PoliceService : public Service {
 private:
+    PoliceStateType state;
     std::unique_ptr<PoliceState> policeState;  ///< Current state of the police service.
     int responseTime;
 
@@ -35,12 +40,6 @@ public:
     ~PoliceService() override = default;
 
     /**
-     * @brief Gets details about the police service building.
-     * @return A string containing details about the police service.
-     */
-    std::string getDetails() const override;
-
-    /**
      * @brief Pays taxes for the police service building.
      */
     // void payTax(int amount) override;
@@ -52,18 +51,21 @@ public:
     void setState();
 
     /**
-     * @brief Checks the operational status of the police service.
-     */
-    void checkOperation();
-
-    /**
      * @brief Pays an officer in the police service.
      * @param officer Pointer to the officer being paid.
      */
     int pay() override;
 
     void responseTimeDec(int by);
+
     void responseTimeInc(int by);
+
+    int getResponseTime() const {
+        return responseTime;
+    }
+
+    std::string getState() const; 
 };
+
 
 #endif // POLICESERVICE_H
