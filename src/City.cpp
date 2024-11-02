@@ -80,4 +80,15 @@ void City::calculateHappiness() {
     setState();        
 }
 
+void City::checkUtilityUsage() {
+    int totalWater = government->getTaxAuthority()->getWaterUsage();
+    int totalPower = government->getTaxAuthority()->getPowerUsage();
+    
+     government->getDepartmentOfWaterPowerAndSanitation()->reviewWaterUsage(totalWater);
+     government->getDepartmentOfWaterPowerAndSanitation()->reviewPowerUsage(totalPower);
+}
 
+void City::repairUtilities() {
+    int bill = government->getDepartmentOfWaterPowerAndSanitation()->repair();
+    std::cout << "City spent $" << bill << " to repair utilities\n";
+}

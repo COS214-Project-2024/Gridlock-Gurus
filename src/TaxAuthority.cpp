@@ -68,3 +68,11 @@ int TaxAuthority::getSize() {
 void TaxAuthority::removeLastBuilding() {
     buildings->removeLastBuilding();
 }
+
+int TaxAuthority::getWaterUsage() const {
+    return buildings->getCityWaterConsumption();
+}
+
+int TaxAuthority::getPowerUsage() const {
+    return buildings->getCityPowerConsumption();
+}

@@ -85,6 +85,9 @@ public:
 
     void calculateHappiness();
 
+    void checkUtilityUsage();
+
+    void repairUtilities();
 };
 
 #endif // CITY_H

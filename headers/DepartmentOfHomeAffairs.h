@@ -52,7 +52,15 @@ public:
      * Cleans up resources and deletes any dynamically allocated components.
      */
      ~DepartmentOfHomeAffairs();
+     int calculateAvgHappiness();
 
+    void fillHomeWithTenants(Residential& home); 
+    void fillWorkWithEmployees(Factory& work); 
+    void fillWorkWithEmployees(Service& work); 
+    void fillWorkWithEmployees(Commercial& work); 
+    Citizen& getRandomCitizen();
+
+protected:
     /**
      * @brief Registers a birth in the department.
      *
@@ -65,15 +73,8 @@ public:
      *
      * @param citizen Pointer to the Citizen object to be removed from the population.
      */
-    void registerDeath(Citizen* citizen);
+    void registerDeath(Citizen& citizen);
 
-    int calculateAvgHappiness();
-
-    void fillHomeWithTenants(Residential& home); 
-    void fillWorkWithEmployees(Factory& work); 
-    void fillWorkWithEmployees(Service& work); 
-    void fillWorkWithEmployees(Commercial& work); 
-    Citizen& getRandomCitizen();
 };
 
 #endif // DEPARTMENTOFHOMEAFFAIRS_H

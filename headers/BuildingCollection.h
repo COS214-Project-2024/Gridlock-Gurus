@@ -49,6 +49,10 @@ public:
 
     void removeLastBuilding();
 
+    int getCityWaterConsumption() const;
+
+    int getCityPowerConsumption() const;
+
 private:
     std::vector<Building*> buildings;                 ///< The collection of buildings in the city.
 

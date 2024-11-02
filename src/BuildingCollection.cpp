@@ -30,3 +30,21 @@ void BuildingCollection::removeLastBuilding() {
         buildings.pop_back();     
     }
 }
+
+int BuildingCollection::getCityWaterConsumption() const {
+    int consumption = 0;
+    for (Building* building : buildings) {
+        consumption += building->getWaterConsumption();
+    }
+
+    return consumption;
+}
+
+int BuildingCollection::getCityPowerConsumption() const {
+    int consumption = 0;
+    for (Building* building : buildings) {
+        consumption += building->getPowerConsumption();
+    }
+
+    return consumption;
+}

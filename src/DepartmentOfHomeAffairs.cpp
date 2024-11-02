@@ -13,8 +13,6 @@ DepartmentOfHomeAffairs::~DepartmentOfHomeAffairs() {
             delete citizen;
         }
     }
-
-    citizens.clear();
 }
 
 void DepartmentOfHomeAffairs::registerBirth() {
@@ -22,8 +20,8 @@ void DepartmentOfHomeAffairs::registerBirth() {
     ++population;
 }
 
-void DepartmentOfHomeAffairs::registerDeath(Citizen* citizen) {
-     auto it = std::find(citizens.begin(), citizens.end(), citizen);
+void DepartmentOfHomeAffairs::registerDeath(Citizen& citizen) {
+     auto it = std::find(citizens.begin(), citizens.end(), &citizen);
     
     if (it != citizens.end()) {
         delete *it;
