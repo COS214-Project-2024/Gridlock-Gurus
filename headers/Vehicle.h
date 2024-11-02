@@ -14,10 +14,10 @@ protected:
     int currentPassengers;
     TransportState* state;
     int usageCount;
-    TransportDepartment* department;
+    TransportDepartment& department;
 
 public:
-    Vehicle(const std::string& type, int capacity, TransportDepartment* transportDept);
+    Vehicle(const std::string& type, int capacity, TransportDepartment& transportDept);
     virtual ~Vehicle() = default;
 
     virtual void checkState() = 0;    
