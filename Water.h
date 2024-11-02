@@ -2,6 +2,7 @@
 #define WATER_H
 
 #include "Utilities.h"
+#include "UtilityType.h"
 
 /**
  * @brief Represents a Water utility.
@@ -11,9 +12,9 @@ public:
     /**
      * @brief Constructor for Water utility.
      */
-    Water();
+    Water() : Utilities(UtilityType::Water, 500, 300) {}
 
-    virtual ~Water();
+    ~Water()override = default;
 
     /**
      * @brief Check the water capacity.
@@ -21,20 +22,9 @@ public:
      */
     void checkCapacity() const override;
 
-    // /**
-    //  * @brief Shed water temporarily.
-    //  */
-    // void shed() override;
-
-    // /**
-    //  * @brief Break the water utility.
-    //  */
-    // void breakUtility() override;
-
-    // /**
-    //  * @brief Repair the water utility.
-    //  */
-    // void repair() override;
+    void shed() override;
+    void breakUtility() override;
+    void repair() override;
 };
 
 #endif // WATER_H

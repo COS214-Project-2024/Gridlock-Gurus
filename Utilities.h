@@ -1,6 +1,6 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
-
+#include "UtilityType.h"
 #include <string>
 
 /**
@@ -8,7 +8,7 @@
  */
 class Utilities {
 protected:
-    std::string type;
+    UtilityType type;
     int maxProduction;
     bool shedding;
     bool isRepair;
@@ -18,13 +18,13 @@ public:
     /**
      * @brief Default constructor for Utilities.
      */
-    Utilities(std::string type, int maxProduction, int costOfRepair);
+    Utilities(UtilityType type, int maxProduction, int costOfRepair) : type(type), maxProduction(maxProduction),shedding(false),isRepair(false),costOfRepair(costOfRepair) {}
 
     /**
      * @brief Check the capacity of the utility.
      * @return The current capacity of the utility.
      */
-    virtual void checkCapacity() const;
+    virtual void checkCapacity() const ;
 
     /**
      * @brief Shed the utility, temporarily shutting it down.
@@ -42,6 +42,10 @@ public:
     virtual void repair();
 
     virtual ~Utilities() = default;
+
+    UtilityType getType() const { return type; }
+    bool isShedding() const { return shedding; }
+    bool isBroken() const { return isRepair; }
 };
 
 #endif // UTILITIES_H

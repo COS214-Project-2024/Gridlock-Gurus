@@ -2,7 +2,8 @@
 #define POWER_H
 
 #include "Utilities.h"
-
+#include <string>
+#include "UtilityType.h"
 /**
  * @brief Represents a Power utility.
  */
@@ -11,9 +12,9 @@ public:
     /**
      * @brief Constructor for Power utility.
      */
-    Power();
+    Power() : Utilities(UtilityType::Power, 1000, 500) {}
 
-    virtual ~Power();
+    ~Power()override = default;
 
     /**
      * @brief Check the power capacity.
@@ -21,20 +22,20 @@ public:
      */
     void checkCapacity() const override;
 
-    // /**
-    //  * @brief Shed power temporarily.
-    //  */
-    // void shed() override;
+    /**
+     * @brief Shed power temporarily.
+     */
+    void shed() override;
 
-    // /**
-    //  * @brief Break the power utility.
-    //  */
-    // void breakUtility() override;
+    /**
+     * @brief Break the power utility.
+     */
+    void breakUtility() override;
 
-    // /**
-    //  * @brief Repair the power utility.
-    //  */
-    // void repair() override;
+    /**
+     * @brief Repair the power utility.
+     */
+    void repair() override;
 };
 
 #endif // POWER_H
