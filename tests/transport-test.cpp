@@ -28,10 +28,12 @@ protected:
     }
 
     void TearDown() override {
-        delete taxi;
+        /*delete taxi;
         delete truck;
         delete train;
+        delete transportDept;*/
         delete transportDept;
+        delete citizen;
     }
 };
 
