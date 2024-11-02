@@ -1,6 +1,9 @@
 #include "Taxi.h"
 #include <iostream>
 
+#include "Broken.h"
+#include "Damaged.h"
+
 Taxi::Taxi(int capacity, TransportDepartment* department) : Vehicle("Taxi", capacity, department) {}
 
 void Taxi::checkState() {
@@ -22,13 +25,12 @@ void Taxi::run() {
 
 void Taxi::breakDown() {
     std::cout << "Taxi has broken down!" << std::endl;
-    if (getState()) {
-        getState()->breakTransport(this);
-    }
+    setState(new Broken());
 }
 
 void Taxi::delay() {
     std::cout << "Taxi is delayed." << std::endl;
+    setState(new Damaged());
 }
 
 Vehicle* Taxi::clone() {
