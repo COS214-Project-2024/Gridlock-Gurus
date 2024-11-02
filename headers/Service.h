@@ -34,9 +34,7 @@ public:
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service(){
-        employees.clear();
-    };
+    virtual ~Service() = default;
 
     /**
      * @brief Produces resources in the service building.
@@ -44,7 +42,8 @@ public:
     void employ(Citizen& employee);
     void fire(Citizen& employee);
     void retire(Citizen& employee);
-    int getNumEmployees() {
+
+    int getNumberOfEmployees() {
         return this->employees.size();
     }
 

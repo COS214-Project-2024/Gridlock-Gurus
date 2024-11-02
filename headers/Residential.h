@@ -61,6 +61,10 @@ public:
     void removeTenant(Citizen& tenant);
 
     bool isFull() const;
+
+    int getNumberOfTenants() const {
+        return tenants.size();
+    }
 };
 
 #endif // RESIDENTIAL_H

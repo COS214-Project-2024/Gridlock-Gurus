@@ -4,10 +4,14 @@
 #include "Service.h"
 #include "PoliceState.h"
 #include "BuildingType.h"
-#include <set>
+#include <memory>
 #include <vector>
 class PoliceState;
 
+enum PoliceStateType{
+    Peace,
+    Unrest
+};
 /**
  * @brief Represents a police service building.
  *
@@ -15,8 +19,8 @@ class PoliceState;
  */
 class PoliceService : public Service {
 private:
-    PoliceState* policeState;  ///< Current state of the police service.
-    std::vector<Citizen*> officers;  ///< List of officers in the police service.
+    PoliceStateType state;
+    std::unique_ptr<PoliceState> policeState;  ///< Current state of the police service.
     int responseTime;
 
 public:
@@ -36,12 +40,6 @@ public:
     ~PoliceService() override = default;
 
     /**
-     * @brief Gets details about the police service building.
-     * @return A string containing details about the police service.
-     */
-    std::string getDetails() const override;
-
-    /**
      * @brief Pays taxes for the police service building.
      */
     // void payTax(int amount) override;
@@ -53,22 +51,21 @@ public:
     void setState();
 
     /**
-     * @brief Checks the operational status of the police service.
-     */
-    void checkOperation();
-
-    /**
      * @brief Pays an officer in the police service.
      * @param officer Pointer to the officer being paid.
      */
     int pay() override;
-/*    void employ(Citizen* employee) override;
-    void fire(Citizen* employee) override;
-    void retire(Citizen* employee) override;
-    int getStaff();
-    int getMaxStaff();*/
+
     void responseTimeDec(int by);
+
     void responseTimeInc(int by);
+
+    int getResponseTime() const {
+        return responseTime;
+    }
+
+    std::string getState() const; 
 };
+
 
 #endif // POLICESERVICE_H

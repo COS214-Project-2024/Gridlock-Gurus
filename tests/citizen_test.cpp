@@ -27,7 +27,6 @@ class citizen_test : public ::testing::Test {
             homeFactory = new ResidentialFactory(taxAuth);
             c = new Citizen(0,CitizenType::Citizen,100,300,taxAuth);
             work = factory->createBuilding(BuildingType::BrickFactory,*c);
-
             home = homeFactory->createBuilding(BuildingType::House,*c);     
         }
         
@@ -84,4 +83,15 @@ TEST_F(citizen_test, citizen_fire_test) {
     EXPECT_EQ(c->getEmploymentStatus(),false);
     EXPECT_EQ(c->getType(),CitizenType::Citizen);
 
+}
+
+TEST_F(citizen_test, citizen_Retire_test) {
+    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+    workPtr->employ(*c);
+    EXPECT_EQ(c->getEmploymentStatus(),true);
+    EXPECT_EQ(c->getType(),CitizenType::Worker);
+    workPtr->retire(*c);
+    EXPECT_EQ(c->getEmploymentStatus(),false);
+    EXPECT_EQ(c->getType(),CitizenType::Retired);
+    EXPECT_EQ(c->hasHome(),false);
 }

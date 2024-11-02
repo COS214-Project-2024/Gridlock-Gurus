@@ -50,6 +50,14 @@ public:
     void employ(Citizen& employee);
     void fire(Citizen& employee) ;
     void retire(Citizen& employee);
+
+    int getNumberOfEmployees() {
+        return employees.size();
+    }
+
+    int getMaxEmployees() {
+        return maxEmployees;
+    }
 };
 
 #endif // FACTORY_H

@@ -308,6 +308,30 @@ src/BudgetDepartment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/BudgetDepartment.cpp.s
 .PHONY : src/BudgetDepartment.cpp.s
 
+src/BuildCommand.o: src/BuildCommand.cpp.o
+.PHONY : src/BuildCommand.o
+
+# target to build an object file
+src/BuildCommand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/BuildCommand.cpp.o
+.PHONY : src/BuildCommand.cpp.o
+
+src/BuildCommand.i: src/BuildCommand.cpp.i
+.PHONY : src/BuildCommand.i
+
+# target to preprocess a source file
+src/BuildCommand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/BuildCommand.cpp.i
+.PHONY : src/BuildCommand.cpp.i
+
+src/BuildCommand.s: src/BuildCommand.cpp.s
+.PHONY : src/BuildCommand.s
+
+# target to generate assembly for a file
+src/BuildCommand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/BuildCommand.cpp.s
+.PHONY : src/BuildCommand.cpp.s
+
 src/Building.o: src/Building.cpp.o
 .PHONY : src/Building.o
 
@@ -427,6 +451,30 @@ src/CitizenFactory.s: src/CitizenFactory.cpp.s
 src/CitizenFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/CitizenFactory.cpp.s
 .PHONY : src/CitizenFactory.cpp.s
+
+src/Command.o: src/Command.cpp.o
+.PHONY : src/Command.o
+
+# target to build an object file
+src/Command.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Command.cpp.o
+.PHONY : src/Command.cpp.o
+
+src/Command.i: src/Command.cpp.i
+.PHONY : src/Command.i
+
+# target to preprocess a source file
+src/Command.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Command.cpp.i
+.PHONY : src/Command.cpp.i
+
+src/Command.s: src/Command.cpp.s
+.PHONY : src/Command.s
+
+# target to generate assembly for a file
+src/Command.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Command.cpp.s
+.PHONY : src/Command.cpp.s
 
 src/Commercial.o: src/Commercial.cpp.o
 .PHONY : src/Commercial.o
@@ -956,6 +1004,30 @@ src/PoliceService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceService.cpp.s
 .PHONY : src/PoliceService.cpp.s
 
+src/PolicyCommand.o: src/PolicyCommand.cpp.o
+.PHONY : src/PolicyCommand.o
+
+# target to build an object file
+src/PolicyCommand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PolicyCommand.cpp.o
+.PHONY : src/PolicyCommand.cpp.o
+
+src/PolicyCommand.i: src/PolicyCommand.cpp.i
+.PHONY : src/PolicyCommand.i
+
+# target to preprocess a source file
+src/PolicyCommand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PolicyCommand.cpp.i
+.PHONY : src/PolicyCommand.cpp.i
+
+src/PolicyCommand.s: src/PolicyCommand.cpp.s
+.PHONY : src/PolicyCommand.s
+
+# target to generate assembly for a file
+src/PolicyCommand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PolicyCommand.cpp.s
+.PHONY : src/PolicyCommand.cpp.s
+
 src/Power.o: src/Power.cpp.o
 .PHONY : src/Power.o
 
@@ -1124,6 +1196,54 @@ src/Service.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Service.cpp.s
 .PHONY : src/Service.cpp.s
 
+src/ServiceFactory.o: src/ServiceFactory.cpp.o
+.PHONY : src/ServiceFactory.o
+
+# target to build an object file
+src/ServiceFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ServiceFactory.cpp.o
+.PHONY : src/ServiceFactory.cpp.o
+
+src/ServiceFactory.i: src/ServiceFactory.cpp.i
+.PHONY : src/ServiceFactory.i
+
+# target to preprocess a source file
+src/ServiceFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ServiceFactory.cpp.i
+.PHONY : src/ServiceFactory.cpp.i
+
+src/ServiceFactory.s: src/ServiceFactory.cpp.s
+.PHONY : src/ServiceFactory.s
+
+# target to generate assembly for a file
+src/ServiceFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ServiceFactory.cpp.s
+.PHONY : src/ServiceFactory.cpp.s
+
+src/Simulation.o: src/Simulation.cpp.o
+.PHONY : src/Simulation.o
+
+# target to build an object file
+src/Simulation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Simulation.cpp.o
+.PHONY : src/Simulation.cpp.o
+
+src/Simulation.i: src/Simulation.cpp.i
+.PHONY : src/Simulation.i
+
+# target to preprocess a source file
+src/Simulation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Simulation.cpp.i
+.PHONY : src/Simulation.cpp.i
+
+src/Simulation.s: src/Simulation.cpp.s
+.PHONY : src/Simulation.s
+
+# target to generate assembly for a file
+src/Simulation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Simulation.cpp.s
+.PHONY : src/Simulation.cpp.s
+
 src/SteelFactory.o: src/SteelFactory.cpp.o
 .PHONY : src/SteelFactory.o
 
@@ -1171,6 +1291,30 @@ src/TaxAuthority.s: src/TaxAuthority.cpp.s
 src/TaxAuthority.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxAuthority.cpp.s
 .PHONY : src/TaxAuthority.cpp.s
+
+src/TaxCommand.o: src/TaxCommand.cpp.o
+.PHONY : src/TaxCommand.o
+
+# target to build an object file
+src/TaxCommand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.o
+.PHONY : src/TaxCommand.cpp.o
+
+src/TaxCommand.i: src/TaxCommand.cpp.i
+.PHONY : src/TaxCommand.i
+
+# target to preprocess a source file
+src/TaxCommand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.i
+.PHONY : src/TaxCommand.cpp.i
+
+src/TaxCommand.s: src/TaxCommand.cpp.s
+.PHONY : src/TaxCommand.s
+
+# target to generate assembly for a file
+src/TaxCommand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.s
+.PHONY : src/TaxCommand.cpp.s
 
 src/Taxi.o: src/Taxi.cpp.o
 .PHONY : src/Taxi.o
@@ -1511,6 +1655,9 @@ help:
 	@echo "... src/BudgetDepartment.o"
 	@echo "... src/BudgetDepartment.i"
 	@echo "... src/BudgetDepartment.s"
+	@echo "... src/BuildCommand.o"
+	@echo "... src/BuildCommand.i"
+	@echo "... src/BuildCommand.s"
 	@echo "... src/Building.o"
 	@echo "... src/Building.i"
 	@echo "... src/Building.s"
@@ -1526,6 +1673,9 @@ help:
 	@echo "... src/CitizenFactory.o"
 	@echo "... src/CitizenFactory.i"
 	@echo "... src/CitizenFactory.s"
+	@echo "... src/Command.o"
+	@echo "... src/Command.i"
+	@echo "... src/Command.s"
 	@echo "... src/Commercial.o"
 	@echo "... src/Commercial.i"
 	@echo "... src/Commercial.s"
@@ -1592,6 +1742,9 @@ help:
 	@echo "... src/PoliceService.o"
 	@echo "... src/PoliceService.i"
 	@echo "... src/PoliceService.s"
+	@echo "... src/PolicyCommand.o"
+	@echo "... src/PolicyCommand.i"
+	@echo "... src/PolicyCommand.s"
 	@echo "... src/Power.o"
 	@echo "... src/Power.i"
 	@echo "... src/Power.s"
@@ -1613,12 +1766,21 @@ help:
 	@echo "... src/Service.o"
 	@echo "... src/Service.i"
 	@echo "... src/Service.s"
+	@echo "... src/ServiceFactory.o"
+	@echo "... src/ServiceFactory.i"
+	@echo "... src/ServiceFactory.s"
+	@echo "... src/Simulation.o"
+	@echo "... src/Simulation.i"
+	@echo "... src/Simulation.s"
 	@echo "... src/SteelFactory.o"
 	@echo "... src/SteelFactory.i"
 	@echo "... src/SteelFactory.s"
 	@echo "... src/TaxAuthority.o"
 	@echo "... src/TaxAuthority.i"
 	@echo "... src/TaxAuthority.s"
+	@echo "... src/TaxCommand.o"
+	@echo "... src/TaxCommand.i"
+	@echo "... src/TaxCommand.s"
 	@echo "... src/Taxi.o"
 	@echo "... src/Taxi.i"
 	@echo "... src/Taxi.s"
