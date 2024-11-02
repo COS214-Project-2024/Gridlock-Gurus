@@ -1,0 +1,77 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Residential.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef RESIDENTIAL_H
+        -:    2:#define RESIDENTIAL_H
+        -:    3:
+        -:    4:#include "Building.h"
+        -:    5:#include <vector>
+        -:    6:#include <string>
+        -:    7:#include <memory>
+        -:    8:
+        -:    9:/**
+        -:   10: * @brief Represents a residential building.
+        -:   11: *
+        -:   12: * ConcreteProduct participant in the Factory Method pattern. It represents a specific type of building and adds features like managing tenants.
+        -:   13: */
+        -:   14:class Residential : public Building {
+        -:   15:private:
+        -:   16:    int maxCapacity;  ///< The maximum number of citizens the building can house.
+        -:   17:    std::vector<Citizen*> tenants;  ///< List of tenants living in the building.
+        -:   18:
+        -:   19:public:
+        -:   20:    /**
+        -:   21:     * @brief Constructs a new Residential building object.
+        -:   22:     * @param cost The construction cost.
+        -:   23:     * @param location The location of the building.
+        -:   24:     * @param resources Pointer to the resources used by the building.
+        -:   25:     * @param size The size of the building.
+        -:   26:     * @param owner Pointer to the citizen who owns the building.
+        -:   27:     * @param taxAuthority Pointer to the tax authority.
+        -:   28:     */
+        -:   29:    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int capacity);
+        -:   30:
+        -:   31:    /**
+        -:   32:     * @brief Destroys the Residential building object.
+        -:   33:     */
+        -:   34:    ~Residential() override = default;
+        -:   35:
+        -:   36:    /**
+        -:   37:     * @brief Gets details about the residential building.
+        -:   38:     * @return A string containing details about the residential building.
+        -:   39:     *
+        -:   40:     * This method overrides the base `getDetails()` method to provide specific details for residential buildings.
+        -:   41:     */
+        -:   42:    std::string getDetails() const override;
+        -:   43:
+        -:   44:    /**
+        -:   45:     * @brief Calculates household tax for the residential building.
+        -:   46:     * 
+        -:   47:     * The calculated household tax.
+        -:   48:     */
+        -:   49:    //void householdTax();
+        -:   50:
+        -:   51:    /**
+        -:   52:     * @brief Adds a tenant to the residential building.
+        -:   53:     * @param tenant Pointer to the citizen to add as a tenant.
+        -:   54:     */
+        -:   55:    void addTenant(Citizen& tenant);
+        -:   56:
+        -:   57:    /**
+        -:   58:        * @brief Adds a tenant to the residential building.
+        -:   59:        * @param tenant Pointer to the citizen to add as a tenant.
+        -:   60:        */
+        -:   61:    void removeTenant(Citizen& tenant);
+        -:   62:
+        -:   63:    bool isFull() const;
+        -:   64:
+function _ZNK11Residential18getNumberOfTenantsEv called 1 returned 100% blocks executed 100%
+        1:   65:    int getNumberOfTenants() const {
+        1:   66:        return tenants.size();
+        1:   66-block  0
+call    0 returned 1
+        -:   67:    }
+        -:   68:};
+        -:   69:
+        -:   70:#endif // RESIDENTIAL_H

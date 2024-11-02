@@ -1,0 +1,55 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/FactoryFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FactoryFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FactoryFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef FACTORYFACTORY_H
+        -:    2:#define FACTORYFACTORY_H
+        -:    3:
+        -:    4:#include "BuildingFactory.h"
+        -:    5:#include "TaxAuthority.h"
+        -:    6:#include "BuildingType.h"
+        -:    7:#include <memory>
+        -:    8:
+        -:    9:/**
+        -:   10: * @brief Factory for creating factories/industrial buildings.
+        -:   11: *
+        -:   12: * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create factories/industrial buildings.
+        -:   13: */
+        -:   14:class FactoryFactory : public BuildingFactory {
+        -:   15:public:
+        -:   16:    /**
+        -:   17:     * @brief Constructs a new FactoryFactory object.
+        -:   18:     */
+        -:   19:    FactoryFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+        -:   20:
+        -:   21:    /**
+        -:   22:     * @brief Destroys the FactoryFactory object.
+        -:   23:     */
+       14:   24:    ~FactoryFactory() override = default;
+------------------
+_ZN14FactoryFactoryD0Ev:
+function _ZN14FactoryFactoryD0Ev called 7 returned 100% blocks executed 100%
+        7:   24:    ~FactoryFactory() override = default;
+        7:   24-block  0
+call    0 returned 7
+call    1 returned 7
+------------------
+_ZN14FactoryFactoryD1Ev:
+function _ZN14FactoryFactoryD1Ev called 7 returned 100% blocks executed 100%
+        7:   24:    ~FactoryFactory() override = default;
+        7:   24-block  0
+call    0 returned 7
+------------------
+        -:   25:    
+        -:   26:    /**
+        -:   27:     * @brief Creates a Factory building.
+        -:   28:     * @param type The type of Factory building to create.
+        -:   29:     * @return Pointer to the created Factory building object.
+        -:   30:     *
+        -:   31:     * This method overrides the factory method to create a Factory building.
+        -:   32:     */
+        -:   33:    Building* createBuilding(BuildingType type, Citizen& owner) override;
+        -:   34:};
+        -:   35:
+        -:   36:#endif // FACTORYFACTORY_H
+        -:   37:

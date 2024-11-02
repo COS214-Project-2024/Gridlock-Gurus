@@ -1,0 +1,82 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Main.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Main.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Main.cpp.gcda
+        -:    0:Runs:1
+        -:    1:
+        -:    2:#include <iostream>
+        -:    3:#include "TransportDepartment.h"
+        -:    4:#include "CitizenFactory.h"
+        -:    5:#include "Train.h"
+        -:    6:#include "Taxi.h"
+        -:    7:#include "Truck.h"
+        -:    8:#include "Functional.h"
+        -:    9:#include "Damaged.h"
+        -:   10:#include "Broken.h"
+        -:   11:#include "TaxAuthority.h"
+        -:   12:#include <iostream>
+        -:   13:
+        -:   14:
+function _Z5main2v called 0 returned 0% blocks executed 0%
+    #####:   15:int main2() {
+    #####:   16:    return 0;
+    %%%%%:   16-block  0
+        -:   17:/*   TransportDepartment department;
+        -:   18:
+        -:   19:
+        -:   20:    Train* train = new Train(100);
+        -:   21:    Taxi* taxi = new Taxi(4);
+        -:   22:    Truck* truck = new Truck(10);
+        -:   23:
+        -:   24:
+        -:   25:    Functional functional;
+        -:   26:    Damaged damaged;
+        -:   27:    Broken broken;
+        -:   28:
+        -:   29:    
+        -:   30:    train->setState(&functional);
+        -:   31:    taxi->setState(&damaged);
+        -:   32:    truck->setState(&broken);
+        -:   33:
+        -:   34:    
+        -:   35:    department.addVehicle(train);
+        -:   36:    department.addVehicle(taxi);
+        -:   37:    department.addVehicle(truck);
+        -:   38:
+        -:   39:    std::weak_ptr<TaxAuthority> tax = new TaxAuthority();
+        -:   40:    // Citizen alice("Alice", 1);
+        -:   41:    // Citizen bob("Bob", 2);
+        -:   42:    Citizen* alice = new Citizen("citizen", 100, 5000, tax);
+        -:   43:    Citizen* bob = new Citizen("citizen", 100, 5000, tax);
+        -:   44:
+        -:   45:    
+        -:   46:    alice->callTransport(department, "Train");
+        -:   47:    bob->callTransport(department, "Taxi");  
+        -:   48:
+        -:   49:    train->run();
+        -:   50:    train->delay();
+        -:   51:    truck->run();  
+        -:   52:    truck->breakDown();  
+        -:   53:
+        -:   54:    
+        -:   55:    std::cout << "\n--- State Transitions ---" << std::endl;
+        -:   56:    taxi->repair();  
+        -:   57:    taxi->setState(&functional);
+        -:   58:    taxi->run();
+        -:   59:
+        -:   60:    std::cout << "\n--- Offloading Passengers ---" << std::endl;
+        -:   61:    alice->offloadVehicle();
+        -:   62:    bob->offloadVehicle();  
+        -:   63:
+        -:   64:    std::cout << "\n--- Cloning Vehicles ---" << std::endl;
+        -:   65:    Vehicle* clonedTrain = train->clone();
+        -:   66:    std::cout << "Cloned a new: " << clonedTrain->getType() << std::endl;
+        -:   67:
+        -:   68:    delete train;
+        -:   69:    delete taxi;
+        -:   70:    delete truck;
+        -:   71:    delete clonedTrain;
+        -:   72:
+        -:   73:    std::cout << "\n--- All Tests Completed ---" << std::endl;
+        -:   74:    */
+        -:   75:}
+        -:   76:

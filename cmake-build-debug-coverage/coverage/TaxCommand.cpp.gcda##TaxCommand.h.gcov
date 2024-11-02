@@ -1,0 +1,67 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/TaxCommand.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TaxCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TaxCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef TAXCOMMAND_H
+        -:    2:#define TAXCOMMAND_H
+        -:    3:
+        -:    4:#include "Command.h"
+        -:    5:#include "TaxAuthority.h"
+        -:    6:#include "TaxStrategy.h"
+        -:    7:#include <memory>
+        -:    8:
+        -:    9:/**
+        -:   10: * @brief Command to handle the taxation system in the city.
+        -:   11: *
+        -:   12: * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle tax-related operations.
+        -:   13: */
+        -:   14:class TaxCommand : public Command {
+        -:   15:    std::shared_ptr<TaxAuthority> taxAuthority;
+        -:   16:    std::unique_ptr<TaxStrategy> taxStrategy;
+        -:   17:
+        -:   18:public:
+        -:   19:    /**
+        -:   20:     * @brief Constructs a new TaxCommand object.
+        -:   21:     * @param taxAuth Shared pointer to TaxAuthority.
+        -:   22:     * @param taxStrat Unique pointer to TaxStrategy, transferred with std::move.
+        -:   23:     */
+        -:   24:  TaxCommand(std::shared_ptr<TaxAuthority> taxAuth, std::unique_ptr<TaxStrategy> taxStrat)
+        -:   25:        : taxAuthority(taxAuth), taxStrategy(std::move(taxStrat)) {}
+        -:   26:    /**
+        -:   27:     * @brief Destroys the TaxCommand object.
+        -:   28:     */
+    #####:   29:    ~TaxCommand()override = default;
+------------------
+_ZN10TaxCommandD0Ev:
+function _ZN10TaxCommandD0Ev called 0 returned 0% blocks executed 0%
+    #####:   29:    ~TaxCommand()override = default;
+    %%%%%:   29-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN10TaxCommandD1Ev:
+function _ZN10TaxCommandD1Ev called 0 returned 0% blocks executed 0%
+    #####:   29:    ~TaxCommand()override = default;
+    %%%%%:   29-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+------------------
+        -:   30:
+        -:   31:    /**
+        -:   32:     * @brief Executes the command to manage taxes.
+        -:   33:     */
+        -:   34:    void execute() override;
+        -:   35:
+        -:   36:     /**
+        -:   37:     * @brief Undo functionality.
+        -:   38:     */
+        -:   39:    void undo() override;
+        -:   40:
+        -:   41:    /**
+        -:   42:     * @brief Redo functionality.
+        -:   43:     */
+        -:   44:    void redo() override;
+        -:   45:};
+        -:   46:
+        -:   47:#endif // TAXCOMMAND_H

@@ -1,0 +1,19 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/FlatTaxStrategy.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FlatTaxStrategy.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FlatTaxStrategy.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "FlatTaxStrategy.h"
+        -:    2:
+function _ZN15FlatTaxStrategy20calculateBuildingTaxEi called 2 returned 100% blocks executed 100%
+        2:    3:int FlatTaxStrategy::calculateBuildingTax(int value) {
+        -:    4:    // Flat tax of 30 units
+        2:    5:    return 30;
+        2:    5-block  0
+        -:    6:}
+        -:    7:
+function _ZN15FlatTaxStrategy19calculateCitizenTaxEi called 2 returned 100% blocks executed 100%
+        2:    8:int FlatTaxStrategy::calculateCitizenTax(int earnings) {
+        -:    9:    //Flat tax of 30 units
+        2:   10:    return 30;
+        2:   10-block  0
+        -:   11:}

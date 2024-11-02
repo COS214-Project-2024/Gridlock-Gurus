@@ -1,0 +1,101 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Factory.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Factory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Factory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Factory.h"
+        -:    2:#include "Building.h"
+        -:    3:
+function _ZN7Factory4fireER7Citizen called 1 returned 100% blocks executed 85%
+        1:    4:void Factory::fire(Citizen& employee) {
+        1:    5:    auto it = std::find(employees.begin(), employees.end(), &employee);
+        1:    5-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+    $$$$$:    5-block  1
+        -:    6:
+        1:    7:    if(it != employees.end()) {
+        1:    7-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:    8:        employees.erase(it);
+        1:    8-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:    8-block  1
+        1:    9:        employee.fired();
+        1:    9-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   10:    }   
+        1:   11:}
+        1:   11-block  0
+        -:   12:
+function _ZN7Factory6retireER7Citizen called 1 returned 100% blocks executed 85%
+        1:   13:void Factory::retire(Citizen& employee) {
+        1:   14:    auto it = find(employees.begin(), employees.end(), &employee);
+        1:   14-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+    $$$$$:   14-block  1
+        -:   15:
+        1:   16:    if(it != employees.end()) {
+        1:   16-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   17:        employees.erase(it);
+        1:   17-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   17-block  1
+        1:   18:        employee.retireToCountryside();
+        1:   18-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   19:    }
+        1:   20:}
+        1:   20-block  0
+        -:   21:
+function _ZN7Factory6employER7Citizen called 5 returned 100% blocks executed 91%
+        5:   22:void Factory::employ(Citizen& employee) {
+       5*:   23:    if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
+        5:   23-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0
+        5:   23-block  1
+call    3 returned 5
+branch  4 taken 5 (fallthrough)
+branch  5 taken 0
+        5:   23-block  2
+    %%%%%:   23-block  3
+        5:   23-block  4
+branch  6 taken 5 (fallthrough)
+branch  7 taken 0
+        5:   24:        employees.push_back(&employee);
+        5:   24-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:   25:        employee.setWork(*this);
+        5:   25-block  0
+call    0 returned 5
+        -:   26:    }
+        5:   27:}
+        5:   27-block  0
+        -:   28:

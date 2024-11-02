@@ -1,0 +1,122 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/DepartmentOfHomeAffairs.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\DepartmentOfHomeAffairs.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\DepartmentOfHomeAffairs.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "DepartmentOfHomeAffairs.h"
+        -:    2:#include "CitizenType.h"
+        -:    3:
+function _ZN23DepartmentOfHomeAffairsC2ESt10shared_ptrI12TaxAuthorityE called 0 returned 0% blocks executed 0%
+    #####:    4:DepartmentOfHomeAffairs::DepartmentOfHomeAffairs(std::shared_ptr<TaxAuthority> taxAuth) : taxAuthority(taxAuth){
+    %%%%%:    4-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:    5:    this->population = 0;
+    #####:    6:    this->factory = std::make_unique<CitizenFactory>(taxAuth);
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:    6-block  0
+call    3 never executed
+call    4 never executed
+    $$$$$:    6-block  1
+    #####:    7:}
+    $$$$$:    7-block  0
+call    0 never executed
+    $$$$$:    7-block  1
+call    1 never executed
+    $$$$$:    7-block  2
+call    2 never executed
+        -:    8:
+function _ZN23DepartmentOfHomeAffairsD2Ev called 0 returned 0% blocks executed 0%
+    #####:    9:DepartmentOfHomeAffairs::~DepartmentOfHomeAffairs() {
+    #####:   10:    for (Citizen* citizen : citizens) {
+    %%%%%:   10-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:   10-block  1
+call    2 never executed
+    %%%%%:   10-block  2
+call    3 never executed
+    %%%%%:   10-block  3
+call    4 never executed
+branch  5 never executed
+branch  6 never executed (fallthrough)
+    #####:   11:        if(citizen) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   12:            delete citizen;
+    %%%%%:   12-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   12-block  1
+call    2 never executed
+call    3 never executed
+        -:   13:        }
+        -:   14:    }
+        -:   15:
+    #####:   16:    citizens.clear();
+    %%%%%:   16-block  0
+call    0 never executed
+    #####:   17:}
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   18:
+function _ZN23DepartmentOfHomeAffairs13registerBirthEv called 0 returned 0% blocks executed 0%
+    #####:   19:void DepartmentOfHomeAffairs::registerBirth() {
+    #####:   20:    CitizenType type = CitizenType::Worker;
+    #####:   21:    int startingSatisfaction = 100;
+    #####:   22:    int startingFunds = 1000;
+        -:   23:
+    #####:   24:    citizens.push_back(factory->createCitizen(type, startingSatisfaction, startingFunds));
+    %%%%%:   24-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   24-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+        -:   25:
+    #####:   26:    ++population;
+    #####:   27:}
+    %%%%%:   27-block  0
+        -:   28:
+function _ZN23DepartmentOfHomeAffairs13registerDeathEP7Citizen called 0 returned 0% blocks executed 0%
+    #####:   29:void DepartmentOfHomeAffairs::registerDeath(Citizen* citizen) {
+    #####:   30:     auto it = std::find(citizens.begin(), citizens.end(), citizen);
+    %%%%%:   30-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+        -:   31:    
+    #####:   32:    if (it != citizens.end()) {
+    %%%%%:   32-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   33:        delete *it;
+    %%%%%:   33-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:   33-block  1
+call    3 never executed
+call    4 never executed
+    #####:   34:        citizens.erase(it);  
+    %%%%%:   34-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    $$$$$:   34-block  1
+    #####:   35:        --population;
+    %%%%%:   35-block  0
+        -:   36:    }
+    #####:   37:}
+    %%%%%:   37-block  0

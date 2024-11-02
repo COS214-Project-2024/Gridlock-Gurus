@@ -1,0 +1,45 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/HighFundingState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HealthService.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HealthService.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef HIGHFUNDINGSTATE_H
+        -:    2:#define HIGHFUNDINGSTATE_H
+        -:    3:
+        -:    4:#include "HealthService.h"
+        -:    5:#include "HealthState.h"
+        -:    6:#include <string>
+        -:    7:/**
+        -:    8: * @brief Represents a high-funding state for health services.
+        -:    9: *
+        -:   10: * ConcreteState in the State pattern. It extends the HealthState class and implements the methods to manage health service operations when funding is high.
+        -:   11: */
+        -:   12:class HighFundingState : public HealthState {
+        -:   13:public:
+        -:   14:    /**
+        -:   15:     * @brief Constructs a new HighFundingState object.
+        -:   16:     */
+function _ZN16HighFundingStateC1ER13HealthService called 1 returned 100% blocks executed 100%
+        1:   17:    HighFundingState(HealthService& service) : HealthState(service) {}
+        1:   17-block  0
+call    0 returned 1
+        -:   18:
+        -:   19:    /**
+        -:   20:     * @brief Destroys the HighFundingState object.
+        -:   21:     */
+        -:   22:     ~HighFundingState() override = default;
+        -:   23:
+        -:   24:    /**
+        -:   25:     * @brief Retrieves the current health status of the services in a high-funding state.
+        -:   26:     * This method implements behavior specific to the high-funding condition.
+        -:   27:     */
+        -:   28:    std::string getHealthStatus() override;
+        -:   29:
+        -:   30:    /**
+        -:   31:     * @brief Gets the quality of service time in a high-funding state.
+        -:   32:     * @return int The quality level of service time.
+        -:   33:     */
+        -:   34:    int getQualityOfTime() override;
+        -:   35:    std::string getName() override;
+        -:   36:};
+        -:   37:
+        -:   38:#endif // HIGHFUNDINGSTATE_H

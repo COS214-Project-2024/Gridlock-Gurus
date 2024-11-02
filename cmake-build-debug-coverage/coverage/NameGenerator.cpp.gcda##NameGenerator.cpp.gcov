@@ -1,0 +1,453 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/NameGenerator.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\NameGenerator.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\NameGenerator.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "NameGenerator.h"
+        -:    2:#include <sstream>
+        -:    3:#include <cmath>
+        -:    4:
+function _ZN13NameGeneratorC2Ev called 1 returned 100% blocks executed 76%
+        1:    5:NameGenerator::NameGenerator() {
+        1:    5-block  0
+call    0 returned 1
+call    1 returned 1
+        1:    6:    std::srand(std::time(0));
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:    6-block  0
+call    3 returned 1
+        -:    7:
+       55:    8:    firstNames = { "Jane", "Alex", "Chris", "Taylor", "James", "John", "Robert", "Michael", "William", "David", "Richard", "Charles", "Joseph", "Thomas", "Christopher", "Daniel", "Paul", "Mark", "Donald", "George", "Kenneth", "Steven", "Edward", "Brian", "Ronald", "Anthony", "Kevin", "Jason", "Jeff", "Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer", "Maria", "Susan", "Margaret", "Dorothy", "Lisa", "Nancy", "Karen", "Betty", "Helen", "Sandra", "Donna", "Carol", "Ruth", "Sharon", "Michelle", "Laura", "Sarah", "Kimberly", "Deborah" };
+        1:    8-block  0
+       55:    8-block  1
+branch  0 taken 54 (fallthrough)
+branch  1 taken 1
+       54:    8-block  2
+call    2 returned 54
+    $$$$$:    8-block  3
+    $$$$$:    8-block  4
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    $$$$$:    8-block  5
+call    5 never executed
+    $$$$$:    8-block  6
+       20:    9:    lastNames = { "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin" };
+        1:    9-block  0
+       20:    9-block  1
+branch  0 taken 19 (fallthrough)
+branch  1 taken 1
+       19:    9-block  2
+call    2 returned 19
+    $$$$$:    9-block  3
+    $$$$$:    9-block  4
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    $$$$$:    9-block  5
+call    5 never executed
+    $$$$$:    9-block  6
+        5:   10:}
+        1:   10-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   10-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   10-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   10-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   10-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   10-block  5
+call   15 returned 1
+branch 16 taken 1 (fallthrough)
+branch 17 taken 0 (throw)
+        1:   10-block  6
+call   18 returned 1
+branch 19 taken 1 (fallthrough)
+branch 20 taken 0 (throw)
+        1:   10-block  7
+call   21 returned 1
+branch 22 taken 1 (fallthrough)
+branch 23 taken 0 (throw)
+        1:   10-block  8
+call   24 returned 1
+branch 25 taken 1 (fallthrough)
+branch 26 taken 0 (throw)
+        1:   10-block  9
+call   27 returned 1
+branch 28 taken 1 (fallthrough)
+branch 29 taken 0 (throw)
+        1:   10-block 10
+call   30 returned 1
+branch 31 taken 1 (fallthrough)
+branch 32 taken 0 (throw)
+        1:   10-block 11
+call   33 returned 1
+branch 34 taken 1 (fallthrough)
+branch 35 taken 0 (throw)
+        1:   10-block 12
+call   36 returned 1
+branch 37 taken 1 (fallthrough)
+branch 38 taken 0 (throw)
+        1:   10-block 13
+call   39 returned 1
+branch 40 taken 1 (fallthrough)
+branch 41 taken 0 (throw)
+        1:   10-block 14
+call   42 returned 1
+branch 43 taken 1 (fallthrough)
+branch 44 taken 0 (throw)
+        1:   10-block 15
+call   45 returned 1
+branch 46 taken 1 (fallthrough)
+branch 47 taken 0 (throw)
+        1:   10-block 16
+call   48 returned 1
+branch 49 taken 1 (fallthrough)
+branch 50 taken 0 (throw)
+        1:   10-block 17
+call   51 returned 1
+branch 52 taken 1 (fallthrough)
+branch 53 taken 0 (throw)
+        1:   10-block 18
+call   54 returned 1
+branch 55 taken 1 (fallthrough)
+branch 56 taken 0 (throw)
+        1:   10-block 19
+call   57 returned 1
+branch 58 taken 1 (fallthrough)
+branch 59 taken 0 (throw)
+        1:   10-block 20
+call   60 returned 1
+branch 61 taken 1 (fallthrough)
+branch 62 taken 0 (throw)
+        1:   10-block 21
+call   63 returned 1
+branch 64 taken 1 (fallthrough)
+branch 65 taken 0 (throw)
+        1:   10-block 22
+call   66 returned 1
+branch 67 taken 1 (fallthrough)
+branch 68 taken 0 (throw)
+        1:   10-block 23
+call   69 returned 1
+branch 70 taken 1 (fallthrough)
+branch 71 taken 0 (throw)
+        1:   10-block 24
+call   72 returned 1
+branch 73 taken 1 (fallthrough)
+branch 74 taken 0 (throw)
+        1:   10-block 25
+call   75 returned 1
+branch 76 taken 1 (fallthrough)
+branch 77 taken 0 (throw)
+        1:   10-block 26
+call   78 returned 1
+branch 79 taken 1 (fallthrough)
+branch 80 taken 0 (throw)
+        1:   10-block 27
+call   81 returned 1
+branch 82 taken 1 (fallthrough)
+branch 83 taken 0 (throw)
+        1:   10-block 28
+call   84 returned 1
+branch 85 taken 1 (fallthrough)
+branch 86 taken 0 (throw)
+        1:   10-block 29
+call   87 returned 1
+branch 88 taken 1 (fallthrough)
+branch 89 taken 0 (throw)
+        1:   10-block 30
+call   90 returned 1
+branch 91 taken 1 (fallthrough)
+branch 92 taken 0 (throw)
+        1:   10-block 31
+call   93 returned 1
+branch 94 taken 1 (fallthrough)
+branch 95 taken 0 (throw)
+        1:   10-block 32
+call   96 returned 1
+branch 97 taken 1 (fallthrough)
+branch 98 taken 0 (throw)
+        1:   10-block 33
+call   99 returned 1
+branch 100 taken 1 (fallthrough)
+branch 101 taken 0 (throw)
+        1:   10-block 34
+call   102 returned 1
+branch 103 taken 1 (fallthrough)
+branch 104 taken 0 (throw)
+        1:   10-block 35
+call   105 returned 1
+branch 106 taken 1 (fallthrough)
+branch 107 taken 0 (throw)
+        1:   10-block 36
+call   108 returned 1
+branch 109 taken 1 (fallthrough)
+branch 110 taken 0 (throw)
+        1:   10-block 37
+call   111 returned 1
+branch 112 taken 1 (fallthrough)
+branch 113 taken 0 (throw)
+        1:   10-block 38
+call   114 returned 1
+branch 115 taken 1 (fallthrough)
+branch 116 taken 0 (throw)
+        1:   10-block 39
+call   117 returned 1
+branch 118 taken 1 (fallthrough)
+branch 119 taken 0 (throw)
+        1:   10-block 40
+call   120 returned 1
+branch 121 taken 1 (fallthrough)
+branch 122 taken 0 (throw)
+        1:   10-block 41
+call   123 returned 1
+branch 124 taken 1 (fallthrough)
+branch 125 taken 0 (throw)
+        1:   10-block 42
+call   126 returned 1
+branch 127 taken 1 (fallthrough)
+branch 128 taken 0 (throw)
+        1:   10-block 43
+call   129 returned 1
+branch 130 taken 1 (fallthrough)
+branch 131 taken 0 (throw)
+        1:   10-block 44
+call   132 returned 1
+branch 133 taken 1 (fallthrough)
+branch 134 taken 0 (throw)
+        1:   10-block 45
+call   135 returned 1
+branch 136 taken 1 (fallthrough)
+branch 137 taken 0 (throw)
+        1:   10-block 46
+call   138 returned 1
+branch 139 taken 1 (fallthrough)
+branch 140 taken 0 (throw)
+        1:   10-block 47
+call   141 returned 1
+branch 142 taken 1 (fallthrough)
+branch 143 taken 0 (throw)
+        1:   10-block 48
+call   144 returned 1
+branch 145 taken 1 (fallthrough)
+branch 146 taken 0 (throw)
+        1:   10-block 49
+call   147 returned 1
+branch 148 taken 1 (fallthrough)
+branch 149 taken 0 (throw)
+        1:   10-block 50
+call   150 returned 1
+branch 151 taken 1 (fallthrough)
+branch 152 taken 0 (throw)
+        1:   10-block 51
+call   153 returned 1
+branch 154 taken 1 (fallthrough)
+branch 155 taken 0 (throw)
+        1:   10-block 52
+call   156 returned 1
+branch 157 taken 1 (fallthrough)
+branch 158 taken 0 (throw)
+        1:   10-block 53
+call   159 returned 1
+branch 160 taken 1 (fallthrough)
+branch 161 taken 0 (throw)
+        1:   10-block 54
+call   162 returned 1
+branch 163 taken 1 (fallthrough)
+branch 164 taken 0 (throw)
+        1:   10-block 55
+call   165 returned 1
+branch 166 taken 1 (fallthrough)
+branch 167 taken 0 (throw)
+        1:   10-block 56
+call   168 returned 1
+branch 169 taken 1 (fallthrough)
+branch 170 taken 0 (throw)
+        1:   10-block 57
+call   171 returned 1
+branch 172 taken 1 (fallthrough)
+branch 173 taken 0 (throw)
+        1:   10-block 58
+call   174 returned 1
+branch 175 taken 1 (fallthrough)
+branch 176 taken 0 (throw)
+        1:   10-block 59
+call   177 returned 1
+branch 178 taken 1 (fallthrough)
+branch 179 taken 0 (throw)
+        1:   10-block 60
+call   180 returned 1
+branch 181 taken 1 (fallthrough)
+branch 182 taken 0 (throw)
+        1:   10-block 61
+call   183 returned 1
+branch 184 taken 1 (fallthrough)
+branch 185 taken 0 (throw)
+        1:   10-block 62
+call   186 returned 1
+branch 187 taken 1 (fallthrough)
+branch 188 taken 0 (throw)
+        1:   10-block 63
+call   189 returned 1
+branch 190 taken 1 (fallthrough)
+branch 191 taken 0 (throw)
+        1:   10-block 64
+call   192 returned 1
+branch 193 taken 1 (fallthrough)
+branch 194 taken 0 (throw)
+        1:   10-block 65
+call   195 returned 1
+branch 196 taken 1 (fallthrough)
+branch 197 taken 0 (throw)
+        1:   10-block 66
+call   198 returned 1
+branch 199 taken 1 (fallthrough)
+branch 200 taken 0 (throw)
+        1:   10-block 67
+call   201 returned 1
+branch 202 taken 1 (fallthrough)
+branch 203 taken 0 (throw)
+        1:   10-block 68
+call   204 returned 1
+branch 205 taken 1 (fallthrough)
+branch 206 taken 0 (throw)
+        1:   10-block 69
+call   207 returned 1
+branch 208 taken 1 (fallthrough)
+branch 209 taken 0 (throw)
+        1:   10-block 70
+call   210 returned 1
+branch 211 taken 1 (fallthrough)
+branch 212 taken 0 (throw)
+        1:   10-block 71
+call   213 returned 1
+branch 214 taken 1 (fallthrough)
+branch 215 taken 0 (throw)
+        1:   10-block 72
+call   216 returned 1
+branch 217 taken 1 (fallthrough)
+branch 218 taken 0 (throw)
+        1:   10-block 73
+call   219 returned 1
+branch 220 taken 1 (fallthrough)
+branch 221 taken 0 (throw)
+        1:   10-block 74
+call   222 returned 1
+branch 223 taken 1 (fallthrough)
+branch 224 taken 0 (throw)
+    $$$$$:   10-block 75
+    $$$$$:   10-block 76
+branch 225 never executed (fallthrough)
+branch 226 never executed
+    $$$$$:   10-block 77
+    $$$$$:   10-block 78
+branch 227 never executed (fallthrough)
+branch 228 never executed
+    $$$$$:   10-block 79
+call   229 never executed
+    $$$$$:   10-block 80
+    $$$$$:   10-block 81
+branch 230 never executed (fallthrough)
+branch 231 never executed
+    $$$$$:   10-block 82
+    $$$$$:   10-block 83
+branch 232 never executed (fallthrough)
+branch 233 never executed
+    $$$$$:   10-block 84
+call   234 never executed
+    $$$$$:   10-block 85
+call   235 never executed
+    $$$$$:   10-block 86
+call   236 never executed
+        -:   11:
+function _ZN13NameGenerator11getInstanceEv called 26 returned 100% blocks executed 82%
+       26:   12:NameGenerator& NameGenerator::getInstance() {
+       26:   13:    static NameGenerator instance;
+       26:   13-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 25
+        1:   13-block  1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:   13-block  2
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   13-block  3
+call    8 returned 1
+call    9 returned 1
+    $$$$$:   13-block  4
+branch 10 never executed (fallthrough)
+branch 11 never executed
+    $$$$$:   13-block  5
+call   12 never executed
+       26:   14:    return instance;
+       26:   14-block  0
+       26:   14-block  1
+        -:   15:}
+        -:   16:
+function _ZN13NameGenerator13getRandomNameB5cxx11Ev called 26 returned 100% blocks executed 71%
+       26:   17:std::string NameGenerator::getRandomName() {
+       26:   18:    std::string firstName = firstNames[rand() % firstNames.size()];
+       26:   18-block  0
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+call    3 returned 26
+branch  4 taken 26 (fallthrough)
+branch  5 taken 0 (throw)
+       26:   19:    std::string lastName = lastNames[rand() % lastNames.size()];
+       26:   19-block  0
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+call    3 returned 26
+branch  4 taken 26 (fallthrough)
+branch  5 taken 0 (throw)
+       52:   20:    return firstName + " " + lastName;
+       26:   20-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:   20-block  1
+call    3 returned 26
+branch  4 taken 26 (fallthrough)
+branch  5 taken 0 (throw)
+       26:   20-block  2
+       26:   20-block  3
+call    6 returned 26
+       26:   20-block  4
+    $$$$$:   20-block  5
+call    7 never executed
+    $$$$$:   20-block  6
+       26:   21:}
+call    0 returned 26
+call    1 returned 26
+    $$$$$:   21-block  0
+call    2 never executed
+    $$$$$:   21-block  1
+call    3 never executed
+        -:   22:
+function _ZN13NameGenerator11getRandomIDEi called 0 returned 0% blocks executed 0%
+    #####:   23:int NameGenerator::getRandomID(int numDigits) {
+    #####:   24:    int min = std::pow(10, numDigits - 1);
+    %%%%%:   24-block  0
+call    0 never executed
+    #####:   25:    int max = std::pow(10, numDigits) - 1;
+call    0 never executed
+    #####:   26:    return min + rand() % (max - min + 1);
+call    0 never executed
+        -:   27:}

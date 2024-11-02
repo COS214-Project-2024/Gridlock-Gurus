@@ -1,0 +1,64 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/TaxCommand.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TaxCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TaxCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "TaxCommand.h"
+        -:    2:
+function _ZN10TaxCommand7executeEv called 0 returned 0% blocks executed 0%
+    #####:    3:void TaxCommand::execute() {
+    #####:    4:    status = EXECUTED;
+        -:    5:
+    #####:    6:    taxAuthority->setStrategy(std::move(taxStrategy));
+    %%%%%:    6-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:    6-block  1
+call    6 never executed
+    $$$$$:    6-block  2
+call    7 never executed
+    #####:    7:}
+        -:    8:
+function _ZN10TaxCommand4undoEv called 0 returned 0% blocks executed 0%
+    #####:    9:void TaxCommand::undo() {
+    #####:   10:    status = UNDONE;
+        -:   11:
+        -:   12:    // Revert to the previous tax rate
+    #####:   13:    taxAuthority->setStrategy(std::move(taxStrategy));
+    %%%%%:   13-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   13-block  1
+call    6 never executed
+    $$$$$:   13-block  2
+call    7 never executed
+        -:   14:    //std::cout << "Reverted tax rate to " << previousTaxRate << "%" << std::endl;
+    #####:   15:}
+        -:   16:
+function _ZN10TaxCommand4redoEv called 0 returned 0% blocks executed 0%
+    #####:   17:void TaxCommand::redo() {
+    #####:   18:    status = PENDING;
+        -:   19:
+        -:   20:    // Reapply the adjusted tax rate
+    #####:   21:   taxAuthority->setStrategy(std::move(taxStrategy));
+    %%%%%:   21-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   21-block  1
+call    6 never executed
+    $$$$$:   21-block  2
+call    7 never executed
+        -:   22:    //std::cout << "Re-applied tax rate of " << taxRate << "%" << std::endl;
+    #####:   23:}
+        -:   24:

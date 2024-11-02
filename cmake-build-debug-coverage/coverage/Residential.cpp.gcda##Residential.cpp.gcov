@@ -1,0 +1,239 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Residential.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Residential.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Residential.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Residential.h"
+        -:    2:#include <algorithm>
+        -:    3:#include <iostream>
+        -:    4:
+function _ZN11ResidentialC2EiRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP9ResourcesiR7Citizen12BuildingTypei called 6 returned 100% blocks executed 100%
+        6:    5:Residential::Residential(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name, int capacity) : Building(cost, location, resources, size, owner,name) {
+        6:    5-block  0
+call    0 returned 6
+call    1 returned 6
+        6:    6:    this->maxCapacity = capacity;
+        6:    7:}
+        -:    8:
+function _ZNK11Residential10getDetailsB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:    9:std::string Residential::getDetails() const {
+    %%%%%:    9-block  0
+    #####:   10:    std::string details =  "Residential: \n";
+    %%%%%:   10-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$:   10-block  1
+call    3 never executed
+    #####:   11:    details += "Owner: " + owner.getName() + "\n";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   11-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   11-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:   11-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:   11-block  3
+call   12 never executed
+call   13 never executed
+call   14 never executed
+    $$$$$:   11-block  4
+call   15 never executed
+    $$$$$:   11-block  5
+call   16 never executed
+    $$$$$:   11-block  6
+call   17 never executed
+    $$$$$:   11-block  7
+    $$$$$:   11-block  8
+    $$$$$:   11-block  9
+    #####:   12:    details += "Location: " + location + "\n";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   12-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   12-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:   12-block  2
+call    9 never executed
+call   10 never executed
+    $$$$$:   12-block  3
+call   11 never executed
+    $$$$$:   12-block  4
+call   12 never executed
+    $$$$$:   12-block  5
+    $$$$$:   12-block  6
+    #####:   13:    details += "Capacity: " + std::to_string(tenants.size()) + "/" + std::to_string(maxCapacity) + "\n";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    %%%%%:   13-block  0
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:   13-block  1
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    %%%%%:   13-block  2
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   13-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   13-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   13-block  5
+call   20 never executed
+call   21 never executed
+call   22 never executed
+call   23 never executed
+call   24 never executed
+call   25 never executed
+    $$$$$:   13-block  6
+call   26 never executed
+    $$$$$:   13-block  7
+call   27 never executed
+    $$$$$:   13-block  8
+call   28 never executed
+    $$$$$:   13-block  9
+call   29 never executed
+    $$$$$:   13-block 10
+call   30 never executed
+    $$$$$:   13-block 11
+    $$$$$:   13-block 12
+    $$$$$:   13-block 13
+    $$$$$:   13-block 14
+call   31 never executed
+    $$$$$:   13-block 15
+    $$$$$:   13-block 16
+    $$$$$:   13-block 17
+    #####:   14:    details += "Cost: " + std::to_string(cost) + "\n";
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   14-block  0
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:   14-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   14-block  2
+call   10 never executed
+call   11 never executed
+call   12 never executed
+    $$$$$:   14-block  3
+call   13 never executed
+    $$$$$:   14-block  4
+call   14 never executed
+    $$$$$:   14-block  5
+call   15 never executed
+    $$$$$:   14-block  6
+    $$$$$:   14-block  7
+    $$$$$:   14-block  8
+    #####:   15:    details += "Size: " + std::to_string(size) + "\n";
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   15-block  0
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:   15-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   15-block  2
+call   10 never executed
+call   11 never executed
+call   12 never executed
+    $$$$$:   15-block  3
+call   13 never executed
+    $$$$$:   15-block  4
+call   14 never executed
+    $$$$$:   15-block  5
+call   15 never executed
+    $$$$$:   15-block  6
+    $$$$$:   15-block  7
+    $$$$$:   15-block  8
+    #####:   16:    return details;
+    %%%%%:   16-block  0
+    =====:   17:}
+    $$$$$:   17-block  0
+call    0 never executed
+        -:   18:
+function _ZN11Residential9addTenantER7Citizen called 1 returned 100% blocks executed 100%
+        1:   19:void Residential::addTenant(Citizen& tenant) {
+        1:   20:    if(tenants.size() < maxCapacity) {
+        1:   20-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:   21:        tenants.push_back(&tenant);
+        1:   21-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   22:        tenant.setHome(*this);
+        1:   22-block  0
+call    0 returned 1
+        -:   23:    }
+        1:   24:}
+        1:   24-block  0
+        -:   25:
+function _ZN11Residential12removeTenantER7Citizen called 0 returned 0% blocks executed 0%
+    #####:   26:void Residential::removeTenant(Citizen& tenant) {
+    #####:   27:    auto it = std::find(tenants.begin(), tenants.end(), &tenant);
+    %%%%%:   27-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    $$$$$:   27-block  1
+        -:   28:
+    #####:   29:    if(it != tenants.end()) {
+    %%%%%:   29-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   30:        tenants.erase(it);
+    %%%%%:   30-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   30-block  1
+    $$$$$:   30-block  2
+        -:   31:    }
+    #####:   32:}
+    %%%%%:   32-block  0
+        -:   33:
+function _ZNK11Residential6isFullEv called 2 returned 100% blocks executed 100%
+        2:   34:bool Residential::isFull() const {
+        2:   35:    return tenants.size() >= maxCapacity;
+        2:   35-block  0
+call    0 returned 2
+        -:   36:}

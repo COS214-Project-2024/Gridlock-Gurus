@@ -1,0 +1,45 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/TaxStrategy.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FlatTaxStrategy.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FlatTaxStrategy.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef TAXSTRATEGY_H
+        -:    2:#define TAXSTRATEGY_H
+        -:    3:
+        -:    4:/**
+        -:    5: * @brief Abstract strategy class for calculating taxes.
+        -:    6: *
+        -:    7: * Strategy participant in the Strategy Design Pattern.
+        -:    8: */
+        -:    9:class TaxStrategy {
+        -:   10:public:
+        -:   11:    /**
+        -:   12:     * @brief Constructor for the TaxStrategy.
+        -:   13:     */
+        -:   14:    TaxStrategy() = default;
+        -:   15:    
+        -:   16:    /**
+        -:   17:     * @brief Destructor for the TaxStrategy.
+        -:   18:     */
+function _ZN11TaxStrategyD2Ev called 26 returned 100% blocks executed 100%
+       26:   19:    virtual ~TaxStrategy() = default;
+        -:   20:
+        -:   21:    /**
+        -:   22:     * @brief Calculates tax on a building.
+        -:   23:     * @param value The value of the building.
+        -:   24:     * @return Calculated building tax.
+        -:   25:     *
+        -:   26:     * This function acts as the algorithm() function.
+        -:   27:     */
+        -:   28:    virtual int calculateBuildingTax(int value) = 0;
+        -:   29:
+        -:   30:    /**
+        -:   31:     * @brief Calculates tax on a citizen's earnings.
+        -:   32:     * @param earnings The earnings of the citizen.
+        -:   33:     * @return Calculated citizen tax.
+        -:   34:     *
+        -:   35:     * This function acts as the algorithm() function.
+        -:   36:     */
+        -:   37:    virtual int calculateCitizenTax(int earnings) = 0;
+        -:   38:};
+        -:   39:
+        -:   40:#endif // TAXSTRATEGY_H

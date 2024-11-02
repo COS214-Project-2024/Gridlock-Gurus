@@ -1,0 +1,353 @@
+        -:    0:Source:C:/Program Files/JetBrains/CLion 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    1:// Temporary buffer implementation -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2001-2023 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/*
+        -:   26: *
+        -:   27: * Copyright (c) 1994
+        -:   28: * Hewlett-Packard Company
+        -:   29: *
+        -:   30: * Permission to use, copy, modify, distribute and sell this software
+        -:   31: * and its documentation for any purpose is hereby granted without fee,
+        -:   32: * provided that the above copyright notice appear in all copies and
+        -:   33: * that both that copyright notice and this permission notice appear
+        -:   34: * in supporting documentation.  Hewlett-Packard Company makes no
+        -:   35: * representations about the suitability of this software for any
+        -:   36: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   37: *
+        -:   38: *
+        -:   39: * Copyright (c) 1996,1997
+        -:   40: * Silicon Graphics Computer Systems, Inc.
+        -:   41: *
+        -:   42: * Permission to use, copy, modify, distribute and sell this software
+        -:   43: * and its documentation for any purpose is hereby granted without fee,
+        -:   44: * provided that the above copyright notice appear in all copies and
+        -:   45: * that both that copyright notice and this permission notice appear
+        -:   46: * in supporting documentation.  Silicon Graphics makes no
+        -:   47: * representations about the suitability of this software for any
+        -:   48: * purpose.  It is provided "as is" without express or implied warranty.
+        -:   49: */
+        -:   50:
+        -:   51:/** @file bits/stl_tempbuf.h
+        -:   52: *  This is an internal header file, included by other library headers.
+        -:   53: *  Do not attempt to use it directly. @headername{memory}
+        -:   54: */
+        -:   55:
+        -:   56:#ifndef _STL_TEMPBUF_H
+        -:   57:#define _STL_TEMPBUF_H 1
+        -:   58:
+        -:   59:#include <new>
+        -:   60:#include <bits/exception_defines.h>
+        -:   61:#include <bits/stl_construct.h>
+        -:   62:#include <bits/stl_pair.h>
+        -:   63:#include <ext/numeric_traits.h>
+        -:   64:
+        -:   65:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   66:{
+        -:   67:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   68:
+        -:   69:  namespace __detail
+        -:   70:  {
+        -:   71:    template<typename _Tp>
+        -:   72:      inline void
+function _ZNSt8__detail25__return_temporary_bufferIPN7testing8TestInfoEEEvPT_y called 5 returned 100% blocks executed 100%
+        5:   73:      __return_temporary_buffer(_Tp* __p,
+        -:   74:				size_t __len __attribute__((__unused__)))
+        -:   75:      {
+        -:   76:#if __cpp_sized_deallocation
+        5:   77:	::operator delete(__p, __len * sizeof(_Tp));
+        5:   77-block  0
+call    0 returned 5
+        -:   78:#else
+        -:   79:	::operator delete(__p);
+        -:   80:#endif
+        5:   81:      }
+        -:   82:  }
+        -:   83:
+        -:   84:  /**
+        -:   85:   *  @brief Allocates a temporary buffer.
+        -:   86:   *  @param  __len  The number of objects of type Tp.
+        -:   87:   *  @return See full description.
+        -:   88:   *
+        -:   89:   *  Reinventing the wheel, but this time with prettier spokes!
+        -:   90:   *
+        -:   91:   *  This function tries to obtain storage for @c __len adjacent Tp
+        -:   92:   *  objects.  The objects themselves are not constructed, of course.
+        -:   93:   *  A pair<> is returned containing <em>the buffer s address and
+        -:   94:   *  capacity (in the units of sizeof(_Tp)), or a pair of 0 values if
+        -:   95:   *  no storage can be obtained.</em>  Note that the capacity obtained
+        -:   96:   *  may be less than that requested if the memory is unavailable;
+        -:   97:   *  you should compare len with the .second return value.
+        -:   98:   *
+        -:   99:   * Provides the nothrow exception guarantee.
+        -:  100:   */
+        -:  101:  template<typename _Tp>
+        -:  102:    _GLIBCXX17_DEPRECATED
+        -:  103:    pair<_Tp*, ptrdiff_t>
+function _ZSt20get_temporary_bufferIPN7testing8TestInfoEESt4pairIPT_xEx called 5 returned 100% blocks executed 53%
+        5:  104:    get_temporary_buffer(ptrdiff_t __len) _GLIBCXX_NOEXCEPT
+        -:  105:    {
+        5:  106:      const ptrdiff_t __max =
+        -:  107:	__gnu_cxx::__numeric_traits<ptrdiff_t>::__max / sizeof(_Tp);
+        5:  108:      if (__len > __max)
+        5:  108-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 5
+    #####:  109:	__len = __max;
+    %%%%%:  109-block  0
+        -:  110:
+        5:  111:      while (__len > 0)
+        5:  111-block  0
+        5:  111-block  1
+branch  0 taken 5
+branch  1 taken 0 (fallthrough)
+        -:  112:	{
+        5:  113:	  _Tp* __tmp = static_cast<_Tp*>(::operator new(__len * sizeof(_Tp),
+        5:  113-block  0
+call    0 returned 5
+        -:  114:							std::nothrow));
+        5:  115:	  if (__tmp != 0)
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:  116:	    return std::pair<_Tp*, ptrdiff_t>(__tmp, __len);
+        5:  116-block  0
+call    0 returned 5
+    #####:  117:	  __len = __len == 1 ? 0 : ((__len + 1) / 2);
+    %%%%%:  117-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  117-block  1
+    %%%%%:  117-block  2
+    %%%%%:  117-block  3
+        -:  118:	}
+    #####:  119:      return std::pair<_Tp*, ptrdiff_t>(static_cast<_Tp*>(0), 0);
+    %%%%%:  119-block  0
+call    0 never executed
+        -:  120:    }
+        -:  121:
+        -:  122:  /**
+        -:  123:   *  @brief The companion to get_temporary_buffer().
+        -:  124:   *  @param  __p  A buffer previously allocated by get_temporary_buffer.
+        -:  125:   *  @return   None.
+        -:  126:   *
+        -:  127:   *  Frees the memory pointed to by __p.
+        -:  128:   */
+        -:  129:  template<typename _Tp>
+        -:  130:    inline void
+        -:  131:    return_temporary_buffer(_Tp* __p)
+        -:  132:    { ::operator delete(__p); }
+        -:  133:
+        -:  134:  /**
+        -:  135:   *  This class is used in two places: stl_algo.h and ext/memory,
+        -:  136:   *  where it is wrapped as the temporary_buffer class.  See
+        -:  137:   *  temporary_buffer docs for more notes.
+        -:  138:   */
+        -:  139:  template<typename _ForwardIterator, typename _Tp>
+        -:  140:    class _Temporary_buffer
+        -:  141:    {
+        -:  142:      // concept requirements
+        -:  143:      __glibcxx_class_requires(_ForwardIterator, _ForwardIteratorConcept)
+        -:  144:
+        -:  145:    public:
+        -:  146:      typedef _Tp         value_type;
+        -:  147:      typedef value_type* pointer;
+        -:  148:      typedef pointer     iterator;
+        -:  149:      typedef ptrdiff_t   size_type;
+        -:  150:
+        -:  151:    protected:
+        -:  152:      size_type  _M_original_len;
+        -:  153:      size_type  _M_len;
+        -:  154:      pointer    _M_buffer;
+        -:  155:
+        -:  156:    public:
+        -:  157:      /// As per Table mumble.
+        -:  158:      size_type
+function _ZNKSt17_Temporary_bufferIN9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS4_SaIS4_EEEES4_E4sizeEv called 10 returned 100% blocks executed 100%
+       10:  159:      size() const
+       10:  160:      { return _M_len; }
+       10:  160-block  0
+        -:  161:
+        -:  162:      /// Returns the size requested by the constructor; may be >size().
+        -:  163:      size_type
+function _ZNKSt17_Temporary_bufferIN9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS4_SaIS4_EEEES4_E14requested_sizeEv called 5 returned 100% blocks executed 100%
+        5:  164:      requested_size() const
+        5:  165:      { return _M_original_len; }
+        5:  165-block  0
+        -:  166:
+        -:  167:      /// As per Table mumble.
+        -:  168:      iterator
+function _ZNSt17_Temporary_bufferIN9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS4_SaIS4_EEEES4_E5beginEv called 5 returned 100% blocks executed 100%
+        5:  169:      begin()
+        5:  170:      { return _M_buffer; }
+        5:  170-block  0
+        -:  171:
+        -:  172:      /// As per Table mumble.
+        -:  173:      iterator
+        -:  174:      end()
+        -:  175:      { return _M_buffer + _M_len; }
+        -:  176:
+        -:  177:      /**
+        -:  178:       * Constructs a temporary buffer of a size somewhere between
+        -:  179:       * zero and the given length.
+        -:  180:       */
+        -:  181:      _Temporary_buffer(_ForwardIterator __seed, size_type __original_len);
+        -:  182:
+function _ZNSt17_Temporary_bufferIN9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS4_SaIS4_EEEES4_ED1Ev called 5 returned 100% blocks executed 100%
+        5:  183:      ~_Temporary_buffer()
+        -:  184:      {
+        5:  185:	std::_Destroy(_M_buffer, _M_buffer + _M_len);
+        5:  185-block  0
+call    0 returned 5
+        5:  186:	std::__detail::__return_temporary_buffer(_M_buffer, _M_len);
+call    0 returned 5
+        5:  187:      }
+        -:  188:
+        -:  189:    private:
+        -:  190:      // Disable copy constructor and assignment operator.
+        -:  191:      _Temporary_buffer(const _Temporary_buffer&);
+        -:  192:
+        -:  193:      void
+        -:  194:      operator=(const _Temporary_buffer&);
+        -:  195:    };
+        -:  196:
+        -:  197:
+        -:  198:  template<bool>
+        -:  199:    struct __uninitialized_construct_buf_dispatch
+        -:  200:    {
+        -:  201:      template<typename _Pointer, typename _ForwardIterator>
+        -:  202:        static void
+        -:  203:        __ucr(_Pointer __first, _Pointer __last,
+        -:  204:	      _ForwardIterator __seed)
+        -:  205:        {
+        -:  206:	  if (__first == __last)
+        -:  207:	    return;
+        -:  208:
+        -:  209:	  _Pointer __cur = __first;
+        -:  210:	  __try
+        -:  211:	    {
+        -:  212:	      std::_Construct(std::__addressof(*__first),
+        -:  213:			      _GLIBCXX_MOVE(*__seed));
+        -:  214:	      _Pointer __prev = __cur;
+        -:  215:	      ++__cur;
+        -:  216:	      for(; __cur != __last; ++__cur, ++__prev)
+        -:  217:		std::_Construct(std::__addressof(*__cur),
+        -:  218:				_GLIBCXX_MOVE(*__prev));
+        -:  219:	      *__seed = _GLIBCXX_MOVE(*__prev);
+        -:  220:	    }
+        -:  221:	  __catch(...)
+        -:  222:	    {
+        -:  223:	      std::_Destroy(__first, __cur);
+        -:  224:	      __throw_exception_again;
+        -:  225:	    }
+        -:  226:	}
+        -:  227:    };
+        -:  228:
+        -:  229:  template<>
+        -:  230:    struct __uninitialized_construct_buf_dispatch<true>
+        -:  231:    {
+        -:  232:      template<typename _Pointer, typename _ForwardIterator>
+        -:  233:        static void
+function _ZNSt38__uninitialized_construct_buf_dispatchILb1EE5__ucrIPPN7testing8TestInfoEN9__gnu_cxx17__normal_iteratorIS5_St6vectorIS4_SaIS4_EEEEEEvT_SC_T0_ called 5 returned 100% blocks executed 100%
+        5:  234:        __ucr(_Pointer, _Pointer, _ForwardIterator) { }
+        -:  235:    };
+        -:  236:
+        -:  237:  // Constructs objects in the range [first, last).
+        -:  238:  // Note that while these new objects will take valid values,
+        -:  239:  // their exact value is not defined. In particular they may
+        -:  240:  // be 'moved from'.
+        -:  241:  //
+        -:  242:  // While *__seed may be altered during this algorithm, it will have
+        -:  243:  // the same value when the algorithm finishes, unless one of the
+        -:  244:  // constructions throws.
+        -:  245:  //
+        -:  246:  // Requirements: _Pointer::value_type(_Tp&&) is valid.
+        -:  247:  template<typename _Pointer, typename _ForwardIterator>
+        -:  248:    inline void
+function _ZSt29__uninitialized_construct_bufIPPN7testing8TestInfoEN9__gnu_cxx17__normal_iteratorIS3_St6vectorIS2_SaIS2_EEEEEvT_SA_T0_ called 5 returned 100% blocks executed 100%
+        5:  249:    __uninitialized_construct_buf(_Pointer __first, _Pointer __last,
+        -:  250:				  _ForwardIterator __seed)
+        -:  251:    {
+        -:  252:      typedef typename std::iterator_traits<_Pointer>::value_type
+        -:  253:	_ValueType;
+        -:  254:
+        -:  255:      std::__uninitialized_construct_buf_dispatch<
+        -:  256:        __has_trivial_constructor(_ValueType)>::
+        5:  257:	  __ucr(__first, __last, __seed);
+        5:  257-block  0
+call    0 returned 5
+        5:  258:    }
+        -:  259:
+        -:  260:#pragma GCC diagnostic push
+        -:  261:#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        -:  262:  template<typename _ForwardIterator, typename _Tp>
+function _ZNSt17_Temporary_bufferIN9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS4_SaIS4_EEEES4_EC1ES9_x called 5 returned 100% blocks executed 50%
+        5:  263:    _Temporary_buffer<_ForwardIterator, _Tp>::
+        -:  264:    _Temporary_buffer(_ForwardIterator __seed, size_type __original_len)
+        5:  265:    : _M_original_len(__original_len), _M_len(0), _M_buffer(0)
+        -:  266:    {
+        -:  267:      std::pair<pointer, size_type> __p(
+        5:  268:		std::get_temporary_buffer<value_type>(_M_original_len));
+        5:  268-block  0
+call    0 returned 5
+        -:  269:
+        5:  270:      if (__p.first)
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        -:  271:	{
+        -:  272:	  __try
+        -:  273:	    {
+        5:  274:	      std::__uninitialized_construct_buf(__p.first, __p.first + __p.second,
+        5:  274-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  275:						 __seed);
+        5:  276:	      _M_buffer = __p.first;
+        5:  277:	      _M_len = __p.second;
+        5:  277-block  0
+        -:  278:	    }
+    =====:  279:	  __catch(...)
+    $$$$$:  279-block  0
+    $$$$$:  279-block  1
+call    0 never executed
+    $$$$$:  279-block  2
+call    1 never executed
+        -:  280:	    {
+    =====:  281:	      std::__detail::__return_temporary_buffer(__p.first, __p.second);
+call    0 never executed
+    =====:  282:	      __throw_exception_again;
+call    0 never executed
+        -:  283:	    }
+        -:  284:	}
+        5:  285:    }
+        5:  285-block  0
+        -:  286:#pragma GCC diagnostic pop
+        -:  287:
+        -:  288:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  289:} // namespace
+        -:  290:
+        -:  291:#endif /* _STL_TEMPBUF_H */

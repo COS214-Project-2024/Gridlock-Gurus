@@ -1,0 +1,1224 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/tests/citizen_test.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\citizen_test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\citizen_test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include <gtest/gtest.h>
+        -:    2:#include "../headers/Citizen.h"
+        -:    3:#include "../headers/CitizenType.h"
+        -:    4:#include "../headers/TaxAuthority.h"
+        -:    5:#include "../headers/Building.h"
+        -:    6:#include "../headers/Factory.h"
+        -:    7:#include "../headers/BrickFactory.h"
+        -:    8:#include "../headers/FactoryFactory.h"
+        -:    9:#include "../headers/BuildingType.h"
+        -:   10:#include "../headers/Residential.h"
+        -:   11:#include "../headers/ResidentialFactory.h"
+        -:   12:
+        -:   13:#include <memory>
+        -:   14:
+        -:   15:class citizen_test : public ::testing::Test {
+        -:   16:    protected:
+        -:   17:        std::shared_ptr<TaxAuthority> taxAuth;
+        -:   18:        Citizen* c;
+        -:   19:        Building* work;
+        -:   20:        Building* home;
+        -:   21:        FactoryFactory* factory;
+        -:   22:        ResidentialFactory* homeFactory;
+        -:   23:
+function _ZN12citizen_test5SetUpEv called 5 returned 100% blocks executed 76%
+        5:   24:        void SetUp() override {
+        5:   25:            taxAuth = std::make_shared<TaxAuthority>();
+        5:   25-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:   25-block  1
+call    3 returned 5
+call    4 returned 5
+    $$$$$:   25-block  2
+call    5 never executed
+        5:   26:            factory = new FactoryFactory(taxAuth);
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+call    3 returned 5
+        5:   27:            homeFactory = new ResidentialFactory(taxAuth);
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+call    3 returned 5
+        5:   28:            c = new Citizen(0,CitizenType::Citizen,100,300,taxAuth);
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+branch  3 taken 5 (fallthrough)
+branch  4 taken 0 (throw)
+        5:   28-block  0
+call    5 returned 5
+    $$$$$:   28-block  1
+call    6 never executed
+    $$$$$:   28-block  2
+    $$$$$:   28-block  3
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    $$$$$:   28-block  4
+call    9 never executed
+        5:   29:            work = factory->createBuilding(BuildingType::BrickFactory,*c);
+call    0 returned 5
+        5:   30:            home = homeFactory->createBuilding(BuildingType::House,*c);     
+call    0 returned 5
+        5:   31:        }
+        -:   32:        
+function _ZN12citizen_test8TearDownEv called 5 returned 100% blocks executed 100%
+        5:   33:        void TearDown() override {
+        5:   34:            delete factory;
+        5:   34-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:   34-block  1
+call    2 returned 5
+        5:   35:            delete homeFactory;
+        5:   35-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:   35-block  1
+call    2 returned 5
+        5:   36:            delete c;
+        5:   36-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:   36-block  1
+call    2 returned 5
+call    3 returned 5
+        -:   37:
+        5:   38:        }
+        -:   39:};
+        -:   40:
+        -:   41:// Test Constructor
+        4:   42:TEST_F(citizen_test, citizen_construction_test) {
+       1*:   43:    EXPECT_EQ(c->getId(),0);
+       1*:   44:    EXPECT_EQ(c->getType(),CitizenType::Citizen);
+       1*:   45:    EXPECT_EQ(c->getSatisfactionLevel(),100);
+       1*:   46:    EXPECT_EQ(c->getFunds(),300);
+       1*:   47:    EXPECT_EQ(c->hasHome(),false);
+       1*:   48:    EXPECT_EQ(c->getEmploymentStatus(),false);
+       1*:   49:    EXPECT_EQ(c->isInVehicle(),false);
+        -:   50:
+        1:   51:}
+------------------
+_ZN43citizen_test_citizen_construction_test_TestC1Ev:
+function _ZN43citizen_test_citizen_construction_test_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   42:TEST_F(citizen_test, citizen_construction_test) {
+        1:   42-block  0
+call    0 returned 1
+------------------
+_ZN43citizen_test_citizen_construction_test_TestD0Ev:
+function _ZN43citizen_test_citizen_construction_test_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   42:TEST_F(citizen_test, citizen_construction_test) {
+        1:   42-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN43citizen_test_citizen_construction_test_TestD1Ev:
+function _ZN43citizen_test_citizen_construction_test_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   42:TEST_F(citizen_test, citizen_construction_test) {
+        1:   42-block  0
+call    0 returned 1
+------------------
+_ZN43citizen_test_citizen_construction_test_Test8TestBodyEv:
+function _ZN43citizen_test_citizen_construction_test_Test8TestBodyEv called 1 returned 100% blocks executed 23%
+        1:   42:TEST_F(citizen_test, citizen_construction_test) {
+       1*:   43:    EXPECT_EQ(c->getId(),0);
+        1:   43-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   43-block  1
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   43-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   43-block  3
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   43-block  4
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   43-block  5
+call   17 never executed
+call   18 never executed
+        1:   43-block  6
+call   19 returned 1
+    $$$$$:   43-block  7
+    $$$$$:   43-block  8
+    $$$$$:   43-block  9
+call   20 never executed
+    $$$$$:   43-block 10
+    $$$$$:   43-block 11
+call   21 never executed
+    $$$$$:   43-block 12
+    $$$$$:   43-block 13
+call   22 never executed
+       1*:   44:    EXPECT_EQ(c->getType(),CitizenType::Citizen);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   44-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   44-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   44-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   44-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   44-block  4
+call   17 never executed
+call   18 never executed
+        1:   44-block  5
+call   19 returned 1
+    $$$$$:   44-block  6
+    $$$$$:   44-block  7
+    $$$$$:   44-block  8
+call   20 never executed
+    $$$$$:   44-block  9
+    $$$$$:   44-block 10
+call   21 never executed
+    $$$$$:   44-block 11
+    $$$$$:   44-block 12
+call   22 never executed
+       1*:   45:    EXPECT_EQ(c->getSatisfactionLevel(),100);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   45-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   45-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   45-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   45-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   45-block  4
+call   17 never executed
+call   18 never executed
+        1:   45-block  5
+call   19 returned 1
+    $$$$$:   45-block  6
+    $$$$$:   45-block  7
+    $$$$$:   45-block  8
+call   20 never executed
+    $$$$$:   45-block  9
+    $$$$$:   45-block 10
+call   21 never executed
+    $$$$$:   45-block 11
+    $$$$$:   45-block 12
+call   22 never executed
+       1*:   46:    EXPECT_EQ(c->getFunds(),300);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   46-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   46-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   46-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   46-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   46-block  4
+call   17 never executed
+call   18 never executed
+        1:   46-block  5
+call   19 returned 1
+    $$$$$:   46-block  6
+    $$$$$:   46-block  7
+    $$$$$:   46-block  8
+call   20 never executed
+    $$$$$:   46-block  9
+    $$$$$:   46-block 10
+call   21 never executed
+    $$$$$:   46-block 11
+    $$$$$:   46-block 12
+call   22 never executed
+       1*:   47:    EXPECT_EQ(c->hasHome(),false);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   47-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   47-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   47-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   47-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   47-block  4
+call   17 never executed
+call   18 never executed
+        1:   47-block  5
+call   19 returned 1
+    $$$$$:   47-block  6
+    $$$$$:   47-block  7
+    $$$$$:   47-block  8
+call   20 never executed
+    $$$$$:   47-block  9
+    $$$$$:   47-block 10
+call   21 never executed
+    $$$$$:   47-block 11
+    $$$$$:   47-block 12
+call   22 never executed
+       1*:   48:    EXPECT_EQ(c->getEmploymentStatus(),false);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   48-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   48-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   48-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   48-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   48-block  4
+call   17 never executed
+call   18 never executed
+        1:   48-block  5
+call   19 returned 1
+    $$$$$:   48-block  6
+    $$$$$:   48-block  7
+    $$$$$:   48-block  8
+call   20 never executed
+    $$$$$:   48-block  9
+    $$$$$:   48-block 10
+call   21 never executed
+    $$$$$:   48-block 11
+    $$$$$:   48-block 12
+call   22 never executed
+       1*:   49:    EXPECT_EQ(c->isInVehicle(),false);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   49-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   49-block  1
+call    6 returned 1
+branch  7 taken 0 (fallthrough)
+branch  8 taken 1
+    %%%%%:   49-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:   49-block  3
+call   12 never executed
+call   13 never executed
+branch 14 never executed (fallthrough)
+branch 15 never executed (throw)
+    %%%%%:   49-block  4
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:   49-block  5
+call   19 never executed
+call   20 never executed
+        1:   49-block  6
+call   21 returned 1
+    $$$$$:   49-block  7
+    $$$$$:   49-block  8
+    $$$$$:   49-block  9
+call   22 never executed
+    $$$$$:   49-block 10
+    $$$$$:   49-block 11
+call   23 never executed
+    $$$$$:   49-block 12
+    $$$$$:   49-block 13
+call   24 never executed
+        -:   50:
+        1:   51:}
+------------------
+        -:   52:
+        4:   53:TEST_F(citizen_test, citizen_tax_test) {
+       1*:   54:    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+        -:   55:
+        1:   56:    c->payTaxes(100);
+       1*:   57:    EXPECT_EQ(c->getFunds(),300);
+        1:   58:    workPtr->employ(*c);
+       1*:   59:    EXPECT_EQ(c->getEmploymentStatus(),true);
+       1*:   60:    EXPECT_EQ(c->getType(),CitizenType::Worker);
+        1:   61:    c->payTaxes(100);
+       1*:   62:    EXPECT_EQ(c->getFunds(),200);
+        1:   63:    c->workDay();
+       1*:   64:    EXPECT_EQ(c->getFunds(),300);
+        -:   65:
+        1:   66:}
+------------------
+_ZN34citizen_test_citizen_tax_test_TestC1Ev:
+function _ZN34citizen_test_citizen_tax_test_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   53:TEST_F(citizen_test, citizen_tax_test) {
+        1:   53-block  0
+call    0 returned 1
+------------------
+_ZN34citizen_test_citizen_tax_test_TestD0Ev:
+function _ZN34citizen_test_citizen_tax_test_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   53:TEST_F(citizen_test, citizen_tax_test) {
+        1:   53-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN34citizen_test_citizen_tax_test_TestD1Ev:
+function _ZN34citizen_test_citizen_tax_test_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   53:TEST_F(citizen_test, citizen_tax_test) {
+        1:   53-block  0
+call    0 returned 1
+------------------
+_ZN34citizen_test_citizen_tax_test_Test8TestBodyEv:
+function _ZN34citizen_test_citizen_tax_test_Test8TestBodyEv called 1 returned 100% blocks executed 27%
+        1:   53:TEST_F(citizen_test, citizen_tax_test) {
+       1*:   54:    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+        1:   54-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   54-block  1
+    %%%%%:   54-block  2
+        -:   55:
+        1:   56:    c->payTaxes(100);
+        1:   56-block  0
+call    0 returned 1
+       1*:   57:    EXPECT_EQ(c->getFunds(),300);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   57-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   57-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   57-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   57-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   57-block  4
+call   17 never executed
+call   18 never executed
+        1:   57-block  5
+call   19 returned 1
+    $$$$$:   57-block  6
+    $$$$$:   57-block  7
+    $$$$$:   57-block  8
+call   20 never executed
+    $$$$$:   57-block  9
+    $$$$$:   57-block 10
+call   21 never executed
+    $$$$$:   57-block 11
+    $$$$$:   57-block 12
+call   22 never executed
+        1:   58:    workPtr->employ(*c);
+call    0 returned 1
+       1*:   59:    EXPECT_EQ(c->getEmploymentStatus(),true);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   59-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   59-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   59-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   59-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   59-block  4
+call   17 never executed
+call   18 never executed
+        1:   59-block  5
+call   19 returned 1
+    $$$$$:   59-block  6
+    $$$$$:   59-block  7
+    $$$$$:   59-block  8
+call   20 never executed
+    $$$$$:   59-block  9
+    $$$$$:   59-block 10
+call   21 never executed
+    $$$$$:   59-block 11
+    $$$$$:   59-block 12
+call   22 never executed
+       1*:   60:    EXPECT_EQ(c->getType(),CitizenType::Worker);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   60-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   60-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   60-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   60-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   60-block  4
+call   17 never executed
+call   18 never executed
+        1:   60-block  5
+call   19 returned 1
+    $$$$$:   60-block  6
+    $$$$$:   60-block  7
+    $$$$$:   60-block  8
+call   20 never executed
+    $$$$$:   60-block  9
+    $$$$$:   60-block 10
+call   21 never executed
+    $$$$$:   60-block 11
+    $$$$$:   60-block 12
+call   22 never executed
+        1:   61:    c->payTaxes(100);
+call    0 returned 1
+       1*:   62:    EXPECT_EQ(c->getFunds(),200);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   62-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   62-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   62-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   62-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   62-block  4
+call   17 never executed
+call   18 never executed
+        1:   62-block  5
+call   19 returned 1
+    $$$$$:   62-block  6
+    $$$$$:   62-block  7
+    $$$$$:   62-block  8
+call   20 never executed
+    $$$$$:   62-block  9
+    $$$$$:   62-block 10
+call   21 never executed
+    $$$$$:   62-block 11
+    $$$$$:   62-block 12
+call   22 never executed
+        1:   63:    c->workDay();
+call    0 returned 1
+       1*:   64:    EXPECT_EQ(c->getFunds(),300);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   64-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   64-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   64-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   64-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   64-block  4
+call   17 never executed
+call   18 never executed
+        1:   64-block  5
+call   19 returned 1
+    $$$$$:   64-block  6
+    $$$$$:   64-block  7
+    $$$$$:   64-block  8
+call   20 never executed
+    $$$$$:   64-block  9
+    $$$$$:   64-block 10
+call   21 never executed
+    $$$$$:   64-block 11
+    $$$$$:   64-block 12
+call   22 never executed
+        -:   65:
+        1:   66:}
+------------------
+        -:   67:
+        4:   68:TEST_F(citizen_test, citizen_home_test) {
+       1*:   69:    Residential* homePtr = dynamic_cast<Residential*>(home);
+       1*:   70:    EXPECT_EQ(c->hasHome(),false);
+       1*:   71:    EXPECT_EQ(homePtr->isFull(),false);
+        1:   72:    homePtr->addTenant(*c);
+       1*:   73:    EXPECT_EQ(c->hasHome(),true);
+        -:   74:
+        1:   75:}
+------------------
+_ZN35citizen_test_citizen_home_test_TestC1Ev:
+function _ZN35citizen_test_citizen_home_test_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   68:TEST_F(citizen_test, citizen_home_test) {
+        1:   68-block  0
+call    0 returned 1
+------------------
+_ZN35citizen_test_citizen_home_test_TestD0Ev:
+function _ZN35citizen_test_citizen_home_test_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   68:TEST_F(citizen_test, citizen_home_test) {
+        1:   68-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN35citizen_test_citizen_home_test_TestD1Ev:
+function _ZN35citizen_test_citizen_home_test_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   68:TEST_F(citizen_test, citizen_home_test) {
+        1:   68-block  0
+call    0 returned 1
+------------------
+_ZN35citizen_test_citizen_home_test_Test8TestBodyEv:
+function _ZN35citizen_test_citizen_home_test_Test8TestBodyEv called 1 returned 100% blocks executed 27%
+        1:   68:TEST_F(citizen_test, citizen_home_test) {
+       1*:   69:    Residential* homePtr = dynamic_cast<Residential*>(home);
+        1:   69-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   69-block  1
+    %%%%%:   69-block  2
+       1*:   70:    EXPECT_EQ(c->hasHome(),false);
+        1:   70-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   70-block  1
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   70-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   70-block  3
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   70-block  4
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   70-block  5
+call   17 never executed
+call   18 never executed
+        1:   70-block  6
+call   19 returned 1
+    $$$$$:   70-block  7
+    $$$$$:   70-block  8
+    $$$$$:   70-block  9
+call   20 never executed
+    $$$$$:   70-block 10
+    $$$$$:   70-block 11
+call   21 never executed
+    $$$$$:   70-block 12
+    $$$$$:   70-block 13
+call   22 never executed
+       1*:   71:    EXPECT_EQ(homePtr->isFull(),false);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   71-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   71-block  1
+call    6 returned 1
+branch  7 taken 0 (fallthrough)
+branch  8 taken 1
+    %%%%%:   71-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:   71-block  3
+call   12 never executed
+call   13 never executed
+branch 14 never executed (fallthrough)
+branch 15 never executed (throw)
+    %%%%%:   71-block  4
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:   71-block  5
+call   19 never executed
+call   20 never executed
+        1:   71-block  6
+call   21 returned 1
+    $$$$$:   71-block  7
+    $$$$$:   71-block  8
+    $$$$$:   71-block  9
+call   22 never executed
+    $$$$$:   71-block 10
+    $$$$$:   71-block 11
+call   23 never executed
+    $$$$$:   71-block 12
+    $$$$$:   71-block 13
+call   24 never executed
+        1:   72:    homePtr->addTenant(*c);
+call    0 returned 1
+       1*:   73:    EXPECT_EQ(c->hasHome(),true);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   73-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   73-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   73-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   73-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   73-block  4
+call   17 never executed
+call   18 never executed
+        1:   73-block  5
+call   19 returned 1
+    $$$$$:   73-block  6
+    $$$$$:   73-block  7
+    $$$$$:   73-block  8
+call   20 never executed
+    $$$$$:   73-block  9
+    $$$$$:   73-block 10
+call   21 never executed
+    $$$$$:   73-block 11
+    $$$$$:   73-block 12
+call   22 never executed
+        -:   74:
+        1:   75:}
+------------------
+        -:   76:
+        4:   77:TEST_F(citizen_test, citizen_fire_test) {
+       1*:   78:    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+        1:   79:    workPtr->employ(*c);
+       1*:   80:    EXPECT_EQ(c->getEmploymentStatus(),true);
+       1*:   81:    EXPECT_EQ(c->getType(),CitizenType::Worker);
+        1:   82:    workPtr->fire(*c);
+       1*:   83:    EXPECT_EQ(c->getEmploymentStatus(),false);
+       1*:   84:    EXPECT_EQ(c->getType(),CitizenType::Citizen);
+        -:   85:
+        1:   86:}
+------------------
+_ZN35citizen_test_citizen_fire_test_TestC1Ev:
+function _ZN35citizen_test_citizen_fire_test_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   77:TEST_F(citizen_test, citizen_fire_test) {
+        1:   77-block  0
+call    0 returned 1
+------------------
+_ZN35citizen_test_citizen_fire_test_TestD0Ev:
+function _ZN35citizen_test_citizen_fire_test_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   77:TEST_F(citizen_test, citizen_fire_test) {
+        1:   77-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN35citizen_test_citizen_fire_test_TestD1Ev:
+function _ZN35citizen_test_citizen_fire_test_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   77:TEST_F(citizen_test, citizen_fire_test) {
+        1:   77-block  0
+call    0 returned 1
+------------------
+_ZN35citizen_test_citizen_fire_test_Test8TestBodyEv:
+function _ZN35citizen_test_citizen_fire_test_Test8TestBodyEv called 1 returned 100% blocks executed 27%
+        1:   77:TEST_F(citizen_test, citizen_fire_test) {
+       1*:   78:    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+        1:   78-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   78-block  1
+    %%%%%:   78-block  2
+        1:   79:    workPtr->employ(*c);
+        1:   79-block  0
+call    0 returned 1
+       1*:   80:    EXPECT_EQ(c->getEmploymentStatus(),true);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   80-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   80-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   80-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   80-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   80-block  4
+call   17 never executed
+call   18 never executed
+        1:   80-block  5
+call   19 returned 1
+    $$$$$:   80-block  6
+    $$$$$:   80-block  7
+    $$$$$:   80-block  8
+call   20 never executed
+    $$$$$:   80-block  9
+    $$$$$:   80-block 10
+call   21 never executed
+    $$$$$:   80-block 11
+    $$$$$:   80-block 12
+call   22 never executed
+       1*:   81:    EXPECT_EQ(c->getType(),CitizenType::Worker);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   81-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   81-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   81-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   81-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   81-block  4
+call   17 never executed
+call   18 never executed
+        1:   81-block  5
+call   19 returned 1
+    $$$$$:   81-block  6
+    $$$$$:   81-block  7
+    $$$$$:   81-block  8
+call   20 never executed
+    $$$$$:   81-block  9
+    $$$$$:   81-block 10
+call   21 never executed
+    $$$$$:   81-block 11
+    $$$$$:   81-block 12
+call   22 never executed
+        1:   82:    workPtr->fire(*c);
+call    0 returned 1
+       1*:   83:    EXPECT_EQ(c->getEmploymentStatus(),false);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   83-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   83-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   83-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   83-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   83-block  4
+call   17 never executed
+call   18 never executed
+        1:   83-block  5
+call   19 returned 1
+    $$$$$:   83-block  6
+    $$$$$:   83-block  7
+    $$$$$:   83-block  8
+call   20 never executed
+    $$$$$:   83-block  9
+    $$$$$:   83-block 10
+call   21 never executed
+    $$$$$:   83-block 11
+    $$$$$:   83-block 12
+call   22 never executed
+       1*:   84:    EXPECT_EQ(c->getType(),CitizenType::Citizen);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   84-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   84-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   84-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   84-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   84-block  4
+call   17 never executed
+call   18 never executed
+        1:   84-block  5
+call   19 returned 1
+    $$$$$:   84-block  6
+    $$$$$:   84-block  7
+    $$$$$:   84-block  8
+call   20 never executed
+    $$$$$:   84-block  9
+    $$$$$:   84-block 10
+call   21 never executed
+    $$$$$:   84-block 11
+    $$$$$:   84-block 12
+call   22 never executed
+        -:   85:
+        1:   86:}
+------------------
+        -:   87:
+        4:   88:TEST_F(citizen_test, citizen_Retire_test) {
+       1*:   89:    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+        1:   90:    workPtr->employ(*c);
+       1*:   91:    EXPECT_EQ(c->getEmploymentStatus(),true);
+       1*:   92:    EXPECT_EQ(c->getType(),CitizenType::Worker);
+        1:   93:    workPtr->retire(*c);
+       1*:   94:    EXPECT_EQ(c->getEmploymentStatus(),false);
+       1*:   95:    EXPECT_EQ(c->getType(),CitizenType::Retired);
+       1*:   96:    EXPECT_EQ(c->hasHome(),false);
+        1:   97:}
+------------------
+_ZN37citizen_test_citizen_Retire_test_TestC1Ev:
+function _ZN37citizen_test_citizen_Retire_test_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   88:TEST_F(citizen_test, citizen_Retire_test) {
+        1:   88-block  0
+call    0 returned 1
+------------------
+_ZN37citizen_test_citizen_Retire_test_TestD0Ev:
+function _ZN37citizen_test_citizen_Retire_test_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   88:TEST_F(citizen_test, citizen_Retire_test) {
+        1:   88-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN37citizen_test_citizen_Retire_test_TestD1Ev:
+function _ZN37citizen_test_citizen_Retire_test_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   88:TEST_F(citizen_test, citizen_Retire_test) {
+        1:   88-block  0
+call    0 returned 1
+------------------
+_ZN37citizen_test_citizen_Retire_test_Test8TestBodyEv:
+function _ZN37citizen_test_citizen_Retire_test_Test8TestBodyEv called 1 returned 100% blocks executed 26%
+        1:   88:TEST_F(citizen_test, citizen_Retire_test) {
+       1*:   89:    BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
+        1:   89-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   89-block  1
+    %%%%%:   89-block  2
+        1:   90:    workPtr->employ(*c);
+        1:   90-block  0
+call    0 returned 1
+       1*:   91:    EXPECT_EQ(c->getEmploymentStatus(),true);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   91-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   91-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   91-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   91-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   91-block  4
+call   17 never executed
+call   18 never executed
+        1:   91-block  5
+call   19 returned 1
+    $$$$$:   91-block  6
+    $$$$$:   91-block  7
+    $$$$$:   91-block  8
+call   20 never executed
+    $$$$$:   91-block  9
+    $$$$$:   91-block 10
+call   21 never executed
+    $$$$$:   91-block 11
+    $$$$$:   91-block 12
+call   22 never executed
+       1*:   92:    EXPECT_EQ(c->getType(),CitizenType::Worker);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   92-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   92-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   92-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   92-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   92-block  4
+call   17 never executed
+call   18 never executed
+        1:   92-block  5
+call   19 returned 1
+    $$$$$:   92-block  6
+    $$$$$:   92-block  7
+    $$$$$:   92-block  8
+call   20 never executed
+    $$$$$:   92-block  9
+    $$$$$:   92-block 10
+call   21 never executed
+    $$$$$:   92-block 11
+    $$$$$:   92-block 12
+call   22 never executed
+        1:   93:    workPtr->retire(*c);
+call    0 returned 1
+       1*:   94:    EXPECT_EQ(c->getEmploymentStatus(),false);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   94-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   94-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   94-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   94-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   94-block  4
+call   17 never executed
+call   18 never executed
+        1:   94-block  5
+call   19 returned 1
+    $$$$$:   94-block  6
+    $$$$$:   94-block  7
+    $$$$$:   94-block  8
+call   20 never executed
+    $$$$$:   94-block  9
+    $$$$$:   94-block 10
+call   21 never executed
+    $$$$$:   94-block 11
+    $$$$$:   94-block 12
+call   22 never executed
+       1*:   95:    EXPECT_EQ(c->getType(),CitizenType::Retired);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   95-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   95-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   95-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   95-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   95-block  4
+call   17 never executed
+call   18 never executed
+        1:   95-block  5
+call   19 returned 1
+    $$$$$:   95-block  6
+    $$$$$:   95-block  7
+    $$$$$:   95-block  8
+call   20 never executed
+    $$$$$:   95-block  9
+    $$$$$:   95-block 10
+call   21 never executed
+    $$$$$:   95-block 11
+    $$$$$:   95-block 12
+call   22 never executed
+       1*:   96:    EXPECT_EQ(c->hasHome(),false);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   96-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   96-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   96-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   96-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   96-block  4
+call   17 never executed
+call   18 never executed
+        1:   96-block  5
+call   19 returned 1
+    $$$$$:   96-block  6
+    $$$$$:   96-block  7
+    $$$$$:   96-block  8
+call   20 never executed
+    $$$$$:   96-block  9
+    $$$$$:   96-block 10
+call   21 never executed
+    $$$$$:   96-block 11
+    $$$$$:   96-block 12
+call   22 never executed
+        1:   97:}
+------------------

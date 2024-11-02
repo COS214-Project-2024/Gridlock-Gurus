@@ -1,0 +1,77 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/PoliceService.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef POLICESERVICE_H
+        -:    2:#define POLICESERVICE_H
+        -:    3:
+        -:    4:#include "Service.h"
+        -:    5:#include "PoliceState.h"
+        -:    6:#include "BuildingType.h"
+        -:    7:#include <memory>
+        -:    8:#include <vector>
+        -:    9:class PoliceState;
+        -:   10:
+        -:   11:enum PoliceStateType{
+        -:   12:    Peace,
+        -:   13:    Unrest
+        -:   14:};
+        -:   15:/**
+        -:   16: * @brief Represents a police service building.
+        -:   17: *
+        -:   18: * ConcreteProduct participant in the Factory Method pattern. It extends the Service class and represents a specific type of service building that provides police services.
+        -:   19: */
+        -:   20:class PoliceService : public Service {
+        -:   21:private:
+        -:   22:    PoliceStateType state;
+        -:   23:    std::unique_ptr<PoliceState> policeState;  ///< Current state of the police service.
+        -:   24:    int responseTime;
+        -:   25:
+        -:   26:public:
+        -:   27:    /**
+        -:   28:     * @brief Constructs a new PoliceService building.
+        -:   29:     * @param cost The construction cost of the police service.
+        -:   30:     * @param location The location of the police service.
+        -:   31:     * @param resources Pointer to the resources the police service uses.
+        -:   32:     * @param size The size of the police service.
+        -:   33:     * @param owner Pointer to the owner of the police service.
+        -:   34:     */
+        -:   35:    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType name);
+        -:   36:
+        -:   37:    /**
+        -:   38:     * @brief Destroys the PoliceService building.
+        -:   39:     */
+        -:   40:    ~PoliceService() override = default;
+        -:   41:
+        -:   42:    /**
+        -:   43:     * @brief Pays taxes for the police service building.
+        -:   44:     */
+        -:   45:    // void payTax(int amount) override;
+        -:   46:
+        -:   47:    /**
+        -:   48:     * @brief Sets the state of the police service.
+        -:   49:     * @param state Pointer to the new police state.
+        -:   50:     */
+        -:   51:    void setState();
+        -:   52:
+        -:   53:    /**
+        -:   54:     * @brief Pays an officer in the police service.
+        -:   55:     * @param officer Pointer to the officer being paid.
+        -:   56:     */
+        -:   57:    int pay() override;
+        -:   58:
+        -:   59:    void responseTimeDec(int by);
+        -:   60:
+        -:   61:    void responseTimeInc(int by);
+        -:   62:
+function _ZNK13PoliceService15getResponseTimeEv called 2 returned 100% blocks executed 100%
+        2:   63:    int getResponseTime() const {
+        2:   64:        return responseTime;
+        2:   64-block  0
+        -:   65:    }
+        -:   66:
+        -:   67:    std::string getState() const; 
+        -:   68:};
+        -:   69:
+        -:   70:
+        -:   71:#endif // POLICESERVICE_H

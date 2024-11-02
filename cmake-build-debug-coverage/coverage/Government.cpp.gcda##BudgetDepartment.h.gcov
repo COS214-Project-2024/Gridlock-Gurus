@@ -1,0 +1,75 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/BudgetDepartment.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Government.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Government.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef BUDGETDEPARTMENT_H
+        -:    2:#define BUDGETDEPARTMENT_H
+        -:    3:
+        -:    4:class TaxAuthority;
+        -:    5:#include <memory>
+        -:    6:
+        -:    7:
+        -:    8:/**
+        -:    9: * @brief Manages the city's budget and financial allocations.
+        -:   10: *
+        -:   11: * The BudgetDepartment class is responsible for tracking the total available budget,
+        -:   12: * managing financial transactions, and handling adjustments such as inflation and tax relief.
+        -:   13: */
+        -:   14:class BudgetDepartment {
+        -:   15:private:
+        -:   16:    int totalAvailable;  ///< The total available budget.
+        -:   17:    bool broke;  ///< Indicates whether the budget department is out of funds.
+        -:   18:    std::shared_ptr<TaxAuthority> taxAuthority;
+        -:   19:
+        -:   20:public:
+        -:   21:    /**
+        -:   22:     * @brief Constructs a new BudgetDepartment object.
+        -:   23:     */
+        -:   24:    BudgetDepartment(std::shared_ptr<TaxAuthority> taxAuthority);
+        -:   25:
+        -:   26:    /**
+        -:   27:     * @brief Destroys the BudgetDepartment object.
+        -:   28:     */
+function _ZN16BudgetDepartmentD1Ev called 0 returned 0% blocks executed 0%
+    #####:   29:     ~BudgetDepartment() = default;
+    %%%%%:   29-block  0
+call    0 never executed
+        -:   30:
+        -:   31:    /**
+        -:   32:     * @brief Checks the total available budget.
+        -:   33:     * @return The total available budget.
+        -:   34:     */
+        -:   35:    int checkTotal();
+        -:   36:
+        -:   37:    /**
+        -:   38:     * @brief Checks if the specified amount is available in the budget.
+        -:   39:     * @param amount The amount to check for availability.
+        -:   40:     * @return True if the amount is available, false otherwise.
+        -:   41:     */
+        -:   42:    bool checkAvailability(int amount);
+        -:   43:
+        -:   44:    /**
+        -:   45:     * @brief Increases the total available budget by the specified amount.
+        -:   46:     * @param amount The amount to add to the total budget.
+        -:   47:     */
+        -:   48:    void gain(int amount);
+        -:   49:
+        -:   50:    /**
+        -:   51:     * @brief Decreases the total available budget by the specified amount.
+        -:   52:     * @param amount The amount to subtract from the total budget.
+        -:   53:     */
+        -:   54:    void lose(int amount);
+        -:   55:
+        -:   56:    /**
+        -:   57:     * @brief Adjusts the total budget based on an inflation percentage.
+        -:   58:     * @param percentage The percentage by which to increase the budget due to inflation.
+        -:   59:     */
+        -:   60:    void inflation(int percentage);
+        -:   61:
+        -:   62:    void receiveTaxes();
+        -:   63:
+        -:   64:    bool isBroke(); 
+        -:   65:
+        -:   66:};
+        -:   67:
+        -:   68:#endif // BUDGETDEPARTMENT_H

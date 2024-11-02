@@ -1,0 +1,105 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/PoliceService.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PoliceService.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PoliceService.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "PoliceService.h"
+        -:    2:#include "PeaceState.h"
+        -:    3:#include "UnrestState.h"
+        -:    4:
+function _ZN13PoliceServiceC2EiRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP9ResourcesiR7Citizeni12BuildingType called 1 returned 100% blocks executed 64%
+        1:    5:PoliceService::PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id) {
+        1:    5-block  0
+call    0 returned 1
+call    1 returned 1
+        1:    6:    this->responseTime = 10;
+        1:    7:    policeState =std::make_unique<PeaceState>(*this);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:    7-block  0
+call    3 returned 1
+call    4 returned 1
+    $$$$$:    7-block  1
+        1:    8:    state = PoliceStateType::Peace;
+        1:    9:}
+    $$$$$:    9-block  0
+call    0 never executed
+    $$$$$:    9-block  1
+call    1 never executed
+        -:   10:
+function _ZN13PoliceService3payEv called 2 returned 100% blocks executed 100%
+        2:   11:int PoliceService::pay() {
+        2:   12:    if(state == PoliceStateType::Peace) {
+        2:   12-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   13:        return 3300;
+        1:   13-block  0
+        -:   14:    } else {
+        1:   15:        return 3500;
+        1:   15-block  0
+        -:   16:    }
+        -:   17:}
+        -:   18:
+function _ZN13PoliceService15responseTimeDecEi called 1 returned 100% blocks executed 100%
+        1:   19:void PoliceService::responseTimeDec(int by) {
+        1:   20:    responseTime -= by;
+        1:   21:}
+        -:   22:
+function _ZN13PoliceService15responseTimeIncEi called 1 returned 100% blocks executed 100%
+        1:   23:void PoliceService::responseTimeInc(int by) {
+        1:   24:    responseTime += by;
+        1:   25:}
+        -:   26:
+function _ZN13PoliceService8setStateEv called 1 returned 100% blocks executed 58%
+        1:   27:void PoliceService::setState() {
+        1:   28:    if(state == PoliceStateType::Peace) {
+        1:   28-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   29:        policeState = std::make_unique<UnrestState>(*this);
+        1:   29-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   29-block  1
+call    3 returned 1
+call    4 returned 1
+    $$$$$:   29-block  2
+call    5 never executed
+        1:   30:        state = PoliceStateType::Unrest;
+        -:   31:    } else {
+    #####:   32:        policeState = std::make_unique<PeaceState>(*this);
+    %%%%%:   32-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   32-block  1
+call    3 never executed
+call    4 never executed
+    #####:   33:        state = PoliceStateType::Peace;
+        -:   34:    }
+        1:   35:}
+        1:   35-block  0
+        -:   36:
+function _ZNK13PoliceService8getStateB5cxx11Ev called 2 returned 100% blocks executed 72%
+        2:   37:std::string PoliceService::getState() const {
+        2:   38:    if(state == PoliceStateType::Peace) {
+        2:   38-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        2:   39:        return "Peace";
+        1:   39-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+    $$$$$:   39-block  1
+call    3 never executed
+        -:   40:    } else {
+        2:   41:        return "Unrest";
+        1:   41-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   42:    }
+        -:   43:}

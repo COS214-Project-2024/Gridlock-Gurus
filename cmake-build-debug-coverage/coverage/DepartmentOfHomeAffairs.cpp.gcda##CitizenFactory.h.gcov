@@ -1,0 +1,52 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/CitizenFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\DepartmentOfHomeAffairs.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\DepartmentOfHomeAffairs.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef CITIZENFACTORY_H
+        -:    2:#define CITIZENFACTORY_H
+        -:    3:
+        -:    4:#include <string>
+        -:    5:#include <memory>
+        -:    6:#include "Citizen.h"
+        -:    7:#include "CitizenType.h"
+        -:    8:
+        -:    9:/**
+        -:   10: * @brief Factory class to create Citizen objects.
+        -:   11: *
+        -:   12: * This class provides methods to create instances of Citizen with specific attributes.
+        -:   13: */
+        -:   14:class CitizenFactory {
+        -:   15:private:
+        -:   16:    std::shared_ptr<TaxAuthority> taxAuthority;
+        -:   17:    int citizenCount = 0;
+        -:   18:
+        -:   19:public:
+        -:   20:    /**
+        -:   21:     * @brief Construct a new CitizenFactory object.
+        -:   22:     *
+        -:   23:     * Initializes the CitizenFactory with default values.
+        -:   24:     */
+        -:   25:    CitizenFactory(std::shared_ptr<TaxAuthority> taxAuthority);
+        -:   26:
+        -:   27:    /**
+        -:   28:     * @brief Destroy the CitizenFactory object.
+        -:   29:     *
+        -:   30:     * Cleans up any resources used by the factory.
+        -:   31:     */
+function _ZN14CitizenFactoryD1Ev called 0 returned 0% blocks executed 0%
+    #####:   32:     ~CitizenFactory() = default;
+    %%%%%:   32-block  0
+call    0 never executed
+        -:   33:
+        -:   34:    /**
+        -:   35:     * @brief Creates a new Citizen object.
+        -:   36:     *
+        -:   37:     * @param type The type of citizen to create.
+        -:   38:     * @param startingSatisfaction The initial satisfaction level of the citizen.
+        -:   39:     * @param startingFunds The initial funds available to the citizen.
+        -:   40:     * @return Pointer to the newly created Citizen object.
+        -:   41:     */
+        -:   42:    Citizen* createCitizen(CitizenType type, int startingSatisfaction, int startingFunds);
+        -:   43:};
+        -:   44:
+        -:   45:#endif // CITIZENFACTORY_H

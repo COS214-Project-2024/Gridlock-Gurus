@@ -1,0 +1,173 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Government.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Government.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Government.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Government.h"
+        -:    2:
+function _ZN10Government11getInstanceEv called 0 returned 0% blocks executed 0%
+    #####:    3:Government* Government::getInstance() {
+    #####:    4:    static Government instance;
+    %%%%%:    4-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:    4-block  1
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    %%%%%:    4-block  2
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:    4-block  3
+call    8 never executed
+call    9 never executed
+    $$$$$:    4-block  4
+branch 10 never executed (fallthrough)
+branch 11 never executed
+    $$$$$:    4-block  5
+call   12 never executed
+    #####:    5:    return &instance;
+    %%%%%:    5-block  0
+    %%%%%:    5-block  1
+        -:    6:}
+        -:    7:
+function _ZN10GovernmentC2Ev called 0 returned 0% blocks executed 0%
+    #####:    8:Government::Government()  {
+    %%%%%:    8-block  0
+call    0 never executed
+    #####:    9:    this->taxAuthority = std::make_shared<TaxAuthority>();
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:    9-block  0
+call    3 never executed
+call    4 never executed
+    $$$$$:    9-block  1
+    #####:   10:    this->budgetDepartment = new BudgetDepartment(taxAuthority);
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   10-block  0
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:   10-block  1
+call    7 never executed
+    $$$$$:   10-block  2
+call    8 never executed
+    $$$$$:   10-block  3
+    $$$$$:   10-block  4
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    $$$$$:   10-block  5
+call   11 never executed
+    #####:   11:    this->utilities = new DepartmentOfWaterPowerAndSanitation(new Resources(5000, 5000, true));
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   11-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   11-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:   11-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    $$$$$:   11-block  3
+branch 12 never executed (fallthrough)
+branch 13 never executed
+    $$$$$:   11-block  4
+call   14 never executed
+    $$$$$:   11-block  5
+branch 15 never executed (fallthrough)
+branch 16 never executed
+    $$$$$:   11-block  6
+call   17 never executed
+    #####:   12:    this->homeAffairs = new DepartmentOfHomeAffairs(taxAuthority);
+    %%%%%:   12-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   12-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:   12-block  2
+call    7 never executed
+    $$$$$:   12-block  3
+call    8 never executed
+    $$$$$:   12-block  4
+    $$$$$:   12-block  5
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    $$$$$:   12-block  6
+call   11 never executed
+    #####:   13:    this->transportDepartment = new TransportDepartment();
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   13-block  0
+call    3 never executed
+    #####:   14:}
+    $$$$$:   14-block  0
+call    0 never executed
+        -:   15:
+    #####:   16:Government::~Government() {
+    #####:   17:    delete transportDepartment;
+    #####:   18:    delete budgetDepartment;
+    #####:   19:    delete utilities;
+    #####:   20:    delete homeAffairs;
+    #####:   21:}
+------------------
+_ZN10GovernmentD0Ev:
+function _ZN10GovernmentD0Ev called 0 returned 0% blocks executed 0%
+    #####:   16:Government::~Government() {
+        -:   17:    delete transportDepartment;
+        -:   18:    delete budgetDepartment;
+        -:   19:    delete utilities;
+        -:   20:    delete homeAffairs;
+    #####:   21:}
+    %%%%%:   21-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN10GovernmentD2Ev:
+function _ZN10GovernmentD2Ev called 0 returned 0% blocks executed 0%
+    #####:   16:Government::~Government() {
+    #####:   17:    delete transportDepartment;
+    %%%%%:   17-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   17-block  1
+call    2 never executed
+call    3 never executed
+    #####:   18:    delete budgetDepartment;
+    %%%%%:   18-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   18-block  1
+call    2 never executed
+call    3 never executed
+    #####:   19:    delete utilities;
+    %%%%%:   19-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   19-block  1
+call    2 never executed
+    #####:   20:    delete homeAffairs;
+    %%%%%:   20-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   20-block  1
+call    2 never executed
+call    3 never executed
+    #####:   21:}
+    %%%%%:   21-block  0
+call    0 never executed
+------------------

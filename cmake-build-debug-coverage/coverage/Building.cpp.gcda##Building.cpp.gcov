@@ -1,0 +1,198 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Building.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Building.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Building.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Building.h"
+        -:    2:
+function _ZN8BuildingC2EiRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP9ResourcesiR7Citizen12BuildingType called 21 returned 100% blocks executed 100%
+       21:    3:Building::Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name)
+       21:    4:    : cost(cost), location(location), resources(resources), size(size), owner(owner), name(name) {}
+       21:    4-block  0
+call    0 returned 21
+        -:    5:
+      21*:    6:Building::~Building() {
+       21:    7:    delete resources;
+      21*:    8:}
+------------------
+_ZN8BuildingD0Ev:
+function _ZN8BuildingD0Ev called 0 returned 0% blocks executed 0%
+    #####:    6:Building::~Building() {
+        -:    7:    delete resources;
+    #####:    8:}
+    %%%%%:    8-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN8BuildingD2Ev:
+function _ZN8BuildingD2Ev called 21 returned 100% blocks executed 100%
+       21:    6:Building::~Building() {
+       21:    7:    delete resources;
+       21:    7-block  0
+branch  0 taken 21 (fallthrough)
+branch  1 taken 0
+       21:    7-block  1
+call    2 returned 21
+       21:    8:}
+       21:    8-block  0
+call    0 returned 21
+------------------
+        -:    9:
+function _ZNK8Building10getDetailsB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:   10:std::string Building::getDetails() const {
+    %%%%%:   10-block  0
+    #####:   11:    std::string details =  "";
+    %%%%%:   11-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$:   11-block  1
+call    3 never executed
+    #####:   12:    details += "Owner:\t" + owner.getName() + "\n";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   12-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   12-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:   12-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:   12-block  3
+call   12 never executed
+call   13 never executed
+call   14 never executed
+    $$$$$:   12-block  4
+call   15 never executed
+    $$$$$:   12-block  5
+call   16 never executed
+    $$$$$:   12-block  6
+call   17 never executed
+    $$$$$:   12-block  7
+    $$$$$:   12-block  8
+    $$$$$:   12-block  9
+    #####:   13:    details += "Location:\t" + location + "\n";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   13-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   13-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:   13-block  2
+call    9 never executed
+call   10 never executed
+    $$$$$:   13-block  3
+call   11 never executed
+    $$$$$:   13-block  4
+call   12 never executed
+    $$$$$:   13-block  5
+    $$$$$:   13-block  6
+    #####:   14:    details += "Cost:\t" + std::to_string(cost) + "\n";
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   14-block  0
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:   14-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   14-block  2
+call   10 never executed
+call   11 never executed
+call   12 never executed
+    $$$$$:   14-block  3
+call   13 never executed
+    $$$$$:   14-block  4
+call   14 never executed
+    $$$$$:   14-block  5
+call   15 never executed
+    $$$$$:   14-block  6
+    $$$$$:   14-block  7
+    $$$$$:   14-block  8
+    #####:   15:    details += "Size:\t" + std::to_string(size) + "\n";
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:   15-block  0
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:   15-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   15-block  2
+call   10 never executed
+call   11 never executed
+call   12 never executed
+    $$$$$:   15-block  3
+call   13 never executed
+    $$$$$:   15-block  4
+call   14 never executed
+    $$$$$:   15-block  5
+call   15 never executed
+    $$$$$:   15-block  6
+    $$$$$:   15-block  7
+    $$$$$:   15-block  8
+    #####:   16:    return details;;
+    %%%%%:   16-block  0
+    =====:   17:}
+    $$$$$:   17-block  0
+call    0 never executed
+        -:   18:
+function _ZN8Building3payEv called 0 returned 0% blocks executed 0%
+    #####:   19:int Building::pay() {
+    #####:   20:    return 0;
+    %%%%%:   20-block  0
+        -:   21:}
+        -:   22:
+        -:   23:
+function _ZN8Building6payTaxEi called 4 returned 100% blocks executed 100%
+        4:   24:void Building::payTax(int amount) {
+        4:   25:    this->owner.payTaxes(amount);
+        4:   25-block  0
+call    0 returned 4
+        4:   26:}
+        -:   27:
+        -:   28:
+function _ZNK8Building7getCostEv called 13 returned 100% blocks executed 100%
+       13:   29:int Building::getCost() const {
+       13:   30:    return this->cost;
+       13:   30-block  0
+        -:   31:}
+        -:   32:
+function _ZNK8Building11getLocationB5cxx11Ev called 9 returned 100% blocks executed 100%
+        9:   33:std::string Building::getLocation() const {
+        9:   34:    return this->location;
+        9:   34-block  0
+call    0 returned 9
+        -:   35:}
+        -:   36:
+function _ZNK8Building7getSizeEv called 9 returned 100% blocks executed 100%
+        9:   37:int Building::getSize() const {
+        9:   38:    return this->size;
+        9:   38-block  0
+        -:   39:}
+        -:   40:
+function _ZNK8Building7getNameEv called 9 returned 100% blocks executed 100%
+        9:   41:BuildingType Building::getName() const {
+        9:   42:    return name;
+        9:   42-block  0
+        -:   43:}
+        -:   44:
+        -:   45:

@@ -1,0 +1,53 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Utilities.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Sanitation.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Sanitation.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef UTILITIES_H
+        -:    2:#define UTILITIES_H
+        -:    3:#include "UtilityType.h"
+        -:    4:#include <string>
+        -:    5:
+        -:    6:/**
+        -:    7: * @brief Abstract class representing a utility.
+        -:    8: */
+        -:    9:class Utilities {
+        -:   10:protected:
+        -:   11:    UtilityType type;
+        -:   12:    int maxProduction;
+        -:   13:    bool shedding;
+        -:   14:    bool isRepair;
+        -:   15:    int costOfRepair;
+        -:   16:
+        -:   17:public:
+        -:   18:    /**
+        -:   19:     * @brief Default constructor for Utilities.
+        -:   20:     */
+        -:   21:    Utilities(UtilityType type, int maxProduction, int costOfRepair) : type(type), maxProduction(maxProduction),shedding(false),isRepair(false),costOfRepair(costOfRepair) {}
+        -:   22:
+        -:   23:    /**
+        -:   24:     * @brief Check the capacity of the utility.
+        -:   25:     * @return The current capacity of the utility.
+        -:   26:     */
+        -:   27:    virtual void checkCapacity() const ;
+        -:   28:
+        -:   29:    /**
+        -:   30:     * @brief Shed the utility, temporarily shutting it down.
+        -:   31:     */
+        -:   32:     void shed();
+        -:   33:
+        -:   34:    /**
+        -:   35:     * @brief Break the utility, making it non-functional.
+        -:   36:     */
+        -:   37:     void breakUtility();
+        -:   38:
+        -:   39:    /**
+        -:   40:     * @brief Repair the utility, making it functional again.
+        -:   41:     */
+        -:   42:     void repair();
+        -:   43:
+function _ZN9UtilitiesD2Ev called 0 returned 0% blocks executed 0%
+    #####:   44:    virtual ~Utilities() = default;
+        -:   45:};
+        -:   46:
+        -:   47:#endif // UTILITIES_H
+        -:   48:

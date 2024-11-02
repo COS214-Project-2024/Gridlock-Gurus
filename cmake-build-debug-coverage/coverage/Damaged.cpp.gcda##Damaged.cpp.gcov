@@ -1,0 +1,87 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Damaged.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Damaged.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Damaged.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Damaged.h"
+        -:    2:#include <iostream>
+        -:    3:
+function _ZN7Damaged13checkCapacityEP7Vehicle called 0 returned 0% blocks executed 0%
+    #####:    4:void Damaged::checkCapacity(Vehicle* vehicle) {
+    #####:    5:    std::cout << vehicle->getType() << " is damaged and cannot operate properly." << std::endl;
+    %%%%%:    5-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:    5-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:    5-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:    5-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:    5-block  4
+call   12 never executed
+    $$$$$:    5-block  5
+call   13 never executed
+    #####:    6:}
+        -:    7:
+function _ZN7Damaged14breakTransportEP7Vehicle called 0 returned 0% blocks executed 0%
+    #####:    8:void Damaged::breakTransport(Vehicle* vehicle) {
+    #####:    9:    std::cout << vehicle->getType() << " is now completely broken and is out of commission for the time being." << std::endl;
+    %%%%%:    9-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:    9-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:    9-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:    9-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:    9-block  4
+call   12 never executed
+    $$$$$:    9-block  5
+call   13 never executed
+    #####:   10:}
+        -:   11:
+function _ZN7Damaged6repairEP7Vehicle called 0 returned 0% blocks executed 0%
+    #####:   12:void Damaged::repair(Vehicle* vehicle) {
+    #####:   13:    std::cout << vehicle->getType() << " has been repaired." << std::endl;
+    %%%%%:   13-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   13-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:   13-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:   13-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:   13-block  4
+call   12 never executed
+    $$$$$:   13-block  5
+call   13 never executed
+    #####:   14:}
+        -:   15:
+function _ZN7Damaged11returnStateEv called 0 returned 0% blocks executed 0%
+    #####:   16:TransportState* Damaged::returnState() {
+    #####:   17:    return this;
+    %%%%%:   17-block  0
+        -:   18:}

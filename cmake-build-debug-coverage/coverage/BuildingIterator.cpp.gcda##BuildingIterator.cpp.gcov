@@ -1,0 +1,32 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/BuildingIterator.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildingIterator.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildingIterator.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "BuildingIterator.h"
+        -:    2:
+        -:    3:
+function _ZNK16BuildingIteratordeEv called 4 returned 100% blocks executed 100%
+        4:    4:Building* BuildingIterator::operator*() const { 
+        4:    5:    return buildings.at(position); 
+        4:    5-block  0
+call    0 returned 4
+        -:    6:}
+        -:    7:
+function _ZN16BuildingIteratorppEv called 4 returned 100% blocks executed 100%
+        4:    8:BuildingIterator& BuildingIterator::operator++() { 
+        4:    9:    ++position; 
+        4:   10:    return *this; 
+        4:   10-block  0
+        -:   11:}
+        -:   12:
+function _ZNK16BuildingIteratorneERKS_ called 6 returned 100% blocks executed 100%
+        6:   13:bool BuildingIterator::operator!=(const BuildingIterator& other) const { 
+        6:   14:    return position != other.position; 
+        6:   14-block  0
+        -:   15:}
+        -:   16:
+function _ZNK16BuildingIteratoreqERKS_ called 0 returned 0% blocks executed 0%
+    #####:   17:bool BuildingIterator::operator==(const BuildingIterator& other) const { 
+    #####:   18:    return position == other.position; 
+    %%%%%:   18-block  0
+        -:   19:}

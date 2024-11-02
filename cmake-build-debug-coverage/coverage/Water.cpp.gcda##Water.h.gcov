@@ -1,0 +1,44 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Water.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Water.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Water.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef WATER_H
+        -:    2:#define WATER_H
+        -:    3:
+        -:    4:#include "Utilities.h"
+        -:    5:#include "UtilityType.h"
+        -:    6:
+        -:    7:/**
+        -:    8: * @brief Represents a Water utility.
+        -:    9: */
+        -:   10:class Water : public Utilities {
+        -:   11:public:
+        -:   12:    /**
+        -:   13:     * @brief Constructor for Water utility.
+        -:   14:     */
+        -:   15:    Water() : Utilities(UtilityType::Water, 500, 300) {}
+        -:   16:
+    #####:   17:     ~Water()override = default;
+------------------
+_ZN5WaterD0Ev:
+function _ZN5WaterD0Ev called 0 returned 0% blocks executed 0%
+    #####:   17:     ~Water()override = default;
+    %%%%%:   17-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN5WaterD1Ev:
+function _ZN5WaterD1Ev called 0 returned 0% blocks executed 0%
+    #####:   17:     ~Water()override = default;
+    %%%%%:   17-block  0
+call    0 never executed
+------------------
+        -:   18:
+        -:   19:    /**
+        -:   20:     * @brief Check the water capacity.
+        -:   21:     * @return The current water capacity.
+        -:   22:     */
+        -:   23:    void checkCapacity() const override;
+        -:   24:};
+        -:   25:
+        -:   26:#endif // WATER_H

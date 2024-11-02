@@ -1,0 +1,37 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/PeaceState.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PeaceState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PeaceState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "PeaceState.h"
+        -:    2:
+function _ZN10PeaceState14checkOperationEv called 0 returned 0% blocks executed 0%
+    #####:    3:void PeaceState::checkOperation() {
+        -:    4:/*    if(service) {
+        -:    5:        int currStaff = service->getStaff();
+        -:    6:        int maxStaff = service->getMaxStaff();
+        -:    7:        double ratio = static_cast<double>(currStaff) / maxStaff;
+        -:    8:        if(ratio < 0.5) {
+        -:    9:            cout<< "Warning police station is understaffed. Current staff: " << currStaff << "/" << maxStaff << "\n";
+        -:   10:            service->responseTimeDec(1);
+        -:   11:        } else {
+        -:   12:            cout<< "This station is sufficiently staffed for unrest. Current staff: " << currStaff << "/" << maxStaff << "\n";
+        -:   13:            service->responseTimeDec(3);
+        -:   14:        }
+        -:   15:    } else {
+        -:   16:        cout<< "Error: this state has not been assigned.\n";
+        -:   17:    }*/
+    #####:   18:}
+        -:   19:
+function _ZN10PeaceState7getNameB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:   20:std::string PeaceState::getName() {
+    %%%%%:   20-block  0
+    #####:   21:    return "Peace State";
+    %%%%%:   21-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   21-block  1
+        -:   22:}
+        -:   23:
+        -:   24:
+        -:   25:

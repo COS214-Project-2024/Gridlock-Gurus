@@ -1,0 +1,46 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/CommercialFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef COMMERCIALFACTORY_H
+        -:    2:#define COMMERCIALFACTORY_H
+        -:    3:
+        -:    4:#include <memory>
+        -:    5:#include "BuildingFactory.h"
+        -:    6:#include "BuildingType.h"
+        -:    7:#include "TaxAuthority.h"
+        -:    8:
+        -:    9:/**
+        -:   10: * @brief Factory for creating commercial buildings.
+        -:   11: * 
+        -:   12: *  ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create commercial buildings.
+        -:   13: */
+        -:   14:class CommercialFactory : public BuildingFactory {
+        -:   15:
+        -:   16:public:
+        -:   17:    /**
+        -:   18:     * @brief Constructs a new CommercialFactory object.
+        -:   19:     */
+function _ZN17CommercialFactoryC1ESt10shared_ptrI12TaxAuthorityE called 1 returned 100% blocks executed 100%
+        1:   20:    CommercialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+        1:   20-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        -:   21:
+        -:   22:    /**
+        -:   23:     * @brief Destroys the CommercialFactory object.
+        -:   24:     */
+        -:   25:     ~CommercialFactory() override = default;
+        -:   26:    
+        -:   27:    /**
+        -:   28:     * @brief Creates a commercial building.
+        -:   29:     * @param type The type of commercial building to create.
+        -:   30:     * @return Pointer to the created commercial building object.
+        -:   31:     *
+        -:   32:     * This method overrides the factory method to create a commercial building.
+        -:   33:     */
+        -:   34:     Building* createBuilding(BuildingType type, Citizen& owner) override;
+        -:   35:};
+        -:   36:
+        -:   37:#endif // COMMERCIALFACTORY_H

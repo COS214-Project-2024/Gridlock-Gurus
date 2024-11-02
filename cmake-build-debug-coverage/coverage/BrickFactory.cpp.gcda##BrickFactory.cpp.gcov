@@ -1,0 +1,33 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/BrickFactory.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BrickFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BrickFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "BrickFactory.h"
+        -:    2:
+function _ZN12BrickFactoryC2EiRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP9ResourcesiR7Citizen12BuildingTypeii called 8 returned 100% blocks executed 100%
+        8:    3:BrickFactory::BrickFactory(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name, int productionRate, int max) : Factory(cost, location, resources, size, owner ,name, productionRate, max){}
+        8:    3-block  0
+call    0 returned 8
+        -:    4:
+        -:    5:/*std::string BrickFactory::getDetails() const {
+        -:    6:    std::string details =  "Brick factory: \n";
+        -:    7:    details += "Owner: " + owner.getName() + "\n";
+        -:    8:    details += "Location: " + location + "\n";
+        -:    9:    details += "Employees: " + std::to_string(employees.size()) + "/" + std::to_string(maxEmployees) + "\n";
+        -:   10:    details += "Cost: " + std::to_string(cost) + "\n";
+        -:   11:    details += "Size: " + std::to_string(size) + "\n";
+        -:   12:    return details;
+        -:   13:}*/
+        -:   14:
+function _ZN12BrickFactory15produceResourceEv called 1 returned 100% blocks executed 100%
+        1:   15:int BrickFactory::produceResource() {
+        1:   16:    return 100;
+        1:   16-block  0
+        -:   17:}
+        -:   18:
+function _ZN12BrickFactory3payEv called 2 returned 100% blocks executed 100%
+        2:   19:int BrickFactory::pay() {
+        2:   20:    return 100;
+        2:   20-block  0
+        -:   21:}
+        -:   22:

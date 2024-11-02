@@ -1,0 +1,81 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/HealthService.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HealthService.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HealthService.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef HEALTHSERVICE_H
+        -:    2:#define HEALTHSERVICE_H
+        -:    3:
+        -:    4:#include "Service.h"
+        -:    5:#include "HealthState.h"
+        -:    6:#include "BuildingType.h"
+        -:    7:#include <memory>
+        -:    8:class HealthState;
+        -:    9:
+        -:   10:enum HealthStateType{
+        -:   11:    HighFunding,
+        -:   12:    LowFunding
+        -:   13:};
+        -:   14:/**
+        -:   15: * @brief Represents a health service building.
+        -:   16: *
+        -:   17: * ConcreteProduct participant in the Factory Method pattern. It extends the Service class and represents a specific type of service building that provides health services.
+        -:   18: */
+        -:   19:class HealthService : public Service {
+        -:   20:private:
+        -:   21:    HealthStateType state;
+        -:   22:    std::unique_ptr<HealthState> healthState; 
+        -:   23:    int responseTime;
+        -:   24:public:
+        -:   25:    /**
+        -:   26:     * @brief Constructs a new HealthService building.
+        -:   27:     * @param cost The construction cost of the health service.
+        -:   28:     * @param location The location of the health service.
+        -:   29:     * @param resources Pointer to the resources the health service uses.
+        -:   30:     * @param size The size of the health service.
+        -:   31:     * @param owner Pointer to the owner of the health service.
+        -:   32:     * @param taxAuthority Pointer to the tax authority associated with the health service.
+        -:   33:     */
+        -:   34:    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType name, int id);
+        -:   35:
+        -:   36:    /**
+        -:   37:     * @brief Destroys the HealthService building.
+        -:   38:     */
+        2:   39:     ~HealthService() override = default;
+------------------
+_ZN13HealthServiceD0Ev:
+function _ZN13HealthServiceD0Ev called 1 returned 100% blocks executed 100%
+        1:   39:     ~HealthService() override = default;
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN13HealthServiceD1Ev:
+function _ZN13HealthServiceD1Ev called 1 returned 100% blocks executed 100%
+        1:   39:     ~HealthService() override = default;
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+        -:   40:
+        -:   41:    /**
+        -:   42:     * @brief Sets the state of the health service.
+        -:   43:     * @param state Pointer to the new health state.
+        -:   44:     */
+        -:   45:    void setState();
+        -:   46:
+        -:   47:    /**
+        -:   48:     * @brief Pays a staff member in the health service.
+        -:   49:     * @param staffMember Pointer to the staff member being paid.
+        -:   50:     */
+        -:   51:    int pay() override;
+        -:   52:
+        -:   53:    void responseTimeDec(int by);
+        -:   54:
+        -:   55:    void responseTimeInc(int by);
+        -:   56:
+        -:   57:    int getResponseTime() const;
+        -:   58:
+        -:   59:    std::string getState() const;
+        -:   60:};
+        -:   61:
+        -:   62:#endif // HEALTHSERVICE_H

@@ -1,0 +1,59 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Power.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Power.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Power.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef POWER_H
+        -:    2:#define POWER_H
+        -:    3:
+        -:    4:#include "Utilities.h"
+        -:    5:#include <string>
+        -:    6:#include "UtilityType.h"
+        -:    7:/**
+        -:    8: * @brief Represents a Power utility.
+        -:    9: */
+        -:   10:class Power : public Utilities {
+        -:   11:public:
+        -:   12:    /**
+        -:   13:     * @brief Constructor for Power utility.
+        -:   14:     */
+        -:   15:    Power() : Utilities(UtilityType::Power, 1000, 500) {}
+        -:   16:
+    #####:   17:    ~Power()override = default;
+------------------
+_ZN5PowerD0Ev:
+function _ZN5PowerD0Ev called 0 returned 0% blocks executed 0%
+    #####:   17:    ~Power()override = default;
+    %%%%%:   17-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN5PowerD1Ev:
+function _ZN5PowerD1Ev called 0 returned 0% blocks executed 0%
+    #####:   17:    ~Power()override = default;
+    %%%%%:   17-block  0
+call    0 never executed
+------------------
+        -:   18:
+        -:   19:    /**
+        -:   20:     * @brief Check the power capacity.
+        -:   21:     * @return The current power capacity.
+        -:   22:     */
+        -:   23:    void checkCapacity() const override;
+        -:   24:
+        -:   25:    // /**
+        -:   26:    //  * @brief Shed power temporarily.
+        -:   27:    //  */
+        -:   28:    // void shed() override;
+        -:   29:
+        -:   30:    // /**
+        -:   31:    //  * @brief Break the power utility.
+        -:   32:    //  */
+        -:   33:    // void breakUtility() override;
+        -:   34:
+        -:   35:    // /**
+        -:   36:    //  * @brief Repair the power utility.
+        -:   37:    //  */
+        -:   38:    // void repair() override;
+        -:   39:};
+        -:   40:
+        -:   41:#endif // POWER_H

@@ -1,0 +1,40 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Director.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef DIRECTOR_H
+        -:    2:#define DIRECTOR_H
+        -:    3:
+        -:    4:#include "City.h"
+        -:    5:#include "CityBuilder.h"
+        -:    6:
+        -:    7:/**
+        -:    8: * @brief Directs the building process using the CityBuilder.
+        -:    9: *
+        -:   10: * Director participant in the Builder pattern. It uses a CityBuilder object to construct a complete city by calling the appropriate building methods in the right sequence.
+        -:   11: */
+        -:   12:class Director {
+        -:   13:public:
+        -:   14:    /**
+        -:   15:     * @brief Constructs a new Director object.
+        -:   16:     */
+        -:   17:    Director();
+        -:   18:    
+        -:   19:    /**
+        -:   20:     * @brief Destroys the Director object.
+        -:   21:     */
+        -:   22:    virtual ~Director();
+        -:   23:
+        -:   24:    /**
+        -:   25:     * @brief Constructs a city using the CityBuilder.
+        -:   26:     * @return A pointer to the constructed City object.
+        -:   27:     *
+        -:   28:     * This function orchestrates the steps defined in CityBuilder to create the final city.
+        -:   29:     */
+        -:   30:    City* construct();
+        -:   31:
+function _ZN8Director11setBuildingER8Building called 0 returned 0% blocks executed 0%
+    #####:   32:    void setBuilding(Building& building) {}
+        -:   33:};
+        -:   34:
+        -:   35:#endif // DIRECTOR_H

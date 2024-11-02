@@ -1,0 +1,301 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Citizen.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Citizen.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Citizen.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Citizen.h"
+        -:    2:#include "NameGenerator.h"
+        -:    3:#include <iostream>
+        -:    4:
+function _ZN7CitizenC2Ei11CitizenTypeiiSt8weak_ptrI12TaxAuthorityE called 26 returned 100% blocks executed 67%
+       26:    5:Citizen::Citizen(int id,CitizenType type, int satisfactionLevel, int funds,std::weak_ptr<TaxAuthority> taxAuthority)
+       26:    6:: taxAuthority(taxAuthority),id(id),type(type), satisfactionLevel(satisfactionLevel), funds(funds),employmentStatus(false),retired(false){
+       26:    6-block  0
+call    0 returned 26
+call    1 returned 26
+        -:    7:
+       26:    8:    this->home = nullptr;
+       26:    9:    this->placeOfWork = nullptr;
+       26:   10:    this->currentVehicle = nullptr;
+       26:   11:    this->name = NameGenerator::getInstance().getRandomName();
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:   11-block  0
+call    3 returned 26
+branch  4 taken 26 (fallthrough)
+branch  5 taken 0 (throw)
+       26:   11-block  1
+call    6 returned 26
+call    7 returned 26
+    $$$$$:   11-block  2
+       26:   12:}
+    $$$$$:   12-block  0
+call    0 never executed
+    $$$$$:   12-block  1
+call    1 never executed
+        -:   13:
+function _ZN7Citizen7setWorkER8Building called 5 returned 100% blocks executed 67%
+        5:   14:void Citizen::setWork(Building& work){
+        5:   15:    placeOfWork = &work;
+        5:   16:    employmentStatus = true;
+        5:   17:    type = CitizenType::Worker;
+        5:   18:    if(satisfactionLevel < 100) {
+        5:   18-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 5
+    #####:   19:        satisfactionLevel += 10;
+    %%%%%:   19-block  0
+        -:   20:    }
+        5:   21:}
+        -:   22:
+function _ZN7Citizen7setHomeER8Building called 1 returned 100% blocks executed 67%
+        1:   23:void Citizen::setHome(Building& home){
+        1:   24:    this->home = &home;
+        1:   25:    if(satisfactionLevel < 100) {
+        1:   25-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   26:        satisfactionLevel += 10;
+    %%%%%:   26-block  0
+        -:   27:    }
+        1:   28:}
+        -:   29:
+function _ZN7Citizen7workDayEv called 1 returned 100% blocks executed 100%
+        1:   30:void Citizen::workDay(){
+        1:   31:    if (employmentStatus && placeOfWork) {
+        1:   31-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   31-block  1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   32:        collectSalary();
+        1:   32-block  0
+call    0 returned 1
+        -:   33:    }
+        1:   34:}
+        -:   35:
+function _ZN7Citizen13collectSalaryEv called 1 returned 100% blocks executed 100%
+        1:   36:void Citizen::collectSalary(){
+        1:   37:    if (placeOfWork) {
+        1:   37-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   38:        this->funds += placeOfWork->pay();
+        1:   38-block  0
+call    0 returned 1
+        -:   39:    }
+        1:   40:}
+        -:   41:
+function _ZN7Citizen8payTaxesEi called 10 returned 100% blocks executed 85%
+       10:   42:void Citizen::payTaxes(int amount){
+       10:   43:    if (employmentStatus) {
+       10:   43-block  0
+branch  0 taken 9 (fallthrough)
+branch  1 taken 1
+        9:   44:        if (funds >= amount) {
+        9:   44-block  0
+branch  0 taken 9 (fallthrough)
+branch  1 taken 0
+        9:   45:            funds -= amount;
+        9:   46:            if(auto taxAuth = taxAuthority.lock()) {
+        9:   46-block  0
+call    0 returned 9
+call    1 returned 9
+branch  2 taken 9 (fallthrough)
+branch  3 taken 0
+        9:   47:                taxAuth->sendTax(amount);
+        9:   47-block  0
+call    0 returned 9
+call    1 returned 9
+branch  2 taken 9 (fallthrough)
+branch  3 taken 0 (throw)
+        9:   48:            }
+        9:   48-block  0
+call    0 returned 9
+    $$$$$:   48-block  1
+call    1 never executed
+        -:   49:        } 
+        -:   50:    }
+       10:   51:}
+       10:   51-block  0
+        -:   52:
+function _ZN7Citizen6retireEv called 1 returned 100% blocks executed 67%
+        1:   53:void Citizen::retire(){
+        1:   54:    type = CitizenType::Retired;
+        1:   55:    employmentStatus = false;
+        1:   56:    retired = true;
+        1:   57:    placeOfWork = nullptr;
+        1:   58:    if(satisfactionLevel < 100)
+        1:   58-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   59:            satisfactionLevel += 5;
+    %%%%%:   59-block  0
+        1:   60:}
+        -:   61:
+function _ZN7Citizen19retireToCountrysideEv called 1 returned 100% blocks executed 75%
+        1:   62:void Citizen::retireToCountryside(){
+        1:   63:    retire();
+        1:   63-block  0
+call    0 returned 1
+        1:   64:    home = nullptr;
+        1:   65:    if(satisfactionLevel < 100)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   66:            satisfactionLevel += 5;
+    %%%%%:   66-block  0
+        1:   67:}
+        -:   68:
+function _ZN7Citizen5firedEv called 1 returned 100% blocks executed 100%
+        1:   69:void Citizen::fired(){
+        1:   70:    type = CitizenType::Citizen;
+        1:   71:    employmentStatus = false;
+        1:   72:    placeOfWork = nullptr;
+        1:   73:    satisfactionLevel -= 5;
+        1:   74:}
+        -:   75:
+function _ZN7Citizen13callTransportER19TransportDepartmentRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 5 returned 20% blocks executed 94%
+        5:   76:void Citizen::callTransport(TransportDepartment& department, const std::string& type) {
+        -:   77:    try {
+        5:   78:        Vehicle* vehicle = department.getAvailableVehicle(type);
+        5:   78-block  0
+call    0 returned 5
+branch  1 taken 1 (fallthrough)
+branch  2 taken 4 (throw)
+        1:   79:        std::cout << name << " called a " << type << "." << std::endl;
+        1:   79-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   79-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   79-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   79-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   79-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   80:        boardVehicle(vehicle);
+        1:   80-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   81:    }
+        4:   82:    catch (const std::runtime_error& e) {
+        4:   82-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+        4:   82-block  1
+call    2 returned 4
+        4:   83:        std::cerr << e.what() << std::endl;
+call    0 returned 4
+call    1 returned 4
+branch  2 taken 4 (fallthrough)
+branch  3 taken 0 (throw)
+        4:   83-block  0
+call    4 returned 4
+branch  5 taken 4 (fallthrough)
+branch  6 taken 0 (throw)
+        4:   84:        throw;
+        4:   84-block  0
+call    0 returned 4
+        4:   85:    }
+        4:   85-block  0
+call    0 returned 4
+        1:   86:}
+        1:   86-block  0
+        -:   87:
+function _ZN7Citizen12boardVehicleEP7Vehicle called 1 returned 100% blocks executed 65%
+        1:   88:void Citizen::boardVehicle(Vehicle* vehicle) {
+        1:   89:    if (currentVehicle != nullptr) {
+        1:   89-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   90:        std::cout << name << " is already in a vehicle." << std::endl;
+    %%%%%:   90-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:   91:        return;
+        -:   92:    }
+        1:   93:    currentVehicle = vehicle;
+        1:   94:    std::cout << name << " boarded " << vehicle->getType() << "." << std::endl;
+        1:   94-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   94-block  1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   94-block  2
+call    8 returned 1
+branch  9 taken 1 (fallthrough)
+branch 10 taken 0 (throw)
+        1:   94-block  3
+call   11 returned 1
+branch 12 taken 1 (fallthrough)
+branch 13 taken 0 (throw)
+        1:   94-block  4
+call   14 returned 1
+    $$$$$:   94-block  5
+call   15 never executed
+        -:   95:}
+        -:   96:
+function _ZN7Citizen14offloadVehicleEv called 0 returned 0% blocks executed 0%
+    #####:   97:void Citizen::offloadVehicle() {
+    #####:   98:    if (currentVehicle == nullptr) {
+    %%%%%:   98-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   99:        std::cout << name << " is not on a vehicle." << std::endl;
+    %%%%%:   99-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  100:        return;
+        -:  101:    }
+    #####:  102:    std::cout << name << " offloaded from " << currentVehicle->getType() << "." << std::endl;
+    %%%%%:  102-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    %%%%%:  102-block  1
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:  102-block  2
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    %%%%%:  102-block  3
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  102-block  4
+call   14 never executed
+    $$$$$:  102-block  5
+call   15 never executed
+    #####:  103:    currentVehicle = nullptr;
+        -:  104:}
+        -:  105:
+function _ZNK7Citizen11isInVehicleEv called 1 returned 100% blocks executed 100%
+        1:  106:bool Citizen::isInVehicle() const {
+        1:  107:    return currentVehicle != nullptr;
+        1:  107-block  0
+        -:  108:}
+        -:  109:
+        -:  110:

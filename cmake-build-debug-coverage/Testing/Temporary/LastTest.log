@@ -1,0 +1,139 @@
+Start testing: Nov 02 14:11 South Africa Standard Time
+----------------------------------------------------------
+1/1 Testing: all_tests
+1/1 Test: all_tests
+Command: "C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/cmake-build-debug-coverage/tests.exe"
+Directory: C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/cmake-build-debug-coverage
+"all_tests" start time: Nov 02 14:11 South Africa Standard Time
+Output:
+----------------------------------------------------------
+[==========] Running 26 tests from 5 test suites.
+[----------] Global test environment set-up.
+[----------] 18 tests from TransportDepartmentTest
+[ RUN      ] TransportDepartmentTest.AddAndGetAvailableTaxi
+[       OK ] TransportDepartmentTest.AddAndGetAvailableTaxi (0 ms)
+[ RUN      ] TransportDepartmentTest.GetAvailableTaxi
+[       OK ] TransportDepartmentTest.GetAvailableTaxi (0 ms)
+[ RUN      ] TransportDepartmentTest.GetAvailableTaxiWhenBroken
+Taxi has broken down!
+No drivers were found.
+[       OK ] TransportDepartmentTest.GetAvailableTaxiWhenBroken (0 ms)
+[ RUN      ] TransportDepartmentTest.AddAndGetAvailableTruck
+[       OK ] TransportDepartmentTest.AddAndGetAvailableTruck (0 ms)
+[ RUN      ] TransportDepartmentTest.GetAvailableTruck
+[       OK ] TransportDepartmentTest.GetAvailableTruck (0 ms)
+[ RUN      ] TransportDepartmentTest.GetAvailableTruckWhenBroken
+Truck has broken down!
+No drivers were found.
+No available vehicle of type: Truck
+[       OK ] TransportDepartmentTest.GetAvailableTruckWhenBroken (0 ms)
+[ RUN      ] TransportDepartmentTest.AddAndGetAvailableTrain
+[       OK ] TransportDepartmentTest.AddAndGetAvailableTrain (0 ms)
+[ RUN      ] TransportDepartmentTest.GetAvailableTrain
+[       OK ] TransportDepartmentTest.GetAvailableTrain (0 ms)
+[ RUN      ] TransportDepartmentTest.GetAvailableTrainWhenBroken
+Train has broken down on the tracks!
+No drivers were found.
+[       OK ] TransportDepartmentTest.GetAvailableTrainWhenBroken (0 ms)
+[ RUN      ] TransportDepartmentTest.RepairTaxi
+Taxi has broken down!
+Repairing Taxi.
+[       OK ] TransportDepartmentTest.RepairTaxi (0 ms)
+[ RUN      ] TransportDepartmentTest.ManageFunctionalityWithBrokenVehicles
+Taxi has broken down!
+Taxi has broken down and requires repair.
+Truck is fully functional.
+Train is fully functional.
+Repairing Taxi.
+[       OK ] TransportDepartmentTest.ManageFunctionalityWithBrokenVehicles (0 ms)
+[ RUN      ] TransportDepartmentTest.CitizenRequestAvailableTaxi
+Michael Anderson called a Taxi.
+Michael Anderson boarded Taxi.
+[       OK ] TransportDepartmentTest.CitizenRequestAvailableTaxi (0 ms)
+[ RUN      ] TransportDepartmentTest.CitizenRequestBrokenTaxi
+Taxi has broken down!
+No drivers were found.
+No available vehicle of type: Taxi
+[       OK ] TransportDepartmentTest.CitizenRequestBrokenTaxi (0 ms)
+[ RUN      ] TransportDepartmentTest.CitizenRequestNonExistentVehicle
+No drivers were found.
+No available vehicle of type: NonExistentVehicle
+[       OK ] TransportDepartmentTest.CitizenRequestNonExistentVehicle (0 ms)
+[ RUN      ] TransportDepartmentTest.ManageVehiclesWithAllBroken
+Taxi has broken down!
+Truck has broken down!
+Train has broken down on the tracks!
+Taxi has broken down and requires repair.
+Truck has broken down and requires repair.
+Train has broken down and requires repair.
+Repairing Taxi.
+Repairing Truck.
+Repairing Train.
+[       OK ] TransportDepartmentTest.ManageVehiclesWithAllBroken (0 ms)
+[ RUN      ] TransportDepartmentTest.ManagePartialFunctionalVehicles
+Taxi has broken down!
+Taxi has broken down and requires repair.
+Truck is fully functional.
+Repairing Taxi.
+[       OK ] TransportDepartmentTest.ManagePartialFunctionalVehicles (0 ms)
+[ RUN      ] TransportDepartmentTest.RequestAfterAllBroken
+Taxi has broken down!
+Truck has broken down!
+Train has broken down on the tracks!
+No drivers were found.
+No available vehicle of type: Taxi
+[       OK ] TransportDepartmentTest.RequestAfterAllBroken (0 ms)
+[ RUN      ] TransportDepartmentTest.RepairAllVehicles
+Taxi has broken down!
+Truck has broken down!
+Train has broken down on the tracks!
+Taxi has broken down and requires repair.
+Truck has broken down and requires repair.
+Train has broken down and requires repair.
+Repairing Taxi.
+Repairing Truck.
+Repairing Train.
+[       OK ] TransportDepartmentTest.RepairAllVehicles (0 ms)
+[----------] 18 tests from TransportDepartmentTest (0 ms total)
+
+[----------] 5 tests from citizen_test
+[ RUN      ] citizen_test.citizen_construction_test
+[       OK ] citizen_test.citizen_construction_test (0 ms)
+[ RUN      ] citizen_test.citizen_tax_test
+[       OK ] citizen_test.citizen_tax_test (0 ms)
+[ RUN      ] citizen_test.citizen_home_test
+[       OK ] citizen_test.citizen_home_test (0 ms)
+[ RUN      ] citizen_test.citizen_fire_test
+[       OK ] citizen_test.citizen_fire_test (0 ms)
+[ RUN      ] citizen_test.citizen_Retire_test
+[       OK ] citizen_test.citizen_Retire_test (0 ms)
+[----------] 5 tests from citizen_test (0 ms total)
+
+[----------] 1 test from building_test
+[ RUN      ] building_test.test_construction
+[       OK ] building_test.test_construction (0 ms)
+[----------] 1 test from building_test (0 ms total)
+
+[----------] 1 test from SimpleTest
+[ RUN      ] SimpleTest.AlwaysPass
+[       OK ] SimpleTest.AlwaysPass (0 ms)
+[----------] 1 test from SimpleTest (0 ms total)
+
+[----------] 1 test from tax_system_test
+[ RUN      ] tax_system_test.ConstructorSetCorrectValues
+[       OK ] tax_system_test.ConstructorSetCorrectValues (0 ms)
+[----------] 1 test from tax_system_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 26 tests from 5 test suites ran. (0 ms total)
+[  PASSED  ] 26 tests.
+libgcov profiling error:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles/tests.dir/tests/transport-test.cpp.gcda:overwriting an existing profile data with a different checksum
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"all_tests" end time: Nov 02 14:11 South Africa Standard Time
+"all_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 02 14:11 South Africa Standard Time

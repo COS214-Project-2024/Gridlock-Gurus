@@ -1,0 +1,128 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/TaxAuthority.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Government.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Government.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef TAXAUTHORITY_H
+        -:    2:#define TAXAUTHORITY_H
+        -:    3:#include <memory>
+        -:    4:#include <vector>
+        -:    5:#include <iostream>
+        -:    6:
+        -:    7:#include "BuildingCollection.h"
+        -:    8:#include "TaxStrategy.h"
+        -:    9:#include "Citizen.h"
+        -:   10:
+        -:   11:class Citizen;
+        -:   12:class Building;
+        -:   13:class BuildingCollection;
+        -:   14:
+        -:   15:/**
+        -:   16: * @brief Manages tax collection and taxation strategies in the city.
+        -:   17: *
+        -:   18: * Context participant in the Strategy Design Pattern.
+        -:   19: * 
+        -:   20: * The TaxAuthority class is responsible for overseeing tax-related functions, including
+        -:   21: * registering buildings, notifying citizens about taxes, and calculating tax amounts
+        -:   22: * based on specified strategies.
+        -:   23: */
+        -:   24:class TaxAuthority {
+        -:   25:private:
+        -:   26:    std::unique_ptr<BuildingCollection> buildings;  ///< Pointer to the collection of registered buildings.
+        -:   27:    std::vector<Citizen*> citizens; ///< vector of shared_pointers to citizen objects.
+        -:   28:    std::unique_ptr<TaxStrategy> strategy;          ///< Pointer to the current tax strategy being used.
+        -:   29:    int collectedTax;
+        -:   30:
+        -:   31:public:
+        -:   32:    /**
+        -:   33:     * @brief Construct a new TaxAuthority object.
+        -:   34:     *
+        -:   35:     * Initializes the TaxAuthority with default strategy and values.
+        -:   36:     */
+        -:   37:    TaxAuthority();
+        -:   38:
+        -:   39:    /**
+        -:   40:     * @brief Destroy the TaxAuthority object.
+        -:   41:     *
+        -:   42:     * Cleans up resources and deletes any dynamically allocated components.
+        -:   43:     */
+function _ZN12TaxAuthorityD1Ev called 0 returned 0% blocks executed 0%
+    #####:   44:     ~TaxAuthority() = default;
+    %%%%%:   44-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   45:
+        -:   46:    /**
+        -:   47:     * @brief Registers a building with the tax authority.
+        -:   48:     *
+        -:   49:     * @param building Pointer to the Building object to be registered.
+        -:   50:     */
+        -:   51:    void registerBuilding(Building& building);
+        -:   52:
+        -:   53:    /**
+        -:   54:     * @brief Registers a citizen with the tax authority.
+        -:   55:     *
+        -:   56:     * @param citizen A shared_ptr to a citizen object.
+        -:   57:     */
+        -:   58:    void registerCitizen(Citizen& citizen);
+        -:   59:  
+        -:   60:    /**
+        -:   61:     * @brief Notifies all registered members to pay taxes.
+        -:   62:     */
+        -:   63:    int collectTaxes();
+        -:   64:
+        -:   65:    /**
+        -:   66:     * @brief Sets the tax strategy for the tax authority.
+        -:   67:     *
+        -:   68:     * @param taxStrategy Pointer to the TaxStrategy object to be set as the current strategy.
+        -:   69:     */
+        -:   70:    void setStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
+        -:   71:
+        -:   72:    /**
+        -:   73:    * @brief Recieves the tax from buildings and citizens.
+        -:   74:    *
+        -:   75:    * @param amount The amout being sent to the tax authority.
+        -:   76:    */
+        -:   77:    void sendTax(int amount);
+        -:   78:    
+        -:   79:    int getCollectedTax();
+        -:   80:    
+        -:   81:    int getSize();
+        -:   82:    
+        -:   83:    int getAmountOfCitizens() const {
+        -:   84:        return citizens.size();
+        -:   85:    }
+        -:   86:
+        -:   87:private:
+        -:   88:    /**
+        -:   89:     * @brief Notifies citizens about tax obligations.
+        -:   90:     * Iterates through a vector of registered citizens and notifies them to make payment.
+        -:   91:     */
+        -:   92:    void notifyCitizens();
+        -:   93:
+        -:   94:    /**
+        -:   95:     * @brief Notifies buildings about their tax obligations.
+        -:   96:     * Iterates through the building collection and notifies them to make payment.
+        -:   97:     */
+        -:   98:    void notifyBuildings();
+        -:   99:
+        -:  100:    /**
+        -:  101:     * @brief Calculates the tax for a building based on its value.
+        -:  102:     *
+        -:  103:     * @param value The assessed value of the building.
+        -:  104:     * @return The calculated tax amount for the building.
+        -:  105:     */
+        -:  106:    int calculateBuildingTax(int value);
+        -:  107:
+        -:  108:    /**
+        -:  109:     * @brief Calculates the tax for a citizen based on their earnings.
+        -:  110:     *
+        -:  111:     * @param earnings The earnings of the citizen.
+        -:  112:     * @return The calculated tax amount for the citizen.
+        -:  113:     */
+        -:  114:    int calculateCitizenTax(int earnings);
+        -:  115:    
+        -:  116:
+        -:  117:};
+        -:  118:
+        -:  119:#endif // TAXAUTHORITY_H

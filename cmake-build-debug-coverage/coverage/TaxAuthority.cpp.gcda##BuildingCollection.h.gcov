@@ -1,0 +1,62 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/BuildingCollection.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TaxAuthority.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TaxAuthority.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef BUILDINGCOLLECTION_H
+        -:    2:#define BUILDINGCOLLECTION_H
+        -:    3:#include "Building.h"
+        -:    4:#include "BuildingIterator.h"
+        -:    5:#include <vector>
+        -:    6:#include <memory>
+        -:    7:
+        -:    8:class BuildingIterator;
+        -:    9:class Building;
+        -:   10:
+        -:   11:/**
+        -:   12: * @class BuildingCollection
+        -:   13: * @brief A collection of buildings that supports iteration.
+        -:   14: *
+        -:   15: * This class allows buildings to be added to the collection and provides an iterator to traverse through them.
+        -:   16: */
+        -:   17:class BuildingCollection {
+        -:   18:public:
+        -:   19:
+        -:   20:    /**
+        -:   21:     * @brief Constructs a new BuildingCollection object.
+        -:   22:     */
+function _ZN18BuildingCollectionC1Ev called 25 returned 100% blocks executed 100%
+       25:   23:    BuildingCollection() = default;
+       25:   23-block  0
+call    0 returned 25
+        -:   24:    
+        -:   25:    /**
+        -:   26:     * @brief Destroys the BuildingCollection object.
+        -:   27:     */
+        -:   28:    ~BuildingCollection();
+        -:   29:
+        -:   30:    /**
+        -:   31:     * @brief Adds a building to the collection.
+        -:   32:     * @param building Shared pointer to the building to add.
+        -:   33:     */
+        -:   34:    void addBuilding(Building& building);
+        -:   35:
+        -:   36:    /**
+        -:   37:     * @brief Returns an iterator pointing to the beginning of the collection.
+        -:   38:     * @return BuildingIterator to the beginning of the buildings collection.
+        -:   39:     */
+        -:   40:    BuildingIterator begin();
+        -:   41:
+        -:   42:    /**
+        -:   43:     * @brief Returns an iterator pointing to the end of the collection.
+        -:   44:     * @return BuildingIterator to the end of the buildings collection.
+        -:   45:     */
+        -:   46:    BuildingIterator end();
+        -:   47:    
+        -:   48:    int getSize();
+        -:   49:
+        -:   50:private:
+        -:   51:    std::vector<Building*> buildings;                 ///< The collection of buildings in the city.
+        -:   52:
+        -:   53:};
+        -:   54:
+        -:   55:#endif // BUILDINGCOLLECTION_H

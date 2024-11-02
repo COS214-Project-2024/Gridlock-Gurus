@@ -1,0 +1,140 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Citizen.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Commercial.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Commercial.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef CITIZEN_H
+        -:    2:#define CITIZEN_H
+        -:    3:
+        -:    4:#include "Vehicle.h"
+        -:    5:#include "TransportDepartment.h"
+        -:    6:#include "Building.h"
+        -:    7:#include "TaxAuthority.h"
+        -:    8:#include "CitizenType.h"
+        -:    9:#include <string>
+        -:   10:#include <memory>
+        -:   11:
+        -:   12:class TaxAuthority;
+        -:   13:class Building;
+        -:   14:
+        -:   15:
+        -:   16:class Citizen {
+        -:   17:private:
+        -:   18:    std::weak_ptr<TaxAuthority> taxAuthority;
+        -:   19:
+        -:   20:protected:
+        -:   21:    std::string name;
+        -:   22:    CitizenType type;              ///< The type of the citizen (e.g., worker, retiree).
+        -:   23:    int satisfactionLevel;         ///< The satisfaction level of the citizen.
+        -:   24:    int funds;                     ///< The amount of funds available to the citizen.
+        -:   25:    bool employmentStatus;         ///< Employment status of the citizen (employed or not).
+        -:   26:    bool retired;                  ///< Retirement status of the citizen.
+        -:   27:
+        -:   28:    Building* home;                ///< Pointer to the citizen's home building.
+        -:   29:    Building* placeOfWork;         ///< Pointer to the citizen's workplace.
+        -:   30:
+        -:   31:    int id;
+        -:   32:    Vehicle* currentVehicle;
+        -:   33:
+        -:   34:public:
+        -:   35:    /**
+        -:   36:     * @brief Construct a new Citizen object.
+        -:   37:     *
+        -:   38:     * @param type The type of the citizen.
+        -:   39:     * @param satisfactionLevel The initial satisfaction level of the citizen.
+        -:   40:     * @param funds The initial funds available to the citizen.
+        -:   41:     */
+        -:   42:    Citizen(int id,CitizenType type, int satisfactionLevel, int funds, std::weak_ptr<TaxAuthority> taxAuthority);
+        -:   43:
+        -:   44:    /**
+        -:   45:     * @brief Destroy the Citizen object.
+        -:   46:     *
+        -:   47:     * Cleans up resources related to the citizen.
+        -:   48:     */
+        -:   49:     ~Citizen() = default;
+        -:   50:
+        -:   51:    /**
+        -:   52:     * @brief Finds employment at a specified building.
+        -:   53:     *
+        -:   54:     * @param placeOfEmployment Pointer to the building where the citizen will work.
+        -:   55:     */
+        -:   56:    void setWork(Building& work);
+        -:   57:
+        -:   58:    /**
+        -:   59:     * @brief Finds a home in a specified building.
+        -:   60:     *
+        -:   61:     * @param home Pointer to the building that will be the citizen's home.
+        -:   62:     */
+        -:   63:    void setHome(Building& home);
+        -:   64:
+        -:   65:    /**
+        -:   66:     * @brief Simulates a workday for the citizen.
+        -:   67:     *
+        -:   68:     * This function executes daily tasks associated with the citizen's job.
+        -:   69:     */
+        -:   70:    void workDay();
+        -:   71:
+        -:   72:    /**
+        -:   73:     * @brief Collects salary from the place of work.
+        -:   74:     *
+        -:   75:     * @param placeOfWork Pointer to the building where the citizen works.
+        -:   76:     */
+        -:   77:    void collectSalary();
+        -:   78:
+        -:   79:    /**
+        -:   80:     * @brief Pays taxes based on the citizen's income.
+        -:   81:     *
+        -:   82:     * This function handles the tax payment process for the citizen.
+        -:   83:     */
+        -:   84:    void payTaxes(int amount);
+        -:   85:    
+        -:   86:    void callTransport(TransportDepartment& department, const std::string& type);
+        -:   87:    void boardVehicle(Vehicle* vehicle);
+        -:   88:    void offloadVehicle();
+        -:   89:
+        -:   90:    bool isInVehicle() const;
+        -:   91:
+        -:   92:    void retire();
+        -:   93:    void retireToCountryside();
+        -:   94:
+        -:   95:    void fired();
+        -:   96:
+        -:   97:
+        -:   98://GETTERS
+function _ZNK7Citizen19getEmploymentStatusEv called 0 returned 0% blocks executed 0%
+    #####:   99:    bool getEmploymentStatus() const {
+    #####:  100:        return this->employmentStatus;
+    %%%%%:  100-block  0
+        -:  101:    };
+        -:  102:
+function _ZNK7Citizen7getNameB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:  103:    std::string getName() const {
+    #####:  104:        return this->name;
+    %%%%%:  104-block  0
+call    0 never executed
+        -:  105:    }
+        -:  106:
+        -:  107:    int getId() const {
+        -:  108:        return this->id;
+        -:  109:    }
+        -:  110:
+        -:  111:    int getFunds() const {
+        -:  112:        return this->funds;
+        -:  113:    }
+        -:  114:    
+        -:  115:    int getSatisfactionLevel() const {
+        -:  116:        return this->satisfactionLevel;
+        -:  117:    }
+        -:  118:    
+        -:  119:    CitizenType getType() const {
+        -:  120:        return this->type;
+        -:  121:    }
+        -:  122:
+        -:  123:    bool hasHome() const {
+        -:  124:        return this->home != nullptr;
+        -:  125:    }
+        -:  126:
+        -:  127:
+        -:  128:};
+        -:  129:
+        -:  130:#endif // CITIZEN_H
+        -:  131:

@@ -1,0 +1,3739 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/googletest/googletest/src/gtest-death-test.cc
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright 2005, Google Inc.
+        -:    2:// All rights reserved.
+        -:    3://
+        -:    4:// Redistribution and use in source and binary forms, with or without
+        -:    5:// modification, are permitted provided that the following conditions are
+        -:    6:// met:
+        -:    7://
+        -:    8://     * Redistributions of source code must retain the above copyright
+        -:    9:// notice, this list of conditions and the following disclaimer.
+        -:   10://     * Redistributions in binary form must reproduce the above
+        -:   11:// copyright notice, this list of conditions and the following disclaimer
+        -:   12:// in the documentation and/or other materials provided with the
+        -:   13:// distribution.
+        -:   14://     * Neither the name of Google Inc. nor the names of its
+        -:   15:// contributors may be used to endorse or promote products derived from
+        -:   16:// this software without specific prior written permission.
+        -:   17://
+        -:   18:// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+        -:   19:// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+        -:   20:// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+        -:   21:// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        -:   22:// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        -:   23:// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+        -:   24:// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+        -:   25:// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+        -:   26:// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   27:// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        -:   28:// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   29:
+        -:   30://
+        -:   31:// This file implements death tests.
+        -:   32:
+        -:   33:#include "gtest/gtest-death-test.h"
+        -:   34:
+        -:   35:#include <stdlib.h>
+        -:   36:
+        -:   37:#include <functional>
+        -:   38:#include <memory>
+        -:   39:#include <sstream>
+        -:   40:#include <string>
+        -:   41:#include <utility>
+        -:   42:#include <vector>
+        -:   43:
+        -:   44:#include "gtest/internal/custom/gtest.h"
+        -:   45:#include "gtest/internal/gtest-port.h"
+        -:   46:
+        -:   47:#ifdef GTEST_HAS_DEATH_TEST
+        -:   48:
+        -:   49:#ifdef GTEST_OS_MAC
+        -:   50:#include <crt_externs.h>
+        -:   51:#endif  // GTEST_OS_MAC
+        -:   52:
+        -:   53:#include <errno.h>
+        -:   54:#include <fcntl.h>
+        -:   55:#include <limits.h>
+        -:   56:
+        -:   57:#ifdef GTEST_OS_LINUX
+        -:   58:#include <signal.h>
+        -:   59:#endif  // GTEST_OS_LINUX
+        -:   60:
+        -:   61:#include <stdarg.h>
+        -:   62:
+        -:   63:#ifdef GTEST_OS_WINDOWS
+        -:   64:#include <windows.h>
+        -:   65:#else
+        -:   66:#include <sys/mman.h>
+        -:   67:#include <sys/wait.h>
+        -:   68:#endif  // GTEST_OS_WINDOWS
+        -:   69:
+        -:   70:#ifdef GTEST_OS_QNX
+        -:   71:#include <spawn.h>
+        -:   72:#endif  // GTEST_OS_QNX
+        -:   73:
+        -:   74:#ifdef GTEST_OS_FUCHSIA
+        -:   75:#include <lib/fdio/fd.h>
+        -:   76:#include <lib/fdio/io.h>
+        -:   77:#include <lib/fdio/spawn.h>
+        -:   78:#include <lib/zx/channel.h>
+        -:   79:#include <lib/zx/port.h>
+        -:   80:#include <lib/zx/process.h>
+        -:   81:#include <lib/zx/socket.h>
+        -:   82:#include <zircon/processargs.h>
+        -:   83:#include <zircon/syscalls.h>
+        -:   84:#include <zircon/syscalls/policy.h>
+        -:   85:#include <zircon/syscalls/port.h>
+        -:   86:#endif  // GTEST_OS_FUCHSIA
+        -:   87:
+        -:   88:#endif  // GTEST_HAS_DEATH_TEST
+        -:   89:
+        -:   90:#include "gtest/gtest-message.h"
+        -:   91:#include "gtest/internal/gtest-string.h"
+        -:   92:#include "src/gtest-internal-inl.h"
+        -:   93:
+        -:   94:namespace testing {
+        -:   95:
+        -:   96:// Constants.
+        -:   97:
+        -:   98:// The default death test style.
+        -:   99://
+        -:  100:// This is defined in internal/gtest-port.h as "fast", but can be overridden by
+        -:  101:// a definition in internal/custom/gtest-port.h. The recommended value, which is
+        -:  102:// used internally at Google, is "threadsafe".
+        -:  103:static const char kDefaultDeathTestStyle[] = GTEST_DEFAULT_DEATH_TEST_STYLE;
+        -:  104:
+        -:  105:}  // namespace testing
+        -:  106:
+        -:  107:GTEST_DEFINE_string_(
+        -:  108:    death_test_style,
+        -:  109:    testing::internal::StringFromGTestEnv("death_test_style",
+        -:  110:                                          testing::kDefaultDeathTestStyle),
+        -:  111:    "Indicates how to run a death test in a forked child process: "
+        -:  112:    "\"threadsafe\" (child process re-executes the test binary "
+        -:  113:    "from the beginning, running only the specific death test) or "
+        -:  114:    "\"fast\" (child process runs the death test immediately "
+        -:  115:    "after forking).");
+        -:  116:
+        -:  117:GTEST_DEFINE_bool_(
+        -:  118:    death_test_use_fork,
+        -:  119:    testing::internal::BoolFromGTestEnv("death_test_use_fork", false),
+        -:  120:    "Instructs to use fork()/_Exit() instead of clone() in death tests. "
+        -:  121:    "Ignored and always uses fork() on POSIX systems where clone() is not "
+        -:  122:    "implemented. Useful when running under valgrind or similar tools if "
+        -:  123:    "those do not support clone(). Valgrind 3.3.1 will just fail if "
+        -:  124:    "it sees an unsupported combination of clone() flags. "
+        -:  125:    "It is not recommended to use this flag w/o valgrind though it will "
+        -:  126:    "work in 99% of the cases. Once valgrind is fixed, this flag will "
+        -:  127:    "most likely be removed.");
+        -:  128:
+        -:  129:GTEST_DEFINE_string_(
+        -:  130:    internal_run_death_test, "",
+        -:  131:    "Indicates the file, line number, temporal index of "
+        -:  132:    "the single death test to run, and a file descriptor to "
+        -:  133:    "which a success code may be sent, all separated by "
+        -:  134:    "the '|' characters.  This flag is specified if and only if the "
+        -:  135:    "current process is a sub-process launched for running a thread-safe "
+        -:  136:    "death test.  FOR INTERNAL USE ONLY.");
+        -:  137:
+        -:  138:namespace testing {
+        -:  139:
+        -:  140:#ifdef GTEST_HAS_DEATH_TEST
+        -:  141:
+        -:  142:namespace internal {
+        -:  143:
+        -:  144:// Valid only for fast death tests. Indicates the code is running in the
+        -:  145:// child process of a fast style death test.
+        -:  146:#if !defined(GTEST_OS_WINDOWS) && !defined(GTEST_OS_FUCHSIA)
+        -:  147:static bool g_in_fast_death_test_child = false;
+        -:  148:#endif
+        -:  149:
+        -:  150:// Returns a Boolean value indicating whether the caller is currently
+        -:  151:// executing in the context of the death test child process.  Tools such as
+        -:  152:// Valgrind heap checkers may need this to modify their behavior in death
+        -:  153:// tests.  IMPORTANT: This is an internal utility.  Using it may break the
+        -:  154:// implementation of death tests.  User code MUST NOT use it.
+function _ZN7testing8internal16InDeathTestChildEv called 0 returned 0% blocks executed 0%
+    #####:  155:bool InDeathTestChild() {
+        -:  156:#if defined(GTEST_OS_WINDOWS) || defined(GTEST_OS_FUCHSIA)
+        -:  157:
+        -:  158:  // On Windows and Fuchsia, death tests are thread-safe regardless of the value
+        -:  159:  // of the death_test_style flag.
+    #####:  160:  return !GTEST_FLAG_GET(internal_run_death_test).empty();
+    %%%%%:  160-block  0
+call    0 never executed
+        -:  161:
+        -:  162:#else
+        -:  163:
+        -:  164:  if (GTEST_FLAG_GET(death_test_style) == "threadsafe")
+        -:  165:    return !GTEST_FLAG_GET(internal_run_death_test).empty();
+        -:  166:  else
+        -:  167:    return g_in_fast_death_test_child;
+        -:  168:#endif
+        -:  169:}
+        -:  170:
+        -:  171:}  // namespace internal
+        -:  172:
+        -:  173:// ExitedWithCode constructor.
+function _ZN7testing14ExitedWithCodeC2Ei called 0 returned 0% blocks executed 0%
+    #####:  174:ExitedWithCode::ExitedWithCode(int exit_code) : exit_code_(exit_code) {}
+        -:  175:
+        -:  176:// ExitedWithCode function-call operator.
+function _ZNK7testing14ExitedWithCodeclEi called 0 returned 0% blocks executed 0%
+    #####:  177:bool ExitedWithCode::operator()(int exit_status) const {
+        -:  178:#if defined(GTEST_OS_WINDOWS) || defined(GTEST_OS_FUCHSIA)
+        -:  179:
+    #####:  180:  return exit_status == exit_code_;
+    %%%%%:  180-block  0
+        -:  181:
+        -:  182:#else
+        -:  183:
+        -:  184:  return WIFEXITED(exit_status) && WEXITSTATUS(exit_status) == exit_code_;
+        -:  185:
+        -:  186:#endif  // GTEST_OS_WINDOWS || GTEST_OS_FUCHSIA
+        -:  187:}
+        -:  188:
+        -:  189:#if !defined(GTEST_OS_WINDOWS) && !defined(GTEST_OS_FUCHSIA)
+        -:  190:// KilledBySignal constructor.
+        -:  191:KilledBySignal::KilledBySignal(int signum) : signum_(signum) {}
+        -:  192:
+        -:  193:// KilledBySignal function-call operator.
+        -:  194:bool KilledBySignal::operator()(int exit_status) const {
+        -:  195:#if defined(GTEST_KILLED_BY_SIGNAL_OVERRIDE_)
+        -:  196:  {
+        -:  197:    bool result;
+        -:  198:    if (GTEST_KILLED_BY_SIGNAL_OVERRIDE_(signum_, exit_status, &result)) {
+        -:  199:      return result;
+        -:  200:    }
+        -:  201:  }
+        -:  202:#endif  // defined(GTEST_KILLED_BY_SIGNAL_OVERRIDE_)
+        -:  203:  return WIFSIGNALED(exit_status) && WTERMSIG(exit_status) == signum_;
+        -:  204:}
+        -:  205:#endif  // !GTEST_OS_WINDOWS && !GTEST_OS_FUCHSIA
+        -:  206:
+        -:  207:namespace internal {
+        -:  208:
+        -:  209:// Utilities needed for death tests.
+        -:  210:
+        -:  211:// Generates a textual description of a given exit code, in the format
+        -:  212:// specified by wait(2).
+function _ZN7testing8internalL11ExitSummaryEi called 0 returned 0% blocks executed 0%
+    #####:  213:static std::string ExitSummary(int exit_code) {
+    #####:  214:  Message m;
+    %%%%%:  214-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  215:
+        -:  216:#if defined(GTEST_OS_WINDOWS) || defined(GTEST_OS_FUCHSIA)
+        -:  217:
+    #####:  218:  m << "Exited with exit status " << exit_code;
+    %%%%%:  218-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  218-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+        -:  219:
+        -:  220:#else
+        -:  221:
+        -:  222:  if (WIFEXITED(exit_code)) {
+        -:  223:    m << "Exited with exit status " << WEXITSTATUS(exit_code);
+        -:  224:  } else if (WIFSIGNALED(exit_code)) {
+        -:  225:    m << "Terminated by signal " << WTERMSIG(exit_code);
+        -:  226:  }
+        -:  227:#ifdef WCOREDUMP
+        -:  228:  if (WCOREDUMP(exit_code)) {
+        -:  229:    m << " (core dumped)";
+        -:  230:  }
+        -:  231:#endif
+        -:  232:#endif  // GTEST_OS_WINDOWS || GTEST_OS_FUCHSIA
+        -:  233:
+    #####:  234:  return m.GetString();
+    %%%%%:  234-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  234-block  1
+    #####:  235:}
+    %%%%%:  235-block  0
+call    0 never executed
+    $$$$$:  235-block  1
+call    1 never executed
+        -:  236:
+        -:  237:// Returns true if exit_status describes a process that was terminated
+        -:  238:// by a signal, or exited normally with a nonzero exit code.
+function _ZN7testing8internal20ExitedUnsuccessfullyEi called 0 returned 0% blocks executed 0%
+    #####:  239:bool ExitedUnsuccessfully(int exit_status) {
+    #####:  240:  return !ExitedWithCode(0)(exit_status);
+    %%%%%:  240-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:  240-block  1
+        -:  241:}
+        -:  242:
+        -:  243:#if !defined(GTEST_OS_WINDOWS) && !defined(GTEST_OS_FUCHSIA)
+        -:  244:// Generates a textual failure message when a death test finds more than
+        -:  245:// one thread running, or cannot determine the number of threads, prior
+        -:  246:// to executing the given statement.  It is the responsibility of the
+        -:  247:// caller not to pass a thread_count of 1.
+        -:  248:static std::string DeathTestThreadWarning(size_t thread_count) {
+        -:  249:  Message msg;
+        -:  250:  msg << "Death tests use fork(), which is unsafe particularly"
+        -:  251:      << " in a threaded context. For this test, " << GTEST_NAME_ << " ";
+        -:  252:  if (thread_count == 0) {
+        -:  253:    msg << "couldn't detect the number of threads.";
+        -:  254:  } else {
+        -:  255:    msg << "detected " << thread_count << " threads.";
+        -:  256:  }
+        -:  257:  msg << " See "
+        -:  258:         "https://github.com/google/googletest/blob/main/docs/"
+        -:  259:         "advanced.md#death-tests-and-threads"
+        -:  260:      << " for more explanation and suggested solutions, especially if"
+        -:  261:      << " this is the last message you see before your test times out.";
+        -:  262:  return msg.GetString();
+        -:  263:}
+        -:  264:#endif  // !GTEST_OS_WINDOWS && !GTEST_OS_FUCHSIA
+        -:  265:
+        -:  266:// Flag characters for reporting a death test that did not die.
+        -:  267:static const char kDeathTestLived = 'L';
+        -:  268:static const char kDeathTestReturned = 'R';
+        -:  269:static const char kDeathTestThrew = 'T';
+        -:  270:static const char kDeathTestInternalError = 'I';
+        -:  271:
+        -:  272:#ifdef GTEST_OS_FUCHSIA
+        -:  273:
+        -:  274:// File descriptor used for the pipe in the child process.
+        -:  275:static const int kFuchsiaReadPipeFd = 3;
+        -:  276:
+        -:  277:#endif
+        -:  278:
+        -:  279:// An enumeration describing all of the possible ways that a death test can
+        -:  280:// conclude.  DIED means that the process died while executing the test
+        -:  281:// code; LIVED means that process lived beyond the end of the test code;
+        -:  282:// RETURNED means that the test statement attempted to execute a return
+        -:  283:// statement, which is not allowed; THREW means that the test statement
+        -:  284:// returned control by throwing an exception.  IN_PROGRESS means the test
+        -:  285:// has not yet concluded.
+        -:  286:enum DeathTestOutcome { IN_PROGRESS, DIED, LIVED, RETURNED, THREW };
+        -:  287:
+        -:  288:// Routine for aborting the program which is safe to call from an
+        -:  289:// exec-style death test child process, in which case the error
+        -:  290:// message is propagated back to the parent process.  Otherwise, the
+        -:  291:// message is simply printed to stderr.  In either case, the program
+        -:  292:// then exits with status 1.
+function _ZN7testing8internalL14DeathTestAbortERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:  293:[[noreturn]] static void DeathTestAbort(const std::string& message) {
+        -:  294:  // On a POSIX system, this function may be called from a threadsafe-style
+        -:  295:  // death test child process, which operates on a very small stack.  Use
+        -:  296:  // the heap for any additional non-minuscule memory requirements.
+        -:  297:  const InternalRunDeathTestFlag* const flag =
+    #####:  298:      GetUnitTestImpl()->internal_run_death_test_flag();
+    %%%%%:  298-block  0
+call    0 never executed
+call    1 never executed
+    #####:  299:  if (flag != nullptr) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  300:    FILE* parent = posix::FDOpen(flag->write_fd(), "w");
+    %%%%%:  300-block  0
+call    0 never executed
+call    1 never executed
+    #####:  301:    fputc(kDeathTestInternalError, parent);
+call    0 never executed
+    #####:  302:    fprintf(parent, "%s", message.c_str());
+call    0 never executed
+call    1 never executed
+    #####:  303:    fflush(parent);
+call    0 never executed
+    #####:  304:    _Exit(1);
+call    0 never executed
+        -:  305:  } else {
+    #####:  306:    fprintf(stderr, "%s", message.c_str());
+    %%%%%:  306-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  307:    fflush(stderr);
+call    0 never executed
+call    1 never executed
+    #####:  308:    posix::Abort();
+        -:  309:  }
+        -:  310:}
+        -:  311:
+        -:  312:// A replacement for CHECK that calls DeathTestAbort if the assertion
+        -:  313:// fails.
+        -:  314:#define GTEST_DEATH_TEST_CHECK_(expression)                              \
+        -:  315:  do {                                                                   \
+        -:  316:    if (!::testing::internal::IsTrue(expression)) {                      \
+        -:  317:      DeathTestAbort(::std::string("CHECK failed: File ") + __FILE__ +   \
+        -:  318:                     ", line " +                                         \
+        -:  319:                     ::testing::internal::StreamableToString(__LINE__) + \
+        -:  320:                     ": " + #expression);                                \
+        -:  321:    }                                                                    \
+        -:  322:  } while (::testing::internal::AlwaysFalse())
+        -:  323:
+        -:  324:// This macro is similar to GTEST_DEATH_TEST_CHECK_, but it is meant for
+        -:  325:// evaluating any system call that fulfills two conditions: it must return
+        -:  326:// -1 on failure, and set errno to EINTR when it is interrupted and
+        -:  327:// should be tried again.  The macro expands to a loop that repeatedly
+        -:  328:// evaluates the expression as long as it evaluates to -1 and sets
+        -:  329:// errno to EINTR.  If the expression evaluates to -1 but errno is
+        -:  330:// something other than EINTR, DeathTestAbort is called.
+        -:  331:#define GTEST_DEATH_TEST_CHECK_SYSCALL_(expression)                      \
+        -:  332:  do {                                                                   \
+        -:  333:    int gtest_retval;                                                    \
+        -:  334:    do {                                                                 \
+        -:  335:      gtest_retval = (expression);                                       \
+        -:  336:    } while (gtest_retval == -1 && errno == EINTR);                      \
+        -:  337:    if (gtest_retval == -1) {                                            \
+        -:  338:      DeathTestAbort(::std::string("CHECK failed: File ") + __FILE__ +   \
+        -:  339:                     ", line " +                                         \
+        -:  340:                     ::testing::internal::StreamableToString(__LINE__) + \
+        -:  341:                     ": " + #expression + " != -1");                     \
+        -:  342:    }                                                                    \
+        -:  343:  } while (::testing::internal::AlwaysFalse())
+        -:  344:
+        -:  345:// Returns the message describing the last system error in errno.
+function _ZN7testing8internal23GetLastErrnoDescriptionB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:  346:std::string GetLastErrnoDescription() {
+    %%%%%:  346-block  0
+    #####:  347:  return errno == 0 ? "" : posix::StrError(errno);
+    %%%%%:  347-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  347-block  1
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    %%%%%:  347-block  2
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:  347-block  3
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    %%%%%:  347-block  4
+    %%%%%:  347-block  5
+    %%%%%:  347-block  6
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  347-block  7
+        -:  348:}
+        -:  349:
+        -:  350:// This is called from a death test parent process to read a failure
+        -:  351:// message from the death test child process and log it with the FATAL
+        -:  352:// severity. On Windows, the message is read from a pipe handle. On other
+        -:  353:// platforms, it is read from a file descriptor.
+function _ZN7testing8internalL21FailFromInternalErrorEi called 0 returned 0% blocks executed 0%
+    #####:  354:static void FailFromInternalError(int fd) {
+    #####:  355:  Message error;
+    %%%%%:  355-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  356:  char buffer[256];
+        -:  357:  int num_read;
+        -:  358:
+        -:  359:  do {
+    #####:  360:    while ((num_read = posix::Read(fd, buffer, 255)) > 0) {
+    %%%%%:  360-block  0
+    %%%%%:  360-block  1
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  360-block  2
+branch  3 never executed
+branch  4 never executed (fallthrough)
+    #####:  361:      buffer[num_read] = '\0';
+    #####:  362:      error << buffer;
+    %%%%%:  362-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  363:    }
+    #####:  364:  } while (num_read == -1 && errno == EINTR);
+    %%%%%:  364-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  364-block  1
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    %%%%%:  364-block  2
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  364-block  3
+    %%%%%:  364-block  4
+    %%%%%:  364-block  5
+branch  7 never executed (fallthrough)
+branch  8 never executed
+        -:  365:
+    #####:  366:  if (num_read == 0) {
+    %%%%%:  366-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  367:    GTEST_LOG_(FATAL) << error.GetString();
+    %%%%%:  367-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  367-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  367-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  367-block  3
+call   10 never executed
+call   11 never executed
+    $$$$$:  367-block  4
+call   12 never executed
+    $$$$$:  367-block  5
+    $$$$$:  367-block  6
+call   13 never executed
+    $$$$$:  367-block  7
+        -:  368:  } else {
+    #####:  369:    const int last_error = errno;
+    %%%%%:  369-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  370:    GTEST_LOG_(FATAL) << "Error while reading death test internal: "
+    %%%%%:  370-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  370-block  1
+call    3 never executed
+    $$$$$:  370-block  2
+call    4 never executed
+    $$$$$:  370-block  3
+    #####:  371:                      << GetLastErrnoDescription() << " [" << last_error << "]";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  371-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  371-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  371-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:  371-block  3
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:  371-block  4
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  371-block  5
+call   18 never executed
+call   19 never executed
+    $$$$$:  371-block  6
+call   20 never executed
+    $$$$$:  371-block  7
+        -:  372:  }
+    #####:  373:}
+    %%%%%:  373-block  0
+call    0 never executed
+    $$$$$:  373-block  1
+call    1 never executed
+        -:  374:
+        -:  375:// Death test constructor.  Increments the running death test count
+        -:  376:// for the current test.
+function _ZN7testing8internal9DeathTestC2Ev called 0 returned 0% blocks executed 0%
+    #####:  377:DeathTest::DeathTest() {
+    #####:  378:  TestInfo* const info = GetUnitTestImpl()->current_test_info();
+    %%%%%:  378-block  0
+call    0 never executed
+call    1 never executed
+    #####:  379:  if (info == nullptr) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  380:    DeathTestAbort(
+    %%%%%:  380-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  380-block  1
+call    3 never executed
+    $$$$$:  380-block  2
+call    4 never executed
+    $$$$$:  380-block  3
+        -:  381:        "Cannot run a death test outside of a TEST or "
+        -:  382:        "TEST_F construct");
+        -:  383:  }
+    #####:  384:}
+    %%%%%:  384-block  0
+        -:  385:
+        -:  386:// Creates and returns a death test by dispatching to the current
+        -:  387:// death test factory.
+function _ZN7testing8internal9DeathTest6CreateEPKcNS_7MatcherIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES3_iPPS1_ called 0 returned 0% blocks executed 0%
+    #####:  388:bool DeathTest::Create(const char* statement,
+        -:  389:                       Matcher<const std::string&> matcher, const char* file,
+        -:  390:                       int line, DeathTest** test) {
+    #####:  391:  return GetUnitTestImpl()->death_test_factory()->Create(
+    %%%%%:  391-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    %%%%%:  391-block  1
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:  391-block  2
+call    8 never executed
+    $$$$$:  391-block  3
+call    9 never executed
+    #####:  392:      statement, std::move(matcher), file, line, test);
+call    0 never executed
+    %%%%%:  392-block  0
+    %%%%%:  392-block  1
+        -:  393:}
+        -:  394:
+function _ZN7testing8internal9DeathTest11LastMessageEv called 0 returned 0% blocks executed 0%
+    #####:  395:const char* DeathTest::LastMessage() {
+    #####:  396:  return last_death_test_message_.c_str();
+    %%%%%:  396-block  0
+call    0 never executed
+        -:  397:}
+        -:  398:
+function _ZN7testing8internal9DeathTest27set_last_death_test_messageERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:  399:void DeathTest::set_last_death_test_message(const std::string& message) {
+    #####:  400:  last_death_test_message_ = message;
+    %%%%%:  400-block  0
+call    0 never executed
+    #####:  401:}
+        -:  402:
+        -:  403:std::string DeathTest::last_death_test_message_;
+        -:  404:
+        -:  405:// Provides cross platform implementation for some death functionality.
+        -:  406:class DeathTestImpl : public DeathTest {
+        -:  407: protected:
+function _ZN7testing8internal13DeathTestImplC2EPKcNS_7MatcherIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEE called 0 returned 0% blocks executed 0%
+    #####:  408:  DeathTestImpl(const char* a_statement, Matcher<const std::string&> matcher)
+    #####:  409:      : statement_(a_statement),
+    #####:  410:        matcher_(std::move(matcher)),
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  411:        spawned_(false),
+    #####:  412:        status_(-1),
+    #####:  413:        outcome_(IN_PROGRESS),
+    #####:  414:        read_fd_(-1),
+    #####:  415:        write_fd_(-1) {}
+    %%%%%:  415-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:  415-block  1
+    $$$$$:  415-block  2
+call    2 never executed
+        -:  416:
+        -:  417:  // read_fd_ is expected to be closed and cleared by a derived class.
+function _ZN7testing8internal13DeathTestImplD2Ev called 0 returned 0% blocks executed 0%
+    #####:  418:  ~DeathTestImpl() override { GTEST_DEATH_TEST_CHECK_(read_fd_ == -1); }
+    %%%%%:  418-block  0
+    %%%%%:  418-block  1
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  418-block  2
+call    3 never executed
+    %%%%%:  418-block  3
+call    4 never executed
+call    5 never executed
+call    6 never executed
+call    7 never executed
+call    8 never executed
+call    9 never executed
+call   10 never executed
+    %%%%%:  418-block  4
+call   11 never executed
+branch 12 never executed
+branch 13 never executed (fallthrough)
+    %%%%%:  418-block  5
+call   14 never executed
+call   15 never executed
+        -:  419:
+        -:  420:  void Abort(AbortReason reason) override;
+        -:  421:  bool Passed(bool status_ok) override;
+        -:  422:
+function _ZNK7testing8internal13DeathTestImpl9statementEv called 0 returned 0% blocks executed 0%
+    #####:  423:  const char* statement() const { return statement_; }
+    %%%%%:  423-block  0
+function _ZNK7testing8internal13DeathTestImpl7spawnedEv called 0 returned 0% blocks executed 0%
+    #####:  424:  bool spawned() const { return spawned_; }
+    %%%%%:  424-block  0
+function _ZN7testing8internal13DeathTestImpl11set_spawnedEb called 0 returned 0% blocks executed 0%
+    #####:  425:  void set_spawned(bool is_spawned) { spawned_ = is_spawned; }
+function _ZNK7testing8internal13DeathTestImpl6statusEv called 0 returned 0% blocks executed 0%
+    #####:  426:  int status() const { return status_; }
+    %%%%%:  426-block  0
+function _ZN7testing8internal13DeathTestImpl10set_statusEi called 0 returned 0% blocks executed 0%
+    #####:  427:  void set_status(int a_status) { status_ = a_status; }
+function _ZNK7testing8internal13DeathTestImpl7outcomeEv called 0 returned 0% blocks executed 0%
+    #####:  428:  DeathTestOutcome outcome() const { return outcome_; }
+    %%%%%:  428-block  0
+function _ZN7testing8internal13DeathTestImpl11set_outcomeENS0_16DeathTestOutcomeE called 0 returned 0% blocks executed 0%
+    #####:  429:  void set_outcome(DeathTestOutcome an_outcome) { outcome_ = an_outcome; }
+function _ZNK7testing8internal13DeathTestImpl7read_fdEv called 0 returned 0% blocks executed 0%
+    #####:  430:  int read_fd() const { return read_fd_; }
+    %%%%%:  430-block  0
+function _ZN7testing8internal13DeathTestImpl11set_read_fdEi called 0 returned 0% blocks executed 0%
+    #####:  431:  void set_read_fd(int fd) { read_fd_ = fd; }
+function _ZNK7testing8internal13DeathTestImpl8write_fdEv called 0 returned 0% blocks executed 0%
+    #####:  432:  int write_fd() const { return write_fd_; }
+    %%%%%:  432-block  0
+function _ZN7testing8internal13DeathTestImpl12set_write_fdEi called 0 returned 0% blocks executed 0%
+    #####:  433:  void set_write_fd(int fd) { write_fd_ = fd; }
+        -:  434:
+        -:  435:  // Called in the parent process only. Reads the result code of the death
+        -:  436:  // test child process via a pipe, interprets it to set the outcome_
+        -:  437:  // member, and closes read_fd_.  Outputs diagnostics and terminates in
+        -:  438:  // case of unexpected codes.
+        -:  439:  void ReadAndInterpretStatusByte();
+        -:  440:
+        -:  441:  // Returns stderr output from the child process.
+        -:  442:  virtual std::string GetErrorLogs();
+        -:  443:
+        -:  444: private:
+        -:  445:  // The textual content of the code this object is testing.  This class
+        -:  446:  // doesn't own this string and should not attempt to delete it.
+        -:  447:  const char* const statement_;
+        -:  448:  // A matcher that's expected to match the stderr output by the child process.
+        -:  449:  Matcher<const std::string&> matcher_;
+        -:  450:  // True if the death test child process has been successfully spawned.
+        -:  451:  bool spawned_;
+        -:  452:  // The exit status of the child process.
+        -:  453:  int status_;
+        -:  454:  // How the death test concluded.
+        -:  455:  DeathTestOutcome outcome_;
+        -:  456:  // Descriptor to the read end of the pipe to the child process.  It is
+        -:  457:  // always -1 in the child process.  The child keeps its write end of the
+        -:  458:  // pipe in write_fd_.
+        -:  459:  int read_fd_;
+        -:  460:  // Descriptor to the child's write end of the pipe to the parent process.
+        -:  461:  // It is always -1 in the parent process.  The parent keeps its end of the
+        -:  462:  // pipe in read_fd_.
+        -:  463:  int write_fd_;
+        -:  464:};
+        -:  465:
+        -:  466:// Called in the parent process only. Reads the result code of the death
+        -:  467:// test child process via a pipe, interprets it to set the outcome_
+        -:  468:// member, and closes read_fd_.  Outputs diagnostics and terminates in
+        -:  469:// case of unexpected codes.
+function _ZN7testing8internal13DeathTestImpl26ReadAndInterpretStatusByteEv called 0 returned 0% blocks executed 0%
+    #####:  470:void DeathTestImpl::ReadAndInterpretStatusByte() {
+    %%%%%:  470-block  0
+        -:  471:  char flag;
+        -:  472:  int bytes_read;
+        -:  473:
+        -:  474:  // The read() here blocks until data is available (signifying the
+        -:  475:  // failure of the death test) or until the pipe is closed (signifying
+        -:  476:  // its success), so it's okay to call this in the parent before
+        -:  477:  // the child process has exited.
+        -:  478:  do {
+    #####:  479:    bytes_read = posix::Read(read_fd(), &flag, 1);
+    %%%%%:  479-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    #####:  480:  } while (bytes_read == -1 && errno == EINTR);
+    %%%%%:  480-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  480-block  1
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    %%%%%:  480-block  2
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  480-block  3
+    %%%%%:  480-block  4
+    %%%%%:  480-block  5
+branch  7 never executed
+branch  8 never executed (fallthrough)
+        -:  481:
+    #####:  482:  if (bytes_read == 0) {
+    %%%%%:  482-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  483:    set_outcome(DIED);
+    %%%%%:  483-block  0
+call    0 never executed
+    #####:  484:  } else if (bytes_read == 1) {
+    %%%%%:  484-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  485:    switch (flag) {
+    %%%%%:  485-block  0
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  486:      case kDeathTestReturned:
+    #####:  487:        set_outcome(RETURNED);
+    %%%%%:  487-block  0
+call    0 never executed
+    #####:  488:        break;
+    #####:  489:      case kDeathTestThrew:
+    #####:  490:        set_outcome(THREW);
+    %%%%%:  490-block  0
+call    0 never executed
+    #####:  491:        break;
+    #####:  492:      case kDeathTestLived:
+    #####:  493:        set_outcome(LIVED);
+    %%%%%:  493-block  0
+call    0 never executed
+    #####:  494:        break;
+    #####:  495:      case kDeathTestInternalError:
+    #####:  496:        FailFromInternalError(read_fd());  // Does not return.
+    %%%%%:  496-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    #####:  497:        break;
+    %%%%%:  497-block  0
+    #####:  498:      default:
+    #####:  499:        GTEST_LOG_(FATAL) << "Death test child process reported "
+    %%%%%:  499-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  499-block  1
+call    3 never executed
+    %%%%%:  499-block  2
+call    4 never executed
+    $$$$$:  499-block  3
+call    5 never executed
+    $$$$$:  499-block  4
+    #####:  500:                          << "unexpected status byte ("
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  500-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    #####:  501:                          << static_cast<unsigned int>(flag) << ")";
+    %%%%%:  501-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  501-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+        -:  502:    }
+        -:  503:  } else {
+    #####:  504:    GTEST_LOG_(FATAL) << "Read from death test child process failed: "
+    %%%%%:  504-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  504-block  1
+call    3 never executed
+    $$$$$:  504-block  2
+call    4 never executed
+    $$$$$:  504-block  3
+    #####:  505:                      << GetLastErrnoDescription();
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  505-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  505-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  505-block  2
+call    9 never executed
+call   10 never executed
+    $$$$$:  505-block  3
+call   11 never executed
+    $$$$$:  505-block  4
+        -:  506:  }
+    #####:  507:  GTEST_DEATH_TEST_CHECK_SYSCALL_(posix::Close(read_fd()));
+    %%%%%:  507-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  507-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  507-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  507-block  3
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    %%%%%:  507-block  4
+    %%%%%:  507-block  5
+    %%%%%:  507-block  6
+branch 11 never executed
+branch 12 never executed (fallthrough)
+    %%%%%:  507-block  7
+branch 13 never executed (fallthrough)
+branch 14 never executed
+    %%%%%:  507-block  8
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  507-block  9
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  507-block 10
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  507-block 11
+call   24 never executed
+branch 25 never executed (fallthrough)
+branch 26 never executed (throw)
+    %%%%%:  507-block 12
+call   27 never executed
+branch 28 never executed (fallthrough)
+branch 29 never executed (throw)
+    %%%%%:  507-block 13
+call   30 never executed
+branch 31 never executed (fallthrough)
+branch 32 never executed (throw)
+    %%%%%:  507-block 14
+call   33 never executed
+branch 34 never executed (fallthrough)
+branch 35 never executed (throw)
+    %%%%%:  507-block 15
+call   36 never executed
+branch 37 never executed (fallthrough)
+branch 38 never executed (throw)
+    %%%%%:  507-block 16
+call   39 never executed
+    %%%%%:  507-block 17
+call   40 never executed
+branch 41 never executed (fallthrough)
+branch 42 never executed (throw)
+    %%%%%:  507-block 18
+branch 43 never executed
+branch 44 never executed (fallthrough)
+    $$$$$:  507-block 19
+call   45 never executed
+    $$$$$:  507-block 20
+call   46 never executed
+    $$$$$:  507-block 21
+call   47 never executed
+    $$$$$:  507-block 22
+call   48 never executed
+    $$$$$:  507-block 23
+call   49 never executed
+    $$$$$:  507-block 24
+call   50 never executed
+    $$$$$:  507-block 25
+call   51 never executed
+    $$$$$:  507-block 26
+    $$$$$:  507-block 27
+    $$$$$:  507-block 28
+    $$$$$:  507-block 29
+    $$$$$:  507-block 30
+call   52 never executed
+    $$$$$:  507-block 31
+    $$$$$:  507-block 32
+    $$$$$:  507-block 33
+    $$$$$:  507-block 34
+    $$$$$:  507-block 35
+    $$$$$:  507-block 36
+    #####:  508:  set_read_fd(-1);
+    %%%%%:  508-block  0
+call    0 never executed
+    #####:  509:}
+        -:  510:
+function _ZN7testing8internal13DeathTestImpl12GetErrorLogsB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:  511:std::string DeathTestImpl::GetErrorLogs() { return GetCapturedStderr(); }
+    %%%%%:  511-block  0
+call    0 never executed
+        -:  512:
+        -:  513:// Signals that the death test code which should have exited, didn't.
+        -:  514:// Should be called only in a death test child process.
+        -:  515:// Writes a status byte to the child's status file descriptor, then
+        -:  516:// calls _Exit(1).
+function _ZN7testing8internal13DeathTestImpl5AbortENS0_9DeathTest11AbortReasonE called 0 returned 0% blocks executed 0%
+    #####:  517:void DeathTestImpl::Abort(AbortReason reason) {
+        -:  518:  // The parent process considers the death test to be a failure if
+        -:  519:  // it finds any data in our pipe.  So, here we write a single flag byte
+        -:  520:  // to the pipe, then exit.
+    #####:  521:  const char status_ch = reason == TEST_DID_NOT_DIE       ? kDeathTestLived
+    %%%%%:  521-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  521-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  521-block  2
+    %%%%%:  521-block  3
+    %%%%%:  521-block  4
+    %%%%%:  521-block  5
+    %%%%%:  521-block  6
+        -:  522:                         : reason == TEST_THREW_EXCEPTION ? kDeathTestThrew
+        -:  523:                                                          : kDeathTestReturned;
+        -:  524:
+    #####:  525:  GTEST_DEATH_TEST_CHECK_SYSCALL_(posix::Write(write_fd(), &status_ch, 1));
+    %%%%%:  525-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  525-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  525-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  525-block  3
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    %%%%%:  525-block  4
+    %%%%%:  525-block  5
+    %%%%%:  525-block  6
+branch 11 never executed
+branch 12 never executed (fallthrough)
+    %%%%%:  525-block  7
+branch 13 never executed (fallthrough)
+branch 14 never executed
+    %%%%%:  525-block  8
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  525-block  9
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  525-block 10
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  525-block 11
+call   24 never executed
+branch 25 never executed (fallthrough)
+branch 26 never executed (throw)
+    %%%%%:  525-block 12
+call   27 never executed
+branch 28 never executed (fallthrough)
+branch 29 never executed (throw)
+    %%%%%:  525-block 13
+call   30 never executed
+branch 31 never executed (fallthrough)
+branch 32 never executed (throw)
+    %%%%%:  525-block 14
+call   33 never executed
+branch 34 never executed (fallthrough)
+branch 35 never executed (throw)
+    %%%%%:  525-block 15
+call   36 never executed
+branch 37 never executed (fallthrough)
+branch 38 never executed (throw)
+    %%%%%:  525-block 16
+call   39 never executed
+    %%%%%:  525-block 17
+call   40 never executed
+branch 41 never executed (fallthrough)
+branch 42 never executed (throw)
+    %%%%%:  525-block 18
+branch 43 never executed
+branch 44 never executed (fallthrough)
+    $$$$$:  525-block 19
+call   45 never executed
+    $$$$$:  525-block 20
+call   46 never executed
+    $$$$$:  525-block 21
+call   47 never executed
+    $$$$$:  525-block 22
+call   48 never executed
+    $$$$$:  525-block 23
+call   49 never executed
+    $$$$$:  525-block 24
+call   50 never executed
+    $$$$$:  525-block 25
+call   51 never executed
+    $$$$$:  525-block 26
+    $$$$$:  525-block 27
+    $$$$$:  525-block 28
+    $$$$$:  525-block 29
+    $$$$$:  525-block 30
+call   52 never executed
+    $$$$$:  525-block 31
+    $$$$$:  525-block 32
+    $$$$$:  525-block 33
+    $$$$$:  525-block 34
+    $$$$$:  525-block 35
+    $$$$$:  525-block 36
+        -:  526:  // We are leaking the descriptor here because on some platforms (i.e.,
+        -:  527:  // when built as Windows DLL), destructors of global objects will still
+        -:  528:  // run after calling _Exit(). On such systems, write_fd_ will be
+        -:  529:  // indirectly closed from the destructor of UnitTestImpl, causing double
+        -:  530:  // close if it is also closed here. On debug configurations, double close
+        -:  531:  // may assert. As there are no in-process buffers to flush here, we are
+        -:  532:  // relying on the OS to close the descriptor after the process terminates
+        -:  533:  // when the destructors are not run.
+    #####:  534:  _Exit(1);  // Exits w/o any normal exit hooks (we were supposed to crash)
+    %%%%%:  534-block  0
+call    0 never executed
+        -:  535:}
+        -:  536:
+        -:  537:// Returns an indented copy of stderr output for a death test.
+        -:  538:// This makes distinguishing death test output lines from regular log lines
+        -:  539:// much easier.
+function _ZN7testing8internalL21FormatDeathTestOutputERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:  540:static ::std::string FormatDeathTestOutput(const ::std::string& output) {
+    #####:  541:  ::std::string ret;
+    %%%%%:  541-block  0
+call    0 never executed
+    #####:  542:  for (size_t at = 0;;) {
+    #####:  543:    const size_t line_end = output.find('\n', at);
+    %%%%%:  543-block  0
+call    0 never executed
+    #####:  544:    ret += "[  DEATH   ] ";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  545:    if (line_end == ::std::string::npos) {
+    %%%%%:  545-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  546:      ret += output.substr(at);
+    %%%%%:  546-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  546-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  546-block  2
+call    6 never executed
+    $$$$$:  546-block  3
+call    7 never executed
+    $$$$$:  546-block  4
+    #####:  547:      break;
+        -:  548:    }
+    #####:  549:    ret += output.substr(at, line_end + 1 - at);
+    %%%%%:  549-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  549-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  549-block  2
+call    6 never executed
+    $$$$$:  549-block  3
+call    7 never executed
+    $$$$$:  549-block  4
+    #####:  550:    at = line_end + 1;
+    #####:  551:  }
+    #####:  552:  return ret;
+    %%%%%:  552-block  0
+    %%%%%:  552-block  1
+    =====:  553:}
+    $$$$$:  553-block  0
+call    0 never executed
+        -:  554:
+        -:  555:// Assesses the success or failure of a death test, using both private
+        -:  556:// members which have previously been set, and one argument:
+        -:  557://
+        -:  558:// Private data members:
+        -:  559://   outcome:  An enumeration describing how the death test
+        -:  560://             concluded: DIED, LIVED, THREW, or RETURNED.  The death test
+        -:  561://             fails in the latter three cases.
+        -:  562://   status:   The exit status of the child process. On *nix, it is in the
+        -:  563://             in the format specified by wait(2). On Windows, this is the
+        -:  564://             value supplied to the ExitProcess() API or a numeric code
+        -:  565://             of the exception that terminated the program.
+        -:  566://   matcher_: A matcher that's expected to match the stderr output by the child
+        -:  567://             process.
+        -:  568://
+        -:  569:// Argument:
+        -:  570://   status_ok: true if exit_status is acceptable in the context of
+        -:  571://              this particular death test, which fails if it is false
+        -:  572://
+        -:  573:// Returns true if and only if all of the above conditions are met.  Otherwise,
+        -:  574:// the first failing condition, in the order given above, is the one that is
+        -:  575:// reported. Also sets the last death test message string.
+function _ZN7testing8internal13DeathTestImpl6PassedEb called 0 returned 0% blocks executed 0%
+    #####:  576:bool DeathTestImpl::Passed(bool status_ok) {
+    #####:  577:  if (!spawned()) return false;
+    %%%%%:  577-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  577-block  1
+        -:  578:
+    #####:  579:  const std::string error_message = GetErrorLogs();
+    %%%%%:  579-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  580:
+    #####:  581:  bool success = false;
+    #####:  582:  Message buffer;
+    %%%%%:  582-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  583:
+    #####:  584:  buffer << "Death test: " << statement() << "\n";
+    %%%%%:  584-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  584-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  584-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    $$$$$:  584-block  3
+    #####:  585:  switch (outcome()) {
+    %%%%%:  585-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  586:    case LIVED:
+    #####:  587:      buffer << "    Result: failed to die.\n"
+    %%%%%:  587-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  588:             << " Error msg:\n"
+    %%%%%:  588-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  589:             << FormatDeathTestOutput(error_message);
+    %%%%%:  589-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  589-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  589-block  2
+call    6 never executed
+    $$$$$:  589-block  3
+call    7 never executed
+    $$$$$:  589-block  4
+    #####:  590:      break;
+    #####:  591:    case THREW:
+    #####:  592:      buffer << "    Result: threw an exception.\n"
+    %%%%%:  592-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  593:             << " Error msg:\n"
+    %%%%%:  593-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  594:             << FormatDeathTestOutput(error_message);
+    %%%%%:  594-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  594-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  594-block  2
+call    6 never executed
+    $$$$$:  594-block  3
+call    7 never executed
+    $$$$$:  594-block  4
+    #####:  595:      break;
+    #####:  596:    case RETURNED:
+    #####:  597:      buffer << "    Result: illegal return in test statement.\n"
+    %%%%%:  597-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  598:             << " Error msg:\n"
+    %%%%%:  598-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  599:             << FormatDeathTestOutput(error_message);
+    %%%%%:  599-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  599-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  599-block  2
+call    6 never executed
+    $$$$$:  599-block  3
+call    7 never executed
+    $$$$$:  599-block  4
+    #####:  600:      break;
+    #####:  601:    case DIED:
+    #####:  602:      if (status_ok) {
+    %%%%%:  602-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  603:        if (matcher_.Matches(error_message)) {
+    %%%%%:  603-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  603-block  1
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    #####:  604:          success = true;
+    %%%%%:  604-block  0
+        -:  605:        } else {
+    #####:  606:          std::ostringstream stream;
+    %%%%%:  606-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  607:          matcher_.DescribeTo(&stream);
+    %%%%%:  607-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  608:          buffer << "    Result: died but not with expected error.\n"
+    %%%%%:  608-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  609:                 << "  Expected: " << stream.str() << "\n"
+    %%%%%:  609-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  609-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  609-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  609-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    $$$$$:  609-block  4
+call   12 never executed
+    $$$$$:  609-block  5
+    #####:  610:                 << "Actual msg:\n"
+    %%%%%:  610-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  611:                 << FormatDeathTestOutput(error_message);
+    %%%%%:  611-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  611-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  611-block  2
+call    6 never executed
+call    7 never executed
+    $$$$$:  611-block  3
+call    8 never executed
+    $$$$$:  611-block  4
+    #####:  612:        }
+call    0 never executed
+    $$$$$:  612-block  0
+call    1 never executed
+        -:  613:      } else {
+    #####:  614:        buffer << "    Result: died but not with expected exit code:\n"
+    %%%%%:  614-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  615:               << "            " << ExitSummary(status()) << "\n"
+    %%%%%:  615-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  615-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  615-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  615-block  3
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    $$$$$:  615-block  4
+call   13 never executed
+    $$$$$:  615-block  5
+    #####:  616:               << "Actual msg:\n"
+    %%%%%:  616-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  617:               << FormatDeathTestOutput(error_message);
+    %%%%%:  617-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  617-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  617-block  2
+call    6 never executed
+call    7 never executed
+    $$$$$:  617-block  3
+call    8 never executed
+    $$$$$:  617-block  4
+        -:  618:      }
+    #####:  619:      break;
+    %%%%%:  619-block  0
+    #####:  620:    case IN_PROGRESS:
+        -:  621:    default:
+    #####:  622:      GTEST_LOG_(FATAL)
+    %%%%%:  622-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  622-block  1
+call    3 never executed
+    %%%%%:  622-block  2
+call    4 never executed
+    $$$$$:  622-block  3
+call    5 never executed
+    $$$$$:  622-block  4
+    #####:  623:          << "DeathTest::Passed somehow called before conclusion of test";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  624:  }
+        -:  625:
+    #####:  626:  DeathTest::set_last_death_test_message(buffer.GetString());
+    %%%%%:  626-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  626-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  626-block  2
+call    6 never executed
+    $$$$$:  626-block  3
+call    7 never executed
+    $$$$$:  626-block  4
+    #####:  627:  return success;
+    #####:  628:}
+call    0 never executed
+call    1 never executed
+    $$$$$:  628-block  0
+call    2 never executed
+    $$$$$:  628-block  1
+call    3 never executed
+        -:  629:
+        -:  630:#ifndef GTEST_OS_WINDOWS
+        -:  631:// Note: The return value points into args, so the return value's lifetime is
+        -:  632:// bound to that of args.
+        -:  633:static std::vector<char*> CreateArgvFromArgs(std::vector<std::string>& args) {
+        -:  634:  std::vector<char*> result;
+        -:  635:  result.reserve(args.size() + 1);
+        -:  636:  for (auto& arg : args) {
+        -:  637:    result.push_back(&arg[0]);
+        -:  638:  }
+        -:  639:  result.push_back(nullptr);  // Extra null terminator.
+        -:  640:  return result;
+        -:  641:}
+        -:  642:#endif
+        -:  643:
+        -:  644:#ifdef GTEST_OS_WINDOWS
+        -:  645:// WindowsDeathTest implements death tests on Windows. Due to the
+        -:  646:// specifics of starting new processes on Windows, death tests there are
+        -:  647:// always threadsafe, and Google Test considers the
+        -:  648:// --gtest_death_test_style=fast setting to be equivalent to
+        -:  649:// --gtest_death_test_style=threadsafe there.
+        -:  650://
+        -:  651:// A few implementation notes:  Like the Linux version, the Windows
+        -:  652:// implementation uses pipes for child-to-parent communication. But due to
+        -:  653:// the specifics of pipes on Windows, some extra steps are required:
+        -:  654://
+        -:  655:// 1. The parent creates a communication pipe and stores handles to both
+        -:  656://    ends of it.
+        -:  657:// 2. The parent starts the child and provides it with the information
+        -:  658://    necessary to acquire the handle to the write end of the pipe.
+        -:  659:// 3. The child acquires the write end of the pipe and signals the parent
+        -:  660://    using a Windows event.
+        -:  661:// 4. Now the parent can release the write end of the pipe on its side. If
+        -:  662://    this is done before step 3, the object's reference count goes down to
+        -:  663://    0 and it is destroyed, preventing the child from acquiring it. The
+        -:  664://    parent now has to release it, or read operations on the read end of
+        -:  665://    the pipe will not return when the child terminates.
+        -:  666:// 5. The parent reads child's output through the pipe (outcome code and
+        -:  667://    any possible error messages) from the pipe, and its stderr and then
+        -:  668://    determines whether to fail the test.
+        -:  669://
+        -:  670:// Note: to distinguish Win32 API calls from the local method and function
+        -:  671:// calls, the former are explicitly resolved in the global namespace.
+        -:  672://
+        -:  673:class WindowsDeathTest : public DeathTestImpl {
+        -:  674: public:
+function _ZN7testing8internal16WindowsDeathTestC1EPKcNS_7MatcherIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES3_i called 0 returned 0% blocks executed 0%
+    #####:  675:  WindowsDeathTest(const char* a_statement, Matcher<const std::string&> matcher,
+        -:  676:                   const char* file, int line)
+    #####:  677:      : DeathTestImpl(a_statement, std::move(matcher)),
+    #####:  678:        file_(file),
+    #####:  679:        line_(line) {}
+    %%%%%:  679-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  679-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  679-block  2
+call    7 never executed
+call    8 never executed
+call    9 never executed
+call   10 never executed
+    $$$$$:  679-block  3
+call   11 never executed
+        -:  680:
+        -:  681:  // All of these virtual functions are inherited from DeathTest.
+        -:  682:  virtual int Wait();
+        -:  683:  virtual TestRole AssumeRole();
+        -:  684:
+        -:  685: private:
+        -:  686:  // The name of the file in which the death test is located.
+        -:  687:  const char* const file_;
+        -:  688:  // The line number on which the death test is located.
+        -:  689:  const int line_;
+        -:  690:  // Handle to the write end of the pipe to the child process.
+        -:  691:  AutoHandle write_handle_;
+        -:  692:  // Child process handle.
+        -:  693:  AutoHandle child_handle_;
+        -:  694:  // Event the child process uses to signal the parent that it has
+        -:  695:  // acquired the handle to the write end of the pipe. After seeing this
+        -:  696:  // event the parent can release its own handles to make sure its
+        -:  697:  // ReadFile() calls return when the child terminates.
+        -:  698:  AutoHandle event_handle_;
+        -:  699:};
+        -:  700:
+        -:  701:// Waits for the child in a death test to exit, returning its exit
+        -:  702:// status, or 0 if no child process exists.  As a side effect, sets the
+        -:  703:// outcome data member.
+function _ZN7testing8internal16WindowsDeathTest4WaitEv called 0 returned 0% blocks executed 0%
+    #####:  704:int WindowsDeathTest::Wait() {
+    #####:  705:  if (!spawned()) return 0;
+    %%%%%:  705-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  705-block  1
+        -:  706:
+        -:  707:  // Wait until the child either signals that it has acquired the write end
+        -:  708:  // of the pipe or it dies.
+    #####:  709:  const HANDLE wait_handles[2] = {child_handle_.Get(), event_handle_.Get()};
+    %%%%%:  709-block  0
+call    0 never executed
+call    1 never executed
+    #####:  710:  switch (::WaitForMultipleObjects(2, wait_handles,
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  710-block  0
+branch  3 never executed (fallthrough)
+branch  4 never executed
+        -:  711:                                   FALSE,  // Waits for any of the handles.
+        -:  712:                                   INFINITE)) {
+    #####:  713:    case WAIT_OBJECT_0:
+        -:  714:    case WAIT_OBJECT_0 + 1:
+    #####:  715:      break;
+    %%%%%:  715-block  0
+    #####:  716:    default:
+    #####:  717:      GTEST_DEATH_TEST_CHECK_(false);  // Should not get here.
+    %%%%%:  717-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:  717-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  717-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  717-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:  717-block  4
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:  717-block  5
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  717-block  6
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  717-block  7
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  717-block  8
+call   24 never executed
+    %%%%%:  717-block  9
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:  717-block 10
+branch 28 never executed (fallthrough)
+branch 29 never executed
+    $$$$$:  717-block 11
+call   30 never executed
+    $$$$$:  717-block 12
+call   31 never executed
+    $$$$$:  717-block 13
+call   32 never executed
+    $$$$$:  717-block 14
+call   33 never executed
+    $$$$$:  717-block 15
+call   34 never executed
+    $$$$$:  717-block 16
+call   35 never executed
+    $$$$$:  717-block 17
+    $$$$$:  717-block 18
+    $$$$$:  717-block 19
+    $$$$$:  717-block 20
+    $$$$$:  717-block 21
+call   36 never executed
+    $$$$$:  717-block 22
+    $$$$$:  717-block 23
+    $$$$$:  717-block 24
+    $$$$$:  717-block 25
+    $$$$$:  717-block 26
+        -:  718:  }
+        -:  719:
+        -:  720:  // The child has acquired the write end of the pipe or exited.
+        -:  721:  // We release the handle on our side and continue.
+    #####:  722:  write_handle_.Reset();
+    %%%%%:  722-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  723:  event_handle_.Reset();
+    %%%%%:  723-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  724:
+    #####:  725:  ReadAndInterpretStatusByte();
+    %%%%%:  725-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  726:
+        -:  727:  // Waits for the child process to exit if it haven't already. This
+        -:  728:  // returns immediately if the child has already exited, regardless of
+        -:  729:  // whether previous calls to WaitForMultipleObjects synchronized on this
+        -:  730:  // handle or not.
+    #####:  731:  GTEST_DEATH_TEST_CHECK_(WAIT_OBJECT_0 ==
+    %%%%%:  731-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  731-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  731-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  731-block  3
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:  731-block  4
+call   13 never executed
+branch 14 never executed (fallthrough)
+branch 15 never executed (throw)
+    %%%%%:  731-block  5
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:  731-block  6
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  731-block  7
+call   22 never executed
+branch 23 never executed (fallthrough)
+branch 24 never executed (throw)
+    %%%%%:  731-block  8
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:  731-block  9
+call   28 never executed
+    %%%%%:  731-block 10
+call   29 never executed
+branch 30 never executed (fallthrough)
+branch 31 never executed (throw)
+    %%%%%:  731-block 11
+branch 32 never executed
+branch 33 never executed (fallthrough)
+    $$$$$:  731-block 12
+call   34 never executed
+    $$$$$:  731-block 13
+call   35 never executed
+    $$$$$:  731-block 14
+call   36 never executed
+    $$$$$:  731-block 15
+call   37 never executed
+    $$$$$:  731-block 16
+call   38 never executed
+    $$$$$:  731-block 17
+call   39 never executed
+    $$$$$:  731-block 18
+    $$$$$:  731-block 19
+    $$$$$:  731-block 20
+    $$$$$:  731-block 21
+    $$$$$:  731-block 22
+call   40 never executed
+    $$$$$:  731-block 23
+    $$$$$:  731-block 24
+    $$$$$:  731-block 25
+    $$$$$:  731-block 26
+    $$$$$:  731-block 27
+        -:  732:                          ::WaitForSingleObject(child_handle_.Get(), INFINITE));
+        -:  733:  DWORD status_code;
+    #####:  734:  GTEST_DEATH_TEST_CHECK_(
+    %%%%%:  734-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  734-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  734-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  734-block  3
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:  734-block  4
+call   13 never executed
+branch 14 never executed (fallthrough)
+branch 15 never executed (throw)
+    %%%%%:  734-block  5
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:  734-block  6
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  734-block  7
+call   22 never executed
+branch 23 never executed (fallthrough)
+branch 24 never executed (throw)
+    %%%%%:  734-block  8
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:  734-block  9
+call   28 never executed
+    %%%%%:  734-block 10
+call   29 never executed
+branch 30 never executed (fallthrough)
+branch 31 never executed (throw)
+    %%%%%:  734-block 11
+branch 32 never executed
+branch 33 never executed (fallthrough)
+    $$$$$:  734-block 12
+call   34 never executed
+    $$$$$:  734-block 13
+call   35 never executed
+    $$$$$:  734-block 14
+call   36 never executed
+    $$$$$:  734-block 15
+call   37 never executed
+    $$$$$:  734-block 16
+call   38 never executed
+    $$$$$:  734-block 17
+call   39 never executed
+    $$$$$:  734-block 18
+    $$$$$:  734-block 19
+    $$$$$:  734-block 20
+    $$$$$:  734-block 21
+    $$$$$:  734-block 22
+call   40 never executed
+    $$$$$:  734-block 23
+    $$$$$:  734-block 24
+    $$$$$:  734-block 25
+    $$$$$:  734-block 26
+    $$$$$:  734-block 27
+        -:  735:      ::GetExitCodeProcess(child_handle_.Get(), &status_code) != FALSE);
+    #####:  736:  child_handle_.Reset();
+    %%%%%:  736-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  737:  set_status(static_cast<int>(status_code));
+    %%%%%:  737-block  0
+call    0 never executed
+    #####:  738:  return status();
+call    0 never executed
+        -:  739:}
+        -:  740:
+        -:  741:// The AssumeRole process for a Windows death test.  It creates a child
+        -:  742:// process with the same executable as the current process to run the
+        -:  743:// death test.  The child process is given the --gtest_filter and
+        -:  744:// --gtest_internal_run_death_test flags such that it knows to run the
+        -:  745:// current death test only.
+function _ZN7testing8internal16WindowsDeathTest10AssumeRoleEv called 0 returned 0% blocks executed 0%
+    #####:  746:DeathTest::TestRole WindowsDeathTest::AssumeRole() {
+    #####:  747:  const UnitTestImpl* const impl = GetUnitTestImpl();
+    %%%%%:  747-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  748:  const InternalRunDeathTestFlag* const flag =
+    #####:  749:      impl->internal_run_death_test_flag();
+    %%%%%:  749-block  0
+call    0 never executed
+    #####:  750:  const TestInfo* const info = impl->current_test_info();
+call    0 never executed
+    #####:  751:  const int death_test_index = info->result()->death_test_count();
+call    0 never executed
+call    1 never executed
+        -:  752:
+    #####:  753:  if (flag != nullptr) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  754:    // ParseInternalRunDeathTestFlag() has performed all the necessary
+        -:  755:    // processing.
+    #####:  756:    set_write_fd(flag->write_fd());
+    %%%%%:  756-block  0
+call    0 never executed
+call    1 never executed
+    #####:  757:    return EXECUTE_TEST;
+        -:  758:  }
+        -:  759:
+        -:  760:  // WindowsDeathTest uses an anonymous pipe to communicate results of
+        -:  761:  // a death test.
+    #####:  762:  SECURITY_ATTRIBUTES handles_are_inheritable = {sizeof(SECURITY_ATTRIBUTES),
+    %%%%%:  762-block  0
+        -:  763:                                                 nullptr, TRUE};
+        -:  764:  HANDLE read_handle, write_handle;
+    #####:  765:  GTEST_DEATH_TEST_CHECK_(::CreatePipe(&read_handle, &write_handle,
+    %%%%%:  765-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  765-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  765-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  765-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:  765-block  4
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:  765-block  5
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  765-block  6
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  765-block  7
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  765-block  8
+call   24 never executed
+branch 25 never executed (fallthrough)
+branch 26 never executed (throw)
+    %%%%%:  765-block  9
+call   27 never executed
+    %%%%%:  765-block 10
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:  765-block 11
+branch 31 never executed
+branch 32 never executed (fallthrough)
+    $$$$$:  765-block 12
+call   33 never executed
+    $$$$$:  765-block 13
+call   34 never executed
+    $$$$$:  765-block 14
+call   35 never executed
+    $$$$$:  765-block 15
+call   36 never executed
+    $$$$$:  765-block 16
+call   37 never executed
+    $$$$$:  765-block 17
+call   38 never executed
+    $$$$$:  765-block 18
+    $$$$$:  765-block 19
+    $$$$$:  765-block 20
+    $$$$$:  765-block 21
+    $$$$$:  765-block 22
+call   39 never executed
+    $$$$$:  765-block 23
+    $$$$$:  765-block 24
+    $$$$$:  765-block 25
+    $$$$$:  765-block 26
+    $$$$$:  765-block 27
+        -:  766:                                       &handles_are_inheritable,
+        -:  767:                                       0)  // Default buffer size.
+        -:  768:                          != FALSE);
+    #####:  769:  set_read_fd(
+    %%%%%:  769-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  769-block  1
+call    3 never executed
+        -:  770:      ::_open_osfhandle(reinterpret_cast<intptr_t>(read_handle), O_RDONLY));
+    #####:  771:  write_handle_.Reset(write_handle);
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  772:  event_handle_.Reset(::CreateEvent(
+    %%%%%:  772-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  772-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+        -:  773:      &handles_are_inheritable,
+        -:  774:      TRUE,       // The event will automatically reset to non-signaled state.
+        -:  775:      FALSE,      // The initial state is non-signalled.
+        -:  776:      nullptr));  // The even is unnamed.
+    #####:  777:  GTEST_DEATH_TEST_CHECK_(event_handle_.Get() != nullptr);
+    %%%%%:  777-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  777-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  777-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  777-block  3
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:  777-block  4
+call   13 never executed
+branch 14 never executed (fallthrough)
+branch 15 never executed (throw)
+    %%%%%:  777-block  5
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:  777-block  6
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  777-block  7
+call   22 never executed
+branch 23 never executed (fallthrough)
+branch 24 never executed (throw)
+    %%%%%:  777-block  8
+call   25 never executed
+    %%%%%:  777-block  9
+call   26 never executed
+branch 27 never executed (fallthrough)
+branch 28 never executed (throw)
+    %%%%%:  777-block 10
+branch 29 never executed
+branch 30 never executed (fallthrough)
+    $$$$$:  777-block 11
+call   31 never executed
+    $$$$$:  777-block 12
+call   32 never executed
+    $$$$$:  777-block 13
+call   33 never executed
+    $$$$$:  777-block 14
+call   34 never executed
+    $$$$$:  777-block 15
+call   35 never executed
+    $$$$$:  777-block 16
+call   36 never executed
+    $$$$$:  777-block 17
+    $$$$$:  777-block 18
+    $$$$$:  777-block 19
+    $$$$$:  777-block 20
+    $$$$$:  777-block 21
+call   37 never executed
+    $$$$$:  777-block 22
+    $$$$$:  777-block 23
+    $$$$$:  777-block 24
+    $$$$$:  777-block 25
+    $$$$$:  777-block 26
+    #####:  778:  const std::string filter_flag = std::string("--") + GTEST_FLAG_PREFIX_ +
+    %%%%%:  778-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  778-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  778-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+call    9 never executed
+call   10 never executed
+call   11 never executed
+    $$$$$:  778-block  3
+call   12 never executed
+    $$$$$:  778-block  4
+call   13 never executed
+    $$$$$:  778-block  5
+call   14 never executed
+    $$$$$:  778-block  6
+    $$$$$:  778-block  7
+    $$$$$:  778-block  8
+    $$$$$:  778-block  9
+    #####:  779:                                  "filter=" + info->test_suite_name() + "." +
+call    0 never executed
+    %%%%%:  779-block  0
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  779-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  779-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  779-block  3
+call    9 never executed
+    $$$$$:  779-block  4
+call   10 never executed
+    $$$$$:  779-block  5
+    $$$$$:  779-block  6
+    #####:  780:                                  info->name();
+    %%%%%:  780-block  0
+call    0 never executed
+    %%%%%:  780-block  1
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+        -:  781:  const std::string internal_flag =
+    #####:  782:      std::string("--") + GTEST_FLAG_PREFIX_ +
+    %%%%%:  782-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  782-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  782-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+call    9 never executed
+call   10 never executed
+call   11 never executed
+    $$$$$:  782-block  3
+call   12 never executed
+    $$$$$:  782-block  4
+call   13 never executed
+    $$$$$:  782-block  5
+call   14 never executed
+    $$$$$:  782-block  6
+    $$$$$:  782-block  7
+    $$$$$:  782-block  8
+    $$$$$:  782-block  9
+    #####:  783:      "internal_run_death_test=" + file_ + "|" + StreamableToString(line_) +
+    %%%%%:  783-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  783-block  1
+    %%%%%:  783-block  2
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  783-block  3
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  783-block  4
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:  783-block  5
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+call   15 never executed
+call   16 never executed
+call   17 never executed
+call   18 never executed
+call   19 never executed
+    $$$$$:  783-block  6
+call   20 never executed
+    $$$$$:  783-block  7
+call   21 never executed
+    $$$$$:  783-block  8
+call   22 never executed
+    $$$$$:  783-block  9
+call   23 never executed
+    $$$$$:  783-block 10
+    $$$$$:  783-block 11
+    $$$$$:  783-block 12
+call   24 never executed
+    $$$$$:  783-block 13
+    $$$$$:  783-block 14
+    $$$$$:  783-block 15
+    #####:  784:      "|" + StreamableToString(death_test_index) + "|" +
+    %%%%%:  784-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  784-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  784-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  784-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+call   12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+    $$$$$:  784-block  4
+call   16 never executed
+    $$$$$:  784-block  5
+call   17 never executed
+    $$$$$:  784-block  6
+call   18 never executed
+    $$$$$:  784-block  7
+call   19 never executed
+    $$$$$:  784-block  8
+    $$$$$:  784-block  9
+    $$$$$:  784-block 10
+    $$$$$:  784-block 11
+    #####:  785:      StreamableToString(static_cast<unsigned int>(::GetCurrentProcessId())) +
+    %%%%%:  785-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  785-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  785-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+call    9 never executed
+call   10 never executed
+    $$$$$:  785-block  3
+call   11 never executed
+    $$$$$:  785-block  4
+call   12 never executed
+    $$$$$:  785-block  5
+    $$$$$:  785-block  6
+    $$$$$:  785-block  7
+        -:  786:      // size_t has the same width as pointers on both 32-bit and 64-bit
+        -:  787:      // Windows platforms.
+        -:  788:      // See https://msdn.microsoft.com/en-us/library/tcxf1dw6.aspx.
+    #####:  789:      "|" + StreamableToString(reinterpret_cast<size_t>(write_handle)) + "|" +
+    %%%%%:  789-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  789-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  789-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  789-block  3
+call    9 never executed
+call   10 never executed
+call   11 never executed
+    $$$$$:  789-block  4
+call   12 never executed
+    $$$$$:  789-block  5
+call   13 never executed
+    $$$$$:  789-block  6
+call   14 never executed
+    $$$$$:  789-block  7
+    $$$$$:  789-block  8
+    $$$$$:  789-block  9
+    $$$$$:  789-block 10
+    #####:  790:      StreamableToString(reinterpret_cast<size_t>(event_handle_.Get()));
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  790-block  0
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+call    7 never executed
+    $$$$$:  790-block  1
+call    8 never executed
+    $$$$$:  790-block  2
+    $$$$$:  790-block  3
+        -:  791:
+        -:  792:  char executable_path[_MAX_PATH + 1];  // NOLINT
+    #####:  793:  GTEST_DEATH_TEST_CHECK_(_MAX_PATH + 1 != ::GetModuleFileNameA(nullptr,
+    %%%%%:  793-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  793-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  793-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  793-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    %%%%%:  793-block  4
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:  793-block  5
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  793-block  6
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  793-block  7
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  793-block  8
+call   24 never executed
+branch 25 never executed (fallthrough)
+branch 26 never executed (throw)
+    %%%%%:  793-block  9
+call   27 never executed
+    %%%%%:  793-block 10
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:  793-block 11
+branch 31 never executed
+branch 32 never executed (fallthrough)
+    $$$$$:  793-block 12
+call   33 never executed
+    $$$$$:  793-block 13
+call   34 never executed
+    $$$$$:  793-block 14
+call   35 never executed
+    $$$$$:  793-block 15
+call   36 never executed
+    $$$$$:  793-block 16
+call   37 never executed
+    $$$$$:  793-block 17
+call   38 never executed
+    $$$$$:  793-block 18
+    $$$$$:  793-block 19
+    $$$$$:  793-block 20
+    $$$$$:  793-block 21
+    $$$$$:  793-block 22
+call   39 never executed
+    $$$$$:  793-block 23
+    $$$$$:  793-block 24
+    $$$$$:  793-block 25
+    $$$$$:  793-block 26
+    $$$$$:  793-block 27
+        -:  794:                                                                executable_path,
+        -:  795:                                                                _MAX_PATH));
+        -:  796:
+    #####:  797:  std::string command_line = std::string(::GetCommandLineA()) + " " +
+    %%%%%:  797-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  797-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  797-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  797-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+call   12 never executed
+call   13 never executed
+call   14 never executed
+    $$$$$:  797-block  4
+call   15 never executed
+    $$$$$:  797-block  5
+call   16 never executed
+    $$$$$:  797-block  6
+call   17 never executed
+    $$$$$:  797-block  7
+    $$$$$:  797-block  8
+    $$$$$:  797-block  9
+    $$$$$:  797-block 10
+    #####:  798:                             filter_flag + " \"" + internal_flag + "\"";
+    %%%%%:  798-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  798-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  798-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  798-block  3
+call    9 never executed
+call   10 never executed
+    $$$$$:  798-block  4
+call   11 never executed
+    $$$$$:  798-block  5
+call   12 never executed
+    $$$$$:  798-block  6
+    $$$$$:  798-block  7
+        -:  799:
+    #####:  800:  DeathTest::set_last_death_test_message("");
+    %%%%%:  800-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  800-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  800-block  2
+call    6 never executed
+    $$$$$:  800-block  3
+call    7 never executed
+    $$$$$:  800-block  4
+    $$$$$:  800-block  5
+        -:  801:
+    #####:  802:  CaptureStderr();
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  803:  // Flush the log buffers since the log streams are shared with the child.
+    #####:  804:  FlushInfoLog();
+    %%%%%:  804-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:  805:
+        -:  806:  // The child process will share the standard handles with the parent.
+        -:  807:  STARTUPINFOA startup_info;
+    #####:  808:  memset(&startup_info, 0, sizeof(STARTUPINFO));
+    #####:  809:  startup_info.dwFlags = STARTF_USESTDHANDLES;
+    #####:  810:  startup_info.hStdInput = ::GetStdHandle(STD_INPUT_HANDLE);
+    %%%%%:  810-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  811:  startup_info.hStdOutput = ::GetStdHandle(STD_OUTPUT_HANDLE);
+    %%%%%:  811-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  812:  startup_info.hStdError = ::GetStdHandle(STD_ERROR_HANDLE);
+    %%%%%:  812-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  812-block  1
+        -:  813:
+        -:  814:  PROCESS_INFORMATION process_info;
+    #####:  815:  GTEST_DEATH_TEST_CHECK_(
+    %%%%%:  815-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  815-block  1
+call    3 never executed
+call    4 never executed
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:  815-block  2
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    %%%%%:  815-block  3
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  815-block  4
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:  815-block  5
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:  815-block  6
+call   20 never executed
+branch 21 never executed (fallthrough)
+branch 22 never executed (throw)
+    %%%%%:  815-block  7
+call   23 never executed
+branch 24 never executed (fallthrough)
+branch 25 never executed (throw)
+    %%%%%:  815-block  8
+call   26 never executed
+branch 27 never executed (fallthrough)
+branch 28 never executed (throw)
+    %%%%%:  815-block  9
+call   29 never executed
+branch 30 never executed (fallthrough)
+branch 31 never executed (throw)
+    %%%%%:  815-block 10
+call   32 never executed
+    %%%%%:  815-block 11
+call   33 never executed
+branch 34 never executed (fallthrough)
+branch 35 never executed (throw)
+    %%%%%:  815-block 12
+branch 36 never executed
+branch 37 never executed (fallthrough)
+    $$$$$:  815-block 13
+call   38 never executed
+    $$$$$:  815-block 14
+call   39 never executed
+    $$$$$:  815-block 15
+call   40 never executed
+    $$$$$:  815-block 16
+call   41 never executed
+    $$$$$:  815-block 17
+call   42 never executed
+    $$$$$:  815-block 18
+call   43 never executed
+    $$$$$:  815-block 19
+    $$$$$:  815-block 20
+    $$$$$:  815-block 21
+    $$$$$:  815-block 22
+    $$$$$:  815-block 23
+call   44 never executed
+    $$$$$:  815-block 24
+    $$$$$:  815-block 25
+    $$$$$:  815-block 26
+    $$$$$:  815-block 27
+    $$$$$:  815-block 28
+        -:  816:      ::CreateProcessA(
+        -:  817:          executable_path, const_cast<char*>(command_line.c_str()),
+        -:  818:          nullptr,  // Returned process handle is not inheritable.
+        -:  819:          nullptr,  // Returned thread handle is not inheritable.
+        -:  820:          TRUE,  // Child inherits all inheritable handles (for write_handle_).
+        -:  821:          0x0,   // Default creation flags.
+        -:  822:          nullptr,  // Inherit the parent's environment.
+        -:  823:          UnitTest::GetInstance()->original_working_dir(), &startup_info,
+        -:  824:          &process_info) != FALSE);
+    #####:  825:  child_handle_.Reset(process_info.hProcess);
+    %%%%%:  825-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  826:  ::CloseHandle(process_info.hThread);
+    %%%%%:  826-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####:  827:  set_spawned(true);
+    %%%%%:  827-block  0
+call    0 never executed
+    #####:  828:  return OVERSEE_TEST;
+    #####:  829:}
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    $$$$$:  829-block  0
+call    3 never executed
+    $$$$$:  829-block  1
+call    4 never executed
+    $$$$$:  829-block  2
+call    5 never executed
+        -:  830:
+        -:  831:#elif defined(GTEST_OS_FUCHSIA)
+        -:  832:
+        -:  833:class FuchsiaDeathTest : public DeathTestImpl {
+        -:  834: public:
+        -:  835:  FuchsiaDeathTest(const char* a_statement, Matcher<const std::string&> matcher,
+        -:  836:                   const char* file, int line)
+        -:  837:      : DeathTestImpl(a_statement, std::move(matcher)),
+        -:  838:        file_(file),
+        -:  839:        line_(line) {}
+        -:  840:
+        -:  841:  // All of these virtual functions are inherited from DeathTest.
+        -:  842:  int Wait() override;
+        -:  843:  TestRole AssumeRole() override;
+        -:  844:  std::string GetErrorLogs() override;
+        -:  845:
+        -:  846: private:
+        -:  847:  // The name of the file in which the death test is located.
+        -:  848:  const char* const file_;
+        -:  849:  // The line number on which the death test is located.
+        -:  850:  const int line_;
+        -:  851:  // The stderr data captured by the child process.
+        -:  852:  std::string captured_stderr_;
+        -:  853:
+        -:  854:  zx::process child_process_;
+        -:  855:  zx::channel exception_channel_;
+        -:  856:  zx::socket stderr_socket_;
+        -:  857:};
+        -:  858:
+        -:  859:// Waits for the child in a death test to exit, returning its exit
+        -:  860:// status, or 0 if no child process exists.  As a side effect, sets the
+        -:  861:// outcome data member.
+        -:  862:int FuchsiaDeathTest::Wait() {
+        -:  863:  const int kProcessKey = 0;
+        -:  864:  const int kSocketKey = 1;
+        -:  865:  const int kExceptionKey = 2;
+        -:  866:
+        -:  867:  if (!spawned()) return 0;
+        -:  868:
+        -:  869:  // Create a port to wait for socket/task/exception events.
+        -:  870:  zx_status_t status_zx;
+        -:  871:  zx::port port;
+        -:  872:  status_zx = zx::port::create(0, &port);
+        -:  873:  GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  874:
+        -:  875:  // Register to wait for the child process to terminate.
+        -:  876:  status_zx =
+        -:  877:      child_process_.wait_async(port, kProcessKey, ZX_PROCESS_TERMINATED, 0);
+        -:  878:  GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  879:
+        -:  880:  // Register to wait for the socket to be readable or closed.
+        -:  881:  status_zx = stderr_socket_.wait_async(
+        -:  882:      port, kSocketKey, ZX_SOCKET_READABLE | ZX_SOCKET_PEER_CLOSED, 0);
+        -:  883:  GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  884:
+        -:  885:  // Register to wait for an exception.
+        -:  886:  status_zx = exception_channel_.wait_async(port, kExceptionKey,
+        -:  887:                                            ZX_CHANNEL_READABLE, 0);
+        -:  888:  GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  889:
+        -:  890:  bool process_terminated = false;
+        -:  891:  bool socket_closed = false;
+        -:  892:  do {
+        -:  893:    zx_port_packet_t packet = {};
+        -:  894:    status_zx = port.wait(zx::time::infinite(), &packet);
+        -:  895:    GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  896:
+        -:  897:    if (packet.key == kExceptionKey) {
+        -:  898:      // Process encountered an exception. Kill it directly rather than
+        -:  899:      // letting other handlers process the event. We will get a kProcessKey
+        -:  900:      // event when the process actually terminates.
+        -:  901:      status_zx = child_process_.kill();
+        -:  902:      GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  903:    } else if (packet.key == kProcessKey) {
+        -:  904:      // Process terminated.
+        -:  905:      GTEST_DEATH_TEST_CHECK_(ZX_PKT_IS_SIGNAL_ONE(packet.type));
+        -:  906:      GTEST_DEATH_TEST_CHECK_(packet.signal.observed & ZX_PROCESS_TERMINATED);
+        -:  907:      process_terminated = true;
+        -:  908:    } else if (packet.key == kSocketKey) {
+        -:  909:      GTEST_DEATH_TEST_CHECK_(ZX_PKT_IS_SIGNAL_ONE(packet.type));
+        -:  910:      if (packet.signal.observed & ZX_SOCKET_READABLE) {
+        -:  911:        // Read data from the socket.
+        -:  912:        constexpr size_t kBufferSize = 1024;
+        -:  913:        do {
+        -:  914:          size_t old_length = captured_stderr_.length();
+        -:  915:          size_t bytes_read = 0;
+        -:  916:          captured_stderr_.resize(old_length + kBufferSize);
+        -:  917:          status_zx =
+        -:  918:              stderr_socket_.read(0, &captured_stderr_.front() + old_length,
+        -:  919:                                  kBufferSize, &bytes_read);
+        -:  920:          captured_stderr_.resize(old_length + bytes_read);
+        -:  921:        } while (status_zx == ZX_OK);
+        -:  922:        if (status_zx == ZX_ERR_PEER_CLOSED) {
+        -:  923:          socket_closed = true;
+        -:  924:        } else {
+        -:  925:          GTEST_DEATH_TEST_CHECK_(status_zx == ZX_ERR_SHOULD_WAIT);
+        -:  926:          status_zx = stderr_socket_.wait_async(
+        -:  927:              port, kSocketKey, ZX_SOCKET_READABLE | ZX_SOCKET_PEER_CLOSED, 0);
+        -:  928:          GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  929:        }
+        -:  930:      } else {
+        -:  931:        GTEST_DEATH_TEST_CHECK_(packet.signal.observed & ZX_SOCKET_PEER_CLOSED);
+        -:  932:        socket_closed = true;
+        -:  933:      }
+        -:  934:    }
+        -:  935:  } while (!process_terminated && !socket_closed);
+        -:  936:
+        -:  937:  ReadAndInterpretStatusByte();
+        -:  938:
+        -:  939:  zx_info_process_t buffer;
+        -:  940:  status_zx = child_process_.get_info(ZX_INFO_PROCESS, &buffer, sizeof(buffer),
+        -:  941:                                      nullptr, nullptr);
+        -:  942:  GTEST_DEATH_TEST_CHECK_(status_zx == ZX_OK);
+        -:  943:
+        -:  944:  GTEST_DEATH_TEST_CHECK_(buffer.flags & ZX_INFO_PROCESS_FLAG_EXITED);
+        -:  945:  set_status(static_cast<int>(buffer.return_code));
+        -:  946:  return status();
+        -:  947:}
+        -:  948:
+        -:  949:// The AssumeRole process for a Fuchsia death test.  It creates a child
+        -:  950:// process with the same executable as the current process to run the
+        -:  951:// death test.  The child process is given the --gtest_filter and
+        -:  952:// --gtest_internal_run_death_test flags such that it knows to run the
+        -:  953:// current death test only.
+        -:  954:DeathTest::TestRole FuchsiaDeathTest::AssumeRole() {
+        -:  955:  const UnitTestImpl* const impl = GetUnitTestImpl();
+        -:  956:  const InternalRunDeathTestFlag* const flag =
+        -:  957:      impl->internal_run_death_test_flag();
+        -:  958:  const TestInfo* const info = impl->current_test_info();
+        -:  959:  const int death_test_index = info->result()->death_test_count();
+        -:  960:
+        -:  961:  if (flag != nullptr) {
+        -:  962:    // ParseInternalRunDeathTestFlag() has performed all the necessary
+        -:  963:    // processing.
+        -:  964:    set_write_fd(kFuchsiaReadPipeFd);
+        -:  965:    return EXECUTE_TEST;
+        -:  966:  }
+        -:  967:
+        -:  968:  // Flush the log buffers since the log streams are shared with the child.
+        -:  969:  FlushInfoLog();
+        -:  970:
+        -:  971:  // Build the child process command line.
+        -:  972:  const std::string filter_flag = std::string("--") + GTEST_FLAG_PREFIX_ +
+        -:  973:                                  "filter=" + info->test_suite_name() + "." +
+        -:  974:                                  info->name();
+        -:  975:  const std::string internal_flag = std::string("--") + GTEST_FLAG_PREFIX_ +
+        -:  976:                                    kInternalRunDeathTestFlag + "=" + file_ +
+        -:  977:                                    "|" + StreamableToString(line_) + "|" +
+        -:  978:                                    StreamableToString(death_test_index);
+        -:  979:
+        -:  980:  std::vector<std::string> args = GetInjectableArgvs();
+        -:  981:  args.push_back(filter_flag);
+        -:  982:  args.push_back(internal_flag);
+        -:  983:
+        -:  984:  // Build the pipe for communication with the child.
+        -:  985:  zx_status_t status;
+        -:  986:  zx_handle_t child_pipe_handle;
+        -:  987:  int child_pipe_fd;
+        -:  988:  status = fdio_pipe_half(&child_pipe_fd, &child_pipe_handle);
+        -:  989:  GTEST_DEATH_TEST_CHECK_(status == ZX_OK);
+        -:  990:  set_read_fd(child_pipe_fd);
+        -:  991:
+        -:  992:  // Set the pipe handle for the child.
+        -:  993:  fdio_spawn_action_t spawn_actions[2] = {};
+        -:  994:  fdio_spawn_action_t* add_handle_action = &spawn_actions[0];
+        -:  995:  add_handle_action->action = FDIO_SPAWN_ACTION_ADD_HANDLE;
+        -:  996:  add_handle_action->h.id = PA_HND(PA_FD, kFuchsiaReadPipeFd);
+        -:  997:  add_handle_action->h.handle = child_pipe_handle;
+        -:  998:
+        -:  999:  // Create a socket pair will be used to receive the child process' stderr.
+        -: 1000:  zx::socket stderr_producer_socket;
+        -: 1001:  status = zx::socket::create(0, &stderr_producer_socket, &stderr_socket_);
+        -: 1002:  GTEST_DEATH_TEST_CHECK_(status >= 0);
+        -: 1003:  int stderr_producer_fd = -1;
+        -: 1004:  status =
+        -: 1005:      fdio_fd_create(stderr_producer_socket.release(), &stderr_producer_fd);
+        -: 1006:  GTEST_DEATH_TEST_CHECK_(status >= 0);
+        -: 1007:
+        -: 1008:  // Make the stderr socket nonblocking.
+        -: 1009:  GTEST_DEATH_TEST_CHECK_(fcntl(stderr_producer_fd, F_SETFL, 0) == 0);
+        -: 1010:
+        -: 1011:  fdio_spawn_action_t* add_stderr_action = &spawn_actions[1];
+        -: 1012:  add_stderr_action->action = FDIO_SPAWN_ACTION_CLONE_FD;
+        -: 1013:  add_stderr_action->fd.local_fd = stderr_producer_fd;
+        -: 1014:  add_stderr_action->fd.target_fd = STDERR_FILENO;
+        -: 1015:
+        -: 1016:  // Create a child job.
+        -: 1017:  zx_handle_t child_job = ZX_HANDLE_INVALID;
+        -: 1018:  status = zx_job_create(zx_job_default(), 0, &child_job);
+        -: 1019:  GTEST_DEATH_TEST_CHECK_(status == ZX_OK);
+        -: 1020:  zx_policy_basic_t policy;
+        -: 1021:  policy.condition = ZX_POL_NEW_ANY;
+        -: 1022:  policy.policy = ZX_POL_ACTION_ALLOW;
+        -: 1023:  status = zx_job_set_policy(child_job, ZX_JOB_POL_RELATIVE, ZX_JOB_POL_BASIC,
+        -: 1024:                             &policy, 1);
+        -: 1025:  GTEST_DEATH_TEST_CHECK_(status == ZX_OK);
+        -: 1026:
+        -: 1027:  // Create an exception channel attached to the |child_job|, to allow
+        -: 1028:  // us to suppress the system default exception handler from firing.
+        -: 1029:  status = zx_task_create_exception_channel(
+        -: 1030:      child_job, 0, exception_channel_.reset_and_get_address());
+        -: 1031:  GTEST_DEATH_TEST_CHECK_(status == ZX_OK);
+        -: 1032:
+        -: 1033:  // Spawn the child process.
+        -: 1034:  // Note: The test component must have `fuchsia.process.Launcher` declared
+        -: 1035:  // in its manifest. (Fuchsia integration tests require creating a
+        -: 1036:  // "Fuchsia Test Component" which contains a "Fuchsia Component Manifest")
+        -: 1037:  // Launching processes is a privileged operation in Fuchsia, and the
+        -: 1038:  // declaration indicates that the ability is required for the component.
+        -: 1039:  std::vector<char*> argv = CreateArgvFromArgs(args);
+        -: 1040:  status = fdio_spawn_etc(child_job, FDIO_SPAWN_CLONE_ALL, argv[0], argv.data(),
+        -: 1041:                          nullptr, 2, spawn_actions,
+        -: 1042:                          child_process_.reset_and_get_address(), nullptr);
+        -: 1043:  GTEST_DEATH_TEST_CHECK_(status == ZX_OK);
+        -: 1044:
+        -: 1045:  set_spawned(true);
+        -: 1046:  return OVERSEE_TEST;
+        -: 1047:}
+        -: 1048:
+        -: 1049:std::string FuchsiaDeathTest::GetErrorLogs() { return captured_stderr_; }
+        -: 1050:
+        -: 1051:#else  // We are neither on Windows, nor on Fuchsia.
+        -: 1052:
+        -: 1053:// ForkingDeathTest provides implementations for most of the abstract
+        -: 1054:// methods of the DeathTest interface.  Only the AssumeRole method is
+        -: 1055:// left undefined.
+        -: 1056:class ForkingDeathTest : public DeathTestImpl {
+        -: 1057: public:
+        -: 1058:  ForkingDeathTest(const char* statement, Matcher<const std::string&> matcher);
+        -: 1059:
+        -: 1060:  // All of these virtual functions are inherited from DeathTest.
+        -: 1061:  int Wait() override;
+        -: 1062:
+        -: 1063: protected:
+        -: 1064:  void set_child_pid(pid_t child_pid) { child_pid_ = child_pid; }
+        -: 1065:
+        -: 1066: private:
+        -: 1067:  // PID of child process during death test; 0 in the child process itself.
+        -: 1068:  pid_t child_pid_;
+        -: 1069:};
+        -: 1070:
+        -: 1071:// Constructs a ForkingDeathTest.
+        -: 1072:ForkingDeathTest::ForkingDeathTest(const char* a_statement,
+        -: 1073:                                   Matcher<const std::string&> matcher)
+        -: 1074:    : DeathTestImpl(a_statement, std::move(matcher)), child_pid_(-1) {}
+        -: 1075:
+        -: 1076:// Waits for the child in a death test to exit, returning its exit
+        -: 1077:// status, or 0 if no child process exists.  As a side effect, sets the
+        -: 1078:// outcome data member.
+        -: 1079:int ForkingDeathTest::Wait() {
+        -: 1080:  if (!spawned()) return 0;
+        -: 1081:
+        -: 1082:  ReadAndInterpretStatusByte();
+        -: 1083:
+        -: 1084:  int status_value;
+        -: 1085:  GTEST_DEATH_TEST_CHECK_SYSCALL_(waitpid(child_pid_, &status_value, 0));
+        -: 1086:  set_status(status_value);
+        -: 1087:  return status_value;
+        -: 1088:}
+        -: 1089:
+        -: 1090:// A concrete death test class that forks, then immediately runs the test
+        -: 1091:// in the child process.
+        -: 1092:class NoExecDeathTest : public ForkingDeathTest {
+        -: 1093: public:
+        -: 1094:  NoExecDeathTest(const char* a_statement, Matcher<const std::string&> matcher)
+        -: 1095:      : ForkingDeathTest(a_statement, std::move(matcher)) {}
+        -: 1096:  TestRole AssumeRole() override;
+        -: 1097:};
+        -: 1098:
+        -: 1099:// The AssumeRole process for a fork-and-run death test.  It implements a
+        -: 1100:// straightforward fork, with a simple pipe to transmit the status byte.
+        -: 1101:DeathTest::TestRole NoExecDeathTest::AssumeRole() {
+        -: 1102:  const size_t thread_count = GetThreadCount();
+        -: 1103:  if (thread_count != 1) {
+        -: 1104:    GTEST_LOG_(WARNING) << DeathTestThreadWarning(thread_count);
+        -: 1105:  }
+        -: 1106:
+        -: 1107:  int pipe_fd[2];
+        -: 1108:  GTEST_DEATH_TEST_CHECK_(pipe(pipe_fd) != -1);
+        -: 1109:
+        -: 1110:  DeathTest::set_last_death_test_message("");
+        -: 1111:  CaptureStderr();
+        -: 1112:  // When we fork the process below, the log file buffers are copied, but the
+        -: 1113:  // file descriptors are shared.  We flush all log files here so that closing
+        -: 1114:  // the file descriptors in the child process doesn't throw off the
+        -: 1115:  // synchronization between descriptors and buffers in the parent process.
+        -: 1116:  // This is as close to the fork as possible to avoid a race condition in case
+        -: 1117:  // there are multiple threads running before the death test, and another
+        -: 1118:  // thread writes to the log file.
+        -: 1119:  FlushInfoLog();
+        -: 1120:
+        -: 1121:  const pid_t child_pid = fork();
+        -: 1122:  GTEST_DEATH_TEST_CHECK_(child_pid != -1);
+        -: 1123:  set_child_pid(child_pid);
+        -: 1124:  if (child_pid == 0) {
+        -: 1125:    GTEST_DEATH_TEST_CHECK_SYSCALL_(close(pipe_fd[0]));
+        -: 1126:    set_write_fd(pipe_fd[1]);
+        -: 1127:    // Redirects all logging to stderr in the child process to prevent
+        -: 1128:    // concurrent writes to the log files.  We capture stderr in the parent
+        -: 1129:    // process and append the child process' output to a log.
+        -: 1130:    LogToStderr();
+        -: 1131:    // Event forwarding to the listeners of event listener API mush be shut
+        -: 1132:    // down in death test subprocesses.
+        -: 1133:    GetUnitTestImpl()->listeners()->SuppressEventForwarding(true);
+        -: 1134:    g_in_fast_death_test_child = true;
+        -: 1135:    return EXECUTE_TEST;
+        -: 1136:  } else {
+        -: 1137:    GTEST_DEATH_TEST_CHECK_SYSCALL_(close(pipe_fd[1]));
+        -: 1138:    set_read_fd(pipe_fd[0]);
+        -: 1139:    set_spawned(true);
+        -: 1140:    return OVERSEE_TEST;
+        -: 1141:  }
+        -: 1142:}
+        -: 1143:
+        -: 1144:// A concrete death test class that forks and re-executes the main
+        -: 1145:// program from the beginning, with command-line flags set that cause
+        -: 1146:// only this specific death test to be run.
+        -: 1147:class ExecDeathTest : public ForkingDeathTest {
+        -: 1148: public:
+        -: 1149:  ExecDeathTest(const char* a_statement, Matcher<const std::string&> matcher,
+        -: 1150:                const char* file, int line)
+        -: 1151:      : ForkingDeathTest(a_statement, std::move(matcher)),
+        -: 1152:        file_(file),
+        -: 1153:        line_(line) {}
+        -: 1154:  TestRole AssumeRole() override;
+        -: 1155:
+        -: 1156: private:
+        -: 1157:  static ::std::vector<std::string> GetArgvsForDeathTestChildProcess() {
+        -: 1158:    ::std::vector<std::string> args = GetInjectableArgvs();
+        -: 1159:#if defined(GTEST_EXTRA_DEATH_TEST_COMMAND_LINE_ARGS_)
+        -: 1160:    ::std::vector<std::string> extra_args =
+        -: 1161:        GTEST_EXTRA_DEATH_TEST_COMMAND_LINE_ARGS_();
+        -: 1162:    args.insert(args.end(), extra_args.begin(), extra_args.end());
+        -: 1163:#endif  // defined(GTEST_EXTRA_DEATH_TEST_COMMAND_LINE_ARGS_)
+        -: 1164:    return args;
+        -: 1165:  }
+        -: 1166:  // The name of the file in which the death test is located.
+        -: 1167:  const char* const file_;
+        -: 1168:  // The line number on which the death test is located.
+        -: 1169:  const int line_;
+        -: 1170:};
+        -: 1171:
+        -: 1172:// A struct that encompasses the arguments to the child process of a
+        -: 1173:// threadsafe-style death test process.
+        -: 1174:struct ExecDeathTestArgs {
+        -: 1175:  char* const* argv;  // Command-line arguments for the child's call to exec
+        -: 1176:  int close_fd;       // File descriptor to close; the read end of a pipe
+        -: 1177:};
+        -: 1178:
+        -: 1179:#ifdef GTEST_OS_QNX
+        -: 1180:extern "C" char** environ;
+        -: 1181:#else   // GTEST_OS_QNX
+        -: 1182:// The main function for a threadsafe-style death test child process.
+        -: 1183:// This function is called in a clone()-ed process and thus must avoid
+        -: 1184:// any potentially unsafe operations like malloc or libc functions.
+        -: 1185:static int ExecDeathTestChildMain(void* child_arg) {
+        -: 1186:  ExecDeathTestArgs* const args = static_cast<ExecDeathTestArgs*>(child_arg);
+        -: 1187:  GTEST_DEATH_TEST_CHECK_SYSCALL_(close(args->close_fd));
+        -: 1188:
+        -: 1189:  // We need to execute the test program in the same environment where
+        -: 1190:  // it was originally invoked.  Therefore we change to the original
+        -: 1191:  // working directory first.
+        -: 1192:  const char* const original_dir =
+        -: 1193:      UnitTest::GetInstance()->original_working_dir();
+        -: 1194:  // We can safely call chdir() as it's a direct system call.
+        -: 1195:  if (chdir(original_dir) != 0) {
+        -: 1196:    DeathTestAbort(std::string("chdir(\"") + original_dir +
+        -: 1197:                   "\") failed: " + GetLastErrnoDescription());
+        -: 1198:    return EXIT_FAILURE;
+        -: 1199:  }
+        -: 1200:
+        -: 1201:  // We can safely call execv() as it's almost a direct system call. We
+        -: 1202:  // cannot use execvp() as it's a libc function and thus potentially
+        -: 1203:  // unsafe.  Since execv() doesn't search the PATH, the user must
+        -: 1204:  // invoke the test program via a valid path that contains at least
+        -: 1205:  // one path separator.
+        -: 1206:  execv(args->argv[0], args->argv);
+        -: 1207:  DeathTestAbort(std::string("execv(") + args->argv[0] + ", ...) in " +
+        -: 1208:                 original_dir + " failed: " + GetLastErrnoDescription());
+        -: 1209:  return EXIT_FAILURE;
+        -: 1210:}
+        -: 1211:#endif  // GTEST_OS_QNX
+        -: 1212:
+        -: 1213:#if GTEST_HAS_CLONE
+        -: 1214:// Two utility routines that together determine the direction the stack
+        -: 1215:// grows.
+        -: 1216:// This could be accomplished more elegantly by a single recursive
+        -: 1217:// function, but we want to guard against the unlikely possibility of
+        -: 1218:// a smart compiler optimizing the recursion away.
+        -: 1219://
+        -: 1220:// GTEST_NO_INLINE_ is required to prevent GCC 4.6 from inlining
+        -: 1221:// StackLowerThanAddress into StackGrowsDown, which then doesn't give
+        -: 1222:// correct answer.
+        -: 1223:static void StackLowerThanAddress(const void* ptr,
+        -: 1224:                                  bool* result) GTEST_NO_INLINE_;
+        -: 1225:// Make sure sanitizers do not tamper with the stack here.
+        -: 1226:// Ideally, we want to use `__builtin_frame_address` instead of a local variable
+        -: 1227:// address with sanitizer disabled, but it does not work when the
+        -: 1228:// compiler optimizes the stack frame out, which happens on PowerPC targets.
+        -: 1229:// HWAddressSanitizer add a random tag to the MSB of the local variable address,
+        -: 1230:// making comparison result unpredictable.
+        -: 1231:GTEST_ATTRIBUTE_NO_SANITIZE_ADDRESS_
+        -: 1232:GTEST_ATTRIBUTE_NO_SANITIZE_HWADDRESS_
+        -: 1233:static void StackLowerThanAddress(const void* ptr, bool* result) {
+        -: 1234:  int dummy = 0;
+        -: 1235:  *result = std::less<const void*>()(&dummy, ptr);
+        -: 1236:}
+        -: 1237:
+        -: 1238:// Make sure AddressSanitizer does not tamper with the stack here.
+        -: 1239:GTEST_ATTRIBUTE_NO_SANITIZE_ADDRESS_
+        -: 1240:GTEST_ATTRIBUTE_NO_SANITIZE_HWADDRESS_
+        -: 1241:static bool StackGrowsDown() {
+        -: 1242:  int dummy = 0;
+        -: 1243:  bool result;
+        -: 1244:  StackLowerThanAddress(&dummy, &result);
+        -: 1245:  return result;
+        -: 1246:}
+        -: 1247:#endif  // GTEST_HAS_CLONE
+        -: 1248:
+        -: 1249:// Spawns a child process with the same executable as the current process in
+        -: 1250:// a thread-safe manner and instructs it to run the death test.  The
+        -: 1251:// implementation uses fork(2) + exec.  On systems where clone(2) is
+        -: 1252:// available, it is used instead, being slightly more thread-safe.  On QNX,
+        -: 1253:// fork supports only single-threaded environments, so this function uses
+        -: 1254:// spawn(2) there instead.  The function dies with an error message if
+        -: 1255:// anything goes wrong.
+        -: 1256:static pid_t ExecDeathTestSpawnChild(char* const* argv, int close_fd) {
+        -: 1257:  ExecDeathTestArgs args = {argv, close_fd};
+        -: 1258:  pid_t child_pid = -1;
+        -: 1259:
+        -: 1260:#ifdef GTEST_OS_QNX
+        -: 1261:  // Obtains the current directory and sets it to be closed in the child
+        -: 1262:  // process.
+        -: 1263:  const int cwd_fd = open(".", O_RDONLY);
+        -: 1264:  GTEST_DEATH_TEST_CHECK_(cwd_fd != -1);
+        -: 1265:  GTEST_DEATH_TEST_CHECK_SYSCALL_(fcntl(cwd_fd, F_SETFD, FD_CLOEXEC));
+        -: 1266:  // We need to execute the test program in the same environment where
+        -: 1267:  // it was originally invoked.  Therefore we change to the original
+        -: 1268:  // working directory first.
+        -: 1269:  const char* const original_dir =
+        -: 1270:      UnitTest::GetInstance()->original_working_dir();
+        -: 1271:  // We can safely call chdir() as it's a direct system call.
+        -: 1272:  if (chdir(original_dir) != 0) {
+        -: 1273:    DeathTestAbort(std::string("chdir(\"") + original_dir +
+        -: 1274:                   "\") failed: " + GetLastErrnoDescription());
+        -: 1275:    return EXIT_FAILURE;
+        -: 1276:  }
+        -: 1277:
+        -: 1278:  int fd_flags;
+        -: 1279:  // Set close_fd to be closed after spawn.
+        -: 1280:  GTEST_DEATH_TEST_CHECK_SYSCALL_(fd_flags = fcntl(close_fd, F_GETFD));
+        -: 1281:  GTEST_DEATH_TEST_CHECK_SYSCALL_(
+        -: 1282:      fcntl(close_fd, F_SETFD, fd_flags | FD_CLOEXEC));
+        -: 1283:  struct inheritance inherit = {0};
+        -: 1284:  // spawn is a system call.
+        -: 1285:  child_pid = spawn(args.argv[0], 0, nullptr, &inherit, args.argv, environ);
+        -: 1286:  // Restores the current working directory.
+        -: 1287:  GTEST_DEATH_TEST_CHECK_(fchdir(cwd_fd) != -1);
+        -: 1288:  GTEST_DEATH_TEST_CHECK_SYSCALL_(close(cwd_fd));
+        -: 1289:
+        -: 1290:#else  // GTEST_OS_QNX
+        -: 1291:#ifdef GTEST_OS_LINUX
+        -: 1292:  // When a SIGPROF signal is received while fork() or clone() are executing,
+        -: 1293:  // the process may hang. To avoid this, we ignore SIGPROF here and re-enable
+        -: 1294:  // it after the call to fork()/clone() is complete.
+        -: 1295:  struct sigaction saved_sigprof_action;
+        -: 1296:  struct sigaction ignore_sigprof_action;
+        -: 1297:  memset(&ignore_sigprof_action, 0, sizeof(ignore_sigprof_action));
+        -: 1298:  sigemptyset(&ignore_sigprof_action.sa_mask);
+        -: 1299:  ignore_sigprof_action.sa_handler = SIG_IGN;
+        -: 1300:  GTEST_DEATH_TEST_CHECK_SYSCALL_(
+        -: 1301:      sigaction(SIGPROF, &ignore_sigprof_action, &saved_sigprof_action));
+        -: 1302:#endif  // GTEST_OS_LINUX
+        -: 1303:
+        -: 1304:#if GTEST_HAS_CLONE
+        -: 1305:  const bool use_fork = GTEST_FLAG_GET(death_test_use_fork);
+        -: 1306:
+        -: 1307:  if (!use_fork) {
+        -: 1308:    static const bool stack_grows_down = StackGrowsDown();
+        -: 1309:    const auto stack_size = static_cast<size_t>(getpagesize() * 2);
+        -: 1310:    // MMAP_ANONYMOUS is not defined on Mac, so we use MAP_ANON instead.
+        -: 1311:    void* const stack = mmap(nullptr, stack_size, PROT_READ | PROT_WRITE,
+        -: 1312:                             MAP_ANON | MAP_PRIVATE, -1, 0);
+        -: 1313:    GTEST_DEATH_TEST_CHECK_(stack != MAP_FAILED);
+        -: 1314:
+        -: 1315:    // Maximum stack alignment in bytes:  For a downward-growing stack, this
+        -: 1316:    // amount is subtracted from size of the stack space to get an address
+        -: 1317:    // that is within the stack space and is aligned on all systems we care
+        -: 1318:    // about.  As far as I know there is no ABI with stack alignment greater
+        -: 1319:    // than 64.  We assume stack and stack_size already have alignment of
+        -: 1320:    // kMaxStackAlignment.
+        -: 1321:    const size_t kMaxStackAlignment = 64;
+        -: 1322:    void* const stack_top =
+        -: 1323:        static_cast<char*>(stack) +
+        -: 1324:        (stack_grows_down ? stack_size - kMaxStackAlignment : 0);
+        -: 1325:    GTEST_DEATH_TEST_CHECK_(
+        -: 1326:        static_cast<size_t>(stack_size) > kMaxStackAlignment &&
+        -: 1327:        reinterpret_cast<uintptr_t>(stack_top) % kMaxStackAlignment == 0);
+        -: 1328:
+        -: 1329:    child_pid = clone(&ExecDeathTestChildMain, stack_top, SIGCHLD, &args);
+        -: 1330:
+        -: 1331:    GTEST_DEATH_TEST_CHECK_(munmap(stack, stack_size) != -1);
+        -: 1332:  }
+        -: 1333:#else
+        -: 1334:  const bool use_fork = true;
+        -: 1335:#endif  // GTEST_HAS_CLONE
+        -: 1336:
+        -: 1337:  if (use_fork && (child_pid = fork()) == 0) {
+        -: 1338:    _Exit(ExecDeathTestChildMain(&args));
+        -: 1339:  }
+        -: 1340:#endif  // GTEST_OS_QNX
+        -: 1341:#ifdef GTEST_OS_LINUX
+        -: 1342:  GTEST_DEATH_TEST_CHECK_SYSCALL_(
+        -: 1343:      sigaction(SIGPROF, &saved_sigprof_action, nullptr));
+        -: 1344:#endif  // GTEST_OS_LINUX
+        -: 1345:
+        -: 1346:  GTEST_DEATH_TEST_CHECK_(child_pid != -1);
+        -: 1347:  return child_pid;
+        -: 1348:}
+        -: 1349:
+        -: 1350:// The AssumeRole process for a fork-and-exec death test.  It re-executes the
+        -: 1351:// main program from the beginning, setting the --gtest_filter
+        -: 1352:// and --gtest_internal_run_death_test flags to cause only the current
+        -: 1353:// death test to be re-run.
+        -: 1354:DeathTest::TestRole ExecDeathTest::AssumeRole() {
+        -: 1355:  const UnitTestImpl* const impl = GetUnitTestImpl();
+        -: 1356:  const InternalRunDeathTestFlag* const flag =
+        -: 1357:      impl->internal_run_death_test_flag();
+        -: 1358:  const TestInfo* const info = impl->current_test_info();
+        -: 1359:  const int death_test_index = info->result()->death_test_count();
+        -: 1360:
+        -: 1361:  if (flag != nullptr) {
+        -: 1362:    set_write_fd(flag->write_fd());
+        -: 1363:    return EXECUTE_TEST;
+        -: 1364:  }
+        -: 1365:
+        -: 1366:  int pipe_fd[2];
+        -: 1367:  GTEST_DEATH_TEST_CHECK_(pipe(pipe_fd) != -1);
+        -: 1368:  // Clear the close-on-exec flag on the write end of the pipe, lest
+        -: 1369:  // it be closed when the child process does an exec:
+        -: 1370:  GTEST_DEATH_TEST_CHECK_(fcntl(pipe_fd[1], F_SETFD, 0) != -1);
+        -: 1371:
+        -: 1372:  const std::string filter_flag = std::string("--") + GTEST_FLAG_PREFIX_ +
+        -: 1373:                                  "filter=" + info->test_suite_name() + "." +
+        -: 1374:                                  info->name();
+        -: 1375:  const std::string internal_flag = std::string("--") + GTEST_FLAG_PREFIX_ +
+        -: 1376:                                    "internal_run_death_test=" + file_ + "|" +
+        -: 1377:                                    StreamableToString(line_) + "|" +
+        -: 1378:                                    StreamableToString(death_test_index) + "|" +
+        -: 1379:                                    StreamableToString(pipe_fd[1]);
+        -: 1380:  std::vector<std::string> args = GetArgvsForDeathTestChildProcess();
+        -: 1381:  args.push_back(filter_flag);
+        -: 1382:  args.push_back(internal_flag);
+        -: 1383:
+        -: 1384:  DeathTest::set_last_death_test_message("");
+        -: 1385:
+        -: 1386:  CaptureStderr();
+        -: 1387:  // See the comment in NoExecDeathTest::AssumeRole for why the next line
+        -: 1388:  // is necessary.
+        -: 1389:  FlushInfoLog();
+        -: 1390:
+        -: 1391:  std::vector<char*> argv = CreateArgvFromArgs(args);
+        -: 1392:  const pid_t child_pid = ExecDeathTestSpawnChild(argv.data(), pipe_fd[0]);
+        -: 1393:  GTEST_DEATH_TEST_CHECK_SYSCALL_(close(pipe_fd[1]));
+        -: 1394:  set_child_pid(child_pid);
+        -: 1395:  set_read_fd(pipe_fd[0]);
+        -: 1396:  set_spawned(true);
+        -: 1397:  return OVERSEE_TEST;
+        -: 1398:}
+        -: 1399:
+        -: 1400:#endif  // !GTEST_OS_WINDOWS
+        -: 1401:
+        -: 1402:// Creates a concrete DeathTest-derived class that depends on the
+        -: 1403:// --gtest_death_test_style flag, and sets the pointer pointed to
+        -: 1404:// by the "test" argument to its address.  If the test should be
+        -: 1405:// skipped, sets that pointer to NULL.  Returns true, unless the
+        -: 1406:// flag is set to an invalid value.
+function _ZN7testing8internal23DefaultDeathTestFactory6CreateEPKcNS_7MatcherIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES3_iPPNS0_9DeathTestE called 0 returned 0% blocks executed 0%
+    #####: 1407:bool DefaultDeathTestFactory::Create(const char* statement,
+        -: 1408:                                     Matcher<const std::string&> matcher,
+        -: 1409:                                     const char* file, int line,
+        -: 1410:                                     DeathTest** test) {
+    #####: 1411:  UnitTestImpl* const impl = GetUnitTestImpl();
+    %%%%%: 1411-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -: 1412:  const InternalRunDeathTestFlag* const flag =
+    #####: 1413:      impl->internal_run_death_test_flag();
+    %%%%%: 1413-block  0
+call    0 never executed
+        -: 1414:  const int death_test_index =
+    #####: 1415:      impl->current_test_info()->increment_death_test_count();
+call    0 never executed
+call    1 never executed
+        -: 1416:
+    #####: 1417:  if (flag != nullptr) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####: 1418:    if (death_test_index > flag->index()) {
+    %%%%%: 1418-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####: 1419:      DeathTest::set_last_death_test_message(
+    %%%%%: 1419-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####: 1420:          "Death test count (" + StreamableToString(death_test_index) +
+    %%%%%: 1420-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1420-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%: 1420-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+call    9 never executed
+call   10 never executed
+call   11 never executed
+    $$$$$: 1420-block  3
+call   12 never executed
+    $$$$$: 1420-block  4
+call   13 never executed
+    $$$$$: 1420-block  5
+call   14 never executed
+    $$$$$: 1420-block  6
+    $$$$$: 1420-block  7
+    $$$$$: 1420-block  8
+    #####: 1421:          ") somehow exceeded expected maximum (" +
+    %%%%%: 1421-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+call    3 never executed
+    $$$$$: 1421-block  1
+call    4 never executed
+    $$$$$: 1421-block  2
+    #####: 1422:          StreamableToString(flag->index()) + ")");
+    %%%%%: 1422-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%: 1422-block  1
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%: 1422-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$: 1422-block  3
+call    9 never executed
+    $$$$$: 1422-block  4
+call   10 never executed
+    $$$$$: 1422-block  5
+    $$$$$: 1422-block  6
+    $$$$$: 1422-block  7
+    #####: 1423:      return false;
+        -: 1424:    }
+        -: 1425:
+    #####: 1426:    if (!(flag->file() == file && flag->line() == line &&
+    %%%%%: 1426-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%: 1426-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%: 1426-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    %%%%%: 1426-block  3
+    %%%%%: 1426-block  4
+    %%%%%: 1426-block  5
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    #####: 1427:          flag->index() == death_test_index)) {
+    %%%%%: 1427-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####: 1428:      *test = nullptr;
+    #####: 1429:      return true;
+    %%%%%: 1429-block  0
+        -: 1430:    }
+        -: 1431:  }
+        -: 1432:
+        -: 1433:#ifdef GTEST_OS_WINDOWS
+        -: 1434:
+    #####: 1435:  if (GTEST_FLAG_GET(death_test_style) == "threadsafe" ||
+    %%%%%: 1435-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1435-block  1
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    %%%%%: 1435-block  2
+    %%%%%: 1435-block  3
+    %%%%%: 1435-block  4
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    #####: 1436:      GTEST_FLAG_GET(death_test_style) == "fast") {
+    %%%%%: 1436-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1436-block  1
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    #####: 1437:    *test = new WindowsDeathTest(statement, std::move(matcher), file, line);
+    %%%%%: 1437-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1437-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%: 1437-block  2
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%: 1437-block  3
+call   10 never executed
+    $$$$$: 1437-block  4
+call   11 never executed
+    $$$$$: 1437-block  5
+    $$$$$: 1437-block  6
+branch 12 never executed (fallthrough)
+branch 13 never executed
+    $$$$$: 1437-block  7
+call   14 never executed
+        -: 1438:  }
+        -: 1439:
+        -: 1440:#elif defined(GTEST_OS_FUCHSIA)
+        -: 1441:
+        -: 1442:  if (GTEST_FLAG_GET(death_test_style) == "threadsafe" ||
+        -: 1443:      GTEST_FLAG_GET(death_test_style) == "fast") {
+        -: 1444:    *test = new FuchsiaDeathTest(statement, std::move(matcher), file, line);
+        -: 1445:  }
+        -: 1446:
+        -: 1447:#else
+        -: 1448:
+        -: 1449:  if (GTEST_FLAG_GET(death_test_style) == "threadsafe") {
+        -: 1450:    *test = new ExecDeathTest(statement, std::move(matcher), file, line);
+        -: 1451:  } else if (GTEST_FLAG_GET(death_test_style) == "fast") {
+        -: 1452:    *test = new NoExecDeathTest(statement, std::move(matcher));
+        -: 1453:  }
+        -: 1454:
+        -: 1455:#endif  // GTEST_OS_WINDOWS
+        -: 1456:
+        -: 1457:  else {  // NOLINT - this is more readable than unbalanced brackets inside #if.
+    #####: 1458:    DeathTest::set_last_death_test_message("Unknown death test style \"" +
+    %%%%%: 1458-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1458-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+call    6 never executed
+    $$$$$: 1458-block  2
+call    7 never executed
+    $$$$$: 1458-block  3
+    #####: 1459:                                           GTEST_FLAG_GET(death_test_style) +
+    %%%%%: 1459-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1459-block  1
+call    3 never executed
+    $$$$$: 1459-block  2
+call    4 never executed
+    $$$$$: 1459-block  3
+        -: 1460:                                           "\" encountered");
+    #####: 1461:    return false;
+        -: 1462:  }
+        -: 1463:
+    #####: 1464:  return true;
+    %%%%%: 1464-block  0
+        -: 1465:}
+        -: 1466:
+        -: 1467:#ifdef GTEST_OS_WINDOWS
+        -: 1468:// Recreates the pipe and event handles from the provided parameters,
+        -: 1469:// signals the event, and returns a file descriptor wrapped around the pipe
+        -: 1470:// handle. This function is called in the child process only.
+function _ZN7testing8internalL23GetStatusFileDescriptorEjyy called 0 returned 0% blocks executed 0%
+    #####: 1471:static int GetStatusFileDescriptor(unsigned int parent_process_id,
+        -: 1472:                                   size_t write_handle_as_size_t,
+        -: 1473:                                   size_t event_handle_as_size_t) {
+        -: 1474:  AutoHandle parent_process_handle(::OpenProcess(PROCESS_DUP_HANDLE,
+        -: 1475:                                                 FALSE,  // Non-inheritable.
+    #####: 1476:                                                 parent_process_id));
+    %%%%%: 1476-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1476-block  1
+call    3 never executed
+    #####: 1477:  if (parent_process_handle.Get() == INVALID_HANDLE_VALUE) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####: 1478:    DeathTestAbort("Unable to open parent process " +
+    %%%%%: 1478-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1478-block  1
+call    3 never executed
+    $$$$$: 1478-block  2
+call    4 never executed
+    $$$$$: 1478-block  3
+    #####: 1479:                   StreamableToString(parent_process_id));
+    %%%%%: 1479-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$: 1479-block  1
+call    3 never executed
+    $$$$$: 1479-block  2
+        -: 1480:  }
+        -: 1481:
+    #####: 1482:  GTEST_CHECK_(sizeof(HANDLE) <= sizeof(size_t));
+    %%%%%: 1482-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%: 1482-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%: 1482-block  2
+call    6 never executed
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%: 1482-block  3
+call   10 never executed
+    $$$$$: 1482-block  4
+call   11 never executed
+    $$$$$: 1482-block  5
+        -: 1483:
+    #####: 1484:  const HANDLE write_handle = reinterpret_cast<HANDLE>(write_handle_as_size_t);
+        -: 1485:  HANDLE dup_write_handle;
+        -: 1486:
+        -: 1487:  // The newly initialized handle is accessible only in the parent
+        -: 1488:  // process. To obtain one accessible within the child, we need to use
+        -: 1489:  // DuplicateHandle.
+    #####: 1490:  if (!::DuplicateHandle(parent_process_handle.Get(), write_handle,
+    %%%%%: 1490-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1490-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%: 1490-block  2
+branch  7 never executed (fallthrough)
+branch  8 never executed
+        -: 1491:                         ::GetCurrentProcess(), &dup_write_handle,
+        -: 1492:                         0x0,    // Requested privileges ignored since
+        -: 1493:                                 // DUPLICATE_SAME_ACCESS is used.
+        -: 1494:                         FALSE,  // Request non-inheritable handler.
+        -: 1495:                         DUPLICATE_SAME_ACCESS)) {
+    #####: 1496:    DeathTestAbort("Unable to duplicate the pipe handle " +
+    %%%%%: 1496-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1496-block  1
+call    3 never executed
+    $$$$$: 1496-block  2
+call    4 never executed
+    $$$$$: 1496-block  3
+    #####: 1497:                   StreamableToString(write_handle_as_size_t) +
+    %%%%%: 1497-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1497-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    $$$$$: 1497-block  2
+call    6 never executed
+    $$$$$: 1497-block  3
+call    7 never executed
+    $$$$$: 1497-block  4
+    $$$$$: 1497-block  5
+    #####: 1498:                   " from the parent process " +
+    %%%%%: 1498-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$: 1498-block  1
+call    3 never executed
+    $$$$$: 1498-block  2
+    #####: 1499:                   StreamableToString(parent_process_id));
+    %%%%%: 1499-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$: 1499-block  1
+call    3 never executed
+    $$$$$: 1499-block  2
+        -: 1500:  }
+        -: 1501:
+    #####: 1502:  const HANDLE event_handle = reinterpret_cast<HANDLE>(event_handle_as_size_t);
+        -: 1503:  HANDLE dup_event_handle;
+        -: 1504:
+    #####: 1505:  if (!::DuplicateHandle(parent_process_handle.Get(), event_handle,
+    %%%%%: 1505-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1505-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%: 1505-block  2
+branch  7 never executed (fallthrough)
+branch  8 never executed
+        -: 1506:                         ::GetCurrentProcess(), &dup_event_handle, 0x0, FALSE,
+        -: 1507:                         DUPLICATE_SAME_ACCESS)) {
+    #####: 1508:    DeathTestAbort("Unable to duplicate the event handle " +
+    %%%%%: 1508-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1508-block  1
+call    3 never executed
+    $$$$$: 1508-block  2
+call    4 never executed
+    $$$$$: 1508-block  3
+    #####: 1509:                   StreamableToString(event_handle_as_size_t) +
+    %%%%%: 1509-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1509-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    $$$$$: 1509-block  2
+call    6 never executed
+    $$$$$: 1509-block  3
+call    7 never executed
+    $$$$$: 1509-block  4
+    $$$$$: 1509-block  5
+    #####: 1510:                   " from the parent process " +
+    %%%%%: 1510-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$: 1510-block  1
+call    3 never executed
+    $$$$$: 1510-block  2
+    #####: 1511:                   StreamableToString(parent_process_id));
+    %%%%%: 1511-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    $$$$$: 1511-block  1
+call    3 never executed
+    $$$$$: 1511-block  2
+        -: 1512:  }
+        -: 1513:
+        -: 1514:  const int write_fd =
+    #####: 1515:      ::_open_osfhandle(reinterpret_cast<intptr_t>(dup_write_handle), O_APPEND);
+    %%%%%: 1515-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####: 1516:  if (write_fd == -1) {
+    %%%%%: 1516-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####: 1517:    DeathTestAbort("Unable to convert pipe handle " +
+    %%%%%: 1517-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1517-block  1
+call    3 never executed
+    $$$$$: 1517-block  2
+call    4 never executed
+    $$$$$: 1517-block  3
+    #####: 1518:                   StreamableToString(write_handle_as_size_t) +
+    %%%%%: 1518-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1518-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    $$$$$: 1518-block  2
+call    6 never executed
+    $$$$$: 1518-block  3
+call    7 never executed
+    $$$$$: 1518-block  4
+    $$$$$: 1518-block  5
+        -: 1519:                   " to a file descriptor");
+        -: 1520:  }
+        -: 1521:
+        -: 1522:  // Signals the parent that the write end of the pipe has been acquired
+        -: 1523:  // so the parent can release its own write end.
+    #####: 1524:  ::SetEvent(dup_event_handle);
+    %%%%%: 1524-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -: 1525:
+    #####: 1526:  return write_fd;
+    %%%%%: 1526-block  0
+    #####: 1527:}
+    %%%%%: 1527-block  0
+call    0 never executed
+    $$$$$: 1527-block  1
+call    1 never executed
+        -: 1528:#endif  // GTEST_OS_WINDOWS
+        -: 1529:
+        -: 1530:// Returns a newly created InternalRunDeathTestFlag object with fields
+        -: 1531:// initialized from the GTEST_FLAG(internal_run_death_test) flag if
+        -: 1532:// the flag is specified; otherwise returns NULL.
+function _ZN7testing8internal29ParseInternalRunDeathTestFlagEv called 1 returned 100% blocks executed 14%
+        1: 1533:InternalRunDeathTestFlag* ParseInternalRunDeathTestFlag() {
+        1: 1534:  if (GTEST_FLAG_GET(internal_run_death_test).empty()) return nullptr;
+        1: 1534-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1: 1534-block  1
+        -: 1535:
+        -: 1536:  // GTEST_HAS_DEATH_TEST implies that we have ::std::string, so we
+        -: 1537:  // can use it here.
+    #####: 1538:  int line = -1;
+    #####: 1539:  int index = -1;
+    #####: 1540:  ::std::vector< ::std::string> fields;
+    %%%%%: 1540-block  0
+call    0 never executed
+    #####: 1541:  SplitString(GTEST_FLAG_GET(internal_run_death_test), '|', &fields);
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    #####: 1542:  int write_fd = -1;
+        -: 1543:
+        -: 1544:#ifdef GTEST_OS_WINDOWS
+        -: 1545:
+    #####: 1546:  unsigned int parent_process_id = 0;
+    #####: 1547:  size_t write_handle_as_size_t = 0;
+    #####: 1548:  size_t event_handle_as_size_t = 0;
+        -: 1549:
+    #####: 1550:  if (fields.size() != 6 || !ParseNaturalNumber(fields[1], &line) ||
+    %%%%%: 1550-block  0
+call    0 never executed
+    %%%%%: 1550-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed (fallthrough)
+branch  4 never executed (throw)
+    %%%%%: 1550-block  2
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    #####: 1551:      !ParseNaturalNumber(fields[2], &index) ||
+    %%%%%: 1551-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%: 1551-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    #####: 1552:      !ParseNaturalNumber(fields[3], &parent_process_id) ||
+    %%%%%: 1552-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%: 1552-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    #####: 1553:      !ParseNaturalNumber(fields[4], &write_handle_as_size_t) ||
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%: 1553-block  0
+call    2 never executed
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%: 1553-block  1
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    %%%%%: 1553-block  2
+    %%%%%: 1553-block  3
+    %%%%%: 1553-block  4
+branch  8 never executed (fallthrough)
+branch  9 never executed
+    #####: 1554:      !ParseNaturalNumber(fields[5], &event_handle_as_size_t)) {
+    %%%%%: 1554-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%: 1554-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    #####: 1555:    DeathTestAbort("Bad --gtest_internal_run_death_test flag: " +
+    %%%%%: 1555-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1555-block  1
+call    3 never executed
+    $$$$$: 1555-block  2
+call    4 never executed
+    $$$$$: 1555-block  3
+        -: 1556:                   GTEST_FLAG_GET(internal_run_death_test));
+        -: 1557:  }
+    #####: 1558:  write_fd = GetStatusFileDescriptor(parent_process_id, write_handle_as_size_t,
+    %%%%%: 1558-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -: 1559:                                     event_handle_as_size_t);
+        -: 1560:
+        -: 1561:#elif defined(GTEST_OS_FUCHSIA)
+        -: 1562:
+        -: 1563:  if (fields.size() != 3 || !ParseNaturalNumber(fields[1], &line) ||
+        -: 1564:      !ParseNaturalNumber(fields[2], &index)) {
+        -: 1565:    DeathTestAbort("Bad --gtest_internal_run_death_test flag: " +
+        -: 1566:                   GTEST_FLAG_GET(internal_run_death_test));
+        -: 1567:  }
+        -: 1568:
+        -: 1569:#else
+        -: 1570:
+        -: 1571:  if (fields.size() != 4 || !ParseNaturalNumber(fields[1], &line) ||
+        -: 1572:      !ParseNaturalNumber(fields[2], &index) ||
+        -: 1573:      !ParseNaturalNumber(fields[3], &write_fd)) {
+        -: 1574:    DeathTestAbort("Bad --gtest_internal_run_death_test flag: " +
+        -: 1575:                   GTEST_FLAG_GET(internal_run_death_test));
+        -: 1576:  }
+        -: 1577:
+        -: 1578:#endif  // GTEST_OS_WINDOWS
+        -: 1579:
+    #####: 1580:  return new InternalRunDeathTestFlag(fields[0], line, index, write_fd);
+    %%%%%: 1580-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%: 1580-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%: 1580-block  2
+    $$$$$: 1580-block  3
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    $$$$$: 1580-block  4
+call    9 never executed
+    #####: 1581:}
+    %%%%%: 1581-block  0
+call    0 never executed
+    $$$$$: 1581-block  1
+call    1 never executed
+        -: 1582:
+        -: 1583:}  // namespace internal
+        -: 1584:
+        -: 1585:#endif  // GTEST_HAS_DEATH_TEST
+        -: 1586:
+        -: 1587:}  // namespace testing

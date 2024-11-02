@@ -1,0 +1,124 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/ServiceFactory.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\ServiceFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\ServiceFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "ServiceFactory.h"
+        -:    2:#include "Building.h"
+        -:    3:#include "Service.h"
+        -:    4:#include "PoliceService.h"
+        -:    5:#include "HealthService.h"
+        -:    6:#include "EducationService.h"
+        -:    7:#include <string>
+        -:    8:
+        -:    9:// Made citizen a reference instead of pointer to prevent it being nullptr
+function _ZN14ServiceFactory14createBuildingE12BuildingTypeR7Citizen called 3 returned 100% blocks executed 61%
+        3:   10:Building *ServiceFactory::createBuilding(BuildingType type, Citizen& owner) {
+        3:   11:    Resources* resources = new Resources(200,200,false);
+        3:   11-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:   11-block  1
+call    3 returned 3
+branch  4 taken 3 (fallthrough)
+branch  5 taken 0 (throw)
+        3:   11-block  2
+    $$$$$:   11-block  3
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   11-block  4
+call    8 never executed
+        3:   12:    std::string location = "City Center";
+        3:   12-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+    $$$$$:   12-block  1
+        -:   13:
+        3:   14:    if(type == BuildingType::PoliceStation) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        1:   15:        int id = numberOfPoliceStations;
+        1:   16:        numberOfPoliceStations++;
+        1:   17:        Building* b = new PoliceService(300, location,resources, 300, owner, id, BuildingType::PoliceStation);
+        1:   17-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   17-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   17-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   17-block  3
+call    8 never executed
+        1:   18:        taxAuthority->registerBuilding(*b);
+        1:   18-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   19:        return b; 
+        1:   19-block  0
+        2:   20:    } else if(type == BuildingType::Hospital) {
+        2:   20-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   21:        int id = numberOfHospitals;
+        1:   22:        numberOfHospitals++;
+        1:   23:        Building* b = new HealthService(500, location,resources, 500, owner,BuildingType::Hospital,id);
+        1:   23-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   23-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   23-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   23-block  3
+call    8 never executed
+        1:   24:        taxAuthority->registerBuilding(*b);
+        1:   24-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   25:        return b; 
+        1:   25-block  0
+        -:   26:
+        -:   27:    } else {
+        1:   28:        int id = numberOfSchools;
+        1:   29:        numberOfSchools++;
+        1:   30:        Building* b = new EducationService(200, location,resources, 1000, owner, id,BuildingType::School);
+        1:   30-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   30-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   30-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   30-block  3
+call    8 never executed
+        1:   31:        taxAuthority->registerBuilding(*b);
+        1:   31-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   32:        return b; 
+        1:   32-block  0
+        -:   33:    }
+        3:   34:}
+        3:   34-block  0
+call    0 returned 3
+    $$$$$:   34-block  1
+call    1 never executed

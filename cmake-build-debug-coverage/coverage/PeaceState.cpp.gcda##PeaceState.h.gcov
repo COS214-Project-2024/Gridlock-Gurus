@@ -1,0 +1,53 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/PeaceState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PeaceState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PeaceState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef PEACESTATE_H
+        -:    2:#define PEACESTATE_H
+        -:    3:
+        -:    4:#include "PoliceState.h"
+        -:    5:#include "PoliceService.h"
+        -:    6:
+        -:    7:
+        -:    8:/**
+        -:    9: * @brief Represents a state of peace in the city.
+        -:   10: *
+        -:   11: * ConcreteState in the State pattern. It extends the PoliceState class and provides an implementation for checking the operational status of police services during peaceful conditions.
+        -:   12: */
+        -:   13:class PeaceState : public PoliceState {
+        -:   14:private:
+        -:   15: PoliceService* service;
+        -:   16:public:
+        -:   17:    /**
+        -:   18:     * @brief Constructs a new PeaceState object.
+        -:   19:     */
+        -:   20:    PeaceState(PoliceService& service) : PoliceState(service) {}
+        -:   21:
+        -:   22:    /**
+        -:   23:     * @brief Destroys the PeaceState object.
+        -:   24:     */
+        2:   25:    ~PeaceState()override = default;
+------------------
+_ZN10PeaceStateD0Ev:
+function _ZN10PeaceStateD0Ev called 1 returned 100% blocks executed 100%
+        1:   25:    ~PeaceState()override = default;
+        1:   25-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN10PeaceStateD1Ev:
+function _ZN10PeaceStateD1Ev called 1 returned 100% blocks executed 100%
+        1:   25:    ~PeaceState()override = default;
+        1:   25-block  0
+call    0 returned 1
+------------------
+        -:   26:
+        -:   27:    /**
+        -:   28:     * @brief Checks the operational status of the police service during a state of peace.
+        -:   29:     * This method implements behavior specific to the peaceful state.
+        -:   30:     */
+        -:   31:    void checkOperation() override;
+        -:   32:    std::string getName() override;
+        -:   33:};
+        -:   34:
+        -:   35:#endif // PEACESTATE_H

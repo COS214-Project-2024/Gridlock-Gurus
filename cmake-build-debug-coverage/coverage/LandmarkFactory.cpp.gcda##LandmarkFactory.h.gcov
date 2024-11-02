@@ -1,0 +1,54 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/LandmarkFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LandmarkFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LandmarkFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef LANDMARKFACTORY_H
+        -:    2:#define LANDMARKFACTORY_H
+        -:    3:
+        -:    4:#include "BuildingFactory.h"
+        -:    5:#include "BuildingType.h"
+        -:    6:#include "TaxAuthority.h"
+        -:    7:#include <memory>
+        -:    8:
+        -:    9:/**
+        -:   10: * @brief Factory for creating landmarks.
+        -:   11: * 
+        -:   12: * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create landmarks.
+        -:   13: */
+        -:   14:class LandmarkFactory : public BuildingFactory {
+        -:   15:public:
+        -:   16:    /**
+        -:   17:     * @brief Constructs a new LandmarkFactory object.
+        -:   18:     */
+        -:   19:    LandmarkFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+        -:   20:
+        -:   21:    /**
+        -:   22:     * @brief Destroys the LandmarkFactory object.
+        -:   23:     */
+        2:   24:     ~LandmarkFactory() override = default;
+------------------
+_ZN15LandmarkFactoryD0Ev:
+function _ZN15LandmarkFactoryD0Ev called 1 returned 100% blocks executed 100%
+        1:   24:     ~LandmarkFactory() override = default;
+        1:   24-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN15LandmarkFactoryD1Ev:
+function _ZN15LandmarkFactoryD1Ev called 1 returned 100% blocks executed 100%
+        1:   24:     ~LandmarkFactory() override = default;
+        1:   24-block  0
+call    0 returned 1
+------------------
+        -:   25:    
+        -:   26:    /**
+        -:   27:     * @brief Creates a Landmark building.
+        -:   28:     * @param type The type of Landmark building to create.
+        -:   29:     * @return Pointer to the created Landmark building object.
+        -:   30:     *
+        -:   31:     * This method overrides the factory method to create a Landmark building.
+        -:   32:     */
+        -:   33:    Building* createBuilding(BuildingType type, Citizen& owner) override;
+        -:   34:};
+        -:   35:
+        -:   36:#endif // LANDMARKFACTORY_H

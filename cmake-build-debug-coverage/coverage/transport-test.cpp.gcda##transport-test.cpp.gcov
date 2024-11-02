@@ -1,0 +1,2848 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/tests/transport-test.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\transport-test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\transport-test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "gtest/gtest.h"
+        -:    2:#include "../headers/TransportDepartment.h"
+        -:    3:#include "../headers/Vehicle.h"
+        -:    4:#include "../headers/Functional.h"
+        -:    5:#include "../headers/Broken.h"
+        -:    6:#include "../headers/Taxi.h"
+        -:    7:#include "../headers/Truck.h"
+        -:    8:#include "../headers/Train.h"
+        -:    9:#include "../headers/Citizen.h"
+        -:   10:#include <memory>
+        -:   11:
+        -:   12:class TransportDepartmentTest : public ::testing::Test {
+        -:   13:protected:
+        -:   14:    TransportDepartment* transportDept;
+        -:   15:    Taxi* taxi;
+        -:   16:    Truck* truck;
+        -:   17:    Train* train;
+        -:   18:    std::shared_ptr<TaxAuthority> taxAuth;
+        -:   19:    Citizen* citizen;
+        -:   20:
+function _ZN23TransportDepartmentTest5SetUpEv called 18 returned 100% blocks executed 53%
+       18:   21:    void SetUp() override {
+       18:   22:        transportDept = new TransportDepartment();
+       18:   22-block  0
+call    0 returned 18
+call    1 returned 18
+       18:   23:        taxi = new Taxi(4, transportDept);
+call    0 returned 18
+call    1 returned 18
+branch  2 taken 18 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   23-block  0
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    $$$$$:   23-block  1
+call    6 never executed
+       18:   24:        truck = new Truck(2, transportDept);
+       18:   24-block  0
+call    0 returned 18
+call    1 returned 18
+branch  2 taken 18 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   24-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    $$$$$:   24-block  2
+call    6 never executed
+       18:   25:        train = new Train(10, transportDept);
+       18:   25-block  0
+call    0 returned 18
+call    1 returned 18
+branch  2 taken 18 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   25-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    $$$$$:   25-block  2
+call    6 never executed
+       18:   26:        taxAuth = std::make_shared<TaxAuthority>();
+       18:   26-block  0
+call    0 returned 18
+branch  1 taken 18 (fallthrough)
+branch  2 taken 0 (throw)
+       18:   26-block  1
+call    3 returned 18
+call    4 returned 18
+    $$$$$:   26-block  2
+call    5 never executed
+       18:   27:        citizen = new Citizen(0, CitizenType::Citizen,100, 300, taxAuth);
+call    0 returned 18
+call    1 returned 18
+call    2 returned 18
+branch  3 taken 18 (fallthrough)
+branch  4 taken 0 (throw)
+       18:   27-block  0
+call    5 returned 18
+    $$$$$:   27-block  1
+call    6 never executed
+    $$$$$:   27-block  2
+    $$$$$:   27-block  3
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    $$$$$:   27-block  4
+call    9 never executed
+       18:   28:    }
+        -:   29:
+function _ZN23TransportDepartmentTest8TearDownEv called 18 returned 100% blocks executed 100%
+       18:   30:    void TearDown() override {
+       18:   31:        delete taxi;
+       18:   31-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   31-block  1
+call    2 returned 18
+       18:   32:        delete truck;
+       18:   32-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   32-block  1
+call    2 returned 18
+       18:   33:        delete train;
+       18:   33-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   33-block  1
+call    2 returned 18
+       18:   34:        delete citizen;
+       18:   34-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   34-block  1
+call    2 returned 18
+call    3 returned 18
+       18:   35:        delete transportDept;
+       18:   35-block  0
+branch  0 taken 18 (fallthrough)
+branch  1 taken 0
+       18:   35-block  1
+call    2 returned 18
+call    3 returned 18
+       18:   36:    }
+        -:   37:};
+        -:   38:
+        4:   39:TEST_F(TransportDepartmentTest, AddAndGetAvailableTaxi) {
+        1:   40:    transportDept->addVehicle(taxi);
+       3*:   41:    EXPECT_NO_THROW(transportDept->getAvailableVehicle("Taxi"));
+        1:   42:}
+------------------
+_ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_TestC1Ev:
+function _ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   39:TEST_F(TransportDepartmentTest, AddAndGetAvailableTaxi) {
+        1:   39-block  0
+call    0 returned 1
+------------------
+_ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_TestD0Ev:
+function _ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   39:TEST_F(TransportDepartmentTest, AddAndGetAvailableTaxi) {
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_TestD1Ev:
+function _ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   39:TEST_F(TransportDepartmentTest, AddAndGetAvailableTaxi) {
+        1:   39-block  0
+call    0 returned 1
+------------------
+_ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_Test8TestBodyEv:
+function _ZN51TransportDepartmentTest_AddAndGetAvailableTaxi_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+        1:   39:TEST_F(TransportDepartmentTest, AddAndGetAvailableTaxi) {
+        1:   40:    transportDept->addVehicle(taxi);
+        1:   40-block  0
+call    0 returned 1
+       3*:   41:    EXPECT_NO_THROW(transportDept->getAvailableVehicle("Taxi"));
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   41-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   41-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   41-block  2
+        1:   41-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   41-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   41-block  5
+call   15 returned 1
+    %%%%%:   41-block  6
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:   41-block  7
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:   41-block  8
+call   22 never executed
+call   23 never executed
+branch 24 never executed (fallthrough)
+branch 25 never executed (throw)
+    %%%%%:   41-block  9
+call   26 never executed
+branch 27 never executed (fallthrough)
+branch 28 never executed (throw)
+    %%%%%:   41-block 10
+call   29 never executed
+call   30 never executed
+call   31 never executed
+        1:   41-block 11
+call   32 returned 1
+    $$$$$:   41-block 12
+call   33 never executed
+    $$$$$:   41-block 13
+    $$$$$:   41-block 14
+    $$$$$:   41-block 15
+branch 34 never executed
+branch 35 never executed
+    $$$$$:   41-block 16
+call   36 never executed
+call   37 never executed
+branch 38 never executed (fallthrough)
+branch 39 never executed (throw)
+    $$$$$:   41-block 17
+call   40 never executed
+branch 41 never executed (fallthrough)
+branch 42 never executed (throw)
+    $$$$$:   41-block 18
+call   43 never executed
+branch 44 never executed (fallthrough)
+branch 45 never executed (throw)
+    $$$$$:   41-block 19
+call   46 never executed
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:   41-block 20
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:   41-block 21
+call   54 never executed
+branch 55 never executed (fallthrough)
+branch 56 never executed (throw)
+    $$$$$:   41-block 22
+    $$$$$:   41-block 23
+call   57 never executed
+    $$$$$:   41-block 24
+call   58 never executed
+call   59 never executed
+branch 60 never executed (fallthrough)
+branch 61 never executed (throw)
+    $$$$$:   41-block 25
+    $$$$$:   41-block 26
+call   62 never executed
+branch 63 never executed (fallthrough)
+branch 64 never executed (throw)
+    $$$$$:   41-block 27
+call   65 never executed
+    $$$$$:   41-block 28
+    $$$$$:   41-block 29
+call   66 never executed
+    $$$$$:   41-block 30
+call   67 never executed
+    $$$$$:   41-block 31
+call   68 never executed
+    $$$$$:   41-block 32
+call   69 never executed
+    $$$$$:   41-block 33
+    $$$$$:   41-block 34
+    $$$$$:   41-block 35
+call   70 never executed
+    $$$$$:   41-block 36
+    $$$$$:   41-block 37
+call   71 never executed
+        1:   42:}
+------------------
+        -:   43:
+        4:   44:TEST_F(TransportDepartmentTest, GetAvailableTaxi) {
+        1:   45:    transportDept->addVehicle(taxi);
+        2:   46:    Vehicle* available = transportDept->getAvailableVehicle("Taxi");
+       1*:   47:    EXPECT_EQ(available->getType(), "Taxi");
+        1:   48:}
+------------------
+_ZN45TransportDepartmentTest_GetAvailableTaxi_TestC1Ev:
+function _ZN45TransportDepartmentTest_GetAvailableTaxi_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   44:TEST_F(TransportDepartmentTest, GetAvailableTaxi) {
+        1:   44-block  0
+call    0 returned 1
+------------------
+_ZN45TransportDepartmentTest_GetAvailableTaxi_TestD0Ev:
+function _ZN45TransportDepartmentTest_GetAvailableTaxi_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   44:TEST_F(TransportDepartmentTest, GetAvailableTaxi) {
+        1:   44-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN45TransportDepartmentTest_GetAvailableTaxi_TestD1Ev:
+function _ZN45TransportDepartmentTest_GetAvailableTaxi_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   44:TEST_F(TransportDepartmentTest, GetAvailableTaxi) {
+        1:   44-block  0
+call    0 returned 1
+------------------
+_ZN45TransportDepartmentTest_GetAvailableTaxi_Test8TestBodyEv:
+function _ZN45TransportDepartmentTest_GetAvailableTaxi_Test8TestBodyEv called 1 returned 100% blocks executed 38%
+        1:   44:TEST_F(TransportDepartmentTest, GetAvailableTaxi) {
+        1:   45:    transportDept->addVehicle(taxi);
+        1:   45-block  0
+call    0 returned 1
+        2:   46:    Vehicle* available = transportDept->getAvailableVehicle("Taxi");
+        1:   46-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   46-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   46-block  2
+call    6 returned 1
+    $$$$$:   46-block  3
+call    7 never executed
+    $$$$$:   46-block  4
+    $$$$$:   46-block  5
+call    8 never executed
+       1*:   47:    EXPECT_EQ(available->getType(), "Taxi");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   47-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   47-block  1
+call    6 returned 1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   47-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   47-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   47-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   47-block  5
+call   20 never executed
+call   21 never executed
+        1:   47-block  6
+call   22 returned 1
+    $$$$$:   47-block  7
+call   23 never executed
+    $$$$$:   47-block  8
+    $$$$$:   47-block  9
+call   24 never executed
+    $$$$$:   47-block 10
+    $$$$$:   47-block 11
+call   25 never executed
+    $$$$$:   47-block 12
+    $$$$$:   47-block 13
+call   26 never executed
+        1:   48:}
+------------------
+        -:   49:
+        4:   50:TEST_F(TransportDepartmentTest, GetAvailableTaxiWhenBroken) {
+        1:   51:    transportDept->addVehicle(taxi);
+        1:   52:    taxi->breakDown(); // Set taxi to broken
+       3*:   53:    EXPECT_THROW(transportDept->getAvailableVehicle("Taxi"), std::runtime_error);
+        1:   54:}
+------------------
+_ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_TestC1Ev:
+function _ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   50:TEST_F(TransportDepartmentTest, GetAvailableTaxiWhenBroken) {
+        1:   50-block  0
+call    0 returned 1
+------------------
+_ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_TestD0Ev:
+function _ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   50:TEST_F(TransportDepartmentTest, GetAvailableTaxiWhenBroken) {
+        1:   50-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_TestD1Ev:
+function _ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   50:TEST_F(TransportDepartmentTest, GetAvailableTaxiWhenBroken) {
+        1:   50-block  0
+call    0 returned 1
+------------------
+_ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_Test8TestBodyEv:
+function _ZN55TransportDepartmentTest_GetAvailableTaxiWhenBroken_Test8TestBodyEv called 1 returned 100% blocks executed 36%
+        1:   50:TEST_F(TransportDepartmentTest, GetAvailableTaxiWhenBroken) {
+        1:   51:    transportDept->addVehicle(taxi);
+        1:   51-block  0
+call    0 returned 1
+        1:   52:    taxi->breakDown(); // Set taxi to broken
+call    0 returned 1
+       3*:   53:    EXPECT_THROW(transportDept->getAvailableVehicle("Taxi"), std::runtime_error);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   53-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   53-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   53-block  2
+        1:   53-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   53-block  4
+call   12 returned 1
+branch 13 taken 0 (fallthrough)
+branch 14 taken 1 (throw)
+    %%%%%:   53-block  5
+call   15 never executed
+        1:   53-block  6
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1
+    %%%%%:   53-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:   53-block  8
+    %%%%%:   53-block  9
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:   53-block 10
+call   24 never executed
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:   53-block 11
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:   53-block 12
+call   31 never executed
+call   32 never executed
+        1:   53-block 13
+call   33 returned 1
+        1:   53-block 14
+call   34 returned 1
+        1:   53-block 15
+        1:   53-block 16
+        1:   53-block 17
+branch 35 taken 1
+branch 36 taken 0
+branch 37 taken 0
+        1:   53-block 18
+call   38 returned 1
+call   39 returned 1
+    $$$$$:   53-block 19
+call   40 never executed
+call   41 never executed
+branch 42 never executed (fallthrough)
+branch 43 never executed (throw)
+    $$$$$:   53-block 20
+call   44 never executed
+branch 45 never executed (fallthrough)
+branch 46 never executed (throw)
+    $$$$$:   53-block 21
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:   53-block 22
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:   53-block 23
+call   54 never executed
+call   55 never executed
+branch 56 never executed (fallthrough)
+branch 57 never executed (throw)
+    $$$$$:   53-block 24
+call   58 never executed
+branch 59 never executed (fallthrough)
+branch 60 never executed (throw)
+    $$$$$:   53-block 25
+    $$$$$:   53-block 26
+call   61 never executed
+    $$$$$:   53-block 27
+call   62 never executed
+call   63 never executed
+branch 64 never executed (fallthrough)
+branch 65 never executed (throw)
+    $$$$$:   53-block 28
+    $$$$$:   53-block 29
+call   66 never executed
+branch 67 never executed (fallthrough)
+branch 68 never executed (throw)
+    $$$$$:   53-block 30
+call   69 never executed
+    $$$$$:   53-block 31
+    $$$$$:   53-block 32
+call   70 never executed
+    $$$$$:   53-block 33
+call   71 never executed
+    $$$$$:   53-block 34
+call   72 never executed
+    $$$$$:   53-block 35
+    $$$$$:   53-block 36
+call   73 never executed
+    $$$$$:   53-block 37
+    $$$$$:   53-block 38
+call   74 never executed
+        1:   54:}
+------------------
+        -:   55:
+        4:   56:TEST_F(TransportDepartmentTest, AddAndGetAvailableTruck) {
+        1:   57:    transportDept->addVehicle(truck);
+       3*:   58:    EXPECT_NO_THROW(transportDept->getAvailableVehicle("Truck"));
+        1:   59:}
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTruck_TestC1Ev:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTruck_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   56:TEST_F(TransportDepartmentTest, AddAndGetAvailableTruck) {
+        1:   56-block  0
+call    0 returned 1
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTruck_TestD0Ev:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTruck_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   56:TEST_F(TransportDepartmentTest, AddAndGetAvailableTruck) {
+        1:   56-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTruck_TestD1Ev:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTruck_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   56:TEST_F(TransportDepartmentTest, AddAndGetAvailableTruck) {
+        1:   56-block  0
+call    0 returned 1
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTruck_Test8TestBodyEv:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTruck_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+        1:   56:TEST_F(TransportDepartmentTest, AddAndGetAvailableTruck) {
+        1:   57:    transportDept->addVehicle(truck);
+        1:   57-block  0
+call    0 returned 1
+       3*:   58:    EXPECT_NO_THROW(transportDept->getAvailableVehicle("Truck"));
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   58-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   58-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   58-block  2
+        1:   58-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   58-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   58-block  5
+call   15 returned 1
+    %%%%%:   58-block  6
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:   58-block  7
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:   58-block  8
+call   22 never executed
+call   23 never executed
+branch 24 never executed (fallthrough)
+branch 25 never executed (throw)
+    %%%%%:   58-block  9
+call   26 never executed
+branch 27 never executed (fallthrough)
+branch 28 never executed (throw)
+    %%%%%:   58-block 10
+call   29 never executed
+call   30 never executed
+call   31 never executed
+        1:   58-block 11
+call   32 returned 1
+    $$$$$:   58-block 12
+call   33 never executed
+    $$$$$:   58-block 13
+    $$$$$:   58-block 14
+    $$$$$:   58-block 15
+branch 34 never executed
+branch 35 never executed
+    $$$$$:   58-block 16
+call   36 never executed
+call   37 never executed
+branch 38 never executed (fallthrough)
+branch 39 never executed (throw)
+    $$$$$:   58-block 17
+call   40 never executed
+branch 41 never executed (fallthrough)
+branch 42 never executed (throw)
+    $$$$$:   58-block 18
+call   43 never executed
+branch 44 never executed (fallthrough)
+branch 45 never executed (throw)
+    $$$$$:   58-block 19
+call   46 never executed
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:   58-block 20
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:   58-block 21
+call   54 never executed
+branch 55 never executed (fallthrough)
+branch 56 never executed (throw)
+    $$$$$:   58-block 22
+    $$$$$:   58-block 23
+call   57 never executed
+    $$$$$:   58-block 24
+call   58 never executed
+call   59 never executed
+branch 60 never executed (fallthrough)
+branch 61 never executed (throw)
+    $$$$$:   58-block 25
+    $$$$$:   58-block 26
+call   62 never executed
+branch 63 never executed (fallthrough)
+branch 64 never executed (throw)
+    $$$$$:   58-block 27
+call   65 never executed
+    $$$$$:   58-block 28
+    $$$$$:   58-block 29
+call   66 never executed
+    $$$$$:   58-block 30
+call   67 never executed
+    $$$$$:   58-block 31
+call   68 never executed
+    $$$$$:   58-block 32
+call   69 never executed
+    $$$$$:   58-block 33
+    $$$$$:   58-block 34
+    $$$$$:   58-block 35
+call   70 never executed
+    $$$$$:   58-block 36
+    $$$$$:   58-block 37
+call   71 never executed
+        1:   59:}
+------------------
+        -:   60:
+        4:   61:TEST_F(TransportDepartmentTest, GetAvailableTruck) {
+        1:   62:    transportDept->addVehicle(truck);
+        2:   63:    Vehicle* available = transportDept->getAvailableVehicle("Truck");
+       1*:   64:    EXPECT_EQ(available->getType(), "Truck");
+        1:   65:}
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTruck_TestC1Ev:
+function _ZN46TransportDepartmentTest_GetAvailableTruck_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   61:TEST_F(TransportDepartmentTest, GetAvailableTruck) {
+        1:   61-block  0
+call    0 returned 1
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTruck_TestD0Ev:
+function _ZN46TransportDepartmentTest_GetAvailableTruck_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   61:TEST_F(TransportDepartmentTest, GetAvailableTruck) {
+        1:   61-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTruck_TestD1Ev:
+function _ZN46TransportDepartmentTest_GetAvailableTruck_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   61:TEST_F(TransportDepartmentTest, GetAvailableTruck) {
+        1:   61-block  0
+call    0 returned 1
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTruck_Test8TestBodyEv:
+function _ZN46TransportDepartmentTest_GetAvailableTruck_Test8TestBodyEv called 1 returned 100% blocks executed 38%
+        1:   61:TEST_F(TransportDepartmentTest, GetAvailableTruck) {
+        1:   62:    transportDept->addVehicle(truck);
+        1:   62-block  0
+call    0 returned 1
+        2:   63:    Vehicle* available = transportDept->getAvailableVehicle("Truck");
+        1:   63-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   63-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   63-block  2
+call    6 returned 1
+    $$$$$:   63-block  3
+call    7 never executed
+    $$$$$:   63-block  4
+    $$$$$:   63-block  5
+call    8 never executed
+       1*:   64:    EXPECT_EQ(available->getType(), "Truck");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   64-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   64-block  1
+call    6 returned 1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   64-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   64-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   64-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   64-block  5
+call   20 never executed
+call   21 never executed
+        1:   64-block  6
+call   22 returned 1
+    $$$$$:   64-block  7
+call   23 never executed
+    $$$$$:   64-block  8
+    $$$$$:   64-block  9
+call   24 never executed
+    $$$$$:   64-block 10
+    $$$$$:   64-block 11
+call   25 never executed
+    $$$$$:   64-block 12
+    $$$$$:   64-block 13
+call   26 never executed
+        1:   65:}
+------------------
+        -:   66:
+        4:   67:TEST_F(TransportDepartmentTest, GetAvailableTruckWhenBroken) {
+        1:   68:    transportDept->addVehicle(truck);
+        1:   69:    truck->breakDown();
+       3*:   70:    EXPECT_THROW(citizen->callTransport(*transportDept, "Truck"), std::runtime_error);
+        1:   71:}
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_TestC1Ev:
+function _ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   67:TEST_F(TransportDepartmentTest, GetAvailableTruckWhenBroken) {
+        1:   67-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_TestD0Ev:
+function _ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   67:TEST_F(TransportDepartmentTest, GetAvailableTruckWhenBroken) {
+        1:   67-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_TestD1Ev:
+function _ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   67:TEST_F(TransportDepartmentTest, GetAvailableTruckWhenBroken) {
+        1:   67-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_Test8TestBodyEv:
+function _ZN56TransportDepartmentTest_GetAvailableTruckWhenBroken_Test8TestBodyEv called 1 returned 100% blocks executed 36%
+        1:   67:TEST_F(TransportDepartmentTest, GetAvailableTruckWhenBroken) {
+        1:   68:    transportDept->addVehicle(truck);
+        1:   68-block  0
+call    0 returned 1
+        1:   69:    truck->breakDown();
+call    0 returned 1
+       3*:   70:    EXPECT_THROW(citizen->callTransport(*transportDept, "Truck"), std::runtime_error);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   70-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   70-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   70-block  2
+        1:   70-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   70-block  4
+call   12 returned 1
+branch 13 taken 0 (fallthrough)
+branch 14 taken 1 (throw)
+    %%%%%:   70-block  5
+call   15 never executed
+        1:   70-block  6
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1
+    %%%%%:   70-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:   70-block  8
+    %%%%%:   70-block  9
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:   70-block 10
+call   24 never executed
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:   70-block 11
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:   70-block 12
+call   31 never executed
+call   32 never executed
+        1:   70-block 13
+call   33 returned 1
+        1:   70-block 14
+call   34 returned 1
+        1:   70-block 15
+        1:   70-block 16
+        1:   70-block 17
+branch 35 taken 1
+branch 36 taken 0
+branch 37 taken 0
+        1:   70-block 18
+call   38 returned 1
+call   39 returned 1
+    $$$$$:   70-block 19
+call   40 never executed
+call   41 never executed
+branch 42 never executed (fallthrough)
+branch 43 never executed (throw)
+    $$$$$:   70-block 20
+call   44 never executed
+branch 45 never executed (fallthrough)
+branch 46 never executed (throw)
+    $$$$$:   70-block 21
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:   70-block 22
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:   70-block 23
+call   54 never executed
+call   55 never executed
+branch 56 never executed (fallthrough)
+branch 57 never executed (throw)
+    $$$$$:   70-block 24
+call   58 never executed
+branch 59 never executed (fallthrough)
+branch 60 never executed (throw)
+    $$$$$:   70-block 25
+    $$$$$:   70-block 26
+call   61 never executed
+    $$$$$:   70-block 27
+call   62 never executed
+call   63 never executed
+branch 64 never executed (fallthrough)
+branch 65 never executed (throw)
+    $$$$$:   70-block 28
+    $$$$$:   70-block 29
+call   66 never executed
+branch 67 never executed (fallthrough)
+branch 68 never executed (throw)
+    $$$$$:   70-block 30
+call   69 never executed
+    $$$$$:   70-block 31
+    $$$$$:   70-block 32
+call   70 never executed
+    $$$$$:   70-block 33
+call   71 never executed
+    $$$$$:   70-block 34
+call   72 never executed
+    $$$$$:   70-block 35
+    $$$$$:   70-block 36
+call   73 never executed
+    $$$$$:   70-block 37
+    $$$$$:   70-block 38
+call   74 never executed
+        1:   71:}
+------------------
+        -:   72:
+        4:   73:TEST_F(TransportDepartmentTest, AddAndGetAvailableTrain) {
+        1:   74:    transportDept->addVehicle(train);
+       3*:   75:    EXPECT_NO_THROW(transportDept->getAvailableVehicle("Train"));
+        1:   76:}
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTrain_TestC1Ev:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTrain_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   73:TEST_F(TransportDepartmentTest, AddAndGetAvailableTrain) {
+        1:   73-block  0
+call    0 returned 1
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTrain_TestD0Ev:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTrain_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   73:TEST_F(TransportDepartmentTest, AddAndGetAvailableTrain) {
+        1:   73-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTrain_TestD1Ev:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTrain_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   73:TEST_F(TransportDepartmentTest, AddAndGetAvailableTrain) {
+        1:   73-block  0
+call    0 returned 1
+------------------
+_ZN52TransportDepartmentTest_AddAndGetAvailableTrain_Test8TestBodyEv:
+function _ZN52TransportDepartmentTest_AddAndGetAvailableTrain_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+        1:   73:TEST_F(TransportDepartmentTest, AddAndGetAvailableTrain) {
+        1:   74:    transportDept->addVehicle(train);
+        1:   74-block  0
+call    0 returned 1
+       3*:   75:    EXPECT_NO_THROW(transportDept->getAvailableVehicle("Train"));
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   75-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   75-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   75-block  2
+        1:   75-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   75-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:   75-block  5
+call   15 returned 1
+    %%%%%:   75-block  6
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:   75-block  7
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:   75-block  8
+call   22 never executed
+call   23 never executed
+branch 24 never executed (fallthrough)
+branch 25 never executed (throw)
+    %%%%%:   75-block  9
+call   26 never executed
+branch 27 never executed (fallthrough)
+branch 28 never executed (throw)
+    %%%%%:   75-block 10
+call   29 never executed
+call   30 never executed
+call   31 never executed
+        1:   75-block 11
+call   32 returned 1
+    $$$$$:   75-block 12
+call   33 never executed
+    $$$$$:   75-block 13
+    $$$$$:   75-block 14
+    $$$$$:   75-block 15
+branch 34 never executed
+branch 35 never executed
+    $$$$$:   75-block 16
+call   36 never executed
+call   37 never executed
+branch 38 never executed (fallthrough)
+branch 39 never executed (throw)
+    $$$$$:   75-block 17
+call   40 never executed
+branch 41 never executed (fallthrough)
+branch 42 never executed (throw)
+    $$$$$:   75-block 18
+call   43 never executed
+branch 44 never executed (fallthrough)
+branch 45 never executed (throw)
+    $$$$$:   75-block 19
+call   46 never executed
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:   75-block 20
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:   75-block 21
+call   54 never executed
+branch 55 never executed (fallthrough)
+branch 56 never executed (throw)
+    $$$$$:   75-block 22
+    $$$$$:   75-block 23
+call   57 never executed
+    $$$$$:   75-block 24
+call   58 never executed
+call   59 never executed
+branch 60 never executed (fallthrough)
+branch 61 never executed (throw)
+    $$$$$:   75-block 25
+    $$$$$:   75-block 26
+call   62 never executed
+branch 63 never executed (fallthrough)
+branch 64 never executed (throw)
+    $$$$$:   75-block 27
+call   65 never executed
+    $$$$$:   75-block 28
+    $$$$$:   75-block 29
+call   66 never executed
+    $$$$$:   75-block 30
+call   67 never executed
+    $$$$$:   75-block 31
+call   68 never executed
+    $$$$$:   75-block 32
+call   69 never executed
+    $$$$$:   75-block 33
+    $$$$$:   75-block 34
+    $$$$$:   75-block 35
+call   70 never executed
+    $$$$$:   75-block 36
+    $$$$$:   75-block 37
+call   71 never executed
+        1:   76:}
+------------------
+        -:   77:
+        4:   78:TEST_F(TransportDepartmentTest, GetAvailableTrain) {
+        1:   79:    transportDept->addVehicle(train);
+        2:   80:    Vehicle* available = transportDept->getAvailableVehicle("Train");
+       1*:   81:    EXPECT_EQ(available->getType(), "Train");
+        1:   82:}
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTrain_TestC1Ev:
+function _ZN46TransportDepartmentTest_GetAvailableTrain_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   78:TEST_F(TransportDepartmentTest, GetAvailableTrain) {
+        1:   78-block  0
+call    0 returned 1
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTrain_TestD0Ev:
+function _ZN46TransportDepartmentTest_GetAvailableTrain_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   78:TEST_F(TransportDepartmentTest, GetAvailableTrain) {
+        1:   78-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTrain_TestD1Ev:
+function _ZN46TransportDepartmentTest_GetAvailableTrain_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   78:TEST_F(TransportDepartmentTest, GetAvailableTrain) {
+        1:   78-block  0
+call    0 returned 1
+------------------
+_ZN46TransportDepartmentTest_GetAvailableTrain_Test8TestBodyEv:
+function _ZN46TransportDepartmentTest_GetAvailableTrain_Test8TestBodyEv called 1 returned 100% blocks executed 38%
+        1:   78:TEST_F(TransportDepartmentTest, GetAvailableTrain) {
+        1:   79:    transportDept->addVehicle(train);
+        1:   79-block  0
+call    0 returned 1
+        2:   80:    Vehicle* available = transportDept->getAvailableVehicle("Train");
+        1:   80-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   80-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   80-block  2
+call    6 returned 1
+    $$$$$:   80-block  3
+call    7 never executed
+    $$$$$:   80-block  4
+    $$$$$:   80-block  5
+call    8 never executed
+       1*:   81:    EXPECT_EQ(available->getType(), "Train");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   81-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   81-block  1
+call    6 returned 1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   81-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   81-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   81-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   81-block  5
+call   20 never executed
+call   21 never executed
+        1:   81-block  6
+call   22 returned 1
+    $$$$$:   81-block  7
+call   23 never executed
+    $$$$$:   81-block  8
+    $$$$$:   81-block  9
+call   24 never executed
+    $$$$$:   81-block 10
+    $$$$$:   81-block 11
+call   25 never executed
+    $$$$$:   81-block 12
+    $$$$$:   81-block 13
+call   26 never executed
+        1:   82:}
+------------------
+        -:   83:
+        4:   84:TEST_F(TransportDepartmentTest, GetAvailableTrainWhenBroken) {
+        1:   85:    transportDept->addVehicle(train);
+        1:   86:    train->breakDown();
+       3*:   87:    EXPECT_THROW(transportDept->getAvailableVehicle("Train"), std::runtime_error);
+        1:   88:}
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_TestC1Ev:
+function _ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   84:TEST_F(TransportDepartmentTest, GetAvailableTrainWhenBroken) {
+        1:   84-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_TestD0Ev:
+function _ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   84:TEST_F(TransportDepartmentTest, GetAvailableTrainWhenBroken) {
+        1:   84-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_TestD1Ev:
+function _ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   84:TEST_F(TransportDepartmentTest, GetAvailableTrainWhenBroken) {
+        1:   84-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_Test8TestBodyEv:
+function _ZN56TransportDepartmentTest_GetAvailableTrainWhenBroken_Test8TestBodyEv called 1 returned 100% blocks executed 36%
+        1:   84:TEST_F(TransportDepartmentTest, GetAvailableTrainWhenBroken) {
+        1:   85:    transportDept->addVehicle(train);
+        1:   85-block  0
+call    0 returned 1
+        1:   86:    train->breakDown();
+call    0 returned 1
+       3*:   87:    EXPECT_THROW(transportDept->getAvailableVehicle("Train"), std::runtime_error);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   87-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   87-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:   87-block  2
+        1:   87-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   87-block  4
+call   12 returned 1
+branch 13 taken 0 (fallthrough)
+branch 14 taken 1 (throw)
+    %%%%%:   87-block  5
+call   15 never executed
+        1:   87-block  6
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1
+    %%%%%:   87-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:   87-block  8
+    %%%%%:   87-block  9
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:   87-block 10
+call   24 never executed
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:   87-block 11
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:   87-block 12
+call   31 never executed
+call   32 never executed
+        1:   87-block 13
+call   33 returned 1
+        1:   87-block 14
+call   34 returned 1
+        1:   87-block 15
+        1:   87-block 16
+        1:   87-block 17
+branch 35 taken 1
+branch 36 taken 0
+branch 37 taken 0
+        1:   87-block 18
+call   38 returned 1
+call   39 returned 1
+    $$$$$:   87-block 19
+call   40 never executed
+call   41 never executed
+branch 42 never executed (fallthrough)
+branch 43 never executed (throw)
+    $$$$$:   87-block 20
+call   44 never executed
+branch 45 never executed (fallthrough)
+branch 46 never executed (throw)
+    $$$$$:   87-block 21
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:   87-block 22
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:   87-block 23
+call   54 never executed
+call   55 never executed
+branch 56 never executed (fallthrough)
+branch 57 never executed (throw)
+    $$$$$:   87-block 24
+call   58 never executed
+branch 59 never executed (fallthrough)
+branch 60 never executed (throw)
+    $$$$$:   87-block 25
+    $$$$$:   87-block 26
+call   61 never executed
+    $$$$$:   87-block 27
+call   62 never executed
+call   63 never executed
+branch 64 never executed (fallthrough)
+branch 65 never executed (throw)
+    $$$$$:   87-block 28
+    $$$$$:   87-block 29
+call   66 never executed
+branch 67 never executed (fallthrough)
+branch 68 never executed (throw)
+    $$$$$:   87-block 30
+call   69 never executed
+    $$$$$:   87-block 31
+    $$$$$:   87-block 32
+call   70 never executed
+    $$$$$:   87-block 33
+call   71 never executed
+    $$$$$:   87-block 34
+call   72 never executed
+    $$$$$:   87-block 35
+    $$$$$:   87-block 36
+call   73 never executed
+    $$$$$:   87-block 37
+    $$$$$:   87-block 38
+call   74 never executed
+        1:   88:}
+------------------
+        -:   89:
+        4:   90:TEST_F(TransportDepartmentTest, RepairTaxi) {
+        1:   91:    transportDept->addVehicle(taxi);
+        1:   92:    taxi->breakDown();
+       1*:   93:    EXPECT_NE(dynamic_cast<Broken*>(taxi->getState()), nullptr);
+        1:   94:    transportDept->repairVehicles(taxi);
+       1*:   95:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+        1:   96:}
+------------------
+_ZN39TransportDepartmentTest_RepairTaxi_TestC1Ev:
+function _ZN39TransportDepartmentTest_RepairTaxi_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   90:TEST_F(TransportDepartmentTest, RepairTaxi) {
+        1:   90-block  0
+call    0 returned 1
+------------------
+_ZN39TransportDepartmentTest_RepairTaxi_TestD0Ev:
+function _ZN39TransportDepartmentTest_RepairTaxi_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   90:TEST_F(TransportDepartmentTest, RepairTaxi) {
+        1:   90-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN39TransportDepartmentTest_RepairTaxi_TestD1Ev:
+function _ZN39TransportDepartmentTest_RepairTaxi_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   90:TEST_F(TransportDepartmentTest, RepairTaxi) {
+        1:   90-block  0
+call    0 returned 1
+------------------
+_ZN39TransportDepartmentTest_RepairTaxi_Test8TestBodyEv:
+function _ZN39TransportDepartmentTest_RepairTaxi_Test8TestBodyEv called 1 returned 100% blocks executed 34%
+        1:   90:TEST_F(TransportDepartmentTest, RepairTaxi) {
+        1:   91:    transportDept->addVehicle(taxi);
+        1:   91-block  0
+call    0 returned 1
+        1:   92:    taxi->breakDown();
+call    0 returned 1
+       1*:   93:    EXPECT_NE(dynamic_cast<Broken*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   93-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:   93-block  1
+    %%%%%:   93-block  2
+        1:   93-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   93-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   93-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   93-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:   93-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:   93-block  8
+call   21 never executed
+call   22 never executed
+        1:   93-block  9
+call   23 returned 1
+    $$$$$:   93-block 10
+    $$$$$:   93-block 11
+    $$$$$:   93-block 12
+call   24 never executed
+    $$$$$:   93-block 13
+    $$$$$:   93-block 14
+call   25 never executed
+    $$$$$:   93-block 15
+    $$$$$:   93-block 16
+call   26 never executed
+        1:   94:    transportDept->repairVehicles(taxi);
+call    0 returned 1
+       1*:   95:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   95-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:   95-block  1
+    %%%%%:   95-block  2
+        1:   95-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   95-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:   95-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   95-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:   95-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:   95-block  8
+call   21 never executed
+call   22 never executed
+        1:   95-block  9
+call   23 returned 1
+    $$$$$:   95-block 10
+    $$$$$:   95-block 11
+    $$$$$:   95-block 12
+call   24 never executed
+    $$$$$:   95-block 13
+    $$$$$:   95-block 14
+call   25 never executed
+    $$$$$:   95-block 15
+    $$$$$:   95-block 16
+call   26 never executed
+        1:   96:}
+------------------
+        -:   97:
+        4:   98:TEST_F(TransportDepartmentTest, ManageFunctionalityWithBrokenVehicles) {
+        1:   99:    transportDept->addVehicle(taxi);
+        1:  100:    transportDept->addVehicle(truck);
+        1:  101:    transportDept->addVehicle(train);
+        -:  102:
+        1:  103:    taxi->breakDown();
+       1*:  104:    EXPECT_NE(dynamic_cast<Broken*>(taxi->getState()), nullptr);
+        -:  105:
+        1:  106:    truck->incrementUsage();
+        1:  107:    truck->incrementUsage();
+        1:  108:    truck->incrementUsage();
+        -:  109:
+        1:  110:    transportDept->manage();
+       1*:  111:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+        1:  112:}
+------------------
+_ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_TestC1Ev:
+function _ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   98:TEST_F(TransportDepartmentTest, ManageFunctionalityWithBrokenVehicles) {
+        1:   98-block  0
+call    0 returned 1
+------------------
+_ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_TestD0Ev:
+function _ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   98:TEST_F(TransportDepartmentTest, ManageFunctionalityWithBrokenVehicles) {
+        1:   98-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_TestD1Ev:
+function _ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   98:TEST_F(TransportDepartmentTest, ManageFunctionalityWithBrokenVehicles) {
+        1:   98-block  0
+call    0 returned 1
+------------------
+_ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_Test8TestBodyEv:
+function _ZN66TransportDepartmentTest_ManageFunctionalityWithBrokenVehicles_Test8TestBodyEv called 1 returned 100% blocks executed 39%
+        1:   98:TEST_F(TransportDepartmentTest, ManageFunctionalityWithBrokenVehicles) {
+        1:   99:    transportDept->addVehicle(taxi);
+        1:   99-block  0
+call    0 returned 1
+        1:  100:    transportDept->addVehicle(truck);
+call    0 returned 1
+        1:  101:    transportDept->addVehicle(train);
+call    0 returned 1
+        -:  102:
+        1:  103:    taxi->breakDown();
+call    0 returned 1
+       1*:  104:    EXPECT_NE(dynamic_cast<Broken*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  104-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  104-block  1
+    %%%%%:  104-block  2
+        1:  104-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  104-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  104-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  104-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  104-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  104-block  8
+call   21 never executed
+call   22 never executed
+        1:  104-block  9
+call   23 returned 1
+    $$$$$:  104-block 10
+    $$$$$:  104-block 11
+    $$$$$:  104-block 12
+call   24 never executed
+    $$$$$:  104-block 13
+    $$$$$:  104-block 14
+call   25 never executed
+    $$$$$:  104-block 15
+    $$$$$:  104-block 16
+call   26 never executed
+        -:  105:
+        1:  106:    truck->incrementUsage();
+call    0 returned 1
+        1:  107:    truck->incrementUsage();
+call    0 returned 1
+        1:  108:    truck->incrementUsage();
+call    0 returned 1
+        -:  109:
+        1:  110:    transportDept->manage();
+call    0 returned 1
+       1*:  111:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  111-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  111-block  1
+    %%%%%:  111-block  2
+        1:  111-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  111-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  111-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  111-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  111-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  111-block  8
+call   21 never executed
+call   22 never executed
+        1:  111-block  9
+call   23 returned 1
+    $$$$$:  111-block 10
+    $$$$$:  111-block 11
+    $$$$$:  111-block 12
+call   24 never executed
+    $$$$$:  111-block 13
+    $$$$$:  111-block 14
+call   25 never executed
+    $$$$$:  111-block 15
+    $$$$$:  111-block 16
+call   26 never executed
+        1:  112:}
+------------------
+        -:  113:
+        4:  114:TEST_F(TransportDepartmentTest, CitizenRequestAvailableTaxi) {
+        1:  115:    transportDept->addVehicle(taxi);
+       3*:  116:    EXPECT_NO_THROW(citizen->callTransport(*transportDept, "Taxi"));
+        1:  117:}
+------------------
+_ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_TestC1Ev:
+function _ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  114:TEST_F(TransportDepartmentTest, CitizenRequestAvailableTaxi) {
+        1:  114-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_TestD0Ev:
+function _ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  114:TEST_F(TransportDepartmentTest, CitizenRequestAvailableTaxi) {
+        1:  114-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_TestD1Ev:
+function _ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  114:TEST_F(TransportDepartmentTest, CitizenRequestAvailableTaxi) {
+        1:  114-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_Test8TestBodyEv:
+function _ZN56TransportDepartmentTest_CitizenRequestAvailableTaxi_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+        1:  114:TEST_F(TransportDepartmentTest, CitizenRequestAvailableTaxi) {
+        1:  115:    transportDept->addVehicle(taxi);
+        1:  115-block  0
+call    0 returned 1
+       3*:  116:    EXPECT_NO_THROW(citizen->callTransport(*transportDept, "Taxi"));
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  116-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  116-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:  116-block  2
+        1:  116-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  116-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+        1:  116-block  5
+call   15 returned 1
+    %%%%%:  116-block  6
+call   16 never executed
+branch 17 never executed (fallthrough)
+branch 18 never executed (throw)
+    %%%%%:  116-block  7
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  116-block  8
+call   22 never executed
+call   23 never executed
+branch 24 never executed (fallthrough)
+branch 25 never executed (throw)
+    %%%%%:  116-block  9
+call   26 never executed
+branch 27 never executed (fallthrough)
+branch 28 never executed (throw)
+    %%%%%:  116-block 10
+call   29 never executed
+call   30 never executed
+call   31 never executed
+        1:  116-block 11
+call   32 returned 1
+    $$$$$:  116-block 12
+call   33 never executed
+    $$$$$:  116-block 13
+    $$$$$:  116-block 14
+    $$$$$:  116-block 15
+branch 34 never executed
+branch 35 never executed
+    $$$$$:  116-block 16
+call   36 never executed
+call   37 never executed
+branch 38 never executed (fallthrough)
+branch 39 never executed (throw)
+    $$$$$:  116-block 17
+call   40 never executed
+branch 41 never executed (fallthrough)
+branch 42 never executed (throw)
+    $$$$$:  116-block 18
+call   43 never executed
+branch 44 never executed (fallthrough)
+branch 45 never executed (throw)
+    $$$$$:  116-block 19
+call   46 never executed
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:  116-block 20
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:  116-block 21
+call   54 never executed
+branch 55 never executed (fallthrough)
+branch 56 never executed (throw)
+    $$$$$:  116-block 22
+    $$$$$:  116-block 23
+call   57 never executed
+    $$$$$:  116-block 24
+call   58 never executed
+call   59 never executed
+branch 60 never executed (fallthrough)
+branch 61 never executed (throw)
+    $$$$$:  116-block 25
+    $$$$$:  116-block 26
+call   62 never executed
+branch 63 never executed (fallthrough)
+branch 64 never executed (throw)
+    $$$$$:  116-block 27
+call   65 never executed
+    $$$$$:  116-block 28
+    $$$$$:  116-block 29
+call   66 never executed
+    $$$$$:  116-block 30
+call   67 never executed
+    $$$$$:  116-block 31
+call   68 never executed
+    $$$$$:  116-block 32
+call   69 never executed
+    $$$$$:  116-block 33
+    $$$$$:  116-block 34
+    $$$$$:  116-block 35
+call   70 never executed
+    $$$$$:  116-block 36
+    $$$$$:  116-block 37
+call   71 never executed
+        1:  117:}
+------------------
+        -:  118:
+        4:  119:TEST_F(TransportDepartmentTest, CitizenRequestBrokenTaxi) {
+        1:  120:    transportDept->addVehicle(taxi);
+        1:  121:    taxi->breakDown();
+       3*:  122:    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error);
+        1:  123:}
+------------------
+_ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_TestC1Ev:
+function _ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  119:TEST_F(TransportDepartmentTest, CitizenRequestBrokenTaxi) {
+        1:  119-block  0
+call    0 returned 1
+------------------
+_ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_TestD0Ev:
+function _ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  119:TEST_F(TransportDepartmentTest, CitizenRequestBrokenTaxi) {
+        1:  119-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_TestD1Ev:
+function _ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  119:TEST_F(TransportDepartmentTest, CitizenRequestBrokenTaxi) {
+        1:  119-block  0
+call    0 returned 1
+------------------
+_ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_Test8TestBodyEv:
+function _ZN53TransportDepartmentTest_CitizenRequestBrokenTaxi_Test8TestBodyEv called 1 returned 100% blocks executed 36%
+        1:  119:TEST_F(TransportDepartmentTest, CitizenRequestBrokenTaxi) {
+        1:  120:    transportDept->addVehicle(taxi);
+        1:  120-block  0
+call    0 returned 1
+        1:  121:    taxi->breakDown();
+call    0 returned 1
+       3*:  122:    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  122-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  122-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:  122-block  2
+        1:  122-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  122-block  4
+call   12 returned 1
+branch 13 taken 0 (fallthrough)
+branch 14 taken 1 (throw)
+    %%%%%:  122-block  5
+call   15 never executed
+        1:  122-block  6
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1
+    %%%%%:  122-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  122-block  8
+    %%%%%:  122-block  9
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  122-block 10
+call   24 never executed
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:  122-block 11
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:  122-block 12
+call   31 never executed
+call   32 never executed
+        1:  122-block 13
+call   33 returned 1
+        1:  122-block 14
+call   34 returned 1
+        1:  122-block 15
+        1:  122-block 16
+        1:  122-block 17
+branch 35 taken 1
+branch 36 taken 0
+branch 37 taken 0
+        1:  122-block 18
+call   38 returned 1
+call   39 returned 1
+    $$$$$:  122-block 19
+call   40 never executed
+call   41 never executed
+branch 42 never executed (fallthrough)
+branch 43 never executed (throw)
+    $$$$$:  122-block 20
+call   44 never executed
+branch 45 never executed (fallthrough)
+branch 46 never executed (throw)
+    $$$$$:  122-block 21
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:  122-block 22
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:  122-block 23
+call   54 never executed
+call   55 never executed
+branch 56 never executed (fallthrough)
+branch 57 never executed (throw)
+    $$$$$:  122-block 24
+call   58 never executed
+branch 59 never executed (fallthrough)
+branch 60 never executed (throw)
+    $$$$$:  122-block 25
+    $$$$$:  122-block 26
+call   61 never executed
+    $$$$$:  122-block 27
+call   62 never executed
+call   63 never executed
+branch 64 never executed (fallthrough)
+branch 65 never executed (throw)
+    $$$$$:  122-block 28
+    $$$$$:  122-block 29
+call   66 never executed
+branch 67 never executed (fallthrough)
+branch 68 never executed (throw)
+    $$$$$:  122-block 30
+call   69 never executed
+    $$$$$:  122-block 31
+    $$$$$:  122-block 32
+call   70 never executed
+    $$$$$:  122-block 33
+call   71 never executed
+    $$$$$:  122-block 34
+call   72 never executed
+    $$$$$:  122-block 35
+    $$$$$:  122-block 36
+call   73 never executed
+    $$$$$:  122-block 37
+    $$$$$:  122-block 38
+call   74 never executed
+        1:  123:}
+------------------
+        -:  124:
+        4:  125:TEST_F(TransportDepartmentTest, CitizenRequestNonExistentVehicle) {
+       3*:  126:    EXPECT_THROW(citizen->callTransport(*transportDept, "NonExistentVehicle"), std::runtime_error);
+        1:  127:}
+------------------
+_ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_TestC1Ev:
+function _ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  125:TEST_F(TransportDepartmentTest, CitizenRequestNonExistentVehicle) {
+        1:  125-block  0
+call    0 returned 1
+------------------
+_ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_TestD0Ev:
+function _ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  125:TEST_F(TransportDepartmentTest, CitizenRequestNonExistentVehicle) {
+        1:  125-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_TestD1Ev:
+function _ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  125:TEST_F(TransportDepartmentTest, CitizenRequestNonExistentVehicle) {
+        1:  125-block  0
+call    0 returned 1
+------------------
+_ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_Test8TestBodyEv:
+function _ZN61TransportDepartmentTest_CitizenRequestNonExistentVehicle_Test8TestBodyEv called 1 returned 100% blocks executed 34%
+        1:  125:TEST_F(TransportDepartmentTest, CitizenRequestNonExistentVehicle) {
+       3*:  126:    EXPECT_THROW(citizen->callTransport(*transportDept, "NonExistentVehicle"), std::runtime_error);
+        1:  126-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  126-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  126-block  2
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:  126-block  3
+        1:  126-block  4
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  126-block  5
+call   12 returned 1
+branch 13 taken 0 (fallthrough)
+branch 14 taken 1 (throw)
+    %%%%%:  126-block  6
+call   15 never executed
+        1:  126-block  7
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1
+    %%%%%:  126-block  8
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  126-block  9
+    %%%%%:  126-block 10
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  126-block 11
+call   24 never executed
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:  126-block 12
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:  126-block 13
+call   31 never executed
+call   32 never executed
+        1:  126-block 14
+call   33 returned 1
+        1:  126-block 15
+call   34 returned 1
+        1:  126-block 16
+        1:  126-block 17
+        1:  126-block 18
+branch 35 taken 1
+branch 36 taken 0
+branch 37 taken 0
+        1:  126-block 19
+call   38 returned 1
+call   39 returned 1
+    $$$$$:  126-block 20
+call   40 never executed
+call   41 never executed
+branch 42 never executed (fallthrough)
+branch 43 never executed (throw)
+    $$$$$:  126-block 21
+call   44 never executed
+branch 45 never executed (fallthrough)
+branch 46 never executed (throw)
+    $$$$$:  126-block 22
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:  126-block 23
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:  126-block 24
+call   54 never executed
+call   55 never executed
+branch 56 never executed (fallthrough)
+branch 57 never executed (throw)
+    $$$$$:  126-block 25
+call   58 never executed
+branch 59 never executed (fallthrough)
+branch 60 never executed (throw)
+    $$$$$:  126-block 26
+    $$$$$:  126-block 27
+call   61 never executed
+    $$$$$:  126-block 28
+call   62 never executed
+call   63 never executed
+branch 64 never executed (fallthrough)
+branch 65 never executed (throw)
+    $$$$$:  126-block 29
+    $$$$$:  126-block 30
+call   66 never executed
+branch 67 never executed (fallthrough)
+branch 68 never executed (throw)
+    $$$$$:  126-block 31
+call   69 never executed
+    $$$$$:  126-block 32
+    $$$$$:  126-block 33
+call   70 never executed
+    $$$$$:  126-block 34
+call   71 never executed
+    $$$$$:  126-block 35
+call   72 never executed
+    $$$$$:  126-block 36
+    $$$$$:  126-block 37
+call   73 never executed
+    $$$$$:  126-block 38
+    $$$$$:  126-block 39
+call   74 never executed
+        1:  127:}
+------------------
+        -:  128:
+        4:  129:TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
+        1:  130:    taxi->breakDown();
+        1:  131:    truck->breakDown();
+        1:  132:    train->breakDown();
+        -:  133:
+        1:  134:    transportDept->addVehicle(taxi);
+        1:  135:    transportDept->addVehicle(truck);
+        1:  136:    transportDept->addVehicle(train);
+        -:  137:
+       1*:  138:    EXPECT_NO_THROW(transportDept->manage());
+       1*:  139:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+       1*:  140:    EXPECT_NE(dynamic_cast<Functional*>(truck->getState()), nullptr);
+       1*:  141:    EXPECT_NE(dynamic_cast<Functional*>(train->getState()), nullptr);
+        1:  142:}
+------------------
+_ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_TestC1Ev:
+function _ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  129:TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
+        1:  129-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_TestD0Ev:
+function _ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  129:TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
+        1:  129-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_TestD1Ev:
+function _ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  129:TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
+        1:  129-block  0
+call    0 returned 1
+------------------
+_ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_Test8TestBodyEv:
+function _ZN56TransportDepartmentTest_ManageVehiclesWithAllBroken_Test8TestBodyEv called 1 returned 100% blocks executed 26%
+        1:  129:TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
+        1:  130:    taxi->breakDown();
+        1:  130-block  0
+call    0 returned 1
+        1:  131:    truck->breakDown();
+call    0 returned 1
+        1:  132:    train->breakDown();
+call    0 returned 1
+        -:  133:
+        1:  134:    transportDept->addVehicle(taxi);
+call    0 returned 1
+        1:  135:    transportDept->addVehicle(truck);
+call    0 returned 1
+        1:  136:    transportDept->addVehicle(train);
+call    0 returned 1
+        -:  137:
+       1*:  138:    EXPECT_NO_THROW(transportDept->manage());
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  138-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  138-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:  138-block  2
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+    %%%%%:  138-block  3
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:  138-block  4
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  138-block  5
+call   18 never executed
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  138-block  6
+call   22 never executed
+branch 23 never executed (fallthrough)
+branch 24 never executed (throw)
+    %%%%%:  138-block  7
+call   25 never executed
+call   26 never executed
+call   27 never executed
+        1:  138-block  8
+call   28 returned 1
+    $$$$$:  138-block  9
+branch 29 never executed
+branch 30 never executed
+    $$$$$:  138-block 10
+call   31 never executed
+call   32 never executed
+branch 33 never executed (fallthrough)
+branch 34 never executed (throw)
+    $$$$$:  138-block 11
+call   35 never executed
+branch 36 never executed (fallthrough)
+branch 37 never executed (throw)
+    $$$$$:  138-block 12
+call   38 never executed
+branch 39 never executed (fallthrough)
+branch 40 never executed (throw)
+    $$$$$:  138-block 13
+call   41 never executed
+call   42 never executed
+branch 43 never executed (fallthrough)
+branch 44 never executed (throw)
+    $$$$$:  138-block 14
+call   45 never executed
+call   46 never executed
+branch 47 never executed (fallthrough)
+branch 48 never executed (throw)
+    $$$$$:  138-block 15
+call   49 never executed
+branch 50 never executed (fallthrough)
+branch 51 never executed (throw)
+    $$$$$:  138-block 16
+    $$$$$:  138-block 17
+call   52 never executed
+    $$$$$:  138-block 18
+call   53 never executed
+call   54 never executed
+branch 55 never executed (fallthrough)
+branch 56 never executed (throw)
+    $$$$$:  138-block 19
+    $$$$$:  138-block 20
+call   57 never executed
+branch 58 never executed (fallthrough)
+branch 59 never executed (throw)
+    $$$$$:  138-block 21
+call   60 never executed
+    $$$$$:  138-block 22
+    $$$$$:  138-block 23
+call   61 never executed
+    $$$$$:  138-block 24
+call   62 never executed
+    $$$$$:  138-block 25
+call   63 never executed
+    $$$$$:  138-block 26
+call   64 never executed
+    $$$$$:  138-block 27
+    $$$$$:  138-block 28
+    $$$$$:  138-block 29
+call   65 never executed
+    $$$$$:  138-block 30
+    $$$$$:  138-block 31
+call   66 never executed
+       1*:  139:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  139-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  139-block  1
+    %%%%%:  139-block  2
+        1:  139-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  139-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  139-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  139-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  139-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  139-block  8
+call   21 never executed
+call   22 never executed
+        1:  139-block  9
+call   23 returned 1
+    $$$$$:  139-block 10
+    $$$$$:  139-block 11
+    $$$$$:  139-block 12
+call   24 never executed
+    $$$$$:  139-block 13
+    $$$$$:  139-block 14
+call   25 never executed
+    $$$$$:  139-block 15
+    $$$$$:  139-block 16
+call   26 never executed
+       1*:  140:    EXPECT_NE(dynamic_cast<Functional*>(truck->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  140-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  140-block  1
+    %%%%%:  140-block  2
+        1:  140-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  140-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  140-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  140-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  140-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  140-block  8
+call   21 never executed
+call   22 never executed
+        1:  140-block  9
+call   23 returned 1
+    $$$$$:  140-block 10
+    $$$$$:  140-block 11
+    $$$$$:  140-block 12
+call   24 never executed
+    $$$$$:  140-block 13
+    $$$$$:  140-block 14
+call   25 never executed
+    $$$$$:  140-block 15
+    $$$$$:  140-block 16
+call   26 never executed
+       1*:  141:    EXPECT_NE(dynamic_cast<Functional*>(train->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  141-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  141-block  1
+    %%%%%:  141-block  2
+        1:  141-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  141-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  141-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  141-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  141-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  141-block  8
+call   21 never executed
+call   22 never executed
+        1:  141-block  9
+call   23 returned 1
+    $$$$$:  141-block 10
+    $$$$$:  141-block 11
+    $$$$$:  141-block 12
+call   24 never executed
+    $$$$$:  141-block 13
+    $$$$$:  141-block 14
+call   25 never executed
+    $$$$$:  141-block 15
+    $$$$$:  141-block 16
+call   26 never executed
+        1:  142:}
+------------------
+        -:  143:
+        4:  144:TEST_F(TransportDepartmentTest, ManagePartialFunctionalVehicles) {
+        1:  145:    taxi->breakDown();
+        1:  146:    truck->incrementUsage();
+        1:  147:    transportDept->addVehicle(taxi);
+        1:  148:    transportDept->addVehicle(truck);
+        -:  149:
+       1*:  150:    EXPECT_NO_THROW(transportDept->manage());
+       1*:  151:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+        1:  152:}
+------------------
+_ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_TestC1Ev:
+function _ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  144:TEST_F(TransportDepartmentTest, ManagePartialFunctionalVehicles) {
+        1:  144-block  0
+call    0 returned 1
+------------------
+_ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_TestD0Ev:
+function _ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  144:TEST_F(TransportDepartmentTest, ManagePartialFunctionalVehicles) {
+        1:  144-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_TestD1Ev:
+function _ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  144:TEST_F(TransportDepartmentTest, ManagePartialFunctionalVehicles) {
+        1:  144-block  0
+call    0 returned 1
+------------------
+_ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_Test8TestBodyEv:
+function _ZN60TransportDepartmentTest_ManagePartialFunctionalVehicles_Test8TestBodyEv called 1 returned 100% blocks executed 24%
+        1:  144:TEST_F(TransportDepartmentTest, ManagePartialFunctionalVehicles) {
+        1:  145:    taxi->breakDown();
+        1:  145-block  0
+call    0 returned 1
+        1:  146:    truck->incrementUsage();
+call    0 returned 1
+        1:  147:    transportDept->addVehicle(taxi);
+call    0 returned 1
+        1:  148:    transportDept->addVehicle(truck);
+call    0 returned 1
+        -:  149:
+       1*:  150:    EXPECT_NO_THROW(transportDept->manage());
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  150-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  150-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:  150-block  2
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+    %%%%%:  150-block  3
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:  150-block  4
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  150-block  5
+call   18 never executed
+call   19 never executed
+branch 20 never executed (fallthrough)
+branch 21 never executed (throw)
+    %%%%%:  150-block  6
+call   22 never executed
+branch 23 never executed (fallthrough)
+branch 24 never executed (throw)
+    %%%%%:  150-block  7
+call   25 never executed
+call   26 never executed
+call   27 never executed
+        1:  150-block  8
+call   28 returned 1
+    $$$$$:  150-block  9
+branch 29 never executed
+branch 30 never executed
+    $$$$$:  150-block 10
+call   31 never executed
+call   32 never executed
+branch 33 never executed (fallthrough)
+branch 34 never executed (throw)
+    $$$$$:  150-block 11
+call   35 never executed
+branch 36 never executed (fallthrough)
+branch 37 never executed (throw)
+    $$$$$:  150-block 12
+call   38 never executed
+branch 39 never executed (fallthrough)
+branch 40 never executed (throw)
+    $$$$$:  150-block 13
+call   41 never executed
+call   42 never executed
+branch 43 never executed (fallthrough)
+branch 44 never executed (throw)
+    $$$$$:  150-block 14
+call   45 never executed
+call   46 never executed
+branch 47 never executed (fallthrough)
+branch 48 never executed (throw)
+    $$$$$:  150-block 15
+call   49 never executed
+branch 50 never executed (fallthrough)
+branch 51 never executed (throw)
+    $$$$$:  150-block 16
+    $$$$$:  150-block 17
+call   52 never executed
+    $$$$$:  150-block 18
+call   53 never executed
+call   54 never executed
+branch 55 never executed (fallthrough)
+branch 56 never executed (throw)
+    $$$$$:  150-block 19
+    $$$$$:  150-block 20
+call   57 never executed
+branch 58 never executed (fallthrough)
+branch 59 never executed (throw)
+    $$$$$:  150-block 21
+call   60 never executed
+    $$$$$:  150-block 22
+    $$$$$:  150-block 23
+call   61 never executed
+    $$$$$:  150-block 24
+call   62 never executed
+    $$$$$:  150-block 25
+call   63 never executed
+    $$$$$:  150-block 26
+call   64 never executed
+    $$$$$:  150-block 27
+    $$$$$:  150-block 28
+    $$$$$:  150-block 29
+call   65 never executed
+    $$$$$:  150-block 30
+    $$$$$:  150-block 31
+call   66 never executed
+       1*:  151:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  151-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  151-block  1
+    %%%%%:  151-block  2
+        1:  151-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  151-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  151-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  151-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  151-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  151-block  8
+call   21 never executed
+call   22 never executed
+        1:  151-block  9
+call   23 returned 1
+    $$$$$:  151-block 10
+    $$$$$:  151-block 11
+    $$$$$:  151-block 12
+call   24 never executed
+    $$$$$:  151-block 13
+    $$$$$:  151-block 14
+call   25 never executed
+    $$$$$:  151-block 15
+    $$$$$:  151-block 16
+call   26 never executed
+        1:  152:}
+------------------
+        -:  153:
+        4:  154:TEST_F(TransportDepartmentTest, RequestAfterAllBroken) {
+        1:  155:    transportDept->addVehicle(taxi);
+        1:  156:    transportDept->addVehicle(truck);
+        1:  157:    transportDept->addVehicle(train);
+        -:  158:
+        1:  159:    taxi->breakDown();
+        1:  160:    truck->breakDown();
+        1:  161:    train->breakDown();
+        -:  162:
+       3*:  163:    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error);
+        1:  164:}
+------------------
+_ZN50TransportDepartmentTest_RequestAfterAllBroken_TestC1Ev:
+function _ZN50TransportDepartmentTest_RequestAfterAllBroken_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  154:TEST_F(TransportDepartmentTest, RequestAfterAllBroken) {
+        1:  154-block  0
+call    0 returned 1
+------------------
+_ZN50TransportDepartmentTest_RequestAfterAllBroken_TestD0Ev:
+function _ZN50TransportDepartmentTest_RequestAfterAllBroken_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  154:TEST_F(TransportDepartmentTest, RequestAfterAllBroken) {
+        1:  154-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN50TransportDepartmentTest_RequestAfterAllBroken_TestD1Ev:
+function _ZN50TransportDepartmentTest_RequestAfterAllBroken_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  154:TEST_F(TransportDepartmentTest, RequestAfterAllBroken) {
+        1:  154-block  0
+call    0 returned 1
+------------------
+_ZN50TransportDepartmentTest_RequestAfterAllBroken_Test8TestBodyEv:
+function _ZN50TransportDepartmentTest_RequestAfterAllBroken_Test8TestBodyEv called 1 returned 100% blocks executed 40%
+        1:  154:TEST_F(TransportDepartmentTest, RequestAfterAllBroken) {
+        1:  155:    transportDept->addVehicle(taxi);
+        1:  155-block  0
+call    0 returned 1
+        1:  156:    transportDept->addVehicle(truck);
+call    0 returned 1
+        1:  157:    transportDept->addVehicle(train);
+call    0 returned 1
+        -:  158:
+        1:  159:    taxi->breakDown();
+call    0 returned 1
+        1:  160:    truck->breakDown();
+call    0 returned 1
+        1:  161:    train->breakDown();
+call    0 returned 1
+        -:  162:
+       3*:  163:    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  163-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  163-block  1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0
+        1:  163-block  2
+        1:  163-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  163-block  4
+call   12 returned 1
+branch 13 taken 0 (fallthrough)
+branch 14 taken 1 (throw)
+    %%%%%:  163-block  5
+call   15 never executed
+        1:  163-block  6
+branch 16 taken 0 (fallthrough)
+branch 17 taken 1
+    %%%%%:  163-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  163-block  8
+    %%%%%:  163-block  9
+call   21 never executed
+branch 22 never executed (fallthrough)
+branch 23 never executed (throw)
+    %%%%%:  163-block 10
+call   24 never executed
+call   25 never executed
+branch 26 never executed (fallthrough)
+branch 27 never executed (throw)
+    %%%%%:  163-block 11
+call   28 never executed
+branch 29 never executed (fallthrough)
+branch 30 never executed (throw)
+    %%%%%:  163-block 12
+call   31 never executed
+call   32 never executed
+        1:  163-block 13
+call   33 returned 1
+        1:  163-block 14
+call   34 returned 1
+        1:  163-block 15
+        1:  163-block 16
+        1:  163-block 17
+branch 35 taken 1
+branch 36 taken 0
+branch 37 taken 0
+        1:  163-block 18
+call   38 returned 1
+call   39 returned 1
+    $$$$$:  163-block 19
+call   40 never executed
+call   41 never executed
+branch 42 never executed (fallthrough)
+branch 43 never executed (throw)
+    $$$$$:  163-block 20
+call   44 never executed
+branch 45 never executed (fallthrough)
+branch 46 never executed (throw)
+    $$$$$:  163-block 21
+call   47 never executed
+branch 48 never executed (fallthrough)
+branch 49 never executed (throw)
+    $$$$$:  163-block 22
+call   50 never executed
+call   51 never executed
+branch 52 never executed (fallthrough)
+branch 53 never executed (throw)
+    $$$$$:  163-block 23
+call   54 never executed
+call   55 never executed
+branch 56 never executed (fallthrough)
+branch 57 never executed (throw)
+    $$$$$:  163-block 24
+call   58 never executed
+branch 59 never executed (fallthrough)
+branch 60 never executed (throw)
+    $$$$$:  163-block 25
+    $$$$$:  163-block 26
+call   61 never executed
+    $$$$$:  163-block 27
+call   62 never executed
+call   63 never executed
+branch 64 never executed (fallthrough)
+branch 65 never executed (throw)
+    $$$$$:  163-block 28
+    $$$$$:  163-block 29
+call   66 never executed
+branch 67 never executed (fallthrough)
+branch 68 never executed (throw)
+    $$$$$:  163-block 30
+call   69 never executed
+    $$$$$:  163-block 31
+    $$$$$:  163-block 32
+call   70 never executed
+    $$$$$:  163-block 33
+call   71 never executed
+    $$$$$:  163-block 34
+call   72 never executed
+    $$$$$:  163-block 35
+    $$$$$:  163-block 36
+call   73 never executed
+    $$$$$:  163-block 37
+    $$$$$:  163-block 38
+call   74 never executed
+        1:  164:}
+------------------
+        -:  165:
+        -:  166:
+        4:  167:TEST_F(TransportDepartmentTest, RepairAllVehicles) {
+        1:  168:    taxi->breakDown();
+        1:  169:    truck->breakDown();
+        1:  170:    train->breakDown();
+        -:  171:
+        1:  172:    transportDept->addVehicle(taxi);
+        1:  173:    transportDept->addVehicle(truck);
+        1:  174:    transportDept->addVehicle(train);
+        -:  175:
+        1:  176:    transportDept->manage(); // Assuming it tries to repair as needed
+       1*:  177:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+       1*:  178:    EXPECT_NE(dynamic_cast<Functional*>(truck->getState()), nullptr);
+       1*:  179:    EXPECT_NE(dynamic_cast<Functional*>(train->getState()), nullptr);
+        1:  180:}
+------------------
+_ZN46TransportDepartmentTest_RepairAllVehicles_TestC1Ev:
+function _ZN46TransportDepartmentTest_RepairAllVehicles_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:  167:TEST_F(TransportDepartmentTest, RepairAllVehicles) {
+        1:  167-block  0
+call    0 returned 1
+------------------
+_ZN46TransportDepartmentTest_RepairAllVehicles_TestD0Ev:
+function _ZN46TransportDepartmentTest_RepairAllVehicles_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:  167:TEST_F(TransportDepartmentTest, RepairAllVehicles) {
+        1:  167-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN46TransportDepartmentTest_RepairAllVehicles_TestD1Ev:
+function _ZN46TransportDepartmentTest_RepairAllVehicles_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:  167:TEST_F(TransportDepartmentTest, RepairAllVehicles) {
+        1:  167-block  0
+call    0 returned 1
+------------------
+_ZN46TransportDepartmentTest_RepairAllVehicles_Test8TestBodyEv:
+function _ZN46TransportDepartmentTest_RepairAllVehicles_Test8TestBodyEv called 1 returned 100% blocks executed 35%
+        1:  167:TEST_F(TransportDepartmentTest, RepairAllVehicles) {
+        1:  168:    taxi->breakDown();
+        1:  168-block  0
+call    0 returned 1
+        1:  169:    truck->breakDown();
+call    0 returned 1
+        1:  170:    train->breakDown();
+call    0 returned 1
+        -:  171:
+        1:  172:    transportDept->addVehicle(taxi);
+call    0 returned 1
+        1:  173:    transportDept->addVehicle(truck);
+call    0 returned 1
+        1:  174:    transportDept->addVehicle(train);
+call    0 returned 1
+        -:  175:
+        1:  176:    transportDept->manage(); // Assuming it tries to repair as needed
+call    0 returned 1
+       1*:  177:    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  177-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  177-block  1
+    %%%%%:  177-block  2
+        1:  177-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  177-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  177-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  177-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  177-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  177-block  8
+call   21 never executed
+call   22 never executed
+        1:  177-block  9
+call   23 returned 1
+    $$$$$:  177-block 10
+    $$$$$:  177-block 11
+    $$$$$:  177-block 12
+call   24 never executed
+    $$$$$:  177-block 13
+    $$$$$:  177-block 14
+call   25 never executed
+    $$$$$:  177-block 15
+    $$$$$:  177-block 16
+call   26 never executed
+       1*:  178:    EXPECT_NE(dynamic_cast<Functional*>(truck->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  178-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  178-block  1
+    %%%%%:  178-block  2
+        1:  178-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  178-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  178-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  178-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  178-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  178-block  8
+call   21 never executed
+call   22 never executed
+        1:  178-block  9
+call   23 returned 1
+    $$$$$:  178-block 10
+    $$$$$:  178-block 11
+    $$$$$:  178-block 12
+call   24 never executed
+    $$$$$:  178-block 13
+    $$$$$:  178-block 14
+call   25 never executed
+    $$$$$:  178-block 15
+    $$$$$:  178-block 16
+call   26 never executed
+       1*:  179:    EXPECT_NE(dynamic_cast<Functional*>(train->getState()), nullptr);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  179-block  0
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0
+        1:  179-block  1
+    %%%%%:  179-block  2
+        1:  179-block  3
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:  179-block  4
+call    8 returned 1
+branch  9 taken 0 (fallthrough)
+branch 10 taken 1
+    %%%%%:  179-block  5
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:  179-block  6
+call   14 never executed
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:  179-block  7
+call   18 never executed
+branch 19 never executed (fallthrough)
+branch 20 never executed (throw)
+    %%%%%:  179-block  8
+call   21 never executed
+call   22 never executed
+        1:  179-block  9
+call   23 returned 1
+    $$$$$:  179-block 10
+    $$$$$:  179-block 11
+    $$$$$:  179-block 12
+call   24 never executed
+    $$$$$:  179-block 13
+    $$$$$:  179-block 14
+call   25 never executed
+    $$$$$:  179-block 15
+    $$$$$:  179-block 16
+call   26 never executed
+        1:  180:}
+------------------

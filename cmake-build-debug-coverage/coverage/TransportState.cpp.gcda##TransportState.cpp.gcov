@@ -1,0 +1,10 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/TransportState.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TransportState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\TransportState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "TransportState.h"
+        -:    2:#include "Vehicle.h"
+        -:    3:
+function _ZN14TransportState13checkCapacityEP7Vehicle called 0 returned 0% blocks executed 0%
+    #####:    4:void TransportState::checkCapacity(Vehicle* vehicle) {
+    #####:    5:}

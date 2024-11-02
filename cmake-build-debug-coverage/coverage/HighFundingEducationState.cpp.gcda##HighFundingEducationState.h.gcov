@@ -1,0 +1,56 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/HighFundingEducationState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HighFundingEducationState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HighFundingEducationState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef HIGHFUNDINGEDUCATIONSTATE_H
+        -:    2:#define HIGHFUNDINGEDUCATIONSTATE_H
+        -:    3:#include "EducationService.h"
+        -:    4:#include "EducationState.h"
+        -:    5:#include <string>
+        -:    6:
+        -:    7:/**
+        -:    8: * @brief Represents a high-funding state for education services.
+        -:    9: *
+        -:   10: * ConcreteState in the State pattern. It extends the EducationState class and implements the methods to manage education service operations when funding is high.
+        -:   11: */
+        -:   12:class HighFundingEducationState : public EducationState {
+        -:   13:public:
+        -:   14:    /**
+        -:   15:     * @brief Constructs a new HighFundingEducationState object.
+        -:   16:     */
+        -:   17:    HighFundingEducationState(EducationService& service) : EducationState(service) {}
+        -:   18:
+        -:   19:    /**
+        -:   20:     * @brief Destroys the HighFundingEducationState object.
+        -:   21:     */
+        2:   22:    ~HighFundingEducationState()override = default;
+------------------
+_ZN25HighFundingEducationStateD0Ev:
+function _ZN25HighFundingEducationStateD0Ev called 1 returned 100% blocks executed 100%
+        1:   22:    ~HighFundingEducationState()override = default;
+        1:   22-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN25HighFundingEducationStateD1Ev:
+function _ZN25HighFundingEducationStateD1Ev called 1 returned 100% blocks executed 100%
+        1:   22:    ~HighFundingEducationState()override = default;
+        1:   22-block  0
+call    0 returned 1
+------------------
+        -:   23:
+        -:   24:    /**
+        -:   25:     * @brief Checks the current state of education services in a high-funding condition.
+        -:   26:     * This method implements behavior specific to the high-funding condition.
+        -:   27:     */
+        -:   28:    void checkEducationState() override;
+        -:   29:
+        -:   30:    /**
+        -:   31:     * @brief Gets the quality of education in a high-funding state.
+        -:   32:     * @return int The quality level of education.
+        -:   33:     */
+        -:   34:    int getEducationQuality() override;
+        -:   35:    std::string getName() override;
+        -:   36:};
+        -:   37:
+        -:   38:#endif // HIGHFUNDINGEDUCATIONSTATE_H

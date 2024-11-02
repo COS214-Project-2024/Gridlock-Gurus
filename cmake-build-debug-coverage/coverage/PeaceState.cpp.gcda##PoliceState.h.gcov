@@ -1,0 +1,42 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/PoliceState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PeaceState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PeaceState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef POLICESTATE_H
+        -:    2:#define POLICESTATE_H
+        -:    3:
+        -:    4:#include <string>
+        -:    5:#include <iostream>
+        -:    6:#include "PoliceService.h"
+        -:    7:
+        -:    8:class PoliceService;
+        -:    9:/**
+        -:   10: * @brief Abstract class representing the state of police services.
+        -:   11: *
+        -:   12: * AbstractState in the State pattern. It defines the interface for concrete states that represent various conditions of police operations. Each state will implement specific behaviors for checking the operational status of police services.
+        -:   13: */
+        -:   14:class PoliceState {
+        -:   15:protected:
+        -:   16:    PoliceService& service;
+        -:   17:public:
+        -:   18:    /**
+        -:   19:     * @brief Constructs a new PoliceState object.
+        -:   20:     */
+        -:   21:    PoliceState(PoliceService& service) : service(service) {}
+        -:   22:
+        -:   23:    /**
+        -:   24:     * @brief Destroys the PoliceState object.
+        -:   25:     */
+function _ZN11PoliceStateD2Ev called 2 returned 100% blocks executed 100%
+        2:   26:    virtual ~PoliceState() = default;
+        -:   27:
+        -:   28:    /**
+        -:   29:     * @brief Checks the operational status of the police service.
+        -:   30:     * This method will be overridden by concrete state classes to define specific behavior based on the current state.
+        -:   31:     */
+        -:   32:    virtual void checkOperation() = 0;
+        -:   33:
+        -:   34:    virtual std::string getName() = 0;
+        -:   35:};
+        -:   36:
+        -:   37:#endif // POLICESTATE_H

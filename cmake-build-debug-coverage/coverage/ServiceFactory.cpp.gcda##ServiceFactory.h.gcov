@@ -1,0 +1,58 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/ServiceFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\ServiceFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\ServiceFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef SERVICEFACTORY_H
+        -:    2:#define SERVICEFACTORY_H
+        -:    3:
+        -:    4:#include "BuildingFactory.h"
+        -:    5:#include "BuildingType.h"
+        -:    6:#include "TaxAuthority.h"
+        -:    7:#include <memory>
+        -:    8:
+        -:    9:
+        -:   10:/**
+        -:   11: * @brief Factory for creating service buildings.
+        -:   12: * 
+        -:   13: * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create service buildings.
+        -:   14: */
+        -:   15:class ServiceFactory : public BuildingFactory {
+        -:   16:    int numberOfSchools;
+        -:   17:    int numberOfHospitals;
+        -:   18:    int numberOfPoliceStations;
+        -:   19:public:
+        -:   20:    /**
+        -:   21:     * @brief Constructs a new ServiceFactory object.
+        -:   22:     */
+        -:   23:    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority), numberOfSchools(0),numberOfHospitals(0),numberOfPoliceStations(0) {}
+        -:   24:
+        -:   25:    /**
+        -:   26:     * @brief Destroys the ServiceFactory object.
+        -:   27:     */
+        2:   28:    ~ServiceFactory() override = default;
+------------------
+_ZN14ServiceFactoryD0Ev:
+function _ZN14ServiceFactoryD0Ev called 1 returned 100% blocks executed 100%
+        1:   28:    ~ServiceFactory() override = default;
+        1:   28-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN14ServiceFactoryD1Ev:
+function _ZN14ServiceFactoryD1Ev called 1 returned 100% blocks executed 100%
+        1:   28:    ~ServiceFactory() override = default;
+        1:   28-block  0
+call    0 returned 1
+------------------
+        -:   29:    
+        -:   30:    /**
+        -:   31:     * @brief Creates a service building.
+        -:   32:     * @param type The type of service building to create.
+        -:   33:     * @return Pointer to the created service building object.
+        -:   34:     *
+        -:   35:     * This method overrides the factory method to create a service building.
+        -:   36:     */
+        -:   37:    Building* createBuilding(BuildingType type, Citizen& owner) override;
+        -:   38:};
+        -:   39:
+        -:   40:#endif // SERVICEFACTORY_H

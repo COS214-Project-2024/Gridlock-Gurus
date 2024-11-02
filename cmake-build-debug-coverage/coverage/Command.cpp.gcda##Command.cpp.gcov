@@ -1,0 +1,51 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Command.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Command.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Command.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Command.h"
+        -:    2:#include <iostream>
+        -:    3:
+function _ZN7CommandC2Ev called 0 returned 0% blocks executed 0%
+    #####:    4:Command::Command() : status(PENDING), executionCount(0) {}
+        -:    5:
+function _ZN7Command8executedEv called 0 returned 0% blocks executed 0%
+    #####:    6:void Command::executed() {
+    #####:    7:    status = EXECUTED;
+    #####:    8:    executionCount++;
+        -:    9:
+    #####:   10:}
+        -:   11:
+function _ZN7Command4undoEv called 0 returned 0% blocks executed 0%
+    #####:   12:void Command::undo() {
+        -:   13:    // Set status to UNDONE and log the undo action
+    #####:   14:    if (status == EXECUTED) {
+    %%%%%:   14-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   15:        status = UNDONE;
+    %%%%%:   15-block  0
+        -:   16:        //std::cout << "Command undone" << std::endl;
+        -:   17:    }
+    #####:   18:}
+        -:   19:
+function _ZN7Command4redoEv called 0 returned 0% blocks executed 0%
+    #####:   20:void Command::redo() {
+    #####:   21:    if (status == UNDONE) {
+    %%%%%:   21-block  0
+        -:   22:        // Re-execute the command and set status back to EXECUTED
+        -:   23:        //execute();
+        -:   24:        //std::cout << "Command redone" << std::endl;
+        -:   25:    }
+    #####:   26:}
+        -:   27:
+function _ZNK7Command9getStatusEv called 0 returned 0% blocks executed 0%
+    #####:   28:Status Command::getStatus() const {
+    #####:   29:    return status;
+    %%%%%:   29-block  0
+        -:   30:}
+        -:   31:
+function _ZNK7Command17getExecutionCountEv called 0 returned 0% blocks executed 0%
+    #####:   32:int Command::getExecutionCount() const {
+    #####:   33:    return executionCount;
+    %%%%%:   33-block  0
+        -:   34:}

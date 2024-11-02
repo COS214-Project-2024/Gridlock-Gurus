@@ -1,0 +1,209 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Vehicle.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Vehicle.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Vehicle.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Vehicle.h"
+        -:    2:#include <iostream>
+        -:    3:#include "Damaged.h"
+        -:    4:#include "Functional.h"
+        -:    5:#include "Broken.h"
+        -:    6:
+function _ZN7VehicleC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEiP19TransportDepartment called 54 returned 100% blocks executed 83%
+       54:    7:Vehicle::Vehicle(const std::string& type, int capacity, TransportDepartment* transportDept)
+       54:    8:    : type(type), capacity(capacity), currentPassengers(0), state(new Functional()),
+call    0 returned 54
+branch  1 taken 54 (fallthrough)
+branch  2 taken 0 (throw)
+       54:    8-block  0
+call    3 returned 54
+      108:    9:      department(transportDept), usageCount(0) {}
+       54:    9-block  0
+call    0 returned 54
+    $$$$$:    9-block  1
+call    1 never executed
+        -:   10:
+function _ZN7Vehicle8setStateEP14TransportState called 25 returned 100% blocks executed 100%
+       25:   11:void Vehicle::setState(TransportState* newState) {
+       25:   12:    state = newState;
+       25:   13:}
+        -:   14:
+function _ZNK7Vehicle8getStateEv called 129 returned 100% blocks executed 100%
+      129:   15:TransportState* Vehicle::getState() const {
+      129:   16:    return state;
+      129:   16-block  0
+        -:   17:}
+        -:   18:
+function _ZNK7Vehicle7getTypeB5cxx11Ev called 49 returned 100% blocks executed 100%
+       49:   19:std::string Vehicle::getType() const {
+       49:   20:    return type;
+       49:   20-block  0
+call    0 returned 49
+        -:   21:}
+        -:   22:
+function _ZN7Vehicle11updateStateEv called 4 returned 100% blocks executed 29%
+        4:   23:void Vehicle::updateState() {
+        4:   24:    if(usageCount > 10) {
+        4:   24-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 4
+    #####:   25:        if(dynamic_cast<Functional*>(state)) {
+    %%%%%:   25-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   25-block  1
+    %%%%%:   25-block  2
+    %%%%%:   25-block  3
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   26:            delay();
+    %%%%%:   26-block  0
+call    0 never executed
+    #####:   27:        } else if(dynamic_cast<Damaged*>(state)){
+    %%%%%:   27-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   27-block  1
+    %%%%%:   27-block  2
+    %%%%%:   27-block  3
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   28:            breakDown();
+    %%%%%:   28-block  0
+call    0 never executed
+        -:   29:        }
+        -:   30:    }
+       4*:   31:    if(dynamic_cast<Damaged*>(state)){
+        4:   31-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 0
+        4:   31-block  1
+    %%%%%:   31-block  2
+        4:   31-block  3
+branch  2 taken 0 (fallthrough)
+branch  3 taken 4
+    #####:   32:        requestRepair();
+    %%%%%:   32-block  0
+call    0 never executed
+        -:   33:    }
+        4:   34:}
+        -:   35:
+function _ZN7Vehicle13requestRepairEv called 0 returned 0% blocks executed 0%
+    #####:   36:void Vehicle::requestRepair() {
+    #####:   37:    if (department) {
+    %%%%%:   37-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   38:        std::cout << "Requesting repair for " << type << "." << std::endl;
+    %%%%%:   38-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   39:        department->manage();
+call    0 never executed
+        -:   40:    }
+    #####:   41:}
+        -:   42:
+function _ZN7Vehicle14incrementUsageEv called 4 returned 100% blocks executed 100%
+        4:   43:void Vehicle::incrementUsage() {
+        4:   44:    currentPassengers++;
+        4:   45:    updateState();
+        4:   45-block  0
+call    0 returned 4
+        4:   46:}
+        -:   47:
+function _ZN7Vehicle4loadEi called 0 returned 0% blocks executed 0%
+    #####:   48:void Vehicle::load(int passengers) {
+    #####:   49:    if (currentPassengers + passengers <= capacity) {
+    %%%%%:   49-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   50:        currentPassengers += passengers;
+    #####:   51:        incrementUsage();
+    %%%%%:   51-block  0
+call    0 never executed
+        -:   52:        std::cout << passengers << " passengers loaded into "
+    #####:   53:            << type << ". Current: " << currentPassengers
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   54:            << "/" << capacity << std::endl;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+        -:   55:    }
+        -:   56:    else {
+    #####:   57:        std::cout << "Cannot load passengers: Over capacity!" << std::endl;
+    %%%%%:   57-block  0
+call    0 never executed
+call    1 never executed
+        -:   58:    }
+    #####:   59:}
+        -:   60:
+function _ZN7Vehicle7offloadEv called 0 returned 0% blocks executed 0%
+    #####:   61:void Vehicle::offload() {
+    #####:   62:    std::cout << "Offloading all passengers from " << type
+    #####:   63:        << ". Previous: " << currentPassengers << "/" << capacity << std::endl;
+    %%%%%:   63-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+    #####:   64:    currentPassengers = 0;
+    #####:   65:}
+        -:   66:
+function _ZN7Vehicle7collectEi called 0 returned 0% blocks executed 0%
+    #####:   67:void Vehicle::collect(int amount) {
+    #####:   68:    std::cout << "Collected " << amount << " units of cargo in " << type << "." << std::endl;
+    %%%%%:   68-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:   69:}
+        -:   70:
+function _ZN7Vehicle3runEv called 0 returned 0% blocks executed 0%
+    #####:   71:void Vehicle::run() {
+    #####:   72:    std::cout << type << " is running." << std::endl;
+    %%%%%:   72-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:   73:}
+        -:   74:
+function _ZN7Vehicle9breakDownEv called 0 returned 0% blocks executed 0%
+    #####:   75:void Vehicle::breakDown() {
+    #####:   76:    std::cout << type << " has broken down!" << std::endl;
+    %%%%%:   76-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:   77:    if (state) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   78:        state->breakTransport(this);
+    %%%%%:   78-block  0
+call    0 never executed
+        -:   79:    }
+    #####:   80:}
+        -:   81:
+function _ZN7Vehicle6repairEv called 9 returned 100% blocks executed 100%
+        9:   82:void Vehicle::repair() {
+        9:   83:    usageCount = 0;
+        9:   84:}
+        -:   85:
+function _ZN7Vehicle5delayEv called 0 returned 0% blocks executed 0%
+    #####:   86:void Vehicle::delay() {
+    #####:   87:    std::cout << type << " is delayed." << std::endl;
+    %%%%%:   87-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:   88:}

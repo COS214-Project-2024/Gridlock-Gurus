@@ -1,0 +1,47 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/HealthState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LowFundingState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LowFundingState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef HEALTHSTATE_H
+        -:    2:#define HEALTHSTATE_H
+        -:    3:
+        -:    4:#include <string>
+        -:    5:#include <iostream>
+        -:    6:#include "HealthService.h"
+        -:    7:class HealthService;
+        -:    8:/**
+        -:    9: * @brief Abstract class representing the state of health services.
+        -:   10: *
+        -:   11: * AbstractState in the State pattern, defining the interface for various health service states. Concrete states will implement specific behaviors for managing health service operations based on funding levels.
+        -:   12: */
+        -:   13:class HealthState {
+        -:   14:protected:
+        -:   15:    HealthService& service;
+        -:   16:public:
+        -:   17:    /**
+        -:   18:     * @brief Constructs a new HealthState object.
+        -:   19:     */
+        -:   20:    HealthState(HealthService& service) : service(service) {}
+        -:   21:
+        -:   22:    /**
+        -:   23:     * @brief Destroys the HealthState object.
+        -:   24:     */
+function _ZN11HealthStateD2Ev called 0 returned 0% blocks executed 0%
+    #####:   25:    virtual ~HealthState() = default;
+        -:   26:
+        -:   27:    /**
+        -:   28:     * @brief Retrieves the current health status of the services.
+        -:   29:     * This method must be implemented by concrete states to provide specific health status information.
+        -:   30:     */
+        -:   31:    virtual std::string getHealthStatus() = 0;
+        -:   32:
+        -:   33:    /**
+        -:   34:     * @brief Gets the quality of service time in the current state.
+        -:   35:     * This method must be implemented by concrete states to determine the quality level of health services.
+        -:   36:     * @return int The quality level of service time.
+        -:   37:     */
+        -:   38:    virtual int getQualityOfTime() = 0;
+        -:   39:    virtual std::string getName() = 0;
+        -:   40:};
+        -:   41:
+        -:   42:#endif // HEALTHSTATE_H

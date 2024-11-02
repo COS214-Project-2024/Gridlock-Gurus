@@ -1,0 +1,70 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Service.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\building_test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef SERVICE_H
+        -:    2:#define SERVICE_H
+        -:    3:
+        -:    4:#include "Building.h"
+        -:    5:#include "BuildingType.h"
+        -:    6:#include <algorithm>
+        -:    7:#include <string>
+        -:    8:#include <iostream>
+        -:    9:#include <memory>
+        -:   10:
+        -:   11:
+        -:   12:/**
+        -:   13: * @brief Represents a service building (e.g., hospital, police station).
+        -:   14: *
+        -:   15: * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and serves as a base for specific types of service buildings, providing a common interface for tax payment and services.
+        -:   16: */
+        -:   17:class Service : public Building {
+        -:   18:protected:
+        -:   19:    std::vector<Citizen*> employees;
+        -:   20:    double benefits;
+        -:   21:    int maxEmployees;
+        -:   22:    int id;
+        -:   23:public:
+        -:   24:    /**
+        -:   25:     * @brief Constructs a new Service building.
+        -:   26:     * @param cost The construction cost of the service building.
+        -:   27:     * @param location The location of the service building.
+        -:   28:     * @param resources Pointer to the resources the building uses.
+        -:   29:     * @param size The size of the service building.
+        -:   30:     * @param owner Pointer to the owner of the service building.
+        -:   31:     */
+        -:   32:    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name,int id);
+        -:   33:
+        -:   34:    /**
+        -:   35:     * @brief Destroys the Service building.
+        -:   36:     */
+        -:   37:    virtual ~Service() = default;
+        -:   38:
+        -:   39:    /**
+        -:   40:     * @brief Produces resources in the service building.
+        -:   41:     */
+        -:   42:    void employ(Citizen& employee);
+        -:   43:    void fire(Citizen& employee);
+        -:   44:    void retire(Citizen& employee);
+        -:   45:
+function _ZN7Service20getNumberOfEmployeesEv called 3 returned 100% blocks executed 100%
+        3:   46:    int getNumberOfEmployees() {
+        3:   47:        return this->employees.size();
+        3:   47-block  0
+call    0 returned 3
+        -:   48:    }
+        -:   49:
+function _ZN7Service15getMaxEmployeesEv called 3 returned 100% blocks executed 100%
+        3:   50:    int getMaxEmployees() {
+        3:   51:        return maxEmployees;
+        3:   51-block  0
+        -:   52:    }
+        -:   53:
+function _ZN7Service5getIdEv called 3 returned 100% blocks executed 100%
+        3:   54:    int getId() {
+        3:   55:        return id;
+        3:   55-block  0
+        -:   56:    }
+        -:   57:};
+        -:   58:
+        -:   59:#endif // SERVICE_H

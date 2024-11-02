@@ -1,0 +1,19 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Power.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Power.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Power.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Power.h"
+        -:    2:#include <iostream>
+        -:    3:#include <string>
+        -:    4:
+        -:    5:
+function _ZNK5Power13checkCapacityEv called 0 returned 0% blocks executed 0%
+    #####:    6:void Power::checkCapacity() const {
+    #####:    7:    std::cout << "Power capacity is at maximum output: " << maxProduction << " MW." << std::endl;
+    %%%%%:    7-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:    8:}
+        -:    9:

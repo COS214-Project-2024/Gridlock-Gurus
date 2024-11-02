@@ -1,0 +1,105 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/HealthService.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HealthService.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\HealthService.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "HealthService.h"
+        -:    2:#include "HighFundingState.h"
+        -:    3:#include "LowFundingState.h"
+        -:    4:
+function _ZN13HealthServiceC2EiRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEP9ResourcesiR7Citizen12BuildingTypei called 1 returned 100% blocks executed 64%
+        1:    5:HealthService::HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType name, int id) : Service(cost, location, resources, size, owner, name,id){
+        1:    5-block  0
+call    0 returned 1
+call    1 returned 1
+        1:    6:    this->responseTime = 10;
+        1:    7:    healthState =std::make_unique<HighFundingState>(*this);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:    7-block  0
+call    3 returned 1
+call    4 returned 1
+    $$$$$:    7-block  1
+        1:    8:    state = HealthStateType::HighFunding;
+        1:    9:}
+    $$$$$:    9-block  0
+call    0 never executed
+    $$$$$:    9-block  1
+call    1 never executed
+        -:   10:
+function _ZN13HealthService3payEv called 1 returned 100% blocks executed 100%
+        1:   11:int HealthService::pay() {
+        1:   12:    return 5000;
+        1:   12-block  0
+        -:   13:}
+        -:   14:
+function _ZN13HealthService8setStateEv called 1 returned 100% blocks executed 58%
+        1:   15:void HealthService::setState() {
+        1:   16:    if(state == HealthStateType::LowFunding) {
+        1:   16-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   17:        healthState = std::make_unique<HighFundingState>(*this);
+    %%%%%:   17-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   17-block  1
+call    3 never executed
+call    4 never executed
+    $$$$$:   17-block  2
+call    5 never executed
+    #####:   18:        state = HealthStateType::HighFunding;
+        -:   19:    } else {
+        1:   20:        healthState = std::make_unique<LowFundingState>(*this);
+        1:   20-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   20-block  1
+call    3 returned 1
+call    4 returned 1
+        1:   21:        state = HealthStateType::LowFunding;
+        -:   22:    }
+        1:   23:}
+        1:   23-block  0
+        -:   24:
+function _ZN13HealthService15responseTimeDecEi called 1 returned 100% blocks executed 100%
+        1:   25:void HealthService::responseTimeDec(int by) {
+        1:   26:    responseTime -= by;
+        1:   27:}
+        -:   28:
+function _ZN13HealthService15responseTimeIncEi called 1 returned 100% blocks executed 100%
+        1:   29:void HealthService::responseTimeInc(int by) {
+        1:   30:    responseTime += by;
+        1:   31:}
+        -:   32:
+function _ZNK13HealthService15getResponseTimeEv called 3 returned 100% blocks executed 100%
+        3:   33:int HealthService::getResponseTime() const {
+        3:   34:    return this->responseTime;
+        3:   34-block  0
+        -:   35:}
+        -:   36:
+        -:   37:
+function _ZNK13HealthService8getStateB5cxx11Ev called 2 returned 100% blocks executed 72%
+        2:   38:std::string HealthService::getState() const {
+        2:   39:    if(state == HealthStateType::HighFunding) {
+        2:   39-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        2:   40:        return "High funding";
+        1:   40-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+    $$$$$:   40-block  1
+call    3 never executed
+        -:   41:    } else {
+        2:   42:        return "Low funding";
+        1:   42-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   43:    }
+        -:   44:}
+        -:   45:

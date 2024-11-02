@@ -1,0 +1,52 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/LowFundingState.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LowFundingState.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LowFundingState.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "LowFundingState.h"
+        -:    2:
+function _ZN15LowFundingState15getHealthStatusB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:    3:std::string LowFundingState::getHealthStatus() {
+    %%%%%:    3-block  0
+        -:    4:/*    string state = "Current state: " + name + "\n";
+        -:    5:    state += "Response time: " + to_string(service->getResponseTime()) + " minutes\n";
+        -:    6:    return state;*/
+    #####:    7:    return "Poor Quality";
+    %%%%%:    7-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:    7-block  1
+        -:    8:}
+        -:    9:
+function _ZN15LowFundingState16getQualityOfTimeEv called 0 returned 0% blocks executed 0%
+    #####:   10:int LowFundingState::getQualityOfTime() {
+        -:   11:/*    if(service) {
+        -:   12:        int currStaff = service->getStaff();
+        -:   13:        int maxStaff = service->getMaxStaff();
+        -:   14:        double ratio = static_cast<double>(currStaff) / maxStaff;
+        -:   15:        if(ratio < 0.5) {
+        -:   16:            cout<< "Warning hospital is understaffed for high volumes. Current staff: " << currStaff << "/" << maxStaff << "\n";
+        -:   17:            service->responseTimeInc(5);
+        -:   18:        } else {
+        -:   19:            cout<< "This hospital is sufficiently staffed. Current staff: " << currStaff << "/" << maxStaff << "\n";
+        -:   20:            service->responseTimeDec(2);
+        -:   21:        }
+        -:   22:    } else {
+        -:   23:        cout<< "Error: this state has not been assigned.\n";
+        -:   24:    }*/
+    #####:   25:    return 0;
+    %%%%%:   25-block  0
+        -:   26:}
+        -:   27:
+function _ZN15LowFundingState7getNameB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:   28:std::string LowFundingState::getName() {
+    %%%%%:   28-block  0
+    #####:   29:    return "Low Funding";
+    %%%%%:   29-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:   29-block  1
+        -:   30:}
+        -:   31:
+        -:   32:

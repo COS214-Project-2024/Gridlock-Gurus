@@ -1,0 +1,49 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Vehicle.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Truck.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Truck.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef VEHICLE_H
+        -:    2:#define VEHICLE_H
+        -:    3:
+        -:    4:#include <string>
+        -:    5:#include "TransportState.h"
+        -:    6:#include "TransportDepartment.h"
+        -:    7:
+        -:    8:class TransportDepartment;
+        -:    9:
+        -:   10:class Vehicle {
+        -:   11:protected:
+        -:   12:    std::string type;
+        -:   13:    int capacity;
+        -:   14:    int currentPassengers;
+        -:   15:    TransportState* state;
+        -:   16:    int usageCount;
+        -:   17:    TransportDepartment* department;
+        -:   18:
+        -:   19:public:
+        -:   20:    Vehicle(const std::string& type, int capacity, TransportDepartment* transportDept);
+function _ZN7VehicleD2Ev called 0 returned 0% blocks executed 0%
+    #####:   21:    virtual ~Vehicle() = default;
+    %%%%%:   21-block  0
+call    0 never executed
+        -:   22:
+        -:   23:    virtual void checkState() = 0;    
+        -:   24:    virtual void collect(int amount) = 0; 
+        -:   25:    virtual void run() = 0;           
+        -:   26:    virtual void breakDown() = 0;     
+        -:   27:    virtual void delay() = 0;         
+        -:   28:    virtual Vehicle* clone() = 0;     
+        -:   29:
+        -:   30:    void requestRepair();
+        -:   31:    void updateState();
+        -:   32:    void incrementUsage();
+        -:   33:    void setState(TransportState* newState);
+        -:   34:    TransportState* getState() const;
+        -:   35:    std::string getType() const;
+        -:   36:    void repair();
+        -:   37:
+        -:   38:    void load(int passengers);
+        -:   39:    void offload();
+        -:   40:};
+        -:   41:
+        -:   42:#endif

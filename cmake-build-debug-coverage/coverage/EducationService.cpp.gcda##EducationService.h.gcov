@@ -1,0 +1,83 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/EducationService.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\EducationService.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\EducationService.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef EDUCATIONSERVICE_H
+        -:    2:#define EDUCATIONSERVICE_H
+        -:    3:
+        -:    4:#include "Service.h"
+        -:    5:#include "EducationState.h"
+        -:    6:#include "BuildingType.h"
+        -:    7:#include "EducationState.h"
+        -:    8:#include <memory>
+        -:    9:class EducationState;
+        -:   10:
+        -:   11:enum EducationStateType{
+        -:   12:    HighFundingEducation,
+        -:   13:    LowFundingEducation
+        -:   14:};
+        -:   15:/**
+        -:   16: * @brief Represents an education service building.
+        -:   17: *
+        -:   18: * ConcreteProduct participant in the Factory Method pattern. It extends the Service class and represents a specific type of service building that provides education services.
+        -:   19: */
+        -:   20:class EducationService : public Service {
+        -:   21:private:
+        -:   22:    EducationStateType state;
+        -:   23:    std::unique_ptr<EducationState> educationState; 
+        -:   24:    int prestige;
+        -:   25:
+        -:   26:public:
+        -:   27:    /**
+        -:   28:     * @brief Constructs a new EducationService building.
+        -:   29:     * @param cost The construction cost of the education service.
+        -:   30:     * @param location The location of the education service.
+        -:   31:     * @param resources Pointer to the resources the education service uses.
+        -:   32:     * @param size The size of the education service.
+        -:   33:     * @param owner Pointer to the owner of the education service.
+        -:   34:     * @param taxAuthority Pointer to the tax authority associated with the education service.
+        -:   35:     */
+        -:   36:    EducationService(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType name);
+        -:   37:
+        -:   38:    /**
+        -:   39:     * @brief Destroys the EducationService building.
+        -:   40:     */
+        2:   41:    ~EducationService() override = default;
+------------------
+_ZN16EducationServiceD0Ev:
+function _ZN16EducationServiceD0Ev called 1 returned 100% blocks executed 100%
+        1:   41:    ~EducationService() override = default;
+        1:   41-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN16EducationServiceD1Ev:
+function _ZN16EducationServiceD1Ev called 1 returned 100% blocks executed 100%
+        1:   41:    ~EducationService() override = default;
+        1:   41-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+        -:   42:
+        -:   43:    /**
+        -:   44:     * @brief Sets the state of the education service.
+        -:   45:     * @param state Pointer to the new education state.
+        -:   46:     */
+        -:   47:    void setState();
+        -:   48:
+        -:   49:    /**
+        -:   50:     * @brief Pays a staff member in the education service.
+        -:   51:     * @param staffMember Pointer to the staff member being paid.
+        -:   52:     */
+        -:   53:    int pay() override;
+        -:   54:
+        -:   55:    void prestigeDec(int by);
+        -:   56:    void prestigeInc(int by);
+        -:   57:
+        -:   58:    int getPrestige();
+        -:   59:
+        -:   60:    std::string getState() const;
+        -:   61:
+        -:   62:};
+        -:   63:
+        -:   64:#endif // EDUCATIONSERVICE_H

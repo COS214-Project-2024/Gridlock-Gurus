@@ -1,0 +1,20 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/TransportState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Damaged.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Damaged.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef TRANSPORTSTATE_H
+        -:    2:#define TRANSPORTSTATE_H
+        -:    3:
+        -:    4:class Vehicle;
+        -:    5:
+        -:    6:class TransportState {
+        -:    7:public:
+function _ZN14TransportStateD2Ev called 0 returned 0% blocks executed 0%
+    #####:    8:    virtual ~TransportState() = default;
+        -:    9:    virtual void checkCapacity(Vehicle* vehicle) = 0;
+        -:   10:    virtual void breakTransport(Vehicle* vehicle) = 0;
+        -:   11:    virtual void repair(Vehicle* vehicle) = 0;
+        -:   12:    virtual TransportState* returnState() = 0;
+        -:   13:};
+        -:   14:
+        -:   15:#endif

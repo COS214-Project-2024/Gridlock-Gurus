@@ -1,0 +1,71 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Factory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\SteelFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\SteelFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef FACTORY_H
+        -:    2:#define FACTORY_H
+        -:    3:
+        -:    4:#include "Building.h"
+        -:    5:#include <algorithm>
+        -:    6:#include <string>
+        -:    7:#include <iostream>
+        -:    8:#include <memory>
+        -:    9:#include <vector>
+        -:   10:
+        -:   11:
+        -:   12:/**
+        -:   13: * @brief Represents an industrial factory building.
+        -:   14: *
+        -:   15: * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and adds functionality specific to factories, including production of resources.
+        -:   16: */
+        -:   17:class Factory : public Building {
+        -:   18:protected:
+        -:   19:    int maxEmployees;  ///< Number of employees working in the factory.
+        -:   20:    int productionRate;  ///< The rate at which resources are produced by the factory.
+        -:   21:    std::vector<Citizen*> employees;
+        -:   22:
+        -:   23:public:
+        -:   24:    /**
+        -:   25:     * @brief Constructs a new Factory object.
+        -:   26:     * @param cost The construction cost of the factory.
+        -:   27:     * @param location The location of the factory.
+        -:   28:     * @param resources Pointer to the resources the factory consumes.
+        -:   29:     * @param size The size of the factory.
+        -:   30:     * @param owner Pointer to the factory's owner.
+        -:   31:     * @param taxAuthority Pointer to the tax authority associated with the factory.
+        -:   32:     */
+        -:   33:    Factory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) 
+        -:   34:    : Building(cost,location,resources,size,owner,name) {
+        -:   35:        this->productionRate = productionRate;
+        -:   36:        this->maxEmployees = max;
+        -:   37:    };
+        -:   38:
+        -:   39:    /**
+        -:   40:     * @brief Destroys the Factory object.
+        -:   41:     */
+function _ZN7FactoryD2Ev called 0 returned 0% blocks executed 0%
+    #####:   42:    virtual ~Factory() = default;
+    %%%%%:   42-block  0
+call    0 never executed
+call    1 never executed
+        -:   43:
+        -:   44:    /**
+        -:   45:     * @brief Produces resources in the factory.
+        -:   46:     *
+        -:   47:     * This is an abstract method that must be implemented by concrete factory subclasses.
+        -:   48:     */
+        -:   49:    virtual int produceResource() = 0;
+        -:   50:    void employ(Citizen& employee);
+        -:   51:    void fire(Citizen& employee) ;
+        -:   52:    void retire(Citizen& employee);
+        -:   53:
+        -:   54:    int getNumberOfEmployees() {
+        -:   55:        return employees.size();
+        -:   56:    }
+        -:   57:
+        -:   58:    int getMaxEmployees() {
+        -:   59:        return maxEmployees;
+        -:   60:    }
+        -:   61:};
+        -:   62:
+        -:   63:#endif // FACTORY_H

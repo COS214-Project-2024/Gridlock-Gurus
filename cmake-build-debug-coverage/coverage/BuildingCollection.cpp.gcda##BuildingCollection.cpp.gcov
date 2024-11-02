@@ -1,0 +1,63 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/BuildingCollection.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildingCollection.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildingCollection.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "BuildingCollection.h"
+        -:    2:#include <iostream>
+function _ZN18BuildingCollection11addBuildingER8Building called 21 returned 100% blocks executed 100%
+       21:    3:void BuildingCollection::addBuilding(Building& building) {
+       21:    4:    this->buildings.push_back(&building);
+       21:    4-block  0
+call    0 returned 21
+branch  1 taken 21 (fallthrough)
+branch  2 taken 0 (throw)
+       21:    5:}
+       21:    5-block  0
+        -:    6:
+function _ZN18BuildingCollectionD2Ev called 25 returned 100% blocks executed 100%
+       25:    7:BuildingCollection::~BuildingCollection() {
+       46:    8:    for (Building* building : buildings) {
+       25:    8-block  0
+call    0 returned 25
+call    1 returned 25
+       21:    8-block  1
+call    2 returned 21
+       21:    8-block  2
+call    3 returned 21
+       46:    8-block  3
+call    4 returned 46
+branch  5 taken 21
+branch  6 taken 25 (fallthrough)
+       21:    9:            delete building;
+branch  0 taken 21 (fallthrough)
+branch  1 taken 0
+       21:    9-block  0
+call    2 returned 21
+        -:   10:    }
+        -:   11:
+        -:   12:    //buildings.clear();
+       25:   13:}
+       25:   13-block  0
+call    0 returned 25
+        -:   14:
+function _ZN18BuildingCollection5beginEv called 2 returned 100% blocks executed 100%
+        2:   15:BuildingIterator BuildingCollection::begin() { 
+        2:   16:    return BuildingIterator(buildings, 0); 
+        2:   16-block  0
+call    0 returned 2
+        -:   17:}
+        -:   18:
+function _ZN18BuildingCollection3endEv called 6 returned 100% blocks executed 100%
+        6:   19:BuildingIterator BuildingCollection::end() { 
+        6:   20:    return BuildingIterator(buildings, buildings.size()); 
+        6:   20-block  0
+call    0 returned 6
+call    1 returned 6
+        -:   21:}
+        -:   22:
+function _ZN18BuildingCollection7getSizeEv called 3 returned 100% blocks executed 100%
+        3:   23:int BuildingCollection::getSize() {
+        3:   24:return this->buildings.size();
+        3:   24-block  0
+call    0 returned 3
+        -:   25:}

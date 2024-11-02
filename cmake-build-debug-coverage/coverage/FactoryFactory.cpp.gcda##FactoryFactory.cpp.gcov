@@ -1,0 +1,134 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/FactoryFactory.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FactoryFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\FactoryFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "FactoryFactory.h"
+        -:    2:#include "Building.h"
+        -:    3:#include "Factory.h"
+        -:    4:#include "BrickFactory.h"
+        -:    5:#include "SteelFactory.h"
+        -:    6:#include "WoodFactory.h"
+        -:    7:#include <string>
+        -:    8:
+        -:    9:// Made citizen a reference instead of pointer to prevent it being nullptr
+function _ZN14FactoryFactory14createBuildingE12BuildingTypeR7Citizen called 10 returned 100% blocks executed 61%
+       10:   10:Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
+       10:   11:    Resources* resources = new Resources(200,200,false);
+       10:   11-block  0
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+       10:   11-block  1
+call    3 returned 10
+branch  4 taken 10 (fallthrough)
+branch  5 taken 0 (throw)
+       10:   11-block  2
+    $$$$$:   11-block  3
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   11-block  4
+call    8 never executed
+        -:   12:    int maxEmployees;
+        -:   13:    int productionRate;
+        -:   14:    int cost;
+       10:   15:    std::string location = "Factory district";
+       10:   15-block  0
+call    0 returned 10
+branch  1 taken 10 (fallthrough)
+branch  2 taken 0 (throw)
+    $$$$$:   15-block  1
+        -:   16:
+       10:   17:    if(type == BuildingType::WoodFactory) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 9
+        1:   18:        maxEmployees = 100;
+        1:   19:        cost = 100;
+        1:   20:        productionRate = 4;
+        -:   21:
+        1:   22:        Building* b = new WoodFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
+        1:   22-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   22-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   22-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   22-block  3
+call    8 never executed
+        1:   23:        taxAuthority->registerBuilding(*b);
+        1:   23-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   24:        return b; 
+        1:   24-block  0
+        9:   25:    } else if(type == BuildingType::SteelFactory) {
+        9:   25-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 8
+        1:   26:        maxEmployees = 100;
+        1:   27:        cost = 1000;
+        1:   28:        productionRate = 6;
+        -:   29:
+        1:   30:        Building* b = new SteelFactory(cost, location,resources, 1000, owner,type,productionRate, maxEmployees);
+        1:   30-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   30-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   30-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   30-block  3
+call    8 never executed
+        1:   31:        taxAuthority->registerBuilding(*b);
+        1:   31-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   32:        return b; 
+        1:   32-block  0
+        -:   33:
+        -:   34:    } else {
+        8:   35:        maxEmployees = 100;
+        8:   36:        cost = 500;
+        8:   37:        productionRate = 12;
+        -:   38:
+        8:   39:        Building* b = new BrickFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
+        8:   39-block  0
+call    0 returned 8
+branch  1 taken 8 (fallthrough)
+branch  2 taken 0 (throw)
+        8:   39-block  1
+call    3 returned 8
+branch  4 taken 8 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   39-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   39-block  3
+call    8 never executed
+        8:   40:        taxAuthority->registerBuilding(*b);
+        8:   40-block  0
+call    0 returned 8
+call    1 returned 8
+branch  2 taken 8 (fallthrough)
+branch  3 taken 0 (throw)
+        8:   41:        return b; 
+        8:   41-block  0
+        -:   42:
+        -:   43:    }
+       10:   44:}
+       10:   44-block  0
+call    0 returned 10
+    $$$$$:   44-block  1
+call    1 never executed

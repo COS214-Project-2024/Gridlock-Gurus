@@ -1,0 +1,79 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/LandmarkFactory.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LandmarkFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\LandmarkFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "LandmarkFactory.h"
+        -:    2:#include "Landmark.h"
+        -:    3:#include <string>
+        -:    4:
+        -:    5:
+function _ZN15LandmarkFactory14createBuildingE12BuildingTypeR7Citizen called 1 returned 100% blocks executed 53%
+        1:    6:Building *LandmarkFactory::createBuilding(BuildingType type, Citizen& owner) {
+        1:    7:    Resources* resources = new Resources(0,0,false);
+        1:    7-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:    7-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:    7-block  2
+    $$$$$:    7-block  3
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:    7-block  4
+call    8 never executed
+        -:    8:    int cost;
+        1:    9:    std::string location = "City center";
+        1:    9-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+    $$$$$:    9-block  1
+        1:   10:    int size = 2000;
+        -:   11:
+        1:   12:    if(type == BuildingType::Statue) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   13:        cost = 1000;
+        1:   13-block  0
+    #####:   14:    } else if(type == BuildingType::Park) {
+    %%%%%:   14-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   15:        cost = 1200;
+    %%%%%:   15-block  0
+        -:   16:    } else {
+    #####:   17:        cost = 3000;
+    %%%%%:   17-block  0
+        -:   18:    }
+        -:   19:
+        1:   20:    Landmark* l = new Landmark(cost,location,resources,size,owner,type);
+        1:   20-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   20-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+    $$$$$:   20-block  2
+branch  6 never executed (fallthrough)
+branch  7 never executed
+    $$$$$:   20-block  3
+call    8 never executed
+        1:   21:    taxAuthority->registerBuilding(*l);
+        1:   21-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        -:   22:
+        1:   23:    return l;
+        1:   23-block  0
+        1:   24:}
+        1:   24-block  0
+call    0 returned 1
+    $$$$$:   24-block  1
+call    1 never executed

@@ -1,0 +1,1804 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/googletest/googletest/src/gtest-internal-inl.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\googletest\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright 2005, Google Inc.
+        -:    2:// All rights reserved.
+        -:    3://
+        -:    4:// Redistribution and use in source and binary forms, with or without
+        -:    5:// modification, are permitted provided that the following conditions are
+        -:    6:// met:
+        -:    7://
+        -:    8://     * Redistributions of source code must retain the above copyright
+        -:    9:// notice, this list of conditions and the following disclaimer.
+        -:   10://     * Redistributions in binary form must reproduce the above
+        -:   11:// copyright notice, this list of conditions and the following disclaimer
+        -:   12:// in the documentation and/or other materials provided with the
+        -:   13:// distribution.
+        -:   14://     * Neither the name of Google Inc. nor the names of its
+        -:   15:// contributors may be used to endorse or promote products derived from
+        -:   16:// this software without specific prior written permission.
+        -:   17://
+        -:   18:// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+        -:   19:// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+        -:   20:// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+        -:   21:// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        -:   22:// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        -:   23:// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+        -:   24:// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+        -:   25:// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+        -:   26:// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   27:// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        -:   28:// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   29:
+        -:   30:// Utility functions and classes used by the Google C++ testing framework.//
+        -:   31:// This file contains purely Google Test's internal implementation.  Please
+        -:   32:// DO NOT #INCLUDE IT IN A USER PROGRAM.
+        -:   33:
+        -:   34:#ifndef GOOGLETEST_SRC_GTEST_INTERNAL_INL_H_
+        -:   35:#define GOOGLETEST_SRC_GTEST_INTERNAL_INL_H_
+        -:   36:
+        -:   37:#ifndef _WIN32_WCE
+        -:   38:#include <errno.h>
+        -:   39:#endif  // !_WIN32_WCE
+        -:   40:#include <stddef.h>
+        -:   41:#include <stdlib.h>  // For strtoll/_strtoul64/malloc/free.
+        -:   42:#include <string.h>  // For memmove.
+        -:   43:
+        -:   44:#include <algorithm>
+        -:   45:#include <cstdint>
+        -:   46:#include <memory>
+        -:   47:#include <set>
+        -:   48:#include <string>
+        -:   49:#include <unordered_map>
+        -:   50:#include <vector>
+        -:   51:
+        -:   52:#include "gtest/internal/gtest-port.h"
+        -:   53:
+        -:   54:#if GTEST_CAN_STREAM_RESULTS_
+        -:   55:#include <arpa/inet.h>  // NOLINT
+        -:   56:#include <netdb.h>      // NOLINT
+        -:   57:#endif
+        -:   58:
+        -:   59:#ifdef GTEST_OS_WINDOWS
+        -:   60:#include <windows.h>  // NOLINT
+        -:   61:#endif                // GTEST_OS_WINDOWS
+        -:   62:
+        -:   63:#include "gtest/gtest-spi.h"
+        -:   64:#include "gtest/gtest.h"
+        -:   65:
+        -:   66:GTEST_DISABLE_MSC_WARNINGS_PUSH_(4251 \
+        -:   67:/* class A needs to have dll-interface to be used by clients of class B */)
+        -:   68:
+        -:   69:// Declares the flags.
+        -:   70://
+        -:   71:// We don't want the users to modify this flag in the code, but want
+        -:   72:// Google Test's own unit tests to be able to access it. Therefore we
+        -:   73:// declare it here as opposed to in gtest.h.
+        -:   74:GTEST_DECLARE_bool_(death_test_use_fork);
+        -:   75:
+        -:   76:namespace testing {
+        -:   77:namespace internal {
+        -:   78:
+        -:   79:// The value of GetTestTypeId() as seen from within the Google Test
+        -:   80:// library.  This is solely for testing GetTestTypeId().
+        -:   81:GTEST_API_ extern const TypeId kTestTypeIdInGoogleTest;
+        -:   82:
+        -:   83:// A valid random seed must be in [1, kMaxRandomSeed].
+        -:   84:const int kMaxRandomSeed = 99999;
+        -:   85:
+        -:   86:// g_help_flag is true if and only if the --help flag or an equivalent form
+        -:   87:// is specified on the command line.
+        -:   88:GTEST_API_ extern bool g_help_flag;
+        -:   89:
+        -:   90:// Returns the current time in milliseconds.
+        -:   91:GTEST_API_ TimeInMillis GetTimeInMillis();
+        -:   92:
+        -:   93:// Returns true if and only if Google Test should use colors in the output.
+        -:   94:GTEST_API_ bool ShouldUseColor(bool stdout_is_tty);
+        -:   95:
+        -:   96:// Formats the given time in milliseconds as seconds. If the input is an exact N
+        -:   97:// seconds, the output has a trailing decimal point (e.g., "N." instead of "N").
+        -:   98:GTEST_API_ std::string FormatTimeInMillisAsSeconds(TimeInMillis ms);
+        -:   99:
+        -:  100:// Converts the given time in milliseconds to a date string in the ISO 8601
+        -:  101:// format, without the timezone information.  N.B.: due to the use the
+        -:  102:// non-reentrant localtime() function, this function is not thread safe.  Do
+        -:  103:// not use it in any code that can be called from multiple threads.
+        -:  104:GTEST_API_ std::string FormatEpochTimeInMillisAsIso8601(TimeInMillis ms);
+        -:  105:
+        -:  106:// Parses a string for an Int32 flag, in the form of "--flag=value".
+        -:  107://
+        -:  108:// On success, stores the value of the flag in *value, and returns
+        -:  109:// true.  On failure, returns false without changing *value.
+        -:  110:GTEST_API_ bool ParseFlag(const char* str, const char* flag, int32_t* value);
+        -:  111:
+        -:  112:// Returns a random seed in range [1, kMaxRandomSeed] based on the
+        -:  113:// given --gtest_random_seed flag value.
+function _ZN7testing8internal21GetRandomSeedFromFlagEi called 1 returned 100% blocks executed 83%
+        1:  114:inline int GetRandomSeedFromFlag(int32_t random_seed_flag) {
+        -:  115:  const unsigned int raw_seed =
+       1*:  116:      (random_seed_flag == 0) ? static_cast<unsigned int>(GetTimeInMillis())
+        1:  116-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:  116-block  1
+call    2 returned 1
+    %%%%%:  116-block  2
+        1:  117:                              : static_cast<unsigned int>(random_seed_flag);
+        -:  118:
+        -:  119:  // Normalizes the actual seed to range [1, kMaxRandomSeed] such that
+        -:  120:  // it's easy to type.
+        1:  121:  const int normalized_seed =
+        1:  122:      static_cast<int>((raw_seed - 1U) %
+        -:  123:                       static_cast<unsigned int>(kMaxRandomSeed)) +
+        -:  124:      1;
+        1:  125:  return normalized_seed;
+        1:  125-block  0
+        -:  126:}
+        -:  127:
+        -:  128:// Returns the first valid random seed after 'seed'.  The behavior is
+        -:  129:// undefined if 'seed' is invalid.  The seed after kMaxRandomSeed is
+        -:  130:// considered to be 1.
+function _ZN7testing8internal17GetNextRandomSeedEi called 0 returned 0% blocks executed 0%
+    #####:  131:inline int GetNextRandomSeed(int seed) {
+    #####:  132:  GTEST_CHECK_(1 <= seed && seed <= kMaxRandomSeed)
+    %%%%%:  132-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  132-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  132-block  2
+    %%%%%:  132-block  3
+    %%%%%:  132-block  4
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  132-block  5
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  132-block  6
+call   10 never executed
+    %%%%%:  132-block  7
+call   11 never executed
+    $$$$$:  132-block  8
+call   12 never executed
+    #####:  133:      << "Invalid random seed " << seed << " - must be in [1, "
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  133-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  133-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  133-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    #####:  134:      << kMaxRandomSeed << "].";
+    %%%%%:  134-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  134-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    #####:  135:  const int next_seed = seed + 1;
+    #####:  136:  return (next_seed > kMaxRandomSeed) ? 1 : next_seed;
+    %%%%%:  136-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  136-block  1
+    %%%%%:  136-block  2
+    %%%%%:  136-block  3
+    %%%%%:  136-block  4
+        -:  137:}
+        -:  138:
+        -:  139:// This class saves the values of all Google Test flags in its c'tor, and
+        -:  140:// restores them in its d'tor.
+        -:  141:class GTestFlagSaver {
+        -:  142: public:
+        -:  143:  // The c'tor.
+function _ZN7testing8internal14GTestFlagSaverC1Ev called 26 returned 100% blocks executed 56%
+       26:  144:  GTestFlagSaver() {
+       26:  144-block  0
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+call    3 returned 26
+call    4 returned 26
+call    5 returned 26
+       26:  145:    also_run_disabled_tests_ = GTEST_FLAG_GET(also_run_disabled_tests);
+       26:  146:    break_on_failure_ = GTEST_FLAG_GET(break_on_failure);
+       26:  147:    catch_exceptions_ = GTEST_FLAG_GET(catch_exceptions);
+       26:  148:    color_ = GTEST_FLAG_GET(color);
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  149:    death_test_style_ = GTEST_FLAG_GET(death_test_style);
+       26:  149-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  150:    death_test_use_fork_ = GTEST_FLAG_GET(death_test_use_fork);
+       26:  151:    fail_fast_ = GTEST_FLAG_GET(fail_fast);
+       26:  152:    filter_ = GTEST_FLAG_GET(filter);
+       26:  152-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  153:    internal_run_death_test_ = GTEST_FLAG_GET(internal_run_death_test);
+       26:  153-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  154:    list_tests_ = GTEST_FLAG_GET(list_tests);
+       26:  155:    output_ = GTEST_FLAG_GET(output);
+       26:  155-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  156:    brief_ = GTEST_FLAG_GET(brief);
+       26:  157:    print_time_ = GTEST_FLAG_GET(print_time);
+       26:  158:    print_utf8_ = GTEST_FLAG_GET(print_utf8);
+       26:  159:    random_seed_ = GTEST_FLAG_GET(random_seed);
+       26:  160:    repeat_ = GTEST_FLAG_GET(repeat);
+       26:  161:    recreate_environments_when_repeating_ =
+        -:  162:        GTEST_FLAG_GET(recreate_environments_when_repeating);
+       26:  163:    shuffle_ = GTEST_FLAG_GET(shuffle);
+       26:  164:    stack_trace_depth_ = GTEST_FLAG_GET(stack_trace_depth);
+       26:  165:    stream_result_to_ = GTEST_FLAG_GET(stream_result_to);
+       26:  165-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  166:    throw_on_failure_ = GTEST_FLAG_GET(throw_on_failure);
+       26:  167:  }
+       26:  167-block  0
+    $$$$$:  167-block  1
+call    0 never executed
+    $$$$$:  167-block  2
+call    1 never executed
+    $$$$$:  167-block  3
+call    2 never executed
+    $$$$$:  167-block  4
+call    3 never executed
+    $$$$$:  167-block  5
+call    4 never executed
+    $$$$$:  167-block  6
+call    5 never executed
+        -:  168:
+        -:  169:  // The d'tor is not virtual.  DO NOT INHERIT FROM THIS CLASS.
+function _ZN7testing8internal14GTestFlagSaverD1Ev called 26 returned 100% blocks executed 100%
+       26:  170:  ~GTestFlagSaver() {
+       26:  171:    GTEST_FLAG_SET(also_run_disabled_tests, also_run_disabled_tests_);
+       26:  172:    GTEST_FLAG_SET(break_on_failure, break_on_failure_);
+       26:  173:    GTEST_FLAG_SET(catch_exceptions, catch_exceptions_);
+       26:  174:    GTEST_FLAG_SET(color, color_);
+       26:  174-block  0
+call    0 returned 26
+       26:  175:    GTEST_FLAG_SET(death_test_style, death_test_style_);
+call    0 returned 26
+       26:  176:    GTEST_FLAG_SET(death_test_use_fork, death_test_use_fork_);
+       26:  177:    GTEST_FLAG_SET(filter, filter_);
+call    0 returned 26
+       26:  178:    GTEST_FLAG_SET(fail_fast, fail_fast_);
+       26:  179:    GTEST_FLAG_SET(internal_run_death_test, internal_run_death_test_);
+call    0 returned 26
+       26:  180:    GTEST_FLAG_SET(list_tests, list_tests_);
+       26:  181:    GTEST_FLAG_SET(output, output_);
+call    0 returned 26
+       26:  182:    GTEST_FLAG_SET(brief, brief_);
+       26:  183:    GTEST_FLAG_SET(print_time, print_time_);
+       26:  184:    GTEST_FLAG_SET(print_utf8, print_utf8_);
+       26:  185:    GTEST_FLAG_SET(random_seed, random_seed_);
+       26:  186:    GTEST_FLAG_SET(repeat, repeat_);
+       26:  187:    GTEST_FLAG_SET(recreate_environments_when_repeating,
+        -:  188:                   recreate_environments_when_repeating_);
+       26:  189:    GTEST_FLAG_SET(shuffle, shuffle_);
+       26:  190:    GTEST_FLAG_SET(stack_trace_depth, stack_trace_depth_);
+       26:  191:    GTEST_FLAG_SET(stream_result_to, stream_result_to_);
+call    0 returned 26
+       26:  192:    GTEST_FLAG_SET(throw_on_failure, throw_on_failure_);
+       26:  193:  }
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+call    3 returned 26
+call    4 returned 26
+call    5 returned 26
+        -:  194:
+        -:  195: private:
+        -:  196:  // Fields for saving the original values of flags.
+        -:  197:  bool also_run_disabled_tests_;
+        -:  198:  bool break_on_failure_;
+        -:  199:  bool catch_exceptions_;
+        -:  200:  std::string color_;
+        -:  201:  std::string death_test_style_;
+        -:  202:  bool death_test_use_fork_;
+        -:  203:  bool fail_fast_;
+        -:  204:  std::string filter_;
+        -:  205:  std::string internal_run_death_test_;
+        -:  206:  bool list_tests_;
+        -:  207:  std::string output_;
+        -:  208:  bool brief_;
+        -:  209:  bool print_time_;
+        -:  210:  bool print_utf8_;
+        -:  211:  int32_t random_seed_;
+        -:  212:  int32_t repeat_;
+        -:  213:  bool recreate_environments_when_repeating_;
+        -:  214:  bool shuffle_;
+        -:  215:  int32_t stack_trace_depth_;
+        -:  216:  std::string stream_result_to_;
+        -:  217:  bool throw_on_failure_;
+        -:  218:};
+        -:  219:
+        -:  220:// Converts a Unicode code point to a narrow string in UTF-8 encoding.
+        -:  221:// code_point parameter is of type UInt32 because wchar_t may not be
+        -:  222:// wide enough to contain a code point.
+        -:  223:// If the code_point is not a valid Unicode code point
+        -:  224:// (i.e. outside of Unicode range U+0 to U+10FFFF) it will be converted
+        -:  225:// to "(Invalid Unicode 0xXXXXXXXX)".
+        -:  226:GTEST_API_ std::string CodePointToUtf8(uint32_t code_point);
+        -:  227:
+        -:  228:// Converts a wide string to a narrow string in UTF-8 encoding.
+        -:  229:// The wide string is assumed to have the following encoding:
+        -:  230://   UTF-16 if sizeof(wchar_t) == 2 (on Windows, Cygwin)
+        -:  231://   UTF-32 if sizeof(wchar_t) == 4 (on Linux)
+        -:  232:// Parameter str points to a null-terminated wide string.
+        -:  233:// Parameter num_chars may additionally limit the number
+        -:  234:// of wchar_t characters processed. -1 is used when the entire string
+        -:  235:// should be processed.
+        -:  236:// If the string contains code points that are not valid Unicode code points
+        -:  237:// (i.e. outside of Unicode range U+0 to U+10FFFF) they will be output
+        -:  238:// as '(Invalid Unicode 0xXXXXXXXX)'. If the string is in UTF16 encoding
+        -:  239:// and contains invalid UTF-16 surrogate pairs, values in those pairs
+        -:  240:// will be encoded as individual Unicode characters from Basic Normal Plane.
+        -:  241:GTEST_API_ std::string WideStringToUtf8(const wchar_t* str, int num_chars);
+        -:  242:
+        -:  243:// Reads the GTEST_SHARD_STATUS_FILE environment variable, and creates the file
+        -:  244:// if the variable is present. If a file already exists at this location, this
+        -:  245:// function will write over it. If the variable is present, but the file cannot
+        -:  246:// be created, prints an error and exits.
+        -:  247:void WriteToShardStatusFileIfNeeded();
+        -:  248:
+        -:  249:// Checks whether sharding is enabled by examining the relevant
+        -:  250:// environment variable values. If the variables are present,
+        -:  251:// but inconsistent (e.g., shard_index >= total_shards), prints
+        -:  252:// an error and exits. If in_subprocess_for_death_test, sharding is
+        -:  253:// disabled because it must only be applied to the original test
+        -:  254:// process. Otherwise, we could filter out death tests we intended to execute.
+        -:  255:GTEST_API_ bool ShouldShard(const char* total_shards_str,
+        -:  256:                            const char* shard_index_str,
+        -:  257:                            bool in_subprocess_for_death_test);
+        -:  258:
+        -:  259:// Parses the environment variable var as a 32-bit integer. If it is unset,
+        -:  260:// returns default_val. If it is not a 32-bit integer, prints an error and
+        -:  261:// and aborts.
+        -:  262:GTEST_API_ int32_t Int32FromEnvOrDie(const char* env_var, int32_t default_val);
+        -:  263:
+        -:  264:// Given the total number of shards, the shard index, and the test id,
+        -:  265:// returns true if and only if the test should be run on this shard. The test id
+        -:  266:// is some arbitrary but unique non-negative integer assigned to each test
+        -:  267:// method. Assumes that 0 <= shard_index < total_shards.
+        -:  268:GTEST_API_ bool ShouldRunTestOnShard(int total_shards, int shard_index,
+        -:  269:                                     int test_id);
+        -:  270:
+        -:  271:// STL container utilities.
+        -:  272:
+        -:  273:// Returns the number of elements in the given container that satisfy
+        -:  274:// the given predicate.
+        -:  275:template <class Container, typename Predicate>
+      238:  276:inline int CountIf(const Container& c, Predicate predicate) {
+        -:  277:  // Implemented as an explicit loop since std::count_if() in libCstd on
+        -:  278:  // Solaris has a non-standard signature.
+      238:  279:  int count = 0;
+     492*:  280:  for (auto it = c.begin(); it != c.end(); ++it) {
+     254*:  281:    if (predicate(*it)) ++count;
+        -:  282:  }
+      238:  283:  return count;
+        -:  284:}
+------------------
+_ZN7testing8internal7CountIfISt6vectorIPNS_8TestInfoESaIS4_EEPFbPKS3_EEEiRKT_T0_:
+function _ZN7testing8internal7CountIfISt6vectorIPNS_8TestInfoESaIS4_EEPFbPKS3_EEEiRKT_T0_ called 45 returned 100% blocks executed 100%
+       45:  276:inline int CountIf(const Container& c, Predicate predicate) {
+        -:  277:  // Implemented as an explicit loop since std::count_if() in libCstd on
+        -:  278:  // Solaris has a non-standard signature.
+       45:  279:  int count = 0;
+      279:  280:  for (auto it = c.begin(); it != c.end(); ++it) {
+       45:  280-block  0
+call    0 returned 45
+      234:  280-block  1
+call    1 returned 234
+      279:  280-block  2
+call    2 returned 279
+call    3 returned 279
+branch  4 taken 234
+branch  5 taken 45 (fallthrough)
+      234:  281:    if (predicate(*it)) ++count;
+      234:  281-block  0
+call    0 returned 234
+call    1 returned 234
+branch  2 taken 234 (fallthrough)
+branch  3 taken 0 (throw)
+      234:  281-block  1
+branch  4 taken 130 (fallthrough)
+branch  5 taken 104
+      130:  281-block  2
+        -:  282:  }
+       45:  283:  return count;
+       45:  283-block  0
+       45:  283-block  1
+        -:  284:}
+------------------
+_ZN7testing8internal7CountIfISt6vectorINS_14TestPartResultESaIS3_EEPFbRKS3_EEEiRKT_T0_:
+function _ZN7testing8internal7CountIfISt6vectorINS_14TestPartResultESaIS3_EEPFbRKS3_EEEiRKT_T0_ called 189 returned 100% blocks executed 58%
+      189:  276:inline int CountIf(const Container& c, Predicate predicate) {
+        -:  277:  // Implemented as an explicit loop since std::count_if() in libCstd on
+        -:  278:  // Solaris has a non-standard signature.
+      189:  279:  int count = 0;
+     189*:  280:  for (auto it = c.begin(); it != c.end(); ++it) {
+      189:  280-block  0
+call    0 returned 189
+    %%%%%:  280-block  1
+call    1 never executed
+      189:  280-block  2
+call    2 returned 189
+call    3 returned 189
+branch  4 taken 0
+branch  5 taken 189 (fallthrough)
+    #####:  281:    if (predicate(*it)) ++count;
+    %%%%%:  281-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed (throw)
+    %%%%%:  281-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+    %%%%%:  281-block  2
+        -:  282:  }
+      189:  283:  return count;
+      189:  283-block  0
+      189:  283-block  1
+        -:  284:}
+------------------
+_ZN7testing8internal7CountIfISt6vectorIPNS_9TestSuiteESaIS4_EEPFbPKS3_EEEiRKT_T0_:
+function _ZN7testing8internal7CountIfISt6vectorIPNS_9TestSuiteESaIS4_EEPFbPKS3_EEEiRKT_T0_ called 4 returned 100% blocks executed 100%
+        4:  276:inline int CountIf(const Container& c, Predicate predicate) {
+        -:  277:  // Implemented as an explicit loop since std::count_if() in libCstd on
+        -:  278:  // Solaris has a non-standard signature.
+        4:  279:  int count = 0;
+       24:  280:  for (auto it = c.begin(); it != c.end(); ++it) {
+        4:  280-block  0
+call    0 returned 4
+       20:  280-block  1
+call    1 returned 20
+       24:  280-block  2
+call    2 returned 24
+call    3 returned 24
+branch  4 taken 20
+branch  5 taken 4 (fallthrough)
+       20:  281:    if (predicate(*it)) ++count;
+       20:  281-block  0
+call    0 returned 20
+call    1 returned 20
+branch  2 taken 20 (fallthrough)
+branch  3 taken 0 (throw)
+       20:  281-block  1
+branch  4 taken 10 (fallthrough)
+branch  5 taken 10
+       10:  281-block  2
+        -:  282:  }
+        4:  283:  return count;
+        4:  283-block  0
+        4:  283-block  1
+        -:  284:}
+------------------
+        -:  285:
+        -:  286:// Applies a function/functor to each element in the container.
+        -:  287:template <class Container, typename Functor>
+       8*:  288:void ForEach(const Container& c, Functor functor) {
+       8*:  289:  std::for_each(c.begin(), c.end(), functor);
+       8*:  290:}
+------------------
+_ZN7testing8internal7ForEachISt6vectorIPNS_11EnvironmentESaIS4_EEPFvS4_EEEvRKT_T0_:
+function _ZN7testing8internal7ForEachISt6vectorIPNS_11EnvironmentESaIS4_EEPFvS4_EEEvRKT_T0_ called 2 returned 100% blocks executed 100%
+        2:  288:void ForEach(const Container& c, Functor functor) {
+        2:  289:  std::for_each(c.begin(), c.end(), functor);
+        2:  289-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+        2:  290:}
+------------------
+_ZN7testing8internal7ForEachISt6vectorIPNS_17TestEventListenerESaIS4_EEPFvS4_EEEvRKT_T0_:
+function _ZN7testing8internal7ForEachISt6vectorIPNS_17TestEventListenerESaIS4_EEPFvS4_EEEvRKT_T0_ called 0 returned 0% blocks executed 0%
+    #####:  288:void ForEach(const Container& c, Functor functor) {
+    #####:  289:  std::for_each(c.begin(), c.end(), functor);
+    %%%%%:  289-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  290:}
+------------------
+_ZN7testing8internal7ForEachISt6vectorIPNS_8TestInfoESaIS4_EEPFvS4_EEEvRKT_T0_:
+function _ZN7testing8internal7ForEachISt6vectorIPNS_8TestInfoESaIS4_EEPFvS4_EEEvRKT_T0_ called 5 returned 100% blocks executed 100%
+        5:  288:void ForEach(const Container& c, Functor functor) {
+        5:  289:  std::for_each(c.begin(), c.end(), functor);
+        5:  289-block  0
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+        5:  290:}
+------------------
+_ZN7testing8internal7ForEachISt6vectorIPNS_9TestSuiteESaIS4_EEPFvS4_EEEvRKT_T0_:
+function _ZN7testing8internal7ForEachISt6vectorIPNS_9TestSuiteESaIS4_EEPFvS4_EEEvRKT_T0_ called 1 returned 100% blocks executed 100%
+        1:  288:void ForEach(const Container& c, Functor functor) {
+        1:  289:  std::for_each(c.begin(), c.end(), functor);
+        1:  289-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:  290:}
+------------------
+        -:  291:
+        -:  292:// Returns the i-th element of the vector, or default_value if i is not
+        -:  293:// in range [0, v.size()).
+        -:  294:template <typename E>
+function _ZN7testing8internal12GetElementOrIiEET_RKSt6vectorIS2_SaIS2_EEiS2_ called 31 returned 100% blocks executed 88%
+       31:  295:inline E GetElementOr(const std::vector<E>& v, int i, E default_value) {
+      62*:  296:  return (i < 0 || i >= static_cast<int>(v.size())) ? default_value
+       31:  296-block  0
+branch  0 taken 31 (fallthrough)
+branch  1 taken 0
+       31:  296-block  1
+call    2 returned 31
+branch  3 taken 0 (fallthrough)
+branch  4 taken 31
+    %%%%%:  296-block  2
+       62:  297:                                                    : v[static_cast<size_t>(i)];
+       31:  297-block  0
+call    0 returned 31
+       31:  297-block  1
+        -:  298:}
+        -:  299:
+        -:  300:// Performs an in-place shuffle of a range of the vector's elements.
+        -:  301:// 'begin' and 'end' are element indices as an STL-style range;
+        -:  302:// i.e. [begin, end) are shuffled, where 'end' == size() means to
+        -:  303:// shuffle to the end of the vector.
+        -:  304:template <typename E>
+function _ZN7testing8internal12ShuffleRangeIiEEvPNS0_6RandomEiiPSt6vectorIT_SaIS5_EE called 0 returned 0% blocks executed 0%
+    #####:  305:void ShuffleRange(internal::Random* random, int begin, int end,
+        -:  306:                  std::vector<E>* v) {
+    #####:  307:  const int size = static_cast<int>(v->size());
+    %%%%%:  307-block  0
+call    0 never executed
+    #####:  308:  GTEST_CHECK_(0 <= begin && begin <= size)
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  308-block  0
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  308-block  1
+    %%%%%:  308-block  2
+    %%%%%:  308-block  3
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  308-block  4
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  308-block  5
+call   10 never executed
+    %%%%%:  308-block  6
+call   11 never executed
+    $$$$$:  308-block  7
+call   12 never executed
+    $$$$$:  308-block  8
+call   13 never executed
+    #####:  309:      << "Invalid shuffle range start " << begin << ": must be in range [0, "
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  309-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  309-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  309-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    #####:  310:      << size << "].";
+    %%%%%:  310-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  310-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    #####:  311:  GTEST_CHECK_(begin <= end && end <= size)
+    %%%%%:  311-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  311-block  1
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:  311-block  2
+    %%%%%:  311-block  3
+    %%%%%:  311-block  4
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed
+    %%%%%:  311-block  5
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:  311-block  6
+call   10 never executed
+    %%%%%:  311-block  7
+call   11 never executed
+    $$$$$:  311-block  8
+call   12 never executed
+    #####:  312:      << "Invalid shuffle range finish " << end << ": must be in range ["
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  312-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  312-block  1
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  312-block  2
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+    #####:  313:      << begin << ", " << size << "].";
+    %%%%%:  313-block  0
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  313-block  1
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+    %%%%%:  313-block  2
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed (throw)
+    %%%%%:  313-block  3
+call    9 never executed
+branch 10 never executed (fallthrough)
+branch 11 never executed (throw)
+        -:  314:
+        -:  315:  // Fisher-Yates shuffle, from
+        -:  316:  // https://en.wikipedia.org/wiki/Fisher-Yates_shuffle
+    #####:  317:  for (int range_width = end - begin; range_width >= 2; range_width--) {
+    %%%%%:  317-block  0
+    %%%%%:  317-block  1
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  318:    const int last_in_range = begin + range_width - 1;
+    #####:  319:    const int selected =
+        -:  320:        begin +
+    #####:  321:        static_cast<int>(random->Generate(static_cast<uint32_t>(range_width)));
+    %%%%%:  321-block  0
+call    0 never executed
+    #####:  322:    std::swap((*v)[static_cast<size_t>(selected)],
+call    0 never executed
+call    1 never executed
+    #####:  323:              (*v)[static_cast<size_t>(last_in_range)]);
+call    0 never executed
+        -:  324:  }
+    #####:  325:}
+    %%%%%:  325-block  0
+        -:  326:
+        -:  327:// Performs an in-place shuffle of the vector's elements.
+        -:  328:template <typename E>
+function _ZN7testing8internal7ShuffleIiEEvPNS0_6RandomEPSt6vectorIT_SaIS5_EE called 0 returned 0% blocks executed 0%
+    #####:  329:inline void Shuffle(internal::Random* random, std::vector<E>* v) {
+    #####:  330:  ShuffleRange(random, 0, static_cast<int>(v->size()), v);
+    %%%%%:  330-block  0
+call    0 never executed
+call    1 never executed
+    #####:  331:}
+        -:  332:
+        -:  333:// A function for deleting an object.  Handy for being used as a
+        -:  334:// functor.
+        -:  335:template <typename T>
+    #####:  336:static void Delete(T* x) {
+    #####:  337:  delete x;
+    #####:  338:}
+------------------
+_ZN7testing8internalL6DeleteINS_11EnvironmentEEEvPT_:
+function _ZN7testing8internalL6DeleteINS_11EnvironmentEEEvPT_ called 0 returned 0% blocks executed 0%
+    #####:  336:static void Delete(T* x) {
+    #####:  337:  delete x;
+    %%%%%:  337-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  337-block  1
+call    2 never executed
+    #####:  338:}
+------------------
+_ZN7testing8internalL6DeleteINS_9TestSuiteEEEvPT_:
+function _ZN7testing8internalL6DeleteINS_9TestSuiteEEEvPT_ called 0 returned 0% blocks executed 0%
+    #####:  336:static void Delete(T* x) {
+    #####:  337:  delete x;
+    %%%%%:  337-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  337-block  1
+call    2 never executed
+    #####:  338:}
+------------------
+_ZN7testing8internalL6DeleteINS_17TestEventListenerEEEvPT_:
+function _ZN7testing8internalL6DeleteINS_17TestEventListenerEEEvPT_ called 0 returned 0% blocks executed 0%
+    #####:  336:static void Delete(T* x) {
+    #####:  337:  delete x;
+    %%%%%:  337-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  337-block  1
+call    2 never executed
+    #####:  338:}
+------------------
+_ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
+function _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_ called 0 returned 0% blocks executed 0%
+    #####:  336:static void Delete(T* x) {
+    #####:  337:  delete x;
+    %%%%%:  337-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  337-block  1
+call    2 never executed
+call    3 never executed
+    #####:  338:}
+------------------
+        -:  339:
+        -:  340:// A predicate that checks the key of a TestProperty against a known key.
+        -:  341://
+        -:  342:// TestPropertyKeyIs is copyable.
+        -:  343:class TestPropertyKeyIs {
+        -:  344: public:
+        -:  345:  // Constructor.
+        -:  346:  //
+        -:  347:  // TestPropertyKeyIs has NO default constructor.
+function _ZN7testing8internal17TestPropertyKeyIsC1ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:  348:  explicit TestPropertyKeyIs(const std::string& key) : key_(key) {}
+    %%%%%:  348-block  0
+call    0 never executed
+        -:  349:
+        -:  350:  // Returns true if and only if the test name of test property matches on key_.
+function _ZNK7testing8internal17TestPropertyKeyIsclERKNS_12TestPropertyE called 0 returned 0% blocks executed 0%
+    #####:  351:  bool operator()(const TestProperty& test_property) const {
+    #####:  352:    return test_property.key() == key_;
+    %%%%%:  352-block  0
+call    0 never executed
+call    1 never executed
+        -:  353:  }
+        -:  354:
+        -:  355: private:
+        -:  356:  std::string key_;
+        -:  357:};
+        -:  358:
+        -:  359:// Class UnitTestOptions.
+        -:  360://
+        -:  361:// This class contains functions for processing options the user
+        -:  362:// specifies when running the tests.  It has only static members.
+        -:  363://
+        -:  364:// In most cases, the user can specify an option using either an
+        -:  365:// environment variable or a command line flag.  E.g. you can set the
+        -:  366:// test filter using either GTEST_FILTER or --gtest_filter.  If both
+        -:  367:// the variable and the flag are present, the latter overrides the
+        -:  368:// former.
+        -:  369:class GTEST_API_ UnitTestOptions {
+        -:  370: public:
+        -:  371:  // Functions for processing the gtest_output flag.
+        -:  372:
+        -:  373:  // Returns the output format, or "" for normal printed output.
+        -:  374:  static std::string GetOutputFormat();
+        -:  375:
+        -:  376:  // Returns the absolute path of the requested output file, or the
+        -:  377:  // default (test_detail.xml in the original working directory) if
+        -:  378:  // none was explicitly specified.
+        -:  379:  static std::string GetAbsolutePathToOutputFile();
+        -:  380:
+        -:  381:  // Functions for processing the gtest_filter flag.
+        -:  382:
+        -:  383:  // Returns true if and only if the user-specified filter matches the test
+        -:  384:  // suite name and the test name.
+        -:  385:  static bool FilterMatchesTest(const std::string& test_suite_name,
+        -:  386:                                const std::string& test_name);
+        -:  387:
+        -:  388:#ifdef GTEST_OS_WINDOWS
+        -:  389:  // Function for supporting the gtest_catch_exception flag.
+        -:  390:
+        -:  391:  // Returns EXCEPTION_EXECUTE_HANDLER if given SEH exception was handled, or
+        -:  392:  // EXCEPTION_CONTINUE_SEARCH otherwise.
+        -:  393:  // This function is useful as an __except condition.
+        -:  394:  static int GTestProcessSEH(DWORD seh_code, const char* location);
+        -:  395:#endif  // GTEST_OS_WINDOWS
+        -:  396:
+        -:  397:  // Returns true if "name" matches the ':' separated list of glob-style
+        -:  398:  // filters in "filter".
+        -:  399:  static bool MatchesFilter(const std::string& name, const char* filter);
+        -:  400:};
+        -:  401:
+        -:  402:#if GTEST_HAS_FILE_SYSTEM
+        -:  403:// Returns the current application's name, removing directory path if that
+        -:  404:// is present.  Used by UnitTestOptions::GetOutputFile.
+        -:  405:GTEST_API_ FilePath GetCurrentExecutableName();
+        -:  406:#endif  // GTEST_HAS_FILE_SYSTEM
+        -:  407:
+        -:  408:// The role interface for getting the OS stack trace as a string.
+        -:  409:class OsStackTraceGetterInterface {
+        -:  410: public:
+function _ZN7testing8internal27OsStackTraceGetterInterfaceC2Ev called 1 returned 100% blocks executed 100%
+        1:  411:  OsStackTraceGetterInterface() = default;
+function _ZN7testing8internal27OsStackTraceGetterInterfaceD2Ev called 0 returned 0% blocks executed 0%
+    #####:  412:  virtual ~OsStackTraceGetterInterface() = default;
+        -:  413:
+        -:  414:  // Returns the current OS stack trace as an std::string.  Parameters:
+        -:  415:  //
+        -:  416:  //   max_depth  - the maximum number of stack frames to be included
+        -:  417:  //                in the trace.
+        -:  418:  //   skip_count - the number of top frames to be skipped; doesn't count
+        -:  419:  //                against max_depth.
+        -:  420:  virtual std::string CurrentStackTrace(int max_depth, int skip_count) = 0;
+        -:  421:
+        -:  422:  // UponLeavingGTest() should be called immediately before Google Test calls
+        -:  423:  // user code. It saves some information about the current stack that
+        -:  424:  // CurrentStackTrace() will use to find and hide Google Test stack frames.
+        -:  425:  virtual void UponLeavingGTest() = 0;
+        -:  426:
+        -:  427:  // This string is inserted in place of stack frames that are part of
+        -:  428:  // Google Test's implementation.
+        -:  429:  static const char* const kElidedFramesMarker;
+        -:  430:
+        -:  431: private:
+        -:  432:  OsStackTraceGetterInterface(const OsStackTraceGetterInterface&) = delete;
+        -:  433:  OsStackTraceGetterInterface& operator=(const OsStackTraceGetterInterface&) =
+        -:  434:      delete;
+        -:  435:};
+        -:  436:
+        -:  437:// A working implementation of the OsStackTraceGetterInterface interface.
+        -:  438:class OsStackTraceGetter : public OsStackTraceGetterInterface {
+        -:  439: public:
+function _ZN7testing8internal18OsStackTraceGetterC1Ev called 1 returned 100% blocks executed 100%
+        1:  440:  OsStackTraceGetter() = default;
+        1:  440-block  0
+call    0 returned 1
+        -:  441:
+        -:  442:  std::string CurrentStackTrace(int max_depth, int skip_count) override;
+        -:  443:  void UponLeavingGTest() override;
+        -:  444:
+        -:  445: private:
+        -:  446:#ifdef GTEST_HAS_ABSL
+        -:  447:  Mutex mutex_;  // Protects all internal state.
+        -:  448:
+        -:  449:  // We save the stack frame below the frame that calls user code.
+        -:  450:  // We do this because the address of the frame immediately below
+        -:  451:  // the user code changes between the call to UponLeavingGTest()
+        -:  452:  // and any calls to the stack trace code from within the user code.
+        -:  453:  void* caller_frame_ = nullptr;
+        -:  454:#endif  // GTEST_HAS_ABSL
+        -:  455:
+        -:  456:  OsStackTraceGetter(const OsStackTraceGetter&) = delete;
+        -:  457:  OsStackTraceGetter& operator=(const OsStackTraceGetter&) = delete;
+        -:  458:};
+        -:  459:
+        -:  460:// Information about a Google Test trace point.
+        -:  461:struct TraceInfo {
+        -:  462:  const char* file;
+        -:  463:  int line;
+        -:  464:  std::string message;
+        -:  465:};
+        -:  466:
+        -:  467:// This is the default global test part result reporter used in UnitTestImpl.
+        -:  468:// This class should only be used by UnitTestImpl.
+        -:  469:class DefaultGlobalTestPartResultReporter
+        -:  470:    : public TestPartResultReporterInterface {
+        -:  471: public:
+        -:  472:  explicit DefaultGlobalTestPartResultReporter(UnitTestImpl* unit_test);
+        -:  473:  // Implements the TestPartResultReporterInterface. Reports the test part
+        -:  474:  // result in the current test.
+        -:  475:  void ReportTestPartResult(const TestPartResult& result) override;
+        -:  476:
+        -:  477: private:
+        -:  478:  UnitTestImpl* const unit_test_;
+        -:  479:
+        -:  480:  DefaultGlobalTestPartResultReporter(
+        -:  481:      const DefaultGlobalTestPartResultReporter&) = delete;
+        -:  482:  DefaultGlobalTestPartResultReporter& operator=(
+        -:  483:      const DefaultGlobalTestPartResultReporter&) = delete;
+        -:  484:};
+        -:  485:
+        -:  486:// This is the default per thread test part result reporter used in
+        -:  487:// UnitTestImpl. This class should only be used by UnitTestImpl.
+        -:  488:class DefaultPerThreadTestPartResultReporter
+        -:  489:    : public TestPartResultReporterInterface {
+        -:  490: public:
+        -:  491:  explicit DefaultPerThreadTestPartResultReporter(UnitTestImpl* unit_test);
+        -:  492:  // Implements the TestPartResultReporterInterface. The implementation just
+        -:  493:  // delegates to the current global test part result reporter of *unit_test_.
+        -:  494:  void ReportTestPartResult(const TestPartResult& result) override;
+        -:  495:
+        -:  496: private:
+        -:  497:  UnitTestImpl* const unit_test_;
+        -:  498:
+        -:  499:  DefaultPerThreadTestPartResultReporter(
+        -:  500:      const DefaultPerThreadTestPartResultReporter&) = delete;
+        -:  501:  DefaultPerThreadTestPartResultReporter& operator=(
+        -:  502:      const DefaultPerThreadTestPartResultReporter&) = delete;
+        -:  503:};
+        -:  504:
+        -:  505:// The private implementation of the UnitTest class.  We don't protect
+        -:  506:// the methods under a mutex, as this class is not accessible by a
+        -:  507:// user and the UnitTest class that delegates work to this class does
+        -:  508:// proper locking.
+        -:  509:class GTEST_API_ UnitTestImpl {
+        -:  510: public:
+        -:  511:  explicit UnitTestImpl(UnitTest* parent);
+        -:  512:  virtual ~UnitTestImpl();
+        -:  513:
+        -:  514:  // There are two different ways to register your own TestPartResultReporter.
+        -:  515:  // You can register your own reporter to listen either only for test results
+        -:  516:  // from the current thread or for results from all threads.
+        -:  517:  // By default, each per-thread test result reporter just passes a new
+        -:  518:  // TestPartResult to the global test result reporter, which registers the
+        -:  519:  // test part result for the currently running test.
+        -:  520:
+        -:  521:  // Returns the global test part result reporter.
+        -:  522:  TestPartResultReporterInterface* GetGlobalTestPartResultReporter();
+        -:  523:
+        -:  524:  // Sets the global test part result reporter.
+        -:  525:  void SetGlobalTestPartResultReporter(
+        -:  526:      TestPartResultReporterInterface* reporter);
+        -:  527:
+        -:  528:  // Returns the test part result reporter for the current thread.
+        -:  529:  TestPartResultReporterInterface* GetTestPartResultReporterForCurrentThread();
+        -:  530:
+        -:  531:  // Sets the test part result reporter for the current thread.
+        -:  532:  void SetTestPartResultReporterForCurrentThread(
+        -:  533:      TestPartResultReporterInterface* reporter);
+        -:  534:
+        -:  535:  // Gets the number of successful test suites.
+        -:  536:  int successful_test_suite_count() const;
+        -:  537:
+        -:  538:  // Gets the number of failed test suites.
+        -:  539:  int failed_test_suite_count() const;
+        -:  540:
+        -:  541:  // Gets the number of all test suites.
+        -:  542:  int total_test_suite_count() const;
+        -:  543:
+        -:  544:  // Gets the number of all test suites that contain at least one test
+        -:  545:  // that should run.
+        -:  546:  int test_suite_to_run_count() const;
+        -:  547:
+        -:  548:  // Gets the number of successful tests.
+        -:  549:  int successful_test_count() const;
+        -:  550:
+        -:  551:  // Gets the number of skipped tests.
+        -:  552:  int skipped_test_count() const;
+        -:  553:
+        -:  554:  // Gets the number of failed tests.
+        -:  555:  int failed_test_count() const;
+        -:  556:
+        -:  557:  // Gets the number of disabled tests that will be reported in the XML report.
+        -:  558:  int reportable_disabled_test_count() const;
+        -:  559:
+        -:  560:  // Gets the number of disabled tests.
+        -:  561:  int disabled_test_count() const;
+        -:  562:
+        -:  563:  // Gets the number of tests to be printed in the XML report.
+        -:  564:  int reportable_test_count() const;
+        -:  565:
+        -:  566:  // Gets the number of all tests.
+        -:  567:  int total_test_count() const;
+        -:  568:
+        -:  569:  // Gets the number of tests that should run.
+        -:  570:  int test_to_run_count() const;
+        -:  571:
+        -:  572:  // Gets the time of the test program start, in ms from the start of the
+        -:  573:  // UNIX epoch.
+function _ZNK7testing8internal12UnitTestImpl15start_timestampEv called 0 returned 0% blocks executed 0%
+    #####:  574:  TimeInMillis start_timestamp() const { return start_timestamp_; }
+    %%%%%:  574-block  0
+        -:  575:
+        -:  576:  // Gets the elapsed time, in milliseconds.
+function _ZNK7testing8internal12UnitTestImpl12elapsed_timeEv called 1 returned 100% blocks executed 100%
+        1:  577:  TimeInMillis elapsed_time() const { return elapsed_time_; }
+        1:  577-block  0
+        -:  578:
+        -:  579:  // Returns true if and only if the unit test passed (i.e. all test suites
+        -:  580:  // passed).
+function _ZNK7testing8internal12UnitTestImpl6PassedEv called 2 returned 100% blocks executed 100%
+        2:  581:  bool Passed() const { return !Failed(); }
+        2:  581-block  0
+call    0 returned 2
+        -:  582:
+        -:  583:  // Returns true if and only if the unit test failed (i.e. some test suite
+        -:  584:  // failed or something outside of all tests failed).
+function _ZNK7testing8internal12UnitTestImpl6FailedEv called 2 returned 100% blocks executed 89%
+        2:  585:  bool Failed() const {
+       2*:  586:    return failed_test_suite_count() > 0 || ad_hoc_test_result()->Failed();
+        2:  586-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0
+        2:  586-block  1
+call    3 returned 2
+call    4 returned 2
+branch  5 taken 0 (fallthrough)
+branch  6 taken 2
+    %%%%%:  586-block  2
+        2:  586-block  3
+        2:  586-block  4
+        -:  587:  }
+        -:  588:
+        -:  589:  // Gets the i-th test suite among all the test suites. i can range from 0 to
+        -:  590:  // total_test_suite_count() - 1. If i is not in that range, returns NULL.
+function _ZNK7testing8internal12UnitTestImpl12GetTestSuiteEi called 0 returned 0% blocks executed 0%
+    #####:  591:  const TestSuite* GetTestSuite(int i) const {
+    #####:  592:    const int index = GetElementOr(test_suite_indices_, i, -1);
+    %%%%%:  592-block  0
+call    0 never executed
+    #####:  593:    return index < 0 ? nullptr : test_suites_[static_cast<size_t>(i)];
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:  593-block  0
+call    2 never executed
+    %%%%%:  593-block  1
+    %%%%%:  593-block  2
+        -:  594:  }
+        -:  595:
+        -:  596:  //  Legacy API is deprecated but still available
+        -:  597:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
+function _ZNK7testing8internal12UnitTestImpl11GetTestCaseEi called 0 returned 0% blocks executed 0%
+    #####:  598:  const TestCase* GetTestCase(int i) const { return GetTestSuite(i); }
+    %%%%%:  598-block  0
+call    0 never executed
+        -:  599:#endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
+        -:  600:
+        -:  601:  // Gets the i-th test suite among all the test suites. i can range from 0 to
+        -:  602:  // total_test_suite_count() - 1. If i is not in that range, returns NULL.
+function _ZN7testing8internal12UnitTestImpl19GetMutableSuiteCaseEi called 5 returned 100% blocks executed 86%
+        5:  603:  TestSuite* GetMutableSuiteCase(int i) {
+        5:  604:    const int index = GetElementOr(test_suite_indices_, i, -1);
+        5:  604-block  0
+call    0 returned 5
+       5*:  605:    return index < 0 ? nullptr : test_suites_[static_cast<size_t>(index)];
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        5:  605-block  0
+call    2 returned 5
+    %%%%%:  605-block  1
+        5:  605-block  2
+        -:  606:  }
+        -:  607:
+        -:  608:  // Provides access to the event listener list.
+function _ZN7testing8internal12UnitTestImpl9listenersEv called 33 returned 100% blocks executed 100%
+       33:  609:  TestEventListeners* listeners() { return &listeners_; }
+       33:  609-block  0
+        -:  610:
+        -:  611:  // Returns the TestResult for the test that's currently running, or
+        -:  612:  // the TestResult for the ad hoc test if no test is running.
+        -:  613:  TestResult* current_test_result();
+        -:  614:
+        -:  615:  // Returns the TestResult for the ad hoc test.
+function _ZNK7testing8internal12UnitTestImpl18ad_hoc_test_resultEv called 2 returned 100% blocks executed 100%
+        2:  616:  const TestResult* ad_hoc_test_result() const { return &ad_hoc_test_result_; }
+        2:  616-block  0
+        -:  617:
+        -:  618:  // Sets the OS stack trace getter.
+        -:  619:  //
+        -:  620:  // Does nothing if the input and the current OS stack trace getter
+        -:  621:  // are the same; otherwise, deletes the old getter and makes the
+        -:  622:  // input the current getter.
+        -:  623:  void set_os_stack_trace_getter(OsStackTraceGetterInterface* getter);
+        -:  624:
+        -:  625:  // Returns the current OS stack trace getter if it is not NULL;
+        -:  626:  // otherwise, creates an OsStackTraceGetter, makes it the current
+        -:  627:  // getter, and returns it.
+        -:  628:  OsStackTraceGetterInterface* os_stack_trace_getter();
+        -:  629:
+        -:  630:  // Returns the current OS stack trace as an std::string.
+        -:  631:  //
+        -:  632:  // The maximum number of stack frames to be included is specified by
+        -:  633:  // the gtest_stack_trace_depth flag.  The skip_count parameter
+        -:  634:  // specifies the number of top frames to be skipped, which doesn't
+        -:  635:  // count against the number of frames to be included.
+        -:  636:  //
+        -:  637:  // For example, if Foo() calls Bar(), which in turn calls
+        -:  638:  // CurrentOsStackTraceExceptTop(1), Foo() will be included in the
+        -:  639:  // trace but Bar() and CurrentOsStackTraceExceptTop() won't.
+        -:  640:  std::string CurrentOsStackTraceExceptTop(int skip_count)
+        -:  641:      GTEST_NO_INLINE_ GTEST_NO_TAIL_CALL_;
+        -:  642:
+        -:  643:  // Finds and returns a TestSuite with the given name.  If one doesn't
+        -:  644:  // exist, creates one and returns it.
+        -:  645:  //
+        -:  646:  // Arguments:
+        -:  647:  //
+        -:  648:  //   test_suite_name: name of the test suite
+        -:  649:  //   type_param:      the name of the test's type parameter, or NULL if
+        -:  650:  //                    this is not a typed or a type-parameterized test.
+        -:  651:  //   set_up_tc:       pointer to the function that sets up the test suite
+        -:  652:  //   tear_down_tc:    pointer to the function that tears down the test suite
+        -:  653:  TestSuite* GetTestSuite(const std::string& test_suite_name,
+        -:  654:                          const char* type_param,
+        -:  655:                          internal::SetUpTestSuiteFunc set_up_tc,
+        -:  656:                          internal::TearDownTestSuiteFunc tear_down_tc);
+        -:  657:
+        -:  658://  Legacy API is deprecated but still available
+        -:  659:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
+        -:  660:  TestCase* GetTestCase(const std::string& test_case_name,
+        -:  661:                        const char* type_param,
+        -:  662:                        internal::SetUpTestSuiteFunc set_up_tc,
+        -:  663:                        internal::TearDownTestSuiteFunc tear_down_tc) {
+        -:  664:    return GetTestSuite(test_case_name, type_param, set_up_tc, tear_down_tc);
+        -:  665:  }
+        -:  666:#endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
+        -:  667:
+        -:  668:  // Adds a TestInfo to the unit test.
+        -:  669:  //
+        -:  670:  // Arguments:
+        -:  671:  //
+        -:  672:  //   set_up_tc:    pointer to the function that sets up the test suite
+        -:  673:  //   tear_down_tc: pointer to the function that tears down the test suite
+        -:  674:  //   test_info:    the TestInfo object
+function _ZN7testing8internal12UnitTestImpl11AddTestInfoEPFvvES3_PNS_8TestInfoE called 26 returned 100% blocks executed 59%
+       26:  675:  void AddTestInfo(internal::SetUpTestSuiteFunc set_up_tc,
+        -:  676:                   internal::TearDownTestSuiteFunc tear_down_tc,
+        -:  677:                   TestInfo* test_info) {
+        -:  678:#if GTEST_HAS_FILE_SYSTEM
+        -:  679:    // In order to support thread-safe death tests, we need to
+        -:  680:    // remember the original working directory when the test program
+        -:  681:    // was first invoked.  We cannot do this in RUN_ALL_TESTS(), as
+        -:  682:    // the user may have changed the current directory before calling
+        -:  683:    // RUN_ALL_TESTS().  Therefore we capture the current directory in
+        -:  684:    // AddTestInfo(), which is called to register a TEST or TEST_F
+        -:  685:    // before main() is reached.
+       26:  686:    if (original_working_dir_.IsEmpty()) {
+       26:  686-block  0
+call    0 returned 26
+branch  1 taken 1 (fallthrough)
+branch  2 taken 25
+        1:  687:      original_working_dir_ = FilePath::GetCurrentDir();
+        1:  687-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  687-block  1
+call    3 returned 1
+call    4 returned 1
+    $$$$$:  687-block  2
+call    5 never executed
+       1*:  688:      GTEST_CHECK_(!original_working_dir_.IsEmpty())
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    %%%%%:  688-block  0
+call    4 never executed
+branch  5 never executed (fallthrough)
+branch  6 never executed (throw)
+    %%%%%:  688-block  1
+call    7 never executed
+    %%%%%:  688-block  2
+call    8 never executed
+    $$$$$:  688-block  3
+call    9 never executed
+    #####:  689:          << "Failed to get the current working directory.";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+    %%%%%:  689-block  0
+call    3 never executed
+branch  4 never executed (fallthrough)
+branch  5 never executed (throw)
+        -:  690:    }
+        -:  691:#endif  // GTEST_HAS_FILE_SYSTEM
+        -:  692:
+       26:  693:    GetTestSuite(test_info->test_suite_name_, test_info->type_param(),
+        -:  694:                 set_up_tc, tear_down_tc)
+       26:  695:        ->AddTestInfo(test_info);
+       26:  695-block  0
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+       26:  696:  }
+        -:  697:
+        -:  698:  // Returns ParameterizedTestSuiteRegistry object used to keep track of
+        -:  699:  // value-parameterized tests and instantiate and register them.
+function _ZN7testing8internal12UnitTestImpl27parameterized_test_registryEv called 0 returned 0% blocks executed 0%
+    #####:  700:  internal::ParameterizedTestSuiteRegistry& parameterized_test_registry() {
+    #####:  701:    return parameterized_test_registry_;
+    %%%%%:  701-block  0
+        -:  702:  }
+        -:  703:
+function _ZN7testing8internal12UnitTestImpl33ignored_parameterized_test_suitesB5cxx11Ev called 1 returned 100% blocks executed 100%
+        1:  704:  std::set<std::string>* ignored_parameterized_test_suites() {
+        1:  705:    return &ignored_parameterized_test_suites_;
+        1:  705-block  0
+        -:  706:  }
+        -:  707:
+        -:  708:  // Returns TypeParameterizedTestSuiteRegistry object used to keep track of
+        -:  709:  // type-parameterized tests and instantiations of them.
+        -:  710:  internal::TypeParameterizedTestSuiteRegistry&
+function _ZN7testing8internal12UnitTestImpl32type_parameterized_test_registryEv called 0 returned 0% blocks executed 0%
+    #####:  711:  type_parameterized_test_registry() {
+    #####:  712:    return type_parameterized_test_registry_;
+    %%%%%:  712-block  0
+        -:  713:  }
+        -:  714:
+        -:  715:  // Registers all parameterized tests defined using TEST_P and
+        -:  716:  // INSTANTIATE_TEST_SUITE_P, creating regular tests for each test/parameter
+        -:  717:  // combination. This method can be called more then once; it has guards
+        -:  718:  // protecting from registering the tests more then once.  If
+        -:  719:  // value-parameterized tests are disabled, RegisterParameterizedTests is
+        -:  720:  // present but does nothing.
+        -:  721:  void RegisterParameterizedTests();
+        -:  722:
+        -:  723:  // Runs all tests in this UnitTest object, prints the result, and
+        -:  724:  // returns true if all tests are successful.  If any exception is
+        -:  725:  // thrown during a test, this test is considered to be failed, but
+        -:  726:  // the rest of the tests will still be run.
+        -:  727:  bool RunAllTests();
+        -:  728:
+        -:  729:  // Clears the results of all tests, except the ad hoc tests.
+function _ZN7testing8internal12UnitTestImpl23ClearNonAdHocTestResultEv called 1 returned 100% blocks executed 100%
+        1:  730:  void ClearNonAdHocTestResult() {
+        1:  731:    ForEach(test_suites_, TestSuite::ClearTestSuiteResult);
+        1:  731-block  0
+call    0 returned 1
+        1:  732:  }
+        -:  733:
+        -:  734:  // Clears the results of ad-hoc test assertions.
+        -:  735:  void ClearAdHocTestResult() { ad_hoc_test_result_.Clear(); }
+        -:  736:
+        -:  737:  // Adds a TestProperty to the current TestResult object when invoked in a
+        -:  738:  // context of a test or a test suite, or to the global property set. If the
+        -:  739:  // result already contains a property with the same key, the value will be
+        -:  740:  // updated.
+        -:  741:  void RecordProperty(const TestProperty& test_property);
+        -:  742:
+        -:  743:  enum ReactionToSharding { HONOR_SHARDING_PROTOCOL, IGNORE_SHARDING_PROTOCOL };
+        -:  744:
+        -:  745:  // Matches the full name of each test against the user-specified
+        -:  746:  // filter to decide whether the test should run, then records the
+        -:  747:  // result in each TestSuite and TestInfo object.
+        -:  748:  // If shard_tests == HONOR_SHARDING_PROTOCOL, further filters tests
+        -:  749:  // based on sharding variables in the environment.
+        -:  750:  // Returns the number of tests that should run.
+        -:  751:  int FilterTests(ReactionToSharding shard_tests);
+        -:  752:
+        -:  753:  // Prints the names of the tests matching the user-specified filter flag.
+        -:  754:  void ListTestsMatchingFilter();
+        -:  755:
+function _ZNK7testing8internal12UnitTestImpl18current_test_suiteEv called 26 returned 100% blocks executed 100%
+       26:  756:  const TestSuite* current_test_suite() const { return current_test_suite_; }
+       26:  756-block  0
+function _ZN7testing8internal12UnitTestImpl17current_test_infoEv called 26 returned 100% blocks executed 100%
+       26:  757:  TestInfo* current_test_info() { return current_test_info_; }
+       26:  757-block  0
+function _ZNK7testing8internal12UnitTestImpl17current_test_infoEv called 0 returned 0% blocks executed 0%
+    #####:  758:  const TestInfo* current_test_info() const { return current_test_info_; }
+    %%%%%:  758-block  0
+        -:  759:
+        -:  760:  // Returns the vector of environments that need to be set-up/torn-down
+        -:  761:  // before/after the tests are run.
+function _ZN7testing8internal12UnitTestImpl12environmentsEv called 0 returned 0% blocks executed 0%
+    #####:  762:  std::vector<Environment*>& environments() { return environments_; }
+    %%%%%:  762-block  0
+        -:  763:
+        -:  764:  // Getters for the per-thread Google Test trace stack.
+function _ZN7testing8internal12UnitTestImpl17gtest_trace_stackEv called 0 returned 0% blocks executed 0%
+    #####:  765:  std::vector<TraceInfo>& gtest_trace_stack() {
+    #####:  766:    return *(gtest_trace_stack_.pointer());
+    %%%%%:  766-block  0
+call    0 never executed
+        -:  767:  }
+        -:  768:  const std::vector<TraceInfo>& gtest_trace_stack() const {
+        -:  769:    return gtest_trace_stack_.get();
+        -:  770:  }
+        -:  771:
+        -:  772:#ifdef GTEST_HAS_DEATH_TEST
+function _ZN7testing8internal12UnitTestImpl34InitDeathTestSubprocessControlInfoEv called 1 returned 100% blocks executed 100%
+        1:  773:  void InitDeathTestSubprocessControlInfo() {
+        1:  774:    internal_run_death_test_flag_.reset(ParseInternalRunDeathTestFlag());
+        1:  774-block  0
+call    0 returned 1
+call    1 returned 1
+        1:  775:  }
+        -:  776:  // Returns a pointer to the parsed --gtest_internal_run_death_test
+        -:  777:  // flag, or NULL if that flag was not specified.
+        -:  778:  // This information is useful only in a death test child process.
+        -:  779:  // Must not be called before a call to InitGoogleTest.
+function _ZNK7testing8internal12UnitTestImpl28internal_run_death_test_flagEv called 0 returned 0% blocks executed 0%
+    #####:  780:  const InternalRunDeathTestFlag* internal_run_death_test_flag() const {
+    #####:  781:    return internal_run_death_test_flag_.get();
+    %%%%%:  781-block  0
+call    0 never executed
+        -:  782:  }
+        -:  783:
+        -:  784:  // Returns a pointer to the current death test factory.
+function _ZN7testing8internal12UnitTestImpl18death_test_factoryEv called 0 returned 0% blocks executed 0%
+    #####:  785:  internal::DeathTestFactory* death_test_factory() {
+    #####:  786:    return death_test_factory_.get();
+    %%%%%:  786-block  0
+call    0 never executed
+        -:  787:  }
+        -:  788:
+        -:  789:  void SuppressTestEventsIfInSubprocess();
+        -:  790:
+        -:  791:  friend class ReplaceDeathTestFactory;
+        -:  792:#endif  // GTEST_HAS_DEATH_TEST
+        -:  793:
+        -:  794:  // Initializes the event listener performing XML output as specified by
+        -:  795:  // UnitTestOptions. Must not be called before InitGoogleTest.
+        -:  796:  void ConfigureXmlOutput();
+        -:  797:
+        -:  798:#if GTEST_CAN_STREAM_RESULTS_
+        -:  799:  // Initializes the event listener for streaming test results to a socket.
+        -:  800:  // Must not be called before InitGoogleTest.
+        -:  801:  void ConfigureStreamingOutput();
+        -:  802:#endif
+        -:  803:
+        -:  804:  // Performs initialization dependent upon flag values obtained in
+        -:  805:  // ParseGoogleTestFlagsOnly.  Is called from InitGoogleTest after the call to
+        -:  806:  // ParseGoogleTestFlagsOnly.  In case a user neglects to call InitGoogleTest
+        -:  807:  // this function is also called from RunAllTests.  Since this function can be
+        -:  808:  // called more than once, it has to be idempotent.
+        -:  809:  void PostFlagParsingInit();
+        -:  810:
+        -:  811:  // Gets the random seed used at the start of the current test iteration.
+function _ZNK7testing8internal12UnitTestImpl11random_seedEv called 0 returned 0% blocks executed 0%
+    #####:  812:  int random_seed() const { return random_seed_; }
+    %%%%%:  812-block  0
+        -:  813:
+        -:  814:  // Gets the random number generator.
+function _ZN7testing8internal12UnitTestImpl6randomEv called 0 returned 0% blocks executed 0%
+    #####:  815:  internal::Random* random() { return &random_; }
+    %%%%%:  815-block  0
+        -:  816:
+        -:  817:  // Shuffles all test suites, and the tests within each test suite,
+        -:  818:  // making sure that death tests are still run first.
+        -:  819:  void ShuffleTests();
+        -:  820:
+        -:  821:  // Restores the test suites and tests to their order before the first shuffle.
+        -:  822:  void UnshuffleTests();
+        -:  823:
+        -:  824:  // Returns the value of GTEST_FLAG(catch_exceptions) at the moment
+        -:  825:  // UnitTest::Run() starts.
+function _ZNK7testing8internal12UnitTestImpl16catch_exceptionsEv called 142 returned 100% blocks executed 100%
+      142:  826:  bool catch_exceptions() const { return catch_exceptions_; }
+      142:  826-block  0
+        -:  827:
+        -:  828: private:
+        -:  829:  struct CompareTestSuitesByPointer {
+        -:  830:    bool operator()(const TestSuite* lhs, const TestSuite* rhs) const {
+        -:  831:      return lhs->name_ < rhs->name_;
+        -:  832:    }
+        -:  833:  };
+        -:  834:
+        -:  835:  friend class ::testing::UnitTest;
+        -:  836:
+        -:  837:  // Used by UnitTest::Run() to capture the state of
+        -:  838:  // GTEST_FLAG(catch_exceptions) at the moment it starts.
+function _ZN7testing8internal12UnitTestImpl20set_catch_exceptionsEb called 1 returned 100% blocks executed 100%
+        1:  839:  void set_catch_exceptions(bool value) { catch_exceptions_ = value; }
+        -:  840:
+        -:  841:  // Sets the TestSuite object for the test that's currently running.
+function _ZN7testing8internal12UnitTestImpl22set_current_test_suiteEPNS_9TestSuiteE called 10 returned 100% blocks executed 100%
+       10:  842:  void set_current_test_suite(TestSuite* a_current_test_suite) {
+       10:  843:    current_test_suite_ = a_current_test_suite;
+       10:  844:  }
+        -:  845:
+        -:  846:  // Sets the TestInfo object for the test that's currently running.  If
+        -:  847:  // current_test_info is NULL, the assertion results will be stored in
+        -:  848:  // ad_hoc_test_result_.
+function _ZN7testing8internal12UnitTestImpl21set_current_test_infoEPNS_8TestInfoE called 52 returned 100% blocks executed 100%
+       52:  849:  void set_current_test_info(TestInfo* a_current_test_info) {
+       52:  850:    current_test_info_ = a_current_test_info;
+       52:  851:  }
+        -:  852:
+        -:  853:  // The UnitTest object that owns this implementation object.
+        -:  854:  UnitTest* const parent_;
+        -:  855:
+        -:  856:#if GTEST_HAS_FILE_SYSTEM
+        -:  857:  // The working directory when the first TEST() or TEST_F() was
+        -:  858:  // executed.
+        -:  859:  internal::FilePath original_working_dir_;
+        -:  860:#endif  // GTEST_HAS_FILE_SYSTEM
+        -:  861:
+        -:  862:  // The default test part result reporters.
+        -:  863:  DefaultGlobalTestPartResultReporter default_global_test_part_result_reporter_;
+        -:  864:  DefaultPerThreadTestPartResultReporter
+        -:  865:      default_per_thread_test_part_result_reporter_;
+        -:  866:
+        -:  867:  // Points to (but doesn't own) the global test part result reporter.
+        -:  868:  TestPartResultReporterInterface* global_test_part_result_reporter_;
+        -:  869:
+        -:  870:  // Protects read and write access to global_test_part_result_reporter_.
+        -:  871:  internal::Mutex global_test_part_result_reporter_mutex_;
+        -:  872:
+        -:  873:  // Points to (but doesn't own) the per-thread test part result reporter.
+        -:  874:  internal::ThreadLocal<TestPartResultReporterInterface*>
+        -:  875:      per_thread_test_part_result_reporter_;
+        -:  876:
+        -:  877:  // The vector of environments that need to be set-up/torn-down
+        -:  878:  // before/after the tests are run.
+        -:  879:  std::vector<Environment*> environments_;
+        -:  880:
+        -:  881:  // The vector of TestSuites in their original order.  It owns the
+        -:  882:  // elements in the vector.
+        -:  883:  std::vector<TestSuite*> test_suites_;
+        -:  884:
+        -:  885:  // The set of TestSuites by name.
+        -:  886:  std::unordered_map<std::string, TestSuite*> test_suites_by_name_;
+        -:  887:
+        -:  888:  // Provides a level of indirection for the test suite list to allow
+        -:  889:  // easy shuffling and restoring the test suite order.  The i-th
+        -:  890:  // element of this vector is the index of the i-th test suite in the
+        -:  891:  // shuffled order.
+        -:  892:  std::vector<int> test_suite_indices_;
+        -:  893:
+        -:  894:  // ParameterizedTestRegistry object used to register value-parameterized
+        -:  895:  // tests.
+        -:  896:  internal::ParameterizedTestSuiteRegistry parameterized_test_registry_;
+        -:  897:  internal::TypeParameterizedTestSuiteRegistry
+        -:  898:      type_parameterized_test_registry_;
+        -:  899:
+        -:  900:  // The set holding the name of parameterized
+        -:  901:  // test suites that may go uninstantiated.
+        -:  902:  std::set<std::string> ignored_parameterized_test_suites_;
+        -:  903:
+        -:  904:  // Indicates whether RegisterParameterizedTests() has been called already.
+        -:  905:  bool parameterized_tests_registered_;
+        -:  906:
+        -:  907:  // Index of the last death test suite registered.  Initially -1.
+        -:  908:  int last_death_test_suite_;
+        -:  909:
+        -:  910:  // This points to the TestSuite for the currently running test.  It
+        -:  911:  // changes as Google Test goes through one test suite after another.
+        -:  912:  // When no test is running, this is set to NULL and Google Test
+        -:  913:  // stores assertion results in ad_hoc_test_result_.  Initially NULL.
+        -:  914:  TestSuite* current_test_suite_;
+        -:  915:
+        -:  916:  // This points to the TestInfo for the currently running test.  It
+        -:  917:  // changes as Google Test goes through one test after another.  When
+        -:  918:  // no test is running, this is set to NULL and Google Test stores
+        -:  919:  // assertion results in ad_hoc_test_result_.  Initially NULL.
+        -:  920:  TestInfo* current_test_info_;
+        -:  921:
+        -:  922:  // Normally, a user only writes assertions inside a TEST or TEST_F,
+        -:  923:  // or inside a function called by a TEST or TEST_F.  Since Google
+        -:  924:  // Test keeps track of which test is current running, it can
+        -:  925:  // associate such an assertion with the test it belongs to.
+        -:  926:  //
+        -:  927:  // If an assertion is encountered when no TEST or TEST_F is running,
+        -:  928:  // Google Test attributes the assertion result to an imaginary "ad hoc"
+        -:  929:  // test, and records the result in ad_hoc_test_result_.
+        -:  930:  TestResult ad_hoc_test_result_;
+        -:  931:
+        -:  932:  // The list of event listeners that can be used to track events inside
+        -:  933:  // Google Test.
+        -:  934:  TestEventListeners listeners_;
+        -:  935:
+        -:  936:  // The OS stack trace getter.  Will be deleted when the UnitTest
+        -:  937:  // object is destructed.  By default, an OsStackTraceGetter is used,
+        -:  938:  // but the user can set this field to use a custom getter if that is
+        -:  939:  // desired.
+        -:  940:  OsStackTraceGetterInterface* os_stack_trace_getter_;
+        -:  941:
+        -:  942:  // True if and only if PostFlagParsingInit() has been called.
+        -:  943:  bool post_flag_parse_init_performed_;
+        -:  944:
+        -:  945:  // The random number seed used at the beginning of the test run.
+        -:  946:  int random_seed_;
+        -:  947:
+        -:  948:  // Our random number generator.
+        -:  949:  internal::Random random_;
+        -:  950:
+        -:  951:  // The time of the test program start, in ms from the start of the
+        -:  952:  // UNIX epoch.
+        -:  953:  TimeInMillis start_timestamp_;
+        -:  954:
+        -:  955:  // How long the test took to run, in milliseconds.
+        -:  956:  TimeInMillis elapsed_time_;
+        -:  957:
+        -:  958:#ifdef GTEST_HAS_DEATH_TEST
+        -:  959:  // The decomposed components of the gtest_internal_run_death_test flag,
+        -:  960:  // parsed when RUN_ALL_TESTS is called.
+        -:  961:  std::unique_ptr<InternalRunDeathTestFlag> internal_run_death_test_flag_;
+        -:  962:  std::unique_ptr<internal::DeathTestFactory> death_test_factory_;
+        -:  963:#endif  // GTEST_HAS_DEATH_TEST
+        -:  964:
+        -:  965:  // A per-thread stack of traces created by the SCOPED_TRACE() macro.
+        -:  966:  internal::ThreadLocal<std::vector<TraceInfo> > gtest_trace_stack_;
+        -:  967:
+        -:  968:  // The value of GTEST_FLAG(catch_exceptions) at the moment RunAllTests()
+        -:  969:  // starts.
+        -:  970:  bool catch_exceptions_;
+        -:  971:
+        -:  972:  UnitTestImpl(const UnitTestImpl&) = delete;
+        -:  973:  UnitTestImpl& operator=(const UnitTestImpl&) = delete;
+        -:  974:};  // class UnitTestImpl
+        -:  975:
+        -:  976:// Convenience function for accessing the global UnitTest
+        -:  977:// implementation object.
+function _ZN7testing8internal15GetUnitTestImplEv called 326 returned 100% blocks executed 100%
+      326:  978:inline UnitTestImpl* GetUnitTestImpl() {
+      326:  979:  return UnitTest::GetInstance()->impl();
+      326:  979-block  0
+call    0 returned 326
+call    1 returned 326
+        -:  980:}
+        -:  981:
+        -:  982:#ifdef GTEST_USES_SIMPLE_RE
+        -:  983:
+        -:  984:// Internal helper functions for implementing the simple regular
+        -:  985:// expression matcher.
+        -:  986:GTEST_API_ bool IsInSet(char ch, const char* str);
+        -:  987:GTEST_API_ bool IsAsciiDigit(char ch);
+        -:  988:GTEST_API_ bool IsAsciiPunct(char ch);
+        -:  989:GTEST_API_ bool IsRepeat(char ch);
+        -:  990:GTEST_API_ bool IsAsciiWhiteSpace(char ch);
+        -:  991:GTEST_API_ bool IsAsciiWordChar(char ch);
+        -:  992:GTEST_API_ bool IsValidEscape(char ch);
+        -:  993:GTEST_API_ bool AtomMatchesChar(bool escaped, char pattern, char ch);
+        -:  994:GTEST_API_ bool ValidateRegex(const char* regex);
+        -:  995:GTEST_API_ bool MatchRegexAtHead(const char* regex, const char* str);
+        -:  996:GTEST_API_ bool MatchRepetitionAndRegexAtHead(bool escaped, char ch,
+        -:  997:                                              char repeat, const char* regex,
+        -:  998:                                              const char* str);
+        -:  999:GTEST_API_ bool MatchRegexAnywhere(const char* regex, const char* str);
+        -: 1000:
+        -: 1001:#endif  // GTEST_USES_SIMPLE_RE
+        -: 1002:
+        -: 1003:// Parses the command line for Google Test flags, without initializing
+        -: 1004:// other parts of Google Test.
+        -: 1005:GTEST_API_ void ParseGoogleTestFlagsOnly(int* argc, char** argv);
+        -: 1006:GTEST_API_ void ParseGoogleTestFlagsOnly(int* argc, wchar_t** argv);
+        -: 1007:
+        -: 1008:#ifdef GTEST_HAS_DEATH_TEST
+        -: 1009:
+        -: 1010:// Returns the message describing the last system error, regardless of the
+        -: 1011:// platform.
+        -: 1012:GTEST_API_ std::string GetLastErrnoDescription();
+        -: 1013:
+        -: 1014:// Attempts to parse a string into a positive integer pointed to by the
+        -: 1015:// number parameter.  Returns true if that is possible.
+        -: 1016:// GTEST_HAS_DEATH_TEST implies that we have ::std::string, so we can use
+        -: 1017:// it here.
+        -: 1018:template <typename Integer>
+    #####: 1019:bool ParseNaturalNumber(const ::std::string& str, Integer* number) {
+        -: 1020:  // Fail fast if the given string does not begin with a digit;
+        -: 1021:  // this bypasses strtoXXX's "optional leading whitespace and plus
+        -: 1022:  // or minus sign" semantics, which are undesirable here.
+    #####: 1023:  if (str.empty() || !IsDigit(str[0])) {
+    #####: 1024:    return false;
+        -: 1025:  }
+    #####: 1026:  errno = 0;
+        -: 1027:
+        -: 1028:  char* end;
+        -: 1029:  // BiggestConvertible is the largest integer type that system-provided
+        -: 1030:  // string-to-number conversion routines can return.
+        -: 1031:  using BiggestConvertible = unsigned long long;  // NOLINT
+        -: 1032:
+    #####: 1033:  const BiggestConvertible parsed = strtoull(str.c_str(), &end, 10);  // NOLINT
+    #####: 1034:  const bool parse_success = *end == '\0' && errno == 0;
+        -: 1035:
+    #####: 1036:  GTEST_CHECK_(sizeof(Integer) <= sizeof(parsed));
+        -: 1037:
+    #####: 1038:  const Integer result = static_cast<Integer>(parsed);
+    #####: 1039:  if (parse_success && static_cast<BiggestConvertible>(result) == parsed) {
+    #####: 1040:    *number = result;
+    #####: 1041:    return true;
+        -: 1042:  }
+    #####: 1043:  return false;
+        -: 1044:}
+        -: 1045:#endif  // GTEST_HAS_DEATH_TEST
+        -: 1046:
+        -: 1047:// TestResult contains some private methods that should be hidden from
+        -: 1048:// Google Test user but are required for testing. This class allow our tests
+        -: 1049:// to access them.
+        -: 1050://
+        -: 1051:// This class is supplied only for the purpose of testing Google Test's own
+        -: 1052:// constructs. Do not use it in user tests, either directly or indirectly.
+        -: 1053:class TestResultAccessor {
+        -: 1054: public:
+        -: 1055:  static void RecordProperty(TestResult* test_result,
+        -: 1056:                             const std::string& xml_element,
+        -: 1057:                             const TestProperty& property) {
+        -: 1058:    test_result->RecordProperty(xml_element, property);
+        -: 1059:  }
+        -: 1060:
+        -: 1061:  static void ClearTestPartResults(TestResult* test_result) {
+        -: 1062:    test_result->ClearTestPartResults();
+        -: 1063:  }
+        -: 1064:
+        -: 1065:  static const std::vector<testing::TestPartResult>& test_part_results(
+        -: 1066:      const TestResult& test_result) {
+        -: 1067:    return test_result.test_part_results();
+        -: 1068:  }
+        -: 1069:};
+        -: 1070:
+        -: 1071:#if GTEST_CAN_STREAM_RESULTS_
+        -: 1072:
+        -: 1073:// Streams test results to the given port on the given host machine.
+        -: 1074:class StreamingListener : public EmptyTestEventListener {
+        -: 1075: public:
+        -: 1076:  // Abstract base class for writing strings to a socket.
+        -: 1077:  class AbstractSocketWriter {
+        -: 1078:   public:
+        -: 1079:    virtual ~AbstractSocketWriter() = default;
+        -: 1080:
+        -: 1081:    // Sends a string to the socket.
+        -: 1082:    virtual void Send(const std::string& message) = 0;
+        -: 1083:
+        -: 1084:    // Closes the socket.
+        -: 1085:    virtual void CloseConnection() {}
+        -: 1086:
+        -: 1087:    // Sends a string and a newline to the socket.
+        -: 1088:    void SendLn(const std::string& message) { Send(message + "\n"); }
+        -: 1089:  };
+        -: 1090:
+        -: 1091:  // Concrete class for actually writing strings to a socket.
+        -: 1092:  class SocketWriter : public AbstractSocketWriter {
+        -: 1093:   public:
+        -: 1094:    SocketWriter(const std::string& host, const std::string& port)
+        -: 1095:        : sockfd_(-1), host_name_(host), port_num_(port) {
+        -: 1096:      MakeConnection();
+        -: 1097:    }
+        -: 1098:
+        -: 1099:    ~SocketWriter() override {
+        -: 1100:      if (sockfd_ != -1) CloseConnection();
+        -: 1101:    }
+        -: 1102:
+        -: 1103:    // Sends a string to the socket.
+        -: 1104:    void Send(const std::string& message) override {
+        -: 1105:      GTEST_CHECK_(sockfd_ != -1)
+        -: 1106:          << "Send() can be called only when there is a connection.";
+        -: 1107:
+        -: 1108:      const auto len = static_cast<size_t>(message.length());
+        -: 1109:      if (write(sockfd_, message.c_str(), len) != static_cast<ssize_t>(len)) {
+        -: 1110:        GTEST_LOG_(WARNING) << "stream_result_to: failed to stream to "
+        -: 1111:                            << host_name_ << ":" << port_num_;
+        -: 1112:      }
+        -: 1113:    }
+        -: 1114:
+        -: 1115:   private:
+        -: 1116:    // Creates a client socket and connects to the server.
+        -: 1117:    void MakeConnection();
+        -: 1118:
+        -: 1119:    // Closes the socket.
+        -: 1120:    void CloseConnection() override {
+        -: 1121:      GTEST_CHECK_(sockfd_ != -1)
+        -: 1122:          << "CloseConnection() can be called only when there is a connection.";
+        -: 1123:
+        -: 1124:      close(sockfd_);
+        -: 1125:      sockfd_ = -1;
+        -: 1126:    }
+        -: 1127:
+        -: 1128:    int sockfd_;  // socket file descriptor
+        -: 1129:    const std::string host_name_;
+        -: 1130:    const std::string port_num_;
+        -: 1131:
+        -: 1132:    SocketWriter(const SocketWriter&) = delete;
+        -: 1133:    SocketWriter& operator=(const SocketWriter&) = delete;
+        -: 1134:  };  // class SocketWriter
+        -: 1135:
+        -: 1136:  // Escapes '=', '&', '%', and '\n' characters in str as "%xx".
+        -: 1137:  static std::string UrlEncode(const char* str);
+        -: 1138:
+        -: 1139:  StreamingListener(const std::string& host, const std::string& port)
+        -: 1140:      : socket_writer_(new SocketWriter(host, port)) {
+        -: 1141:    Start();
+        -: 1142:  }
+        -: 1143:
+        -: 1144:  explicit StreamingListener(AbstractSocketWriter* socket_writer)
+        -: 1145:      : socket_writer_(socket_writer) {
+        -: 1146:    Start();
+        -: 1147:  }
+        -: 1148:
+        -: 1149:  void OnTestProgramStart(const UnitTest& /* unit_test */) override {
+        -: 1150:    SendLn("event=TestProgramStart");
+        -: 1151:  }
+        -: 1152:
+        -: 1153:  void OnTestProgramEnd(const UnitTest& unit_test) override {
+        -: 1154:    // Note that Google Test current only report elapsed time for each
+        -: 1155:    // test iteration, not for the entire test program.
+        -: 1156:    SendLn("event=TestProgramEnd&passed=" + FormatBool(unit_test.Passed()));
+        -: 1157:
+        -: 1158:    // Notify the streaming server to stop.
+        -: 1159:    socket_writer_->CloseConnection();
+        -: 1160:  }
+        -: 1161:
+        -: 1162:  void OnTestIterationStart(const UnitTest& /* unit_test */,
+        -: 1163:                            int iteration) override {
+        -: 1164:    SendLn("event=TestIterationStart&iteration=" +
+        -: 1165:           StreamableToString(iteration));
+        -: 1166:  }
+        -: 1167:
+        -: 1168:  void OnTestIterationEnd(const UnitTest& unit_test,
+        -: 1169:                          int /* iteration */) override {
+        -: 1170:    SendLn("event=TestIterationEnd&passed=" + FormatBool(unit_test.Passed()) +
+        -: 1171:           "&elapsed_time=" + StreamableToString(unit_test.elapsed_time()) +
+        -: 1172:           "ms");
+        -: 1173:  }
+        -: 1174:
+        -: 1175:  // Note that "event=TestCaseStart" is a wire format and has to remain
+        -: 1176:  // "case" for compatibility
+        -: 1177:  void OnTestSuiteStart(const TestSuite& test_suite) override {
+        -: 1178:    SendLn(std::string("event=TestCaseStart&name=") + test_suite.name());
+        -: 1179:  }
+        -: 1180:
+        -: 1181:  // Note that "event=TestCaseEnd" is a wire format and has to remain
+        -: 1182:  // "case" for compatibility
+        -: 1183:  void OnTestSuiteEnd(const TestSuite& test_suite) override {
+        -: 1184:    SendLn("event=TestCaseEnd&passed=" + FormatBool(test_suite.Passed()) +
+        -: 1185:           "&elapsed_time=" + StreamableToString(test_suite.elapsed_time()) +
+        -: 1186:           "ms");
+        -: 1187:  }
+        -: 1188:
+        -: 1189:  void OnTestStart(const TestInfo& test_info) override {
+        -: 1190:    SendLn(std::string("event=TestStart&name=") + test_info.name());
+        -: 1191:  }
+        -: 1192:
+        -: 1193:  void OnTestEnd(const TestInfo& test_info) override {
+        -: 1194:    SendLn("event=TestEnd&passed=" +
+        -: 1195:           FormatBool((test_info.result())->Passed()) + "&elapsed_time=" +
+        -: 1196:           StreamableToString((test_info.result())->elapsed_time()) + "ms");
+        -: 1197:  }
+        -: 1198:
+        -: 1199:  void OnTestPartResult(const TestPartResult& test_part_result) override {
+        -: 1200:    const char* file_name = test_part_result.file_name();
+        -: 1201:    if (file_name == nullptr) file_name = "";
+        -: 1202:    SendLn("event=TestPartResult&file=" + UrlEncode(file_name) +
+        -: 1203:           "&line=" + StreamableToString(test_part_result.line_number()) +
+        -: 1204:           "&message=" + UrlEncode(test_part_result.message()));
+        -: 1205:  }
+        -: 1206:
+        -: 1207: private:
+        -: 1208:  // Sends the given message and a newline to the socket.
+        -: 1209:  void SendLn(const std::string& message) { socket_writer_->SendLn(message); }
+        -: 1210:
+        -: 1211:  // Called at the start of streaming to notify the receiver what
+        -: 1212:  // protocol we are using.
+        -: 1213:  void Start() { SendLn("gtest_streaming_protocol_version=1.0"); }
+        -: 1214:
+        -: 1215:  std::string FormatBool(bool value) { return value ? "1" : "0"; }
+        -: 1216:
+        -: 1217:  const std::unique_ptr<AbstractSocketWriter> socket_writer_;
+        -: 1218:
+        -: 1219:  StreamingListener(const StreamingListener&) = delete;
+        -: 1220:  StreamingListener& operator=(const StreamingListener&) = delete;
+        -: 1221:};  // class StreamingListener
+        -: 1222:
+        -: 1223:#endif  // GTEST_CAN_STREAM_RESULTS_
+        -: 1224:
+        -: 1225:}  // namespace internal
+        -: 1226:}  // namespace testing
+        -: 1227:
+        -: 1228:GTEST_DISABLE_MSC_WARNINGS_POP_()  //  4251
+        -: 1229:
+        -: 1230:#endif  // GOOGLETEST_SRC_GTEST_INTERNAL_INL_H_

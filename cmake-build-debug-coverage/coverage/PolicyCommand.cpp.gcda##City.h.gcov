@@ -1,0 +1,117 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/City.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PolicyCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PolicyCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef CITY_H
+        -:    2:#define CITY_H
+        -:    3:
+        -:    4:#include "Government.h"
+        -:    5:#include "BuildingCollection.h"
+        -:    6:#include "TaxAuthority.h"
+        -:    7:#include "FactoryFactory.h"
+        -:    8:#include "LandmarkFactory.h"
+        -:    9:#include "ResidentialFactory.h"
+        -:   10:#include "CommercialFactory.h"
+        -:   11:#include "ServiceFactory.h"
+        -:   12:#include <memory>
+        -:   13:
+        -:   14:/**
+        -:   15: * @brief Represents the entire city, managing citizens, buildings, and services.
+        -:   16: *
+        -:   17: * Subject in the Observer pattern, notifying its observers (Government) about changes in the state.
+        -:   18: */
+        -:   19:class City {
+        -:   20:private:
+        -:   21:    Government& government;  ///< Pointer to the government managing the city.
+        -:   22:    //BuildingCollection* buildings;  ///< Collection of buildings in the city.
+        -:   23:
+        -:   24:    std::shared_ptr<TaxAuthority> taxAuthority;
+        -:   25:
+        -:   26:    FactoryFactory* factory_factory;
+        -:   27:    LandmarkFactory* landmark_factory;
+        -:   28:    ResidentialFactory* residential_factory;
+        -:   29:    CommercialFactory* commercial_factory;
+        -:   30:    ServiceFactory* service_factory;
+        -:   31:    int happiness;
+        -:   32:
+        -:   33:public:
+        -:   34:    /**
+        -:   35:     * @brief Constructs a new City object.
+        -:   36:     */
+        -:   37:    City(Government& gov,std::shared_ptr<TaxAuthority> taxAuth): government(gov), taxAuthority(taxAuth){
+        -:   38:        this->factory_factory = new FactoryFactory(taxAuth);
+        -:   39:        this->landmark_factory = new LandmarkFactory(taxAuth);
+        -:   40:        this->residential_factory = new ResidentialFactory(taxAuth);
+        -:   41:        this->commercial_factory = new CommercialFactory(taxAuth);
+        -:   42:        this->service_factory = new ServiceFactory(taxAuth);
+        -:   43:
+        -:   44:    };
+        -:   45:    
+        -:   46:    /**
+        -:   47:     * @brief Destroys the City object.
+        -:   48:     */
+        -:   49:     ~City(){
+        -:   50:        delete factory_factory;
+        -:   51:        delete landmark_factory;
+        -:   52:        delete residential_factory;
+        -:   53:        delete commercial_factory;
+        -:   54:        delete service_factory;
+        -:   55:    }
+        -:   56:
+        -:   57:    /**
+        -:   58:     * @brief Adds an observer (Government) to the city.
+        -:   59:     * @param observer The observer to be added.
+        -:   60:     */
+        -:   61:    void addObserver(Government* observer);
+        -:   62:
+        -:   63:    /**
+        -:   64:     * @brief Removes an observer (Government) from the city.
+        -:   65:     * @param observer The observer to be removed.
+        -:   66:     */
+        -:   67:    void removeObserver(Government* observer);
+        -:   68:
+        -:   69:    /**
+        -:   70:     * @brief Notifies all observers of a change in the city's state.
+        -:   71:     *
+        -:   72:     * Observer pattern -> updating observers when the city's state changes.
+        -:   73:     */
+        -:   74:    void notifyObservers();
+        -:   75:
+        -:   76:    /**
+        -:   77:     * @brief Adds a new building to the city's collection of buildings.
+        -:   78:     */
+        -:   79:    void addBuilding(Building& building){}
+        -:   80:
+        -:   81:    /**
+        -:   82:     * @brief Updates citizen happiness based on city conditions.
+        -:   83:     */
+        -:   84:    void citizenHappiness();
+        -:   85:
+        -:   86:    /**
+        -:   87:     * @brief Sets the state of citizen happiness in the city.
+        -:   88:     * @param citizenHappiness The new citizen happiness level.
+        -:   89:     */
+        -:   90:    void setState(int citizenHappiness);
+        -:   91:
+        -:   92:    /**
+        -:   93:     * @brief Gets the current state of citizen happiness in the city.
+        -:   94:     * @return The current citizen happiness level.
+        -:   95:     */
+        -:   96:    int getState() const;
+        -:   97:
+        -:   98:    void removeLastBuilding(){}
+        -:   99:
+function _ZN4City19getCitizenHappinessEv called 0 returned 0% blocks executed 0%
+    #####:  100:    int getCitizenHappiness() {
+    #####:  101:        return happiness;
+    %%%%%:  101-block  0
+        -:  102:    }
+        -:  103:
+function _ZN4City19setCitizenHappinessEi called 0 returned 0% blocks executed 0%
+    #####:  104:    void setCitizenHappiness(int happiness) {
+    #####:  105:        this->happiness = happiness;
+    #####:  106:    }
+        -:  107:
+        -:  108:};
+        -:  109:
+        -:  110:#endif // CITY_H

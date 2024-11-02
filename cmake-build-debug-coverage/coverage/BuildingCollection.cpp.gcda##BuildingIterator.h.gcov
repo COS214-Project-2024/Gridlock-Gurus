@@ -1,0 +1,65 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/BuildingIterator.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildingCollection.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildingCollection.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef BUILDINGITERATOR_H
+        -:    2:#define BUILDINGITERATOR_H
+        -:    3:#include <vector>
+        -:    4:#include <memory>
+        -:    5:
+        -:    6:class Building;
+        -:    7:
+        -:    8:/**
+        -:    9:* @class BuildingIterator
+        -:   10:* @brief Provides functionality to iterate through BuildingCollection.
+        -:   11:*/
+        -:   12:class BuildingIterator {
+        -:   13:    //friend class Building;
+        -:   14:
+        -:   15:public:
+        -:   16:
+        -:   17:    /**
+        -:   18:     * @brief Constructs an iterator for the given collection of buildings.
+        -:   19:     * @param buildings Reference to the vector of buildings.
+        -:   20:     * @param pos Initial position of the iterator.
+        -:   21:     */ 
+function _ZN16BuildingIteratorC1ERSt6vectorIP8BuildingSaIS2_EEy called 8 returned 100% blocks executed 100%
+        8:   22:    BuildingIterator(std::vector<Building*>& buildings, size_t pos) : buildings(buildings), position(pos){}
+        -:   23:    
+        -:   24:    /**
+        -:   25:     * @brief Destroys the BuildingIterator object.
+        -:   26:     */
+        -:   27:    ~BuildingIterator() = default;
+        -:   28:
+        -:   29:    /**
+        -:   30:     * @brief Dereference operator to access the current building.
+        -:   31:     * @return Shared pointer to the current building.
+        -:   32:     */
+        -:   33:    Building* operator*() const ;
+        -:   34:
+        -:   35:    /**
+        -:   36:     * @brief Prefix increment operator to advance to the next building.
+        -:   37:     * @return Reference to the incremented iterator.
+        -:   38:     */
+        -:   39:    BuildingIterator& operator++();
+        -:   40:
+        -:   41:    /**
+        -:   42:     * @brief Inequality operator to compare two iterators.
+        -:   43:     * @param other The iterator to compare with.
+        -:   44:     * @return True if iterators are not equal, false otherwise.
+        -:   45:     */
+        -:   46:    bool operator!=(const BuildingIterator& other) const;
+        -:   47:
+        -:   48:    /**
+        -:   49:     * @brief Equality operator to compare two iterators.
+        -:   50:     * @param other The iterator to compare with.
+        -:   51:     * @return True if iterators are equal, false otherwise.
+        -:   52:     */
+        -:   53:    bool operator==(const BuildingIterator& other) const;
+        -:   54:
+        -:   55:private:
+        -:   56:    std::vector<Building*>& buildings;    ///< Reference to the vector of buildings.
+        -:   57:    size_t position;                        ///< Current position of the iterator.
+        -:   58:};
+        -:   59:
+        -:   60:#endif // BUILDINGITERATOR_H

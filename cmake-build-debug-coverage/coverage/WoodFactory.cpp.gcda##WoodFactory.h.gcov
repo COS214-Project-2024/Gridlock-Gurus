@@ -1,0 +1,70 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/WoodFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\WoodFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\WoodFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef WOODFACTORY_H
+        -:    2:#define WOODFACTORY_H
+        -:    3:
+        -:    4:#include "BuildingType.h"
+        -:    5:#include "Building.h"
+        -:    6:#include "Factory.h"
+        -:    7:
+        -:    8:#include <vector>
+        -:    9:#include <string>
+        -:   10:
+        -:   11:/**
+        -:   12: * @brief Represents a wood processing factory.
+        -:   13: *
+        -:   14: * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that processes wood.
+        -:   15: */
+        -:   16:class WoodFactory : public Factory {
+        -:   17:public:
+        -:   18:    /**
+        -:   19:     * @brief Constructs a new WoodFactory object.
+        -:   20:     * @param cost The construction cost of the factory.
+        -:   21:     * @param location The location of the factory.
+        -:   22:     * @param resources Pointer to the resources the factory consumes.
+        -:   23:     * @param size The size of the factory.
+        -:   24:     * @param owner Pointer to the factory's owner.
+        -:   25:     * @param taxAuthority Pointer to the tax authority associated with the factory.
+        -:   26:     */
+        -:   27:    WoodFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int productionRate, int max);
+        -:   28:
+        -:   29:    /**
+        -:   30:     * @brief Destroys the WoodFactory object.
+        -:   31:     */
+        2:   32:     ~WoodFactory() override = default;
+------------------
+_ZN11WoodFactoryD0Ev:
+function _ZN11WoodFactoryD0Ev called 1 returned 100% blocks executed 100%
+        1:   32:     ~WoodFactory() override = default;
+        1:   32-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN11WoodFactoryD1Ev:
+function _ZN11WoodFactoryD1Ev called 1 returned 100% blocks executed 100%
+        1:   32:     ~WoodFactory() override = default;
+        1:   32-block  0
+call    0 returned 1
+------------------
+        -:   33:
+        -:   34:    /**
+        -:   35:     * @brief Gets details about the wood factory.
+        -:   36:     * @return A string containing details about the wood factory.
+        -:   37:     */
+        -:   38:    std::string getDetails() const override;
+        -:   39:
+        -:   40:    /**
+        -:   41:     * @brief Produces wood in the factory.
+        -:   42:     */
+        -:   43:    int produceResource() override;
+        -:   44:
+        -:   45:    /**
+        -:   46:     * @brief Pays an employee working at the wood factory.
+        -:   47:     * @param employee Pointer to the employee.
+        -:   48:     */
+        -:   49:     int pay() override;
+        -:   50:};
+        -:   51:
+        -:   52:#endif // WOODFACTORY_H

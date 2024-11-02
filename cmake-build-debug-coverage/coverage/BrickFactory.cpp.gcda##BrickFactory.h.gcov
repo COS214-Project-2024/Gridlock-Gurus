@@ -1,0 +1,75 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/BrickFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BrickFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BrickFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef BRICKFACTORY_H
+        -:    2:#define BRICKFACTORY_H
+        -:    3:
+        -:    4:#include "Factory.h"
+        -:    5:#include "Building.h"
+        -:    6:#include "BuildingType.h"
+        -:    7:
+        -:    8:#include <vector>
+        -:    9:#include <string>
+        -:   10:
+        -:   11:/**
+        -:   12: * @brief Represents a brick manufacturing factory.
+        -:   13: *
+        -:   14: * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that produces bricks.
+        -:   15: */
+        -:   16:class BrickFactory : public Factory {
+        -:   17:public:
+        -:   18:    /**
+        -:   19:     * @brief Constructs a new BrickFactory object.
+        -:   20:     * @param cost The construction cost of the factory.
+        -:   21:     * @param location The location of the factory.
+        -:   22:     * @param resources Pointer to the resources the factory consumes.
+        -:   23:     * @param size The size of the factory.
+        -:   24:     * @param owner Pointer to the factory's owner.
+        -:   25:     * @param taxAuthority Pointer to the tax authority associated with the factory.
+        -:   26:     */
+        -:   27:    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner ,BuildingType name, int productionRate, int max);
+        -:   28:
+        -:   29:    /**
+        -:   30:     * @brief Destroys the BrickFactory object.
+        -:   31:     */
+       16:   32:     ~BrickFactory() override = default;
+------------------
+_ZN12BrickFactoryD0Ev:
+function _ZN12BrickFactoryD0Ev called 8 returned 100% blocks executed 100%
+        8:   32:     ~BrickFactory() override = default;
+        8:   32-block  0
+call    0 returned 8
+call    1 returned 8
+------------------
+_ZN12BrickFactoryD1Ev:
+function _ZN12BrickFactoryD1Ev called 8 returned 100% blocks executed 100%
+        8:   32:     ~BrickFactory() override = default;
+        8:   32-block  0
+call    0 returned 8
+------------------
+        -:   33:
+        -:   34:    /**
+        -:   35:     * @brief Gets details about the brick factory.
+        -:   36:     * @return A string containing details about the brick factory.
+        -:   37:     */
+        -:   38:    //std::string getDetails() const override;
+        -:   39:
+        -:   40:    /**
+        -:   41:     * @brief Pays taxes for the brick factory.
+        -:   42:     */
+        -:   43:    // void payTax(int amount) override;
+        -:   44:
+        -:   45:    /**
+        -:   46:     * @brief Produces bricks in the factory.
+        -:   47:     */
+        -:   48:    int produceResource() override;
+        -:   49:
+        -:   50:    /**
+        -:   51:     * @brief Pays an employee working at the brick factory.
+        -:   52:     * @param employee Pointer to the employee.
+        -:   53:     */
+        -:   54:    int pay() override;
+        -:   55:};
+        -:   56:
+        -:   57:#endif // BRICKFACTORY_H

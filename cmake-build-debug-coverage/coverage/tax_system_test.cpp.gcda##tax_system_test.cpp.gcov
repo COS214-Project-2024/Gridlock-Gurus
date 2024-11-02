@@ -1,0 +1,658 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/tests/tax_system_test.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\tax_system_test.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\tests\tax_system_test.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include <gtest/gtest.h>
+        -:    2:#include "../headers/TaxAuthority.h"
+        -:    3:#include "../headers/Building.h"
+        -:    4:#include "../headers/Citizen.h"
+        -:    5:#include "../headers/BuildingCollection.h"
+        -:    6:#include "../headers/FlatTaxStrategy.h"
+        -:    7:#include "../headers/ProgressiveTaxStrategy.h"
+        -:    8:#include "../headers/FactoryFactory.h"
+        -:    9:#include "../headers/CitizenFactory.h"
+        -:   10:#include "../headers/CitizenType.h"
+        -:   11:#include "../headers/BrickFactory.h"
+        -:   12:#include <memory>
+        -:   13:
+        -:   14:class tax_system_test : public ::testing::Test {
+        -:   15:    protected:
+        -:   16:        std::shared_ptr<TaxAuthority> taxAuth;
+        -:   17:        CitizenFactory* citizen_factory;
+        -:   18:        FactoryFactory* factory_factory;
+        -:   19:        Citizen* citizen1;
+        -:   20:        Citizen* citizen2;
+        -:   21:
+        -:   22:        Building* factory1;
+        -:   23:        Building* factory2;
+        -:   24:
+function _ZN15tax_system_test5SetUpEv called 1 returned 100% blocks executed 68%
+        1:   25:        void SetUp() override {
+        1:   26:            taxAuth = std::make_shared<TaxAuthority>();
+        1:   26-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   26-block  1
+call    3 returned 1
+call    4 returned 1
+    $$$$$:   26-block  2
+call    5 never executed
+        1:   27:            citizen_factory = new CitizenFactory(taxAuth);
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   27-block  0
+call    5 returned 1
+    $$$$$:   27-block  1
+call    6 never executed
+    $$$$$:   27-block  2
+    $$$$$:   27-block  3
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    $$$$$:   27-block  4
+call    9 never executed
+        1:   28:            factory_factory = new FactoryFactory(taxAuth);
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+        1:   29:        }
+        -:   30:
+function _ZN15tax_system_test8TearDownEv called 1 returned 100% blocks executed 100%
+        1:   31:        void TearDown() override {
+        1:   32:            delete factory_factory;
+        1:   32-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   32-block  1
+call    2 returned 1
+        1:   33:            delete citizen_factory;
+        1:   33-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   33-block  1
+call    2 returned 1
+call    3 returned 1
+        1:   34:            delete citizen1;
+        1:   34-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   34-block  1
+call    2 returned 1
+call    3 returned 1
+        1:   35:            delete citizen2;
+        1:   35-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   35-block  1
+call    2 returned 1
+call    3 returned 1
+        1:   36:        }
+        -:   37:};
+        -:   38:
+        -:   39:// Test Constructor
+        4:   40:TEST_F(tax_system_test, ConstructorSetCorrectValues) {
+       1*:   41:    EXPECT_EQ(taxAuth->getCollectedTax(),0);
+       1*:   42:    EXPECT_EQ(taxAuth->getSize(), 0);
+       1*:   43:    EXPECT_EQ(taxAuth->getAmountOfCitizens(), 0);
+        1:   44:    taxAuth->sendTax(3);
+       1*:   45:    EXPECT_EQ(taxAuth->getCollectedTax(),3);
+        1:   46:    taxAuth->sendTax(5);
+       1*:   47:    EXPECT_EQ(taxAuth->getCollectedTax(),8);
+        -:   48:    //EXPECT_EQ(taxAuth->calculateCitizenTax(100),30);
+        -:   49:    //EXPECT_EQ(taxAuth->calculateBuildingTax(100),30);
+        -:   50:   
+        -:   51:    //EXPECT_EQ(taxAuth->calculateCitizenTax(100),60);
+        -:   52:    //EXPECT_EQ(taxAuth->calculateBuildingTax(100),60);
+        -:   53:
+        1:   54:    citizen2 = citizen_factory->createCitizen(CitizenType::Citizen,100,1000);
+        1:   55:    citizen1 = citizen_factory->createCitizen(CitizenType::Worker,100,1000);
+        -:   56:
+       1*:   57:    EXPECT_EQ(taxAuth->getAmountOfCitizens(), 2);
+        -:   58:
+        1:   59:    factory1 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
+        1:   60:    factory2 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
+       1*:   61:    EXPECT_EQ(taxAuth->getSize(), 2);
+       1*:   62:    BrickFactory* fac1 = dynamic_cast<BrickFactory*>(factory1);
+        -:   63:    //BrickFactory* fac2 = dynamic_cast<BrickFactory*>(factory2);
+        -:   64:
+        -:   65:
+        1:   66:    fac1->employ(*citizen1);
+        1:   67:    fac1->employ(*citizen2);
+        1:   68:    taxAuth->collectTaxes();
+        -:   69:    // 30 + 30 + 30 = 90 (0wns buildings)
+       1*:   70:    EXPECT_EQ(citizen1->getFunds(),910);
+       1*:   71:    EXPECT_EQ(citizen2->getFunds(),970);
+        1:   72:    taxAuth->setStrategy(std::make_unique<ProgressiveTaxStrategy>());
+        1:   73:    taxAuth->collectTaxes();
+        -:   74:    //  300 + 300 + 546 = 90 (0wns buildings)
+       1*:   75:    EXPECT_EQ(citizen1->getFunds(),124);
+       1*:   76:    EXPECT_EQ(citizen2->getFunds(),388);
+        -:   77:
+        -:   78:
+        1:   79:}
+------------------
+_ZN48tax_system_test_ConstructorSetCorrectValues_TestC1Ev:
+function _ZN48tax_system_test_ConstructorSetCorrectValues_TestC1Ev called 1 returned 100% blocks executed 100%
+        1:   40:TEST_F(tax_system_test, ConstructorSetCorrectValues) {
+        1:   40-block  0
+call    0 returned 1
+------------------
+_ZN48tax_system_test_ConstructorSetCorrectValues_TestD0Ev:
+function _ZN48tax_system_test_ConstructorSetCorrectValues_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   40:TEST_F(tax_system_test, ConstructorSetCorrectValues) {
+        1:   40-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN48tax_system_test_ConstructorSetCorrectValues_TestD1Ev:
+function _ZN48tax_system_test_ConstructorSetCorrectValues_TestD1Ev called 1 returned 100% blocks executed 100%
+        1:   40:TEST_F(tax_system_test, ConstructorSetCorrectValues) {
+        1:   40-block  0
+call    0 returned 1
+------------------
+_ZN48tax_system_test_ConstructorSetCorrectValues_Test8TestBodyEv:
+function _ZN48tax_system_test_ConstructorSetCorrectValues_Test8TestBodyEv called 1 returned 100% blocks executed 30%
+        1:   40:TEST_F(tax_system_test, ConstructorSetCorrectValues) {
+       1*:   41:    EXPECT_EQ(taxAuth->getCollectedTax(),0);
+        1:   41-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   41-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   41-block  2
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   41-block  3
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   41-block  4
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   41-block  5
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   41-block  6
+call   20 never executed
+call   21 never executed
+        1:   41-block  7
+call   22 returned 1
+    $$$$$:   41-block  8
+    $$$$$:   41-block  9
+    $$$$$:   41-block 10
+call   23 never executed
+    $$$$$:   41-block 11
+    $$$$$:   41-block 12
+call   24 never executed
+    $$$$$:   41-block 13
+    $$$$$:   41-block 14
+call   25 never executed
+       1*:   42:    EXPECT_EQ(taxAuth->getSize(), 0);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   42-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   42-block  1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   42-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   42-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   42-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   42-block  5
+call   20 never executed
+call   21 never executed
+        1:   42-block  6
+call   22 returned 1
+    $$$$$:   42-block  7
+    $$$$$:   42-block  8
+    $$$$$:   42-block  9
+call   23 never executed
+    $$$$$:   42-block 10
+    $$$$$:   42-block 11
+call   24 never executed
+    $$$$$:   42-block 12
+    $$$$$:   42-block 13
+call   25 never executed
+       1*:   43:    EXPECT_EQ(taxAuth->getAmountOfCitizens(), 0);
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   43-block  0
+call    5 returned 1
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   43-block  1
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    %%%%%:   43-block  2
+call   11 never executed
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:   43-block  3
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:   43-block  4
+call   18 never executed
+call   19 never executed
+        1:   43-block  5
+call   20 returned 1
+    $$$$$:   43-block  6
+    $$$$$:   43-block  7
+    $$$$$:   43-block  8
+call   21 never executed
+    $$$$$:   43-block  9
+    $$$$$:   43-block 10
+call   22 never executed
+    $$$$$:   43-block 11
+    $$$$$:   43-block 12
+call   23 never executed
+        1:   44:    taxAuth->sendTax(3);
+call    0 returned 1
+call    1 returned 1
+       1*:   45:    EXPECT_EQ(taxAuth->getCollectedTax(),3);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   45-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   45-block  1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   45-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   45-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   45-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   45-block  5
+call   20 never executed
+call   21 never executed
+        1:   45-block  6
+call   22 returned 1
+    $$$$$:   45-block  7
+    $$$$$:   45-block  8
+    $$$$$:   45-block  9
+call   23 never executed
+    $$$$$:   45-block 10
+    $$$$$:   45-block 11
+call   24 never executed
+    $$$$$:   45-block 12
+    $$$$$:   45-block 13
+call   25 never executed
+        1:   46:    taxAuth->sendTax(5);
+call    0 returned 1
+call    1 returned 1
+       1*:   47:    EXPECT_EQ(taxAuth->getCollectedTax(),8);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   47-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   47-block  1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   47-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   47-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   47-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   47-block  5
+call   20 never executed
+call   21 never executed
+        1:   47-block  6
+call   22 returned 1
+    $$$$$:   47-block  7
+    $$$$$:   47-block  8
+    $$$$$:   47-block  9
+call   23 never executed
+    $$$$$:   47-block 10
+    $$$$$:   47-block 11
+call   24 never executed
+    $$$$$:   47-block 12
+    $$$$$:   47-block 13
+call   25 never executed
+        -:   48:    //EXPECT_EQ(taxAuth->calculateCitizenTax(100),30);
+        -:   49:    //EXPECT_EQ(taxAuth->calculateBuildingTax(100),30);
+        -:   50:   
+        -:   51:    //EXPECT_EQ(taxAuth->calculateCitizenTax(100),60);
+        -:   52:    //EXPECT_EQ(taxAuth->calculateBuildingTax(100),60);
+        -:   53:
+        1:   54:    citizen2 = citizen_factory->createCitizen(CitizenType::Citizen,100,1000);
+call    0 returned 1
+        1:   55:    citizen1 = citizen_factory->createCitizen(CitizenType::Worker,100,1000);
+call    0 returned 1
+        -:   56:
+       1*:   57:    EXPECT_EQ(taxAuth->getAmountOfCitizens(), 2);
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:   57-block  0
+call    5 returned 1
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    %%%%%:   57-block  1
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    %%%%%:   57-block  2
+call   11 never executed
+call   12 never executed
+branch 13 never executed (fallthrough)
+branch 14 never executed (throw)
+    %%%%%:   57-block  3
+call   15 never executed
+branch 16 never executed (fallthrough)
+branch 17 never executed (throw)
+    %%%%%:   57-block  4
+call   18 never executed
+call   19 never executed
+        1:   57-block  5
+call   20 returned 1
+    $$$$$:   57-block  6
+    $$$$$:   57-block  7
+    $$$$$:   57-block  8
+call   21 never executed
+    $$$$$:   57-block  9
+    $$$$$:   57-block 10
+call   22 never executed
+    $$$$$:   57-block 11
+    $$$$$:   57-block 12
+call   23 never executed
+        -:   58:
+        1:   59:    factory1 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
+call    0 returned 1
+        1:   60:    factory2 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
+call    0 returned 1
+       1*:   61:    EXPECT_EQ(taxAuth->getSize(), 2);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   61-block  0
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:   61-block  1
+call    7 returned 1
+branch  8 taken 0 (fallthrough)
+branch  9 taken 1
+    %%%%%:   61-block  2
+call   10 never executed
+branch 11 never executed (fallthrough)
+branch 12 never executed (throw)
+    %%%%%:   61-block  3
+call   13 never executed
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   61-block  4
+call   17 never executed
+branch 18 never executed (fallthrough)
+branch 19 never executed (throw)
+    %%%%%:   61-block  5
+call   20 never executed
+call   21 never executed
+        1:   61-block  6
+call   22 returned 1
+    $$$$$:   61-block  7
+    $$$$$:   61-block  8
+    $$$$$:   61-block  9
+call   23 never executed
+    $$$$$:   61-block 10
+    $$$$$:   61-block 11
+call   24 never executed
+    $$$$$:   61-block 12
+    $$$$$:   61-block 13
+call   25 never executed
+       1*:   62:    BrickFactory* fac1 = dynamic_cast<BrickFactory*>(factory1);
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   62-block  0
+    %%%%%:   62-block  1
+        -:   63:    //BrickFactory* fac2 = dynamic_cast<BrickFactory*>(factory2);
+        -:   64:
+        -:   65:
+        1:   66:    fac1->employ(*citizen1);
+        1:   66-block  0
+call    0 returned 1
+        1:   67:    fac1->employ(*citizen2);
+call    0 returned 1
+        1:   68:    taxAuth->collectTaxes();
+call    0 returned 1
+call    1 returned 1
+        -:   69:    // 30 + 30 + 30 = 90 (0wns buildings)
+       1*:   70:    EXPECT_EQ(citizen1->getFunds(),910);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   70-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   70-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   70-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   70-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   70-block  4
+call   17 never executed
+call   18 never executed
+        1:   70-block  5
+call   19 returned 1
+    $$$$$:   70-block  6
+    $$$$$:   70-block  7
+    $$$$$:   70-block  8
+call   20 never executed
+    $$$$$:   70-block  9
+    $$$$$:   70-block 10
+call   21 never executed
+    $$$$$:   70-block 11
+    $$$$$:   70-block 12
+call   22 never executed
+       1*:   71:    EXPECT_EQ(citizen2->getFunds(),970);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   71-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   71-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   71-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   71-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   71-block  4
+call   17 never executed
+call   18 never executed
+        1:   71-block  5
+call   19 returned 1
+    $$$$$:   71-block  6
+    $$$$$:   71-block  7
+    $$$$$:   71-block  8
+call   20 never executed
+    $$$$$:   71-block  9
+    $$$$$:   71-block 10
+call   21 never executed
+    $$$$$:   71-block 11
+    $$$$$:   71-block 12
+call   22 never executed
+        1:   72:    taxAuth->setStrategy(std::make_unique<ProgressiveTaxStrategy>());
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   72-block  0
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+        1:   72-block  1
+call    8 returned 1
+call    9 returned 1
+    $$$$$:   72-block  2
+call   10 never executed
+    $$$$$:   72-block  3
+call   11 never executed
+    $$$$$:   72-block  4
+    $$$$$:   72-block  5
+call   12 never executed
+        1:   73:    taxAuth->collectTaxes();
+call    0 returned 1
+call    1 returned 1
+        -:   74:    //  300 + 300 + 546 = 90 (0wns buildings)
+       1*:   75:    EXPECT_EQ(citizen1->getFunds(),124);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   75-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   75-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   75-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   75-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   75-block  4
+call   17 never executed
+call   18 never executed
+        1:   75-block  5
+call   19 returned 1
+    $$$$$:   75-block  6
+    $$$$$:   75-block  7
+    $$$$$:   75-block  8
+call   20 never executed
+    $$$$$:   75-block  9
+    $$$$$:   75-block 10
+call   21 never executed
+    $$$$$:   75-block 11
+    $$$$$:   75-block 12
+call   22 never executed
+       1*:   76:    EXPECT_EQ(citizen2->getFunds(),388);
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   76-block  0
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   76-block  1
+call    7 never executed
+branch  8 never executed (fallthrough)
+branch  9 never executed (throw)
+    %%%%%:   76-block  2
+call   10 never executed
+call   11 never executed
+branch 12 never executed (fallthrough)
+branch 13 never executed (throw)
+    %%%%%:   76-block  3
+call   14 never executed
+branch 15 never executed (fallthrough)
+branch 16 never executed (throw)
+    %%%%%:   76-block  4
+call   17 never executed
+call   18 never executed
+        1:   76-block  5
+call   19 returned 1
+    $$$$$:   76-block  6
+    $$$$$:   76-block  7
+    $$$$$:   76-block  8
+call   20 never executed
+    $$$$$:   76-block  9
+    $$$$$:   76-block 10
+call   21 never executed
+    $$$$$:   76-block 11
+    $$$$$:   76-block 12
+call   22 never executed
+        -:   77:
+        -:   78:
+        1:   79:}
+------------------
+        -:   80:
+        -:   81:

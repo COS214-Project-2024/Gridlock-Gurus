@@ -1,0 +1,63 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/PolicyCommand.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PolicyCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PolicyCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef POLICYCOMMAND_H
+        -:    2:#define POLICYCOMMAND_H
+        -:    3:
+        -:    4:#include "Command.h"
+        -:    5:#include "City.h"
+        -:    6:#include <string>
+        -:    7:/**
+        -:    8: * @brief Command to handle the implementation of government policies.
+        -:    9: *
+        -:   10: * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle the enforcement of government policies.
+        -:   11: */
+        -:   12:class PolicyCommand : public Command {
+        -:   13:    City& city;
+        -:   14:    std::string policyName;
+        -:   15:    int previousHappiness;
+        -:   16:
+        -:   17:public:
+        -:   18:    /**
+        -:   19:     * @brief Constructs a new PolicyCommand object.
+        -:   20:     */
+        -:   21:    PolicyCommand(City& city, const std::string& policyName): city(city), policyName(policyName), previousHappiness(0) {}
+        -:   22:
+        -:   23:    /**
+        -:   24:     * @brief Destroys the PolicyCommand object.
+        -:   25:     */
+    #####:   26:    ~PolicyCommand()override = default;
+------------------
+_ZN13PolicyCommandD0Ev:
+function _ZN13PolicyCommandD0Ev called 0 returned 0% blocks executed 0%
+    #####:   26:    ~PolicyCommand()override = default;
+    %%%%%:   26-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN13PolicyCommandD1Ev:
+function _ZN13PolicyCommandD1Ev called 0 returned 0% blocks executed 0%
+    #####:   26:    ~PolicyCommand()override = default;
+    %%%%%:   26-block  0
+call    0 never executed
+call    1 never executed
+------------------
+        -:   27:
+        -:   28:    /**
+        -:   29:     * @brief Executes the command to implement a policy.
+        -:   30:     */
+        -:   31:    void execute() override;
+        -:   32:
+        -:   33:       /**
+        -:   34:     * @brief Undo functionality.
+        -:   35:     */
+        -:   36:    void undo() override;
+        -:   37:
+        -:   38:    /**
+        -:   39:     * @brief Redo functionality.
+        -:   40:     */
+        -:   41:    void redo() override;
+        -:   42:};
+        -:   43:
+        -:   44:#endif // POLICYCOMMAND_H

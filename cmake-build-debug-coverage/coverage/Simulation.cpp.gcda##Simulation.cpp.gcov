@@ -1,0 +1,21 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Simulation.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Simulation.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Simulation.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Simulation.h"
+        -:    2:
+        -:    3:
+function _ZN10Simulation15storeAndExecuteESt10unique_ptrI7CommandSt14default_deleteIS1_EE called 0 returned 0% blocks executed 0%
+    #####:    4:void Simulation::storeAndExecute(std::unique_ptr<Command> cmd) {
+    #####:    5:    commandQueue.push(std::move(cmd));
+    %%%%%:    5-block  0
+call    0 never executed
+call    1 never executed
+        -:    6:    
+    #####:    7:    cmd->execute();
+call    0 never executed
+call    1 never executed
+        -:    8:    
+    #####:    9:    commandQueue.pop();
+call    0 never executed
+    #####:   10:}

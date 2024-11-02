@@ -1,0 +1,45 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Sanitation.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Sanitation.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Sanitation.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef SANITATION_H
+        -:    2:#define SANITATION_H
+        -:    3:
+        -:    4:#include "Utilities.h"
+        -:    5:#include "UtilityType.h"
+        -:    6:
+        -:    7:/**
+        -:    8: * @brief Represents a Sanitation utility.
+        -:    9: */
+        -:   10:class Sanitation : public Utilities {
+        -:   11:public:
+        -:   12:    /**
+        -:   13:     * @brief Constructor for Sanitation utility.
+        -:   14:     */
+        -:   15:    Sanitation() : Utilities(UtilityType::Sanitation,300,300) {}
+        -:   16:
+    #####:   17:    ~Sanitation()override = default;
+------------------
+_ZN10SanitationD0Ev:
+function _ZN10SanitationD0Ev called 0 returned 0% blocks executed 0%
+    #####:   17:    ~Sanitation()override = default;
+    %%%%%:   17-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN10SanitationD1Ev:
+function _ZN10SanitationD1Ev called 0 returned 0% blocks executed 0%
+    #####:   17:    ~Sanitation()override = default;
+    %%%%%:   17-block  0
+call    0 never executed
+------------------
+        -:   18:
+        -:   19:    /**
+        -:   20:     * @brief Check the sanitation capacity.
+        -:   21:     * @return The current sanitation capacity.
+        -:   22:     */
+        -:   23:    void checkCapacity() const override;
+        -:   24:
+        -:   25:};
+        -:   26:
+        -:   27:#endif // SANITATION_H

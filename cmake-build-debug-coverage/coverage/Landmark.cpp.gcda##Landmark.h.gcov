@@ -1,0 +1,59 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Landmark.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Landmark.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Landmark.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef LANDMARK_H
+        -:    2:#define LANDMARK_H
+        -:    3:
+        -:    4:#include "Building.h"
+        -:    5:#include "BuildingType.h"
+        -:    6:#include <memory>
+        -:    7:#include <string>
+        -:    8:
+        -:    9:
+        -:   10:/**
+        -:   11: * @brief Represents a landmark in the city.
+        -:   12: *
+        -:   13: * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and represents a notable landmark structure within the city.
+        -:   14: */
+        -:   15:class Landmark : public Building {
+        -:   16:    
+        -:   17:public:
+        -:   18:    /**
+        -:   19:     * @brief Constructs a new Landmark building.
+        -:   20:     * @param cost The construction cost of the landmark.
+        -:   21:     * @param location The location of the landmark.
+        -:   22:     * @param resources Pointer to the resources the landmark uses.
+        -:   23:     * @param size The size of the landmark.
+        -:   24:     * @param owner Pointer to the owner of the landmark.
+        -:   25:     * @param taxAuthority Pointer to the tax authority associated with the landmark.
+        -:   26:     */
+        -:   27:    Landmark(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name) : Building(cost,location,resources,size,owner,name) {} 
+        -:   28:
+        -:   29:    /**
+        -:   30:     * @brief Destroys the Landmark building.
+        -:   31:     */
+        2:   32:    ~Landmark() override = default;  ///< Destructor
+------------------
+_ZN8LandmarkD0Ev:
+function _ZN8LandmarkD0Ev called 1 returned 100% blocks executed 100%
+        1:   32:    ~Landmark() override = default;  ///< Destructor
+        1:   32-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN8LandmarkD1Ev:
+function _ZN8LandmarkD1Ev called 1 returned 100% blocks executed 100%
+        1:   32:    ~Landmark() override = default;  ///< Destructor
+        1:   32-block  0
+call    0 returned 1
+------------------
+        -:   33:
+        -:   34:    /**
+        -:   35:     * @brief Gets details about the landmark building.
+        -:   36:     * @return A string containing details about the landmark.
+        -:   37:     */
+        -:   38:    std::string getDetails() const override;
+        -:   39:};
+        -:   40:
+        -:   41:#endif // LANDMARK_H

@@ -1,0 +1,75 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/BuildCommand.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef BUILDCOMMAND_H
+        -:    2:#define BUILDCOMMAND_H
+        -:    3:
+        -:    4:#include "Command.h"
+        -:    5:#include "City.h"
+        -:    6:#include "Director.h"
+        -:    7:#include "BuildingFactory.h"
+        -:    8:#include "BuildingType.h"
+        -:    9:#include "Citizen.h"
+        -:   10:#include <iostream>
+        -:   11:
+        -:   12:class Director;
+        -:   13:class BuildingFactory;
+        -:   14:class Building;
+        -:   15:class Citizen;
+        -:   16:class City;
+        -:   17:/**
+        -:   18: * @brief Command to handle the construction of buildings in the city.
+        -:   19: *
+        -:   20: * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle building construction.
+        -:   21: */
+        -:   22:class BuildCommand : public Command {
+        -:   23:    City& city;
+        -:   24:    Director& director;
+        -:   25:    BuildingFactory& buildingFactory;
+        -:   26:    BuildingType buildingType;
+        -:   27:    Building* constructedBuilding;
+        -:   28:    Citizen& citizen;
+        -:   29:public:
+        -:   30:    /**
+        -:   31:     * @brief Constructs a new BuildCommand object.
+        -:   32:     */
+        -:   33:    BuildCommand(City& city, Director& director, BuildingFactory& factory, BuildingType buildingType,Citizen& citizen) : city(city), director(director), buildingFactory(factory), buildingType(buildingType), citizen(citizen) {}
+        -:   34:
+        -:   35:
+        -:   36:    /**
+        -:   37:     * @brief Destroys the BuildCommand object.
+        -:   38:     */
+    #####:   39:    ~BuildCommand() override = default;
+------------------
+_ZN12BuildCommandD0Ev:
+function _ZN12BuildCommandD0Ev called 0 returned 0% blocks executed 0%
+    #####:   39:    ~BuildCommand() override = default;
+    %%%%%:   39-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN12BuildCommandD1Ev:
+function _ZN12BuildCommandD1Ev called 0 returned 0% blocks executed 0%
+    #####:   39:    ~BuildCommand() override = default;
+    %%%%%:   39-block  0
+call    0 never executed
+------------------
+        -:   40:
+        -:   41:    /**
+        -:   42:     * @brief Executes the command to construct a building.
+        -:   43:     */
+        -:   44:    void execute() override;
+        -:   45:
+        -:   46:    /**
+        -:   47:     * @brief Undo functionality.
+        -:   48:     */
+        -:   49:    void undo() override ;
+        -:   50:
+        -:   51:    /**
+        -:   52:     * @brief Redo functionality.
+        -:   53:     */
+        -:   54:    void redo() override;
+        -:   55:
+        -:   56:};
+        -:   57:#endif // BUILDCOMMAND_H

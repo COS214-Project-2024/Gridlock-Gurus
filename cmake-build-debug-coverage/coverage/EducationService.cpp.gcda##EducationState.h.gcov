@@ -1,0 +1,51 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/EducationState.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\EducationService.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\EducationService.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef EDUCATIONSTATE_H
+        -:    2:#define EDUCATIONSTATE_H
+        -:    3:
+        -:    4:#include "EducationService.h"
+        -:    5:#include <string>
+        -:    6:#include <iostream>
+        -:    7:class EducationService;
+        -:    8:/**
+        -:    9: * @brief Abstract class representing the state of education services.
+        -:   10: *
+        -:   11: * AbstractState in the State pattern, defining the interface for various education service states. Concrete states will implement specific behaviors for managing education service operations based on funding levels.
+        -:   12: */
+        -:   13:class EducationState {
+        -:   14:protected:
+        -:   15:    EducationService& service;
+        -:   16:    std::string name;
+        -:   17:
+        -:   18:public:
+        -:   19:    /**
+        -:   20:     * @brief Constructs a new EducationState object.
+        -:   21:     */
+function _ZN14EducationStateC2ER16EducationService called 2 returned 100% blocks executed 100%
+        2:   22:    EducationState(EducationService& service) : service(service) {}
+        2:   22-block  0
+call    0 returned 2
+        -:   23:
+        -:   24:    /**
+        -:   25:     * @brief Destroys the EducationState object.
+        -:   26:     */
+        -:   27:    virtual ~EducationState() = default;
+        -:   28:
+        -:   29:    /**
+        -:   30:     * @brief Checks the current state of education services.
+        -:   31:     * This method must be implemented by concrete states to provide specific education state information.
+        -:   32:     */
+        -:   33:    virtual void checkEducationState() = 0;
+        -:   34:
+        -:   35:    /**
+        -:   36:     * @brief Gets the quality of education in the current state.
+        -:   37:     * This method must be implemented by concrete states to define the quality level of education services.
+        -:   38:     * @return int The quality level of education.
+        -:   39:     */
+        -:   40:    virtual int getEducationQuality() = 0;
+        -:   41:    virtual std::string getName() = 0;
+        -:   42:};
+        -:   43:
+        -:   44:#endif // EDUCATIONSTATE_H

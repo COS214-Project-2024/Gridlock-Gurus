@@ -1,0 +1,73 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Command.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef COMMAND_H
+        -:    2:#define COMMAND_H
+        -:    3:
+        -:    4:/**
+        -:    5: * @brief Enum for command status.
+        -:    6: */
+        -:    7: enum Status {
+        -:    8:    PENDING,
+        -:    9:    EXECUTED,
+        -:   10:    UNDONE
+        -:   11: };
+        -:   12:
+        -:   13:/**
+        -:   14: * @brief Abstract class representing a command in the simulation.
+        -:   15: *
+        -:   16: * Command participant in the Command design pattern. It declares the `execute()` method that all concrete commands must implement.
+        -:   17: */
+        -:   18:class Command {
+        -:   19:protected:
+        -:   20:    Status status;
+        -:   21:    int executionCount;
+        -:   22:public:
+        -:   23:    /**
+        -:   24:     * @brief Constructs a new Command object.
+        -:   25:     */
+        -:   26:    Command();
+        -:   27:
+        -:   28:    /**
+        -:   29:     * @brief Destroys the Command object.
+        -:   30:     */
+function _ZN7CommandD2Ev called 0 returned 0% blocks executed 0%
+    #####:   31:    virtual ~Command() = default;
+        -:   32:
+        -:   33:    /**
+        -:   34:     * @brief Executes the command.
+        -:   35:     *
+        -:   36:     * This is a pure virtual function that concrete command classes must implement.
+        -:   37:     */
+        -:   38:    virtual void execute() = 0;
+        -:   39:      /**
+        -:   40:     * @brief Check if executed.
+        -:   41:     */
+        -:   42:    void executed();
+        -:   43:
+        -:   44:     /**
+        -:   45:     * @brief Optionally undoes the command.
+        -:   46:     */
+        -:   47:    virtual void undo();
+        -:   48:
+        -:   49:    /**
+        -:   50:     * @brief Optionally re-executes the command after an undo.
+        -:   51:     */
+        -:   52:    virtual void redo();
+        -:   53:
+        -:   54:    /**
+        -:   55:     * @brief Gets the status of the command.
+        -:   56:     * @return The current status of the command (PENDING, EXECUTED, or UNDONE).
+        -:   57:     */
+        -:   58:    Status getStatus() const;
+        -:   59:
+        -:   60:    /**
+        -:   61:     * @brief Gets the execution count of the command.
+        -:   62:     * @return The number of times the command has been executed.
+        -:   63:     */
+        -:   64:    int getExecutionCount() const;
+        -:   65:
+        -:   66:};
+        -:   67:
+        -:   68:#endif // COMMAND_H

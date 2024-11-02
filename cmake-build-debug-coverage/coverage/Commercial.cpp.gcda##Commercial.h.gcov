@@ -1,0 +1,83 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/Commercial.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Commercial.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Commercial.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef COMMERCIAL_H
+        -:    2:#define COMMERCIAL_H
+        -:    3:
+        -:    4:#include "Building.h"
+        -:    5:#include <algorithm>
+        -:    6:#include <string>
+        -:    7:#include <vector>
+        -:    8:#include <iostream>
+        -:    9:#include <memory>
+        -:   10:#include "BuildingType.h"
+        -:   11:
+        -:   12:
+        -:   13:/**
+        -:   14: * @brief Represents a commercial building.
+        -:   15: *
+        -:   16: * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and adds functionality specific to commercial buildings, including the ability to generate money.
+        -:   17: */
+        -:   18:class Commercial : public Building {
+        -:   19:private:
+        -:   20:    int productionRate;  
+        -:   21:    int maxEmployees;
+        -:   22:    std::vector<Citizen*> employees;  
+        -:   23:
+        -:   24:public:
+        -:   25:    /**
+        -:   26:     * @brief Constructs a new Commercial building.
+        -:   27:     * @param cost The construction cost of the building.
+        -:   28:     * @param location The location of the building.
+        -:   29:     * @param resources Pointer to the resources the building consumes.
+        -:   30:     * @param size The size of the building.
+        -:   31:     * @param owner Pointer to the owner of the building.
+        -:   32:     * @param taxAuthority Pointer to the tax authority associated with the building.
+        -:   33:     */
+        -:   34:    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name,int max, int rate); 
+        -:   35:
+        -:   36:    /**
+        -:   37:     * @brief Destroys the Commercial building.
+        -:   38:     */
+        2:   39:    ~Commercial() override = default;
+------------------
+_ZN10CommercialD0Ev:
+function _ZN10CommercialD0Ev called 1 returned 100% blocks executed 100%
+        1:   39:    ~Commercial() override = default;
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN10CommercialD1Ev:
+function _ZN10CommercialD1Ev called 1 returned 100% blocks executed 100%
+        1:   39:    ~Commercial() override = default;
+        1:   39-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+        -:   40:
+        -:   41:    std::string getDetails() const override;
+        -:   42:
+        -:   43:    /**
+        -:   44:     * @brief Generates money in the commercial building.
+        -:   45:     */
+        -:   46:    int produceMoney();
+        -:   47:
+        -:   48:    void employ(Citizen& employee);
+        -:   49:
+        -:   50:    int pay() override;
+        -:   51:
+        -:   52:    void fire(Citizen& employee);
+        -:   53:
+        -:   54:    void retire(Citizen& employee);
+        -:   55:
+        -:   56:    int getNumberOfEmployees(); 
+        -:   57:
+        -:   58:    int getProductionRate();
+        -:   59:
+        -:   60:    int getMaxEmployees(); 
+        -:   61:
+        -:   62:};
+        -:   63:
+        -:   64:#endif // COMMERCIAL_H

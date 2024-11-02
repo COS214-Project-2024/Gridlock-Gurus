@@ -1,0 +1,79 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/BuildCommand.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\BuildCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "BuildCommand.h"
+        -:    2:
+function _ZN12BuildCommand7executeEv called 0 returned 0% blocks executed 0%
+    #####:    3:void BuildCommand::execute() {
+        -:    4:    //Command::execute();  // Update status
+    #####:    5:    status = EXECUTED;
+    #####:    6:    executionCount++;
+        -:    7:
+    #####:    8:    constructedBuilding = buildingFactory.createBuilding(buildingType,citizen);
+    %%%%%:    8-block  0
+call    0 never executed
+        -:    9:
+    #####:   10:    if (constructedBuilding != nullptr) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   11:        //CityBuilder CityBuilder(building);
+    #####:   12:        director.setBuilding(*constructedBuilding);
+    %%%%%:   12-block  0
+call    0 never executed
+        -:   13:
+    #####:   14:        if (buildingType == BuildingType::House || buildingType == BuildingType::Flat ||  buildingType == BuildingType::Estate ) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   14-block  0
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:   14-block  1
+branch  4 never executed (fallthrough)
+branch  5 never executed
+        -:   15:            //director.constructResidentialArea();
+    #####:   16:        } else if (buildingType == BuildingType::Bank ||buildingType == BuildingType::Shop ) {
+    %%%%%:   16-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   16-block  1
+        -:   17:            //director.constructCommercialArea();
+        -:   18:        } else {
+        -:   19:            //director.constructInfrastructure();
+        -:   20:        }
+        -:   21:        
+    #####:   22:        city.addBuilding(*constructedBuilding);
+    %%%%%:   22-block  0
+call    0 never executed
+        -:   23:    }
+    #####:   24:}
+        -:   25:
+function _ZN12BuildCommand4undoEv called 0 returned 0% blocks executed 0%
+    #####:   26:void BuildCommand::undo() {
+        -:   27:    //Command::undo();
+    #####:   28:    if (status == EXECUTED) {
+    %%%%%:   28-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   29:        status = UNDONE;
+    %%%%%:   29-block  0
+        -:   30:    }
+    #####:   31:    city.removeLastBuilding();
+    %%%%%:   31-block  0
+call    0 never executed
+    #####:   32:}
+        -:   33:
+function _ZN12BuildCommand4redoEv called 0 returned 0% blocks executed 0%
+    #####:   34:void BuildCommand::redo() {
+        -:   35:    //Command::redo();
+    #####:   36:    if (status == UNDONE) {
+    %%%%%:   36-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   37:        status = PENDING;
+    %%%%%:   37-block  0
+        -:   38:    }
+    #####:   39:    execute(); 
+    %%%%%:   39-block  0
+call    0 never executed
+    #####:   40:}

@@ -1,0 +1,55 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/headers/ResidentialFactory.h
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\ResidentialFactory.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\ResidentialFactory.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef RESIDENTIALFACTORY_H
+        -:    2:#define RESIDENTIALFACTORY_H
+        -:    3:
+        -:    4:#include "BuildingType.h"
+        -:    5:#include "BuildingFactory.h"
+        -:    6:#include "TaxAuthority.h"
+        -:    7:#include <memory>
+        -:    8:#include <string>
+        -:    9:
+        -:   10:/**
+        -:   11: * @brief Factory for creating residential buildings.
+        -:   12: *
+        -:   13: * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create residential buildings.
+        -:   14: */
+        -:   15:class ResidentialFactory : public BuildingFactory {
+        -:   16:public:
+        -:   17:    /**
+        -:   18:     * @brief Constructs a new ResidentialFactory object.
+        -:   19:     */
+        -:   20:    ResidentialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+        -:   21:
+        -:   22:    /**
+        -:   23:     * @brief Destroys the ResidentialFactory object.
+        -:   24:     */
+       12:   25:    ~ResidentialFactory() override = default;
+------------------
+_ZN18ResidentialFactoryD0Ev:
+function _ZN18ResidentialFactoryD0Ev called 6 returned 100% blocks executed 100%
+        6:   25:    ~ResidentialFactory() override = default;
+        6:   25-block  0
+call    0 returned 6
+call    1 returned 6
+------------------
+_ZN18ResidentialFactoryD1Ev:
+function _ZN18ResidentialFactoryD1Ev called 6 returned 100% blocks executed 100%
+        6:   25:    ~ResidentialFactory() override = default;
+        6:   25-block  0
+call    0 returned 6
+------------------
+        -:   26:
+        -:   27:    /**
+        -:   28:     * @brief Creates a residential building.
+        -:   29:     * @param type The type of residential building to create.
+        -:   30:     * @return Pointer to the created Residential building object.
+        -:   31:     *
+        -:   32:     * This method overrides the factory method to create a residential building.
+        -:   33:     */
+        -:   34:    Building* createBuilding(BuildingType type, Citizen& owner) override;
+        -:   35:};
+        -:   36:
+        -:   37:#endif // RESIDENTIALFACTORY_H

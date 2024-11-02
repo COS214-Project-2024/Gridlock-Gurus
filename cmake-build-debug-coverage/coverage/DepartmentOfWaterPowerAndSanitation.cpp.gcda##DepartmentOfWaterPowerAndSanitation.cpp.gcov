@@ -1,0 +1,115 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/DepartmentOfWaterPowerAndSanitation.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\DepartmentOfWaterPowerAndSanitation.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\DepartmentOfWaterPowerAndSanitation.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "DepartmentOfWaterPowerAndSanitation.h"
+        -:    2:#include <iostream>
+        -:    3:
+function _ZN35DepartmentOfWaterPowerAndSanitationC2EP9Resources called 0 returned 0% blocks executed 0%
+    #####:    4:DepartmentOfWaterPowerAndSanitation::DepartmentOfWaterPowerAndSanitation(Resources* resources)
+    #####:    5:    : resources(resources) {}
+    %%%%%:    5-block  0
+call    0 never executed
+        -:    6:
+function _ZN35DepartmentOfWaterPowerAndSanitation12addUtilitiesEP9Utilities called 0 returned 0% blocks executed 0%
+    #####:    7:void DepartmentOfWaterPowerAndSanitation::addUtilities(Utilities* utility) {
+    #####:    8:    utilities.push_back(utility);
+    %%%%%:    8-block  0
+call    0 never executed
+    #####:    9:}
+        -:   10:
+function _ZN35DepartmentOfWaterPowerAndSanitation18updateCitizenCountEi called 0 returned 0% blocks executed 0%
+    #####:   11:void DepartmentOfWaterPowerAndSanitation::updateCitizenCount(int citizenCount) {
+    #####:   12:    int waterConsumption = citizenCount * 2;
+    #####:   13:    int energyConsumption = citizenCount * 3;
+    #####:   14:    resources->manageConsumption(energyConsumption, waterConsumption);
+    %%%%%:   14-block  0
+call    0 never executed
+    #####:   15:}
+        -:   16:
+function _ZN35DepartmentOfWaterPowerAndSanitation6repairEv called 0 returned 0% blocks executed 0%
+    #####:   17:void DepartmentOfWaterPowerAndSanitation::repair() {
+    #####:   18:    for (auto& utility : utilities) {
+    %%%%%:   18-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:   18-block  1
+call    2 never executed
+    %%%%%:   18-block  2
+call    3 never executed
+    %%%%%:   18-block  3
+call    4 never executed
+branch  5 never executed
+branch  6 never executed (fallthrough)
+    #####:   19:        utility->repair();
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:   20:    }
+    #####:   21:}
+    %%%%%:   21-block  0
+        -:   22:
+function _ZNK35DepartmentOfWaterPowerAndSanitation12checkNetworkEv called 0 returned 0% blocks executed 0%
+    #####:   23:void DepartmentOfWaterPowerAndSanitation::checkNetwork() const {
+    #####:   24:    for (const auto& utility : utilities) {
+    %%%%%:   24-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:   24-block  1
+call    2 never executed
+    %%%%%:   24-block  2
+call    3 never executed
+    %%%%%:   24-block  3
+call    4 never executed
+branch  5 never executed
+branch  6 never executed (fallthrough)
+    #####:   25:        utility->checkCapacity();
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:   26:    }
+    #####:   27:}
+    %%%%%:   27-block  0
+        -:   28:
+    #####:   29:DepartmentOfWaterPowerAndSanitation::~DepartmentOfWaterPowerAndSanitation() {
+    #####:   30:    for (auto utility : utilities) {
+    #####:   31:        delete utility;
+        -:   32:    }
+    #####:   33:}
+------------------
+_ZN35DepartmentOfWaterPowerAndSanitationD0Ev:
+function _ZN35DepartmentOfWaterPowerAndSanitationD0Ev called 0 returned 0% blocks executed 0%
+    #####:   29:DepartmentOfWaterPowerAndSanitation::~DepartmentOfWaterPowerAndSanitation() {
+        -:   30:    for (auto utility : utilities) {
+        -:   31:        delete utility;
+        -:   32:    }
+    #####:   33:}
+    %%%%%:   33-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN35DepartmentOfWaterPowerAndSanitationD2Ev:
+function _ZN35DepartmentOfWaterPowerAndSanitationD2Ev called 0 returned 0% blocks executed 0%
+    #####:   29:DepartmentOfWaterPowerAndSanitation::~DepartmentOfWaterPowerAndSanitation() {
+    #####:   30:    for (auto utility : utilities) {
+    %%%%%:   30-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:   30-block  1
+call    2 never executed
+    %%%%%:   30-block  2
+call    3 never executed
+    %%%%%:   30-block  3
+call    4 never executed
+branch  5 never executed
+branch  6 never executed (fallthrough)
+    #####:   31:        delete utility;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    %%%%%:   31-block  0
+call    2 never executed
+        -:   32:    }
+    #####:   33:}
+    %%%%%:   33-block  0
+call    0 never executed
+------------------

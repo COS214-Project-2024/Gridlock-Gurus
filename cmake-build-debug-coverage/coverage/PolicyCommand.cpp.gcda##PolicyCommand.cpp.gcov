@@ -1,0 +1,44 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/PolicyCommand.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PolicyCommand.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\PolicyCommand.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "PolicyCommand.h"
+        -:    2:#include <string>
+        -:    3:#include <iostream>
+        -:    4:
+        -:    5:
+function _ZN13PolicyCommand7executeEv called 0 returned 0% blocks executed 0%
+    #####:    6:void PolicyCommand::execute() {
+    #####:    7:    status = EXECUTED;
+        -:    8:
+        -:    9:    // Store current happiness level and apply policy
+    #####:   10:    previousHappiness = city.getCitizenHappiness();
+    %%%%%:   10-block  0
+call    0 never executed
+        -:   11:    // Simulate implementing a policy.
+    #####:   12:    city.setCitizenHappiness(previousHappiness + 10);  // Example: increasing happiness.
+call    0 never executed
+        -:   13:    //std::cout << "Implemented the " << policyName << " policy." << std::endl;
+    #####:   14:}
+        -:   15:
+function _ZN13PolicyCommand4undoEv called 0 returned 0% blocks executed 0%
+    #####:   16:void PolicyCommand::undo() {
+    #####:   17:    status = UNDONE;
+        -:   18:
+        -:   19:    // Revert to the previous happiness level
+    #####:   20:    city.setCitizenHappiness(previousHappiness);
+    %%%%%:   20-block  0
+call    0 never executed
+        -:   21:    //std::cout << "Undid the " << policyName << " policy, restoring happiness." << std::endl;
+    #####:   22:}
+        -:   23:
+function _ZN13PolicyCommand4redoEv called 0 returned 0% blocks executed 0%
+    #####:   24:void PolicyCommand::redo() {
+    #####:   25:    status = PENDING;
+        -:   26:
+        -:   27:    // Reapply the policy effect on happiness
+    #####:   28:   city.setCitizenHappiness(previousHappiness + 10);
+    %%%%%:   28-block  0
+call    0 never executed
+        -:   29:    //std::cout << "Redid the " << policyName << " policy, increasing happiness again." << std::endl;
+    #####:   30:}

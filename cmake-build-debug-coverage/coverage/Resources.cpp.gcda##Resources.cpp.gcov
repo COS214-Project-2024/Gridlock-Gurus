@@ -1,0 +1,48 @@
+        -:    0:Source:C:/Users/rainb/Documents/GitHub/New/Gridlock-Gurus/src/Resources.cpp
+        -:    0:Graph:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Resources.cpp.gcno
+        -:    0:Data:C:\Users\rainb\Documents\GitHub\New\Gridlock-Gurus\cmake-build-debug-coverage\CMakeFiles\tests.dir\src\Resources.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include "Resources.h"
+        -:    2:#include <iostream>
+        -:    3:
+function _ZN9ResourcesC2Eiib called 21 returned 100% blocks executed 100%
+       21:    4:Resources::Resources(int energy, int water, bool sanitationAvailable)
+       21:    5:    : energy(energy), water(water), sanitationAvailable(sanitationAvailable) {}
+        -:    6:
+function _ZN9Resources17manageConsumptionEii called 0 returned 0% blocks executed 0%
+    #####:    7:void Resources::manageConsumption(int energyUsed, int waterUsed) {
+    #####:    8:    energy -= energyUsed;
+    #####:    9:    water -= waterUsed;
+    #####:   10:    sanitationAvailable = (waterUsed < water);
+        -:   11:
+    #####:   12:    std::cout << "Resources after consumption -> Energy: " << energy
+    %%%%%:   12-block  0
+call    0 never executed
+    #####:   13:              << ", Water: " << water << ", Sanitation available: " 
+call    0 never executed
+call    1 never executed
+    #####:   14:              << (sanitationAvailable ? "Yes" : "No") << std::endl;
+call    0 never executed
+call    1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    %%%%%:   14-block  0
+    %%%%%:   14-block  1
+    %%%%%:   14-block  2
+call    4 never executed
+call    5 never executed
+    #####:   15:}
+        -:   16:
+       42:   17:Resources::~Resources() {}
+------------------
+_ZN9ResourcesD0Ev:
+function _ZN9ResourcesD0Ev called 21 returned 100% blocks executed 100%
+       21:   17:Resources::~Resources() {}
+       21:   17-block  0
+call    0 returned 21
+call    1 returned 21
+------------------
+_ZN9ResourcesD2Ev:
+function _ZN9ResourcesD2Ev called 21 returned 100% blocks executed 100%
+       21:   17:Resources::~Resources() {}
+------------------
