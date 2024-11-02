@@ -84,6 +84,11 @@ public:
         return citizens.size();
     }
 
+    int getWaterUsage() const;
+    int getPowerUsage() const;
+
+    void removeLastBuilding();
+
 private:
     /**
      * @brief Notifies citizens about tax obligations.

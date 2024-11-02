@@ -54,6 +54,11 @@ public:
     int getId() {
         return id;
     }
+
+    bool isFull() {
+        return maxEmployees <= employees.size();
+    }
+
 };
 
 #endif // SERVICE_H

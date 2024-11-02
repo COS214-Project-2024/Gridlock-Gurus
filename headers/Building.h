@@ -66,7 +66,14 @@ public:
      int getSize() const;
 
      BuildingType getName() const;
-     
+
+    int getWaterConsumption() const {
+        return resources->getWaterConsumption();
+    }
+
+    int getPowerConsumption() const {
+        return resources->getPowerConsumption();
+    }
 };
 
 #endif // BUILDING_H

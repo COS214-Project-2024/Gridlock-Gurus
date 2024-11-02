@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/tests.dir/src/Citizen.cpp.o.d"
   "CMakeFiles/tests.dir/src/CitizenFactory.cpp.o"
   "CMakeFiles/tests.dir/src/CitizenFactory.cpp.o.d"
+  "CMakeFiles/tests.dir/src/City.cpp.o"
+  "CMakeFiles/tests.dir/src/City.cpp.o.d"
   "CMakeFiles/tests.dir/src/Command.cpp.o"
   "CMakeFiles/tests.dir/src/Command.cpp.o.d"
   "CMakeFiles/tests.dir/src/Commercial.cpp.o"

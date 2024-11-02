@@ -14,7 +14,6 @@ class TaxAuthority;
 class BudgetDepartment {
 private:
     int totalAvailable;  ///< The total available budget.
-    bool broke;  ///< Indicates whether the budget department is out of funds.
     std::shared_ptr<TaxAuthority> taxAuthority;
 
 public:
@@ -34,35 +33,11 @@ public:
      */
     int checkTotal();
 
-    /**
-     * @brief Checks if the specified amount is available in the budget.
-     * @param amount The amount to check for availability.
-     * @return True if the amount is available, false otherwise.
-     */
-    bool checkAvailability(int amount);
-
-    /**
-     * @brief Increases the total available budget by the specified amount.
-     * @param amount The amount to add to the total budget.
-     */
-    void gain(int amount);
-
-    /**
-     * @brief Decreases the total available budget by the specified amount.
-     * @param amount The amount to subtract from the total budget.
-     */
-    void lose(int amount);
-
-    /**
-     * @brief Adjusts the total budget based on an inflation percentage.
-     * @param percentage The percentage by which to increase the budget due to inflation.
-     */
-    void inflation(int percentage);
-
     void receiveTaxes();
 
-    bool isBroke(); 
-
+    bool isBroke() {
+        return totalAvailable <= 0;
+    }
 };
 
 #endif // BUDGETDEPARTMENT_H
