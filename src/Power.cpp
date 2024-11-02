@@ -4,6 +4,20 @@
 
 
 void Power::checkCapacity() const {
-    std::cout << "Power capacity is at maximum output: " << maxProduction << " MW." << std::endl;
+    Utilities::checkCapacity();
 }
 
+void Power::shed() {
+    Utilities::shed();
+    std::cout << "Power utility is reducing energy distribution." << std::endl;
+}
+
+void Power::breakUtility() {
+    Utilities::breakUtility();
+    std::cout << "Alert: Power utility outage reported!" << std::endl;
+}
+
+void Power::repair() {
+    Utilities::repair();
+    std::cout << "Power utility restored. Energy generation stabilized." << std::endl;
+}
