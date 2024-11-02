@@ -20,14 +20,14 @@ public:
      *
      * Initializes the DepartmentOfWaterPowerAndSanitation and prepares the resources and utilities.
      */
-    DepartmentOfWaterPowerAndSanitation(Resources* resources);
+    DepartmentOfWaterPowerAndSanitation() = default;
 
     /**
      * @brief Destroy the DepartmentOfWaterPowerAndSanitation object.
      *
      * Cleans up resources and deletes the utilities.
      */
-    virtual ~DepartmentOfWaterPowerAndSanitation();
+     ~DepartmentOfWaterPowerAndSanitation();
     
     /**
      * @brief Update the number of citizens in the network.

@@ -1,8 +1,6 @@
 #include "DepartmentOfWaterPowerAndSanitation.h"
 #include <iostream>
 
-DepartmentOfWaterPowerAndSanitation::DepartmentOfWaterPowerAndSanitation(Resources* resources)
-    : resources(resources) {}
 
 void DepartmentOfWaterPowerAndSanitation::addUtilities(Utilities* utility) {
     utilities.push_back(utility);
