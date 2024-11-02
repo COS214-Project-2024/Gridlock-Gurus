@@ -36,7 +36,7 @@ void Vehicle::updateState() {
 void Vehicle::requestRepair() {
     
         std::cout << "Requesting repair for " << type << "." << std::endl;
-        department->manage();
+        department.manage();
     
 }
 
