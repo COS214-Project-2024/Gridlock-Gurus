@@ -1,10 +1,24 @@
 #include "Power.h"
 #include <iostream>
+#include <string>
 
-Power::Power() : Utilities("Power", 1000, 500) {}
 
 void Power::checkCapacity() const {
-    std::cout << "Power capacity is at maximum output: " << maxProduction << " MW." << std::endl;
+    Utilities::checkCapacity();
+    std::cout << "Additional checks specific to Power utility." << std::endl;
 }
 
-Power::~Power() {}
+void Power::shed() {
+    Utilities::shed();
+    std::cout << "Power utility is reducing energy distribution." << std::endl;
+}
+
+void Power::breakUtility() {
+    Utilities::breakUtility();
+    std::cout << "Alert: Power utility outage reported!" << std::endl;
+}
+
+void Power::repair() {
+    Utilities::repair();
+    std::cout << "Power utility restored. Energy generation stabilized." << std::endl;
+}

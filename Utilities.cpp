@@ -1,30 +1,42 @@
 #include "Utilities.h"
 #include <iostream>
 
-Utilities::Utilities(std::string type, int maxProduction, int costOfRepair)
-    : type(type), maxProduction(maxProduction), shedding(false), isRepair(false), costOfRepair(costOfRepair) {}
-
 void Utilities::checkCapacity() const {
-    std::cout << type << " capacity: " << maxProduction << std::endl;
+    std::cout << "Checking capacity for utility." << std::endl;
+    if (isRepair) {
+        std::cout << "Utility is currently in disrepair and not operating at full capacity." << std::endl;
+    } else {
+        std::cout << "Utility is operating at maximum production of " << maxProduction << "." << std::endl;
+    }
 }
 
 void Utilities::shed() {
-    shedding = true;
-    std::cout << type << " is shedding power." << std::endl;
+    if (!shedding) {
+        shedding = true;
+        std::cout << "Utility is now shedding to reduce load." << std::endl;
+    } else {
+        std::cout << "Utility is already in load shedding mode." << std::endl;
+    }
 }
 
 void Utilities::repair() {
     if (isRepair) {
         isRepair = false;
-        std::cout << type << " repaired at a cost of " << costOfRepair << "." << std::endl;
+        shedding = false;
+        std::cout << "Utility has been repaired. Cost: " << costOfRepair << std::endl;
     } else {
-        std::cout << type << " is not in disrepair." << std::endl;
+        std::cout << "Utility is not in disrepair." << std::endl;
     }
 }
 
 void Utilities::breakUtility() {
-    isRepair = true;
-    std::cout << type << " is now in disrepair." << std::endl;
+    if (!isRepair) {
+        isRepair = true;
+        shedding = true;
+        std::cout << "Utility has broken down." << std::endl;
+    } else {
+        std::cout << "Utility is already broken." << std::endl;
+    }
 }
 
 Utilities::~Utilities() {}

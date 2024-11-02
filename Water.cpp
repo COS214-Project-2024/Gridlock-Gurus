@@ -1,10 +1,22 @@
 #include "Water.h"
 #include <iostream>
 
-Water::Water() : Utilities("Water", 500, 300) {}
-
 void Water::checkCapacity() const {
-    std::cout << "Water supply capacity: " << maxProduction << " liters per minute." << std::endl;
+    Utilities::checkCapacity();
+    std::cout << "Additional checks specific to Water utility." << std::endl;
 }
 
-Water::~Water() {}
+void Water::shed() {
+    Utilities::shed();
+    std::cout << "Water utility is reducing water flow to conserve resources." << std::endl;
+}
+
+void Water::breakUtility() {
+    Utilities::breakUtility();
+    std::cout << "Alert: Water utility malfunction detected!" << std::endl;
+}
+
+void Water::repair() {
+    Utilities::repair();
+    std::cout << "Water utility restored. Water flow normalized." << std::endl;
+}
