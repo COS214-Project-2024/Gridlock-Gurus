@@ -60,7 +60,7 @@ TEST_F(tax_system_test, ConstructorSetCorrectValues) {
     factory2 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
     EXPECT_EQ(taxAuth->getSize(), 2);
     BrickFactory* fac1 = dynamic_cast<BrickFactory*>(factory1);
-    BrickFactory* fac2 = dynamic_cast<BrickFactory*>(factory2);
+    //BrickFactory* fac2 = dynamic_cast<BrickFactory*>(factory2);
 
 
     fac1->employ(*citizen1);
