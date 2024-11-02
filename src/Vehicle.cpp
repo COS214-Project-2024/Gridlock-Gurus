@@ -4,7 +4,7 @@
 #include "Functional.h"
 #include "Broken.h"
 
-Vehicle::Vehicle(const std::string& type, int capacity, TransportDepartment* transportDept)
+Vehicle::Vehicle(const std::string& type, int capacity, TransportDepartment& transportDept)
     : type(type), capacity(capacity), currentPassengers(0), state(new Functional()),
       department(transportDept), usageCount(0) {}
 
@@ -34,10 +34,10 @@ void Vehicle::updateState() {
 }
 
 void Vehicle::requestRepair() {
-    if (department) {
+    
         std::cout << "Requesting repair for " << type << "." << std::endl;
         department->manage();
-    }
+    
 }
 
 void Vehicle::incrementUsage() {
