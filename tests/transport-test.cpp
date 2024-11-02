@@ -67,7 +67,7 @@ TEST_F(TransportDepartmentTest, GetAvailableTruck) {
 TEST_F(TransportDepartmentTest, GetAvailableTruckWhenBroken) {
     transportDept->addVehicle(truck);
     truck->breakDown();
-    EXPECT_THROW(transportDept->getAvailableVehicle("Truck"), std::runtime_error);
+    EXPECT_THROW(citizen->callTransport(*transportDept, "Truck"), std::runtime_error);
 }
 
 TEST_F(TransportDepartmentTest, AddAndGetAvailableTrain) {
@@ -119,11 +119,11 @@ TEST_F(TransportDepartmentTest, CitizenRequestAvailableTaxi) {
 TEST_F(TransportDepartmentTest, CitizenRequestBrokenTaxi) {
     transportDept->addVehicle(taxi);
     taxi->breakDown();
-    EXPECT_NO_THROW(citizen->callTransport(*transportDept, "Taxi"));
+    EXPECT_THROW(citizen->callTransport(*transportDept, "Taxi"), std::runtime_error);
 }
 
 TEST_F(TransportDepartmentTest, CitizenRequestNonExistentVehicle) {
-    EXPECT_NO_THROW(citizen->callTransport(*transportDept, "NonExistentVehicle"));
+    EXPECT_THROW(citizen->callTransport(*transportDept, "NonExistentVehicle"), std::runtime_error);
 }
 
 TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
@@ -135,9 +135,8 @@ TEST_F(TransportDepartmentTest, ManageVehiclesWithAllBroken) {
     transportDept->addVehicle(truck);
     transportDept->addVehicle(train);
 
-    // Manage function should attempt repairs
     EXPECT_NO_THROW(transportDept->manage());
-    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr); // Assuming manage can repair if conditions met
+    EXPECT_NE(dynamic_cast<Functional*>(taxi->getState()), nullptr);
     EXPECT_NE(dynamic_cast<Functional*>(truck->getState()), nullptr);
     EXPECT_NE(dynamic_cast<Functional*>(train->getState()), nullptr);
 }

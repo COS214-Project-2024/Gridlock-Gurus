@@ -1,6 +1,8 @@
 #include "Truck.h"
 #include <iostream>
 
+#include "Broken.h"
+
 Truck::Truck(int capacity, TransportDepartment* department) : Vehicle("Truck", capacity, department) {}
 
 void Truck::checkState() {
@@ -22,9 +24,7 @@ void Truck::run() {
 
 void Truck::breakDown() {
     std::cout << "Truck has broken down!" << std::endl;
-    if (getState()) {
-        getState()->breakTransport(this);
-    }
+    setState(new Broken());
 }
 
 void Truck::delay() {

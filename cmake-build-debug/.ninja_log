@@ -89,3 +89,12 @@
 311	2993	7522511761315733	tests.exe	381c647b5ec74b11
 16	897	7522511973929489	CMakeFiles/tests.dir/tests/transport-test.cpp.obj	6afa480fdbafeb91
 897	3645	7522511982742224	tests.exe	381c647b5ec74b11
+6	904	7522516592899150	CMakeFiles/tests.dir/tests/transport-test.cpp.obj	6afa480fdbafeb91
+904	3655	7522516601885881	tests.exe	381c647b5ec74b11
+16	893	7522517055482851	CMakeFiles/tests.dir/tests/transport-test.cpp.obj	6afa480fdbafeb91
+893	3618	7522517064258955	tests.exe	381c647b5ec74b11
+5	904	7522517622500789	CMakeFiles/tests.dir/tests/transport-test.cpp.obj	6afa480fdbafeb91
+904	3673	7522517631490783	tests.exe	381c647b5ec74b11
+22	267	7522518377772635	CMakeFiles/tests.dir/src/Truck.cpp.obj	5f3c3d217b6a5a25
+19	268	7522518377742666	CMakeFiles/tests.dir/src/Train.cpp.obj	d724ce18e4765889
+268	2937	7522518380228200	tests.exe	381c647b5ec74b11
