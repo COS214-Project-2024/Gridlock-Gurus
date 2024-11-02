@@ -2,6 +2,7 @@
 #define CITY_H
 
 #include "Government.h"
+#include <memory>
 #include "BuildingCollection.h"
 #include "TaxAuthority.h"
 #include "FactoryFactory.h"
@@ -9,7 +10,7 @@
 #include "ResidentialFactory.h"
 #include "CommercialFactory.h"
 #include "ServiceFactory.h"
-#include <memory>
+
 
 /**
  * @brief Represents the entire city, managing citizens, buildings, and services.
@@ -18,29 +19,29 @@
  */
 class City {
 private:
-    Government& government;  ///< Pointer to the government managing the city.
-    //BuildingCollection* buildings;  ///< Collection of buildings in the city.
-
-    std::shared_ptr<TaxAuthority> taxAuthority;
+    std::shared_ptr<Government> government;  ///< Pointer to the government managing the city.
+    std::shared_ptr<BuildingCollection> building_collection;  ///< Collection of buildings in the city.
 
     FactoryFactory* factory_factory;
     LandmarkFactory* landmark_factory;
     ResidentialFactory* residential_factory;
     CommercialFactory* commercial_factory;
     ServiceFactory* service_factory;
+
     int happiness;
 
 public:
     /**
      * @brief Constructs a new City object.
      */
-    City(Government& gov,std::shared_ptr<TaxAuthority> taxAuth): government(gov), taxAuthority(taxAuth){
-        this->factory_factory = new FactoryFactory(taxAuth);
-        this->landmark_factory = new LandmarkFactory(taxAuth);
-        this->residential_factory = new ResidentialFactory(taxAuth);
-        this->commercial_factory = new CommercialFactory(taxAuth);
-        this->service_factory = new ServiceFactory(taxAuth);
-
+    City() {
+        this->government = Government::getInstance();
+        this->factory_factory = new FactoryFactory(government->getTaxAuthority());
+        this->landmark_factory = new LandmarkFactory(government->getTaxAuthority());
+        this->residential_factory = new ResidentialFactory(government->getTaxAuthority());
+        this->commercial_factory = new CommercialFactory(government->getTaxAuthority());
+        this->service_factory = new ServiceFactory(government->getTaxAuthority());
+        
     };
     
     /**
