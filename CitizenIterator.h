@@ -44,4 +44,4 @@ public:
 };
 
 #endif // CITIZENITERATOR_H
-
+ 
