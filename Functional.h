@@ -51,3 +51,4 @@ public:
 };
 
 #endif // FUNCTIONAL_H
+ 
