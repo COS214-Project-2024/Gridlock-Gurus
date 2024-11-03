@@ -49,8 +49,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/tests.dir/src/HighFundingEducationState.cpp.o.d"
   "CMakeFiles/tests.dir/src/HighFundingState.cpp.o"
   "CMakeFiles/tests.dir/src/HighFundingState.cpp.o.d"
-  "CMakeFiles/tests.dir/src/IncreaseTransportCommand.cpp.o"
-  "CMakeFiles/tests.dir/src/IncreaseTransportCommand.cpp.o.d"
   "CMakeFiles/tests.dir/src/Landmark.cpp.o"
   "CMakeFiles/tests.dir/src/Landmark.cpp.o.d"
   "CMakeFiles/tests.dir/src/LandmarkFactory.cpp.o"

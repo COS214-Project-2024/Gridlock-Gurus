@@ -92,6 +92,7 @@ public:
 
     int getWorkerCount();
 
+    void generateReport(std::string& temp);
 };
 
 #endif // CITY_H

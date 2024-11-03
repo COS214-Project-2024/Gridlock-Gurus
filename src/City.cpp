@@ -122,11 +122,14 @@ int City::getWorkerCount() {
 }
 
 void City::increaseTransport(VehicleType type){
-
+    government->getTransportDepartment()->addTransport(type);
 }
 
 void City::changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy){
     return government->getTaxAuthority()->setStrategy(std::move(taxStrategy));
-
 }
 
+void City::generateReport(std::string& temp) {
+    government->getTransportDepartment()->getReport(temp);
+    getUtilityStats(temp);
+}
