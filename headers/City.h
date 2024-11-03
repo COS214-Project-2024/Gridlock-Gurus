@@ -2,7 +2,34 @@
 #define CITY_H
 
 #include "Government.h"
+#include <memory>
 #include "BuildingCollection.h"
+#include "BuildingType.h"
+#include "TaxAuthority.h"
+#include "FactoryFactory.h"
+#include "LandmarkFactory.h"
+#include "ResidentialFactory.h"
+#include "CommercialFactory.h"
+#include "ServiceFactory.h"
+#include "Building.h"
+#include "Commercial.h"
+#include "BuildingType.h"
+#include "Citizen.h"
+#include "BrickFactory.h"
+#include "WoodFactory.h"
+#include "SteelFactory.h"
+#include "Residential.h"
+#include "Landmark.h"
+#include "EducationService.h"
+#include "HealthService.h"
+#include "PoliceService.h"
+
+
+enum CityState {
+    Happy,
+    Normal,
+    Upset
+};
 
 /**
  * @brief Represents the entire city, managing citizens, buildings, and services.
@@ -11,8 +38,16 @@
  */
 class City {
 private:
-    Government* government;  ///< Pointer to the government managing the city.
-    BuildingCollection* buildings;  ///< Collection of buildings in the city.
+    std::shared_ptr<Government> government;  ///< Pointer to the government managing the city.
+
+    FactoryFactory* factory_factory;
+    LandmarkFactory* landmark_factory;
+    ResidentialFactory* residential_factory;
+    CommercialFactory* commercial_factory;
+    ServiceFactory* service_factory;
+
+    int citizen_happiness;
+    CityState state;
 
 public:
     /**
@@ -23,48 +58,41 @@ public:
     /**
      * @brief Destroys the City object.
      */
-    virtual ~City();
-
-    /**
-     * @brief Adds an observer (Government) to the city.
-     * @param observer The observer to be added.
-     */
-    void addObserver(Government* observer);
-
-    /**
-     * @brief Removes an observer (Government) from the city.
-     * @param observer The observer to be removed.
-     */
-    void removeObserver(Government* observer);
-
-    /**
-     * @brief Notifies all observers of a change in the city's state.
-     *
-     * Observer pattern -> updating observers when the city's state changes.
-     */
-    void notifyObservers();
+     ~City();
 
     /**
      * @brief Adds a new building to the city's collection of buildings.
      */
-    void addBuilding();
-
-    /**
-     * @brief Updates citizen happiness based on city conditions.
-     */
-    void citizenHappiness();
+    void addBuilding(BuildingType type);
 
     /**
      * @brief Sets the state of citizen happiness in the city.
      * @param citizenHappiness The new citizen happiness level.
      */
-    void setState(int citizenHappiness);
+    void setState();
 
     /**
      * @brief Gets the current state of citizen happiness in the city.
      * @return The current citizen happiness level.
      */
-    int getState() const;
+    CityState getState() const; 
+
+    void removeLastBuilding();
+
+    int getCitizenHappiness() const;
+
+    void setCitizenHappiness(int happiness);
+
+    void calculateHappiness();
+
+    void checkUtilityUsage();
+
+    void repairUtilities();
+
+    int checkCityFunds() const;
+
+    void startTaxCycle();
+
 };
 
 #endif // CITY_H

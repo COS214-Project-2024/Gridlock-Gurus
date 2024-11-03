@@ -13,11 +13,14 @@
  * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create service buildings.
  */
 class ServiceFactory : public BuildingFactory {
+    int numberOfSchools;
+    int numberOfHospitals;
+    int numberOfPoliceStations;
 public:
     /**
      * @brief Constructs a new ServiceFactory object.
      */
-    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority), numberOfSchools(0),numberOfHospitals(0),numberOfPoliceStations(0) {}
 
     /**
      * @brief Destroys the ServiceFactory object.

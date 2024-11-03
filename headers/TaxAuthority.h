@@ -79,7 +79,15 @@ public:
     int getCollectedTax();
     
     int getSize();
+    
+    int getAmountOfCitizens() const {
+        return citizens.size();
+    }
 
+    int getWaterUsage() const;
+    int getPowerUsage() const;
+
+    void removeLastBuilding();
 
 private:
     /**

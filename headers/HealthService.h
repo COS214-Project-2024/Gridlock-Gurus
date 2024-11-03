@@ -4,8 +4,13 @@
 #include "Service.h"
 #include "HealthState.h"
 #include "BuildingType.h"
+#include <memory>
 class HealthState;
 
+enum HealthStateType{
+    HighFunding,
+    LowFunding
+};
 /**
  * @brief Represents a health service building.
  *
@@ -13,7 +18,8 @@ class HealthState;
  */
 class HealthService : public Service {
 private:
-    HealthState* healthState; 
+    HealthStateType state;
+    std::unique_ptr<HealthState> healthState; 
     int responseTime;
 public:
     /**
@@ -33,36 +39,24 @@ public:
      ~HealthService() override = default;
 
     /**
-     * @brief Gets details about the health service building.
-     * @return A string containing details about the health service.
-     */
-    std::string getDetails() const override;
-
-    /**
      * @brief Sets the state of the health service.
      * @param state Pointer to the new health state.
      */
     void setState();
 
     /**
-     * @brief Checks the operational status of the health service.
-     */
-    void checkOperation();
-
-    /**
      * @brief Pays a staff member in the health service.
      * @param staffMember Pointer to the staff member being paid.
      */
     int pay() override;
-/*    void employ(Citizen* employee) override;
-    void fire(Citizen* employee) override;
-    void retire(Citizen* employee) override;
-*/
-//   int getStaff();
-//    int getMaxStaff();
+
     void responseTimeDec(int by);
+
     void responseTimeInc(int by);
-    int getResponseTime();
+
+    int getResponseTime() const;
+
+    std::string getState() const;
 };
 
 #endif // HEALTHSERVICE_H

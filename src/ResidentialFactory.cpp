@@ -26,7 +26,7 @@ Building *ResidentialFactory::createBuilding(BuildingType type,Citizen &owner) {
     location = "Country";
   }
 
-    Residential* r = new Residential(cost, location, resources, 5000, owner, type, maxInhabitants);
+    Residential* r = new Residential(cost, location, resources, 500, owner, type, maxInhabitants);
     taxAuthority->registerBuilding(*r);
 
   return r;
