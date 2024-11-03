@@ -23,9 +23,9 @@ class transport_system_test : public ::testing::Test {
 
 // Test Constructor
 TEST_F(transport_system_test, transport_test) {
-    department->addVehicle(*v1);
+    department->addVehicle(v1);
     EXPECT_EQ(department->getSize(),1);
-    department->addVehicle(*v2);
+    department->addVehicle(v2);
     EXPECT_EQ(department->getSize(),2);
     
     EXPECT_EQ(v1->getType(),VehicleType::Taxi);
