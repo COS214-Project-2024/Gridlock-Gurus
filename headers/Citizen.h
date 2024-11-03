@@ -2,6 +2,7 @@
 #define CITIZEN_H
 
 #include "Vehicle.h"
+#include "VehicleType.h"
 #include "TransportDepartment.h"
 #include "Building.h"
 #include "TaxAuthority.h"
@@ -29,7 +30,6 @@ protected:
     Building* placeOfWork;         ///< Pointer to the citizen's workplace.
 
     int id;
-    Vehicle* currentVehicle;
 
 public:
     /**
@@ -83,11 +83,7 @@ public:
      */
     void payTaxes(int amount);
     
-    void callTransport(TransportDepartment& department, const std::string& type);
-    void boardVehicle(Vehicle* vehicle);
-    void offloadVehicle();
-
-    bool isInVehicle() const;
+    void callTransport(TransportDepartment& department, VehicleType type);
 
     void retire();
     void retireToCountryside();

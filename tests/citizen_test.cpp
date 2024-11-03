@@ -46,8 +46,6 @@ TEST_F(citizen_test, citizen_construction_test) {
     EXPECT_EQ(c->getFunds(),300);
     EXPECT_EQ(c->hasHome(),false);
     EXPECT_EQ(c->getEmploymentStatus(),false);
-    EXPECT_EQ(c->isInVehicle(),false);
-
 }
 
 TEST_F(citizen_test, citizen_tax_test) {

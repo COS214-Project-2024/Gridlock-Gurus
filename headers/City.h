@@ -93,7 +93,6 @@ public:
 
     void startTaxCycle();
 
-
 };
 
 #endif // CITY_H

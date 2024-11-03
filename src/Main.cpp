@@ -1,15 +1,5 @@
 
 #include <iostream>
-#include "TransportDepartment.h"
-#include "CitizenFactory.h"
-#include "Train.h"
-#include "Taxi.h"
-#include "Truck.h"
-#include "Functional.h"
-#include "Damaged.h"
-#include "Broken.h"
-#include "TaxAuthority.h"
-#include <iostream>
 
 
 int main2() {
