@@ -45,7 +45,7 @@ TransportDepartment::~TransportDepartment() {
 Vehicle& TransportDepartment::getAvailableVehicle(VehicleType type) {
     for (Vehicle* vehicle : vehicles) {
         if (vehicle->getType() == type) {
-            if (vehicle->getState() && VehicleState::Functional) {
+            if (vehicle->getState() == VehicleState::Functional) {
                 return *vehicle;
             }
         }
