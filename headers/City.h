@@ -23,7 +23,7 @@
 #include "EducationService.h"
 #include "HealthService.h"
 #include "PoliceService.h"
-
+#include "VehicleType.h"
 
 enum CityState {
     Happy,
@@ -77,9 +77,9 @@ public:
      */
     CityState getState() const; 
 
-    void removeLastBuilding();
+    void removeLastBuilding();//test
 
-    int getCitizenHappiness() const;
+    int getCitizenHappiness() const;//test
 
     void setCitizenHappiness(int happiness);
 
@@ -89,9 +89,17 @@ public:
 
     void repairUtilities();
 
-    int checkCityFunds() const;
+    int checkCityFunds() const;//tested
 
     void startTaxCycle();
+
+    void increaseTransport(VehicleType type);
+
+    void changeTaxStrategy();
+
+    int getBuildingCount();
+    int getCitizenCount();
+    int getWorkierCount();
 
 };
 

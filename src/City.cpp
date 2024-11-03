@@ -101,3 +101,22 @@ void City::startTaxCycle() {
     government->getBudgetDepartment()->receiveTaxes();
 }
 
+int City::getBuildingCount() {
+    return government->getTaxAuthority()->getSize();
+}
+
+int City::getCitizenCount() {
+    return government->getDepartmentOfHomeAffairs()->getPopulation();
+}
+
+int City::getWorkierCount() {
+    return government->getTaxAuthority()->getAmountOfCitizens();
+}
+
+void City::increaseTransport(VehicleType type){
+
+}
+
+void City::changeTaxStrategy(){
+}
+
