@@ -10,7 +10,6 @@ enum class BuildingType {
     BrickFactory,
     SteelFactory,
     WoodFactory,
-    Office,
     Bank,
     Flat,
     Estate,

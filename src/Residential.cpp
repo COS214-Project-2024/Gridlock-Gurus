@@ -6,25 +6,15 @@ Residential::Residential(int cost, std::string& location, Resources *resources, 
     this->maxCapacity = capacity;
 }
 
-std::string Residential::getDetails() const {
-    std::string details =  "Residential: \n";
-    details += "Owner: " + owner.getName() + "\n";
-    details += "Location: " + location + "\n";
-    details += "Capacity: " + std::to_string(tenants.size()) + "/" + std::to_string(maxCapacity) + "\n";
-    details += "Cost: " + std::to_string(cost) + "\n";
-    details += "Size: " + std::to_string(size) + "\n";
-    return details;
-}
-
 void Residential::addTenant(Citizen& tenant) {
     if(tenants.size() < maxCapacity) {
-        tenants.push_back(&tenant);
+        tenants.push_back(tenant.getId());
         tenant.setHome(*this);
     }
 }
 
 void Residential::removeTenant(Citizen& tenant) {
-    auto it = std::find(tenants.begin(), tenants.end(), &tenant);
+    auto it = std::find(tenants.begin(), tenants.end(), tenant.getId());
 
     if(it != tenants.end()) {
         tenants.erase(it);

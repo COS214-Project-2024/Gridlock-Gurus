@@ -1,31 +1,61 @@
 #include "DepartmentOfWaterPowerAndSanitation.h"
 #include <iostream>
 
+int DepartmentOfWaterPowerAndSanitation::repair() {
+    int repairBill = 0;
 
-void DepartmentOfWaterPowerAndSanitation::addUtilities(Utilities* utility) {
-    utilities.push_back(utility);
+    if(water->isBroken()) {
+        water->repair();
+        repairBill += water->getCost();
+    }
+
+    if(power->isBroken()) {
+        power->repair();
+        repairBill += power->getCost();
+    }
+
+    return repairBill;
 }
 
-void DepartmentOfWaterPowerAndSanitation::updateCitizenCount(int citizenCount) {
-    int waterConsumption = citizenCount * 2;
-    int energyConsumption = citizenCount * 3;
-    resources->manageConsumption(energyConsumption, waterConsumption);
+std::string DepartmentOfWaterPowerAndSanitation::checkNetwork() const {
+    std::string ret = "Broken Facilities:\n"; 
+
+    if(water->isBroken()) {
+       ret += "Water Facilities are broked waiting for repair!\n"; 
+    } 
+
+    if(power->isBroken()) {
+       ret += "Power Facilities are broked waiting for repair!\n";    
+    }
+
+    ret += "Shedding Facilities:\n"; 
+
+    if(water->isShedding()) {
+       ret += "Water usage is currently limited.\n"; 
+    } 
+
+    if(power->isShedding()) {
+       ret += "Power usage is currently limited.\n";    
+    }
+
+    return ret;
 }
 
-void DepartmentOfWaterPowerAndSanitation::repair() {
-    for (auto& utility : utilities) {
-        utility->repair();
+void DepartmentOfWaterPowerAndSanitation::reviewWaterUsage(int totalWater) {
+    if(totalWater >= water->getMax()) {
+        water->breakUtility();
+        water->shed();
     }
 }
 
-void DepartmentOfWaterPowerAndSanitation::checkNetwork() const {
-    for (const auto& utility : utilities) {
-        utility->checkCapacity();
+void DepartmentOfWaterPowerAndSanitation::reviewPowerUsage(int totalPower) {
+    if(totalPower >= power->getMax()) {
+        power->breakUtility();
+        power->shed();
     }
 }
 
-DepartmentOfWaterPowerAndSanitation::~DepartmentOfWaterPowerAndSanitation() {
-    for (auto utility : utilities) {
-        delete utility;
-    }
+void DepartmentOfWaterPowerAndSanitation::upgrade() {
+    power->upgradeProduction();
+    water->upgradeProduction();
 }

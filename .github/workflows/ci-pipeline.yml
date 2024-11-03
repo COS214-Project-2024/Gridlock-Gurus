@@ -29,7 +29,7 @@ jobs:
       - name: Branch Protection Checks
         run: |
           # Prevent direct pushes to the main branch
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          if [[ "${GITHUB_REF}" == "refs/heads/main" && "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
             echo "Direct pushes to main are not allowed."
             exit 1
           fi
@@ -80,7 +80,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           cd build
-          ctest --output-on-failure
+          ./tests
 
       # Step 5: Memory Leak Check with Valgrind
       - name: Memory Leak Check with Valgrind

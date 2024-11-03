@@ -1,14 +1,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-/**
- * @brief Enum for command status.
- */
- enum Status {
-    PENDING,
-    EXECUTED,
-    UNDONE
- };
+#include "City.h"
+#include <memory>
 
 /**
  * @brief Abstract class representing a command in the simulation.
@@ -17,13 +11,14 @@
  */
 class Command {
 protected:
-    Status status;
-    int executionCount;
+    //int executionCount;
+    std::shared_ptr<City> city;
+
 public:
     /**
      * @brief Constructs a new Command object.
      */
-    Command();
+    Command(std::shared_ptr<City> city) : city(city) {}
 
     /**
      * @brief Destroys the Command object.
@@ -36,32 +31,33 @@ public:
      * This is a pure virtual function that concrete command classes must implement.
      */
     virtual void execute() = 0;
-      /**
+
+     /**
      * @brief Check if executed.
      */
-    void executed();
+    //void executed();
 
      /**
      * @brief Optionally undoes the command.
      */
-    virtual void undo();
+    //virtual void undo();
 
     /**
      * @brief Optionally re-executes the command after an undo.
      */
-    virtual void redo();
+    //virtual void redo();
 
     /**
      * @brief Gets the status of the command.
      * @return The current status of the command (PENDING, EXECUTED, or UNDONE).
      */
-    Status getStatus() const;
+    //Status getStatus() const;
 
     /**
      * @brief Gets the execution count of the command.
      * @return The number of times the command has been executed.
      */
-    int getExecutionCount() const;
+    //int getExecutionCount() const;
 
 };
 

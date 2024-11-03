@@ -8,12 +8,12 @@ Service::Service(int cost, std::string& location, Resources *resources, int size
 
 void Service::employ(Citizen& employee) {
     if (!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
-        employees.push_back(&employee);
+        employees.push_back(employee.getId());
     }
 }
 
 void Service::fire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employee.fired();
@@ -22,7 +22,7 @@ void Service::fire(Citizen& employee) {
 }
 
 void Service::retire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employees.erase(it);

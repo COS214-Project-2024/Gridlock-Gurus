@@ -18,7 +18,7 @@ class Factory : public Building {
 protected:
     int maxEmployees;  ///< Number of employees working in the factory.
     int productionRate;  ///< The rate at which resources are produced by the factory.
-    std::vector<Citizen*> employees;
+    std::vector<int> employees;
 
 public:
     /**
@@ -57,6 +57,10 @@ public:
 
     int getMaxEmployees() {
         return maxEmployees;
+    }
+
+    bool isFull() {
+        return maxEmployees <= employees.size();
     }
 };
 

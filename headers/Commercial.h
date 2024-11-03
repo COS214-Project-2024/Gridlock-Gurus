@@ -19,7 +19,7 @@ class Commercial : public Building {
 private:
     int productionRate;  
     int maxEmployees;
-    std::vector<Citizen*> employees;  
+    std::vector<int> employees;  
 
 public:
     /**
@@ -37,9 +37,6 @@ public:
      * @brief Destroys the Commercial building.
      */
     ~Commercial() override = default;
-
-    std::string getDetails() const override;
-
     /**
      * @brief Generates money in the commercial building.
      */
@@ -59,6 +56,9 @@ public:
 
     int getMaxEmployees(); 
 
+    bool isFull() {
+        return maxEmployees <= employees.size();
+    }
 };
 
 #endif // COMMERCIAL_H
