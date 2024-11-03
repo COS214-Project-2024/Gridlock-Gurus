@@ -18,14 +18,24 @@ int DepartmentOfWaterPowerAndSanitation::repair() {
 }
 
 std::string DepartmentOfWaterPowerAndSanitation::checkNetwork() const {
-    std::string ret = ""; 
+    std::string ret = "Broken Facilities:\n"; 
 
     if(water->isBroken()) {
        ret += "Water Facilities are broked waiting for repair!\n"; 
-    }
+    } 
 
     if(power->isBroken()) {
        ret += "Power Facilities are broked waiting for repair!\n";    
+    }
+
+    ret += "Shedding Facilities:\n"; 
+
+    if(water->isShedding()) {
+       ret += "Water usage is currently limited.\n"; 
+    } 
+
+    if(power->isShedding()) {
+       ret += "Power usage is currently limited.\n";    
     }
 
     return ret;
@@ -45,3 +55,7 @@ void DepartmentOfWaterPowerAndSanitation::reviewPowerUsage(int totalPower) {
     }
 }
 
+void DepartmentOfWaterPowerAndSanitation::upgrade() {
+    power->upgradeProduction();
+    water->upgradeProduction();
+}

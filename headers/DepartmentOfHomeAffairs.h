@@ -1,7 +1,6 @@
 #ifndef DEPARTMENTOFHOMEAFFAIRS_H
 #define DEPARTMENTOFHOMEAFFAIRS_H
 
-#include "CitizenIterator.h"
 #include "CitizenFactory.h"
 #include "TaxAuthority.h"
 #include <vector>

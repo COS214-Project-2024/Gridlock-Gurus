@@ -15,6 +15,7 @@
 #include "Commercial.h"
 #include "BuildingType.h"
 #include "Citizen.h"
+#include "TaxStrategy.h"
 #include "BrickFactory.h"
 #include "WoodFactory.h"
 #include "SteelFactory.h"
@@ -85,9 +86,19 @@ public:
 
     void calculateHappiness();
 
+    //UTILITIES
+    /**
+    * Determines if the utilites are functional or under strain.
+    */
     void checkUtilityUsage();
 
+    void getUtilityStats(std::string& temp);
+
+    void upgradeUtilities();
+
     void repairUtilities();
+
+    //TAX
 
     int checkCityFunds() const;//tested
 
@@ -95,12 +106,16 @@ public:
 
     void increaseTransport(VehicleType type);
 
-    void changeTaxStrategy();
+    //Tested
+    void changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
 
     int getBuildingCount();
-    int getCitizenCount();
-    int getWorkierCount();
 
+    int getCitizenCount();
+
+    int getWorkerCount();
+
+    void generateReport(std::string& temp);
 };
 
 #endif // CITY_H

@@ -11,9 +11,11 @@ int Commercial::produceMoney() {
 }
 
 void Commercial::employ(Citizen& employee) {
-    if (!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
-        employees.push_back(&employee);
+    if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
+        employees.push_back(employee.getId());
+        employee.setWork(*this);
     }
+
 }
 
 int Commercial::pay() {
@@ -21,16 +23,16 @@ int Commercial::pay() {
 }
 
 void Commercial::fire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
-        employee.fired();
         employees.erase(it);
-    }
+        employee.fired();
+    }   
 }
 
 void Commercial::retire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employees.erase(it);

@@ -8,11 +8,15 @@ DepartmentOfHomeAffairs::DepartmentOfHomeAffairs(std::shared_ptr<TaxAuthority> t
 }
 
 DepartmentOfHomeAffairs::~DepartmentOfHomeAffairs() {
+    taxAuthority->deregisterAllCitizens();
+
     for (Citizen* citizen : citizens) {
         if(citizen) {
+            citizen->quitJob();
             delete citizen;
         }
     }
+     citizens.clear();
 }
 
 void DepartmentOfHomeAffairs::registerBirth() {
@@ -45,28 +49,36 @@ int DepartmentOfHomeAffairs::calculateAvgHappiness() {
 
 void DepartmentOfHomeAffairs::fillHomeWithTenants(Residential& home) {
     while(!home.isFull()) {
-        home.addTenant(*factory->createCitizen(CitizenType::Citizen, 100, 1000));
+        Citizen* c = factory->createCitizen(CitizenType::Citizen, 100, 1000);
+        citizens.push_back(c);
+        home.addTenant(*c);
         ++population;
     }
 }
 
 void DepartmentOfHomeAffairs::fillWorkWithEmployees(Factory& work) {
     while(!work.isFull()) {
-        work.employ(*factory->createCitizen(CitizenType::Worker, 100, 1000));
+        Citizen* c = factory->createCitizen(CitizenType::Worker, 100, 1000);
+        citizens.push_back(c);
+        work.employ(*c);
         ++population;
     }
 }
 
 void DepartmentOfHomeAffairs::fillWorkWithEmployees(Service& work) {
     while(!work.isFull()) {
-            work.employ(*factory->createCitizen(CitizenType::Worker, 100, 1000));
+            Citizen* c = factory->createCitizen(CitizenType::Worker, 100, 1000);
+            citizens.push_back(c);
+            work.employ(*c);
             ++population;
         }
 }
 
 void DepartmentOfHomeAffairs::fillWorkWithEmployees(Commercial& work){
     while(!work.isFull()) {
-            work.employ(*factory->createCitizen(CitizenType::Worker, 100, 1000));
+            Citizen* c = factory->createCitizen(CitizenType::Worker, 100, 1000);
+            citizens.push_back(c);
+            work.employ(*c);
             ++population;
         }
 }
@@ -74,7 +86,7 @@ void DepartmentOfHomeAffairs::fillWorkWithEmployees(Commercial& work){
 Citizen& DepartmentOfHomeAffairs::getRandomCitizen(){
     // Ensure the vector is not empty
     if (citizens.empty()) {
-        Citizen *c = factory->createCitizen(CitizenType::Worker, 100, 1000);
+        Citizen* c = factory->createCitizen(CitizenType::Worker, 100, 1000);
         citizens.push_back(c);
         ++population;
         return *c;
