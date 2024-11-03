@@ -7,11 +7,6 @@
 
 class City;
 
-enum TaxType{
-    Flat,
-    Progressive
-};
-
 class IncreaseTransportCommand : public Command {
     VehicleType type;
 public:
@@ -30,7 +25,9 @@ public:
     /**
      * @brief Executes the command.
      */
-     void execute() override;
+     void execute() override {
+        city->increaseTransport(type);
+     }
 };
 
 #endif // INCREASETRANSPORTCOMMAND_H

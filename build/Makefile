@@ -836,30 +836,6 @@ src/HighFundingState.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HighFundingState.cpp.s
 .PHONY : src/HighFundingState.cpp.s
 
-src/IncreaseTransportCommand.o: src/IncreaseTransportCommand.cpp.o
-.PHONY : src/IncreaseTransportCommand.o
-
-# target to build an object file
-src/IncreaseTransportCommand.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/IncreaseTransportCommand.cpp.o
-.PHONY : src/IncreaseTransportCommand.cpp.o
-
-src/IncreaseTransportCommand.i: src/IncreaseTransportCommand.cpp.i
-.PHONY : src/IncreaseTransportCommand.i
-
-# target to preprocess a source file
-src/IncreaseTransportCommand.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/IncreaseTransportCommand.cpp.i
-.PHONY : src/IncreaseTransportCommand.cpp.i
-
-src/IncreaseTransportCommand.s: src/IncreaseTransportCommand.cpp.s
-.PHONY : src/IncreaseTransportCommand.s
-
-# target to generate assembly for a file
-src/IncreaseTransportCommand.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/IncreaseTransportCommand.cpp.s
-.PHONY : src/IncreaseTransportCommand.cpp.s
-
 src/Landmark.o: src/Landmark.cpp.o
 .PHONY : src/Landmark.o
 
@@ -1697,9 +1673,6 @@ help:
 	@echo "... src/HighFundingState.o"
 	@echo "... src/HighFundingState.i"
 	@echo "... src/HighFundingState.s"
-	@echo "... src/IncreaseTransportCommand.o"
-	@echo "... src/IncreaseTransportCommand.i"
-	@echo "... src/IncreaseTransportCommand.s"
 	@echo "... src/Landmark.o"
 	@echo "... src/Landmark.i"
 	@echo "... src/Landmark.s"
