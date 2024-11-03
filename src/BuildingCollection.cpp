@@ -8,8 +8,6 @@ BuildingCollection::~BuildingCollection() {
     for (Building* building : buildings) {
             delete building;
     }
-
-    //buildings.clear();
 }
 
 BuildingIterator BuildingCollection::begin() { 

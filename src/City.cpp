@@ -83,9 +83,17 @@ void City::calculateHappiness() {
 void City::checkUtilityUsage() {
     int totalWater = government->getTaxAuthority()->getWaterUsage();
     int totalPower = government->getTaxAuthority()->getPowerUsage();
-    
      government->getDepartmentOfWaterPowerAndSanitation()->reviewWaterUsage(totalWater);
      government->getDepartmentOfWaterPowerAndSanitation()->reviewPowerUsage(totalPower);
+}
+
+void City::getUtilityStats(std::string& temp) {
+    temp += government->getDepartmentOfWaterPowerAndSanitation()->checkNetwork();
+}
+
+void City::upgradeUtilities() {
+    government->getDepartmentOfWaterPowerAndSanitation()->upgrade();
+    std::cout << "Utilites have been upgraded and undergone any repairs.\n";
 }
 
 void City::repairUtilities() {
@@ -101,3 +109,27 @@ void City::startTaxCycle() {
     government->getBudgetDepartment()->receiveTaxes();
 }
 
+int City::getBuildingCount() {
+    return government->getTaxAuthority()->getSize();
+}
+
+int City::getCitizenCount() {
+    return government->getDepartmentOfHomeAffairs()->getPopulation();
+}
+
+int City::getWorkerCount() {
+    return government->getTaxAuthority()->getAmountOfCitizens();
+}
+
+void City::increaseTransport(VehicleType type){
+    government->getTransportDepartment()->addTransport(type);
+}
+
+void City::changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy){
+    return government->getTaxAuthority()->setStrategy(std::move(taxStrategy));
+}
+
+void City::generateReport(std::string& temp) {
+    government->getTransportDepartment()->getReport(temp);
+    getUtilityStats(temp);
+}

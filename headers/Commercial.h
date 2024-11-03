@@ -19,7 +19,7 @@ class Commercial : public Building {
 private:
     int productionRate;  
     int maxEmployees;
-    std::vector<Citizen*> employees;  
+    std::vector<int> employees;  
 
 public:
     /**
@@ -37,7 +37,6 @@ public:
      * @brief Destroys the Commercial building.
      */
     ~Commercial() override = default;
-
     /**
      * @brief Generates money in the commercial building.
      */

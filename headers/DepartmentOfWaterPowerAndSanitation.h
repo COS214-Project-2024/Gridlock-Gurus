@@ -52,6 +52,8 @@ public:
     void reviewWaterUsage(int totalWater);
 
     void reviewPowerUsage(int totalPower);
+
+    void upgrade();
 };
 
 #endif // DEPARTMENTOFWATERPOWERANDSANITATION_H

@@ -1,7 +1,6 @@
 #ifndef DEPARTMENTOFHOMEAFFAIRS_H
 #define DEPARTMENTOFHOMEAFFAIRS_H
 
-#include "CitizenIterator.h"
 #include "CitizenFactory.h"
 #include "TaxAuthority.h"
 #include <vector>
@@ -59,7 +58,9 @@ public:
     void fillWorkWithEmployees(Service& work); 
     void fillWorkWithEmployees(Commercial& work); 
     Citizen& getRandomCitizen();
-
+    int getPopulation() {
+        return population;
+    }
 protected:
     /**
      * @brief Registers a birth in the department.

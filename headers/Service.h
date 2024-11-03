@@ -16,7 +16,7 @@
  */
 class Service : public Building {
 protected:
-    std::vector<Citizen*> employees;
+    std::vector<int> employees;
     double benefits;
     int maxEmployees;
     int id;
@@ -34,7 +34,9 @@ public:
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service() = default;
+    virtual ~Service() {
+        employees.clear();
+    }
 
     /**
      * @brief Produces resources in the service building.

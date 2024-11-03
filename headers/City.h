@@ -15,6 +15,7 @@
 #include "Commercial.h"
 #include "BuildingType.h"
 #include "Citizen.h"
+#include "TaxStrategy.h"
 #include "BrickFactory.h"
 #include "WoodFactory.h"
 #include "SteelFactory.h"
@@ -23,7 +24,7 @@
 #include "EducationService.h"
 #include "HealthService.h"
 #include "PoliceService.h"
-
+#include "VehicleType.h"
 
 enum CityState {
     Happy,
@@ -77,22 +78,44 @@ public:
      */
     CityState getState() const; 
 
-    void removeLastBuilding();
+    void removeLastBuilding();//test
 
-    int getCitizenHappiness() const;
+    int getCitizenHappiness() const;//test
 
     void setCitizenHappiness(int happiness);
 
     void calculateHappiness();
 
+    //UTILITIES
+    /**
+    * Determines if the utilites are functional or under strain.
+    */
     void checkUtilityUsage();
+
+    void getUtilityStats(std::string& temp);
+
+    void upgradeUtilities();
 
     void repairUtilities();
 
-    int checkCityFunds() const;
+    //TAX
+
+    int checkCityFunds() const;//tested
 
     void startTaxCycle();
 
+    void increaseTransport(VehicleType type);
+
+    //Tested
+    void changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
+
+    int getBuildingCount();
+
+    int getCitizenCount();
+
+    int getWorkerCount();
+
+    void generateReport(std::string& temp);
 };
 
 #endif // CITY_H
