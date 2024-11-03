@@ -52,7 +52,7 @@ Vehicle& TransportDepartment::getAvailableVehicle(VehicleType type) {
     }
 
     Vehicle* v = new Vehicle(VehicleType::Taxi,4,*this);
-    addVehicle(*v);
+    addVehicle(v);
 
     return *v;
 }
