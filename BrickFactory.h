@@ -55,4 +55,4 @@ public:
     void payEmployee(Citizen* employee);
 };
 
-#endif // BRICKFACTORY_H
+#endif // BRICKFACTORY_H 
