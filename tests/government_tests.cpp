@@ -3,21 +3,17 @@
 #include "../headers/CitizenType.h"
 #include "../headers/TaxAuthority.h"
 #include "../headers/Building.h"
-#include "../headers/Factory.h"
-#include "../headers/BrickFactory.h"
-#include "../headers/FactoryFactory.h"
-#include "../headers/BuildingType.h"
-#include "../headers/Residential.h"
-#include "../headers/ResidentialFactory.h"
+#include "../headers/City.h"
+#include "../headers/Government.h"
 
 #include <memory>
 
 class government_test : public ::testing::Test {
     protected:
-        std::shared_ptr<TaxAuthority> taxAuth;
-        
+        City* city;
+
         void SetUp() override {
-            taxAuth = std::make_shared<TaxAuthority>();
+            city = new City();
         }
         
         void TearDown() override {
@@ -25,18 +21,25 @@ class government_test : public ::testing::Test {
 };
 
 // Test Constructor
-/*TEST_F(government_test, construction_test) {
-    EXPECT_EQ(c->getId(),0);
-    EXPECT_EQ(c->getType(),CitizenType::Citizen);
-    EXPECT_EQ(c->getSatisfactionLevel(),100);
-    EXPECT_EQ(c->getFunds(),300);
-    EXPECT_EQ(c->hasHome(),false);
-    EXPECT_EQ(c->getEmploymentStatus(),false);
-    EXPECT_EQ(c->isInVehicle(),false);
+TEST_F(government_test, construction_test) {
+    EXPECT_EQ(city->getState(),CityState::Happy);
+    EXPECT_EQ(city->checkFunds(),20000);
+
+    city->startTaxCycle();
+    EXPECT_EQ(city->checkFunds(),20000);
+
+    EXPECT_EQ(city->getCitizenHappiness(),0);
+    EXPECT_EQ(city->setCitizenHappiness(),100);
+    EXPECT_EQ(city->getCitizenHappiness(),100);
+    city->calculateCitizenHappiness();
+    EXPECT_EQ(city->getCitizenHappiness(),0);
+    EXPECT_EQ(city->getState(),CityState::Upset);
+
+    city->removeLastBuilding();
 
 }
 
-TEST_F(citizen_test, citizen_tax_test) {
+/*TEST_F(citizen_test, citizen_tax_test) {
     BrickFactory* workPtr = dynamic_cast<BrickFactory*>(work);
 
     c->payTaxes(100);

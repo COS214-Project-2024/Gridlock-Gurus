@@ -59,7 +59,9 @@ public:
     void fillWorkWithEmployees(Service& work); 
     void fillWorkWithEmployees(Commercial& work); 
     Citizen& getRandomCitizen();
-
+    int getPopulation() {
+        return population;
+    }
 protected:
     /**
      * @brief Registers a birth in the department.

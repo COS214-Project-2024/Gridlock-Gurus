@@ -2,7 +2,7 @@
 #include "TaxAuthority.h"
 
 BudgetDepartment::BudgetDepartment(std::shared_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {
-    this->totalAvailable = 0;
+    this->totalAvailable = 20000;
 }
 
 int BudgetDepartment::checkTotal() {
