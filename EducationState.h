@@ -32,4 +32,4 @@ public:
     virtual int getEducationQuality() = 0;
 };
 
-#endif // EDUCATIONSTATE_H
+#endif // EDUCATIONSTATE_H 
