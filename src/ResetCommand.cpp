@@ -3,7 +3,8 @@
 
 void ResetCommand::execute() {
     city = std::make_shared<City>();
-    BuildCommand newBuild(*city, director, BuildingType::House);
+    std::shared_ptr<City> city = std::make_shared<City>();
+    BuildCommand newBuild(city, director, BuildingType::House);
     newBuild.execute();
     std::cout<<"New city created"<<std::endl;
 }
