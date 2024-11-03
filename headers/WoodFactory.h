@@ -32,12 +32,6 @@ public:
      ~WoodFactory() override = default;
 
     /**
-     * @brief Gets details about the wood factory.
-     * @return A string containing details about the wood factory.
-     */
-    std::string getDetails() const override;
-
-    /**
      * @brief Produces wood in the factory.
      */
     int produceResource() override;

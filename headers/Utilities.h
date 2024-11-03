@@ -44,8 +44,22 @@ public:
      virtual ~Utilities() = default;
 
      UtilityType getType() const { return type; }
+
      bool isShedding() const { return shedding; }
+
      bool isBroken() const { return isRepair; }
+
+     int getMax() const {
+        return maxProduction;
+     }
+     
+    int getCost() const {
+        return costOfRepair;
+    }
+
+    void upgradeProduction() {
+        this->maxProduction *= 2;
+    }
 };
 
 #endif // UTILITIES_H

@@ -31,13 +31,6 @@ public:
      * @brief Destroys the SteelFactory object.
      */
     ~SteelFactory() override = default;
-
-    /**
-     * @brief Gets details about the steel factory.
-     * @return A string containing details about the steel factory.
-     */
-    std::string getDetails() const override;
-
     /**
      * @brief Produces steel in the factory.
      */

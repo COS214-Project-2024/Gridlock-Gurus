@@ -22,7 +22,7 @@ protected:
     std::string location;  ///< The location of the building.
     Resources* resources;  ///< Resources used by the building.
     int size;  ///< The size of the building.
-    Citizen& owner;  ///< The owner of the building.
+    Citizen* owner;  ///< The owner of the building.
     BuildingType name;
 
 public:
@@ -42,13 +42,7 @@ public:
      */
     virtual ~Building();
 
-    /**
-     * @brief Gets details about the building.
-     * @return A string containing details about the building.
-     */
-     virtual std::string getDetails() const;
-
-     virtual int pay();
+    virtual int pay();
   
      /**
      * @brief Pays taxes on the building.
@@ -66,7 +60,14 @@ public:
      int getSize() const;
 
      BuildingType getName() const;
-     
+
+    int getWaterConsumption() const {
+        return resources->getWaterConsumption();
+    }
+
+    int getPowerConsumption() const {
+        return resources->getPowerConsumption();
+    }
 };
 
 #endif // BUILDING_H

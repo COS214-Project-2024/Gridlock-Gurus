@@ -5,24 +5,17 @@ Commercial::Commercial(int cost, std::string& location, Resources* resources, in
     this->productionRate = rate;
 }
 
-std::string Commercial::getDetails() const {
-    std::string details = "Shop: \n";
-    details += "Owner: " + owner.getName() + "\n";
-    details += "Location: " + location + "\n";
-    details += "Capacity: " + std::to_string(employees.size()) + "/" + std::to_string(maxEmployees) + "\n";
-    details += "Cost: " + std::to_string(cost) + "\n";
-    details += "Size: " + std::to_string(size) + "\n";
-    return details;
-}
 
 int Commercial::produceMoney() {
     return 100;
 }
 
 void Commercial::employ(Citizen& employee) {
-    if (!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
-        employees.push_back(&employee);
+    if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
+        employees.push_back(employee.getId());
+        employee.setWork(*this);
     }
+
 }
 
 int Commercial::pay() {
@@ -30,16 +23,16 @@ int Commercial::pay() {
 }
 
 void Commercial::fire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
-        employee.fired();
         employees.erase(it);
-    }
+        employee.fired();
+    }   
 }
 
 void Commercial::retire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employees.erase(it);
