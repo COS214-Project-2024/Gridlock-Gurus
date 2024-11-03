@@ -50,4 +50,4 @@ public:
     void registerDeath(Citizen* citizen);
 };
 
-#endif // DEPARTMENTOFHOMEAFFAIRS_H
+#endif // DEPARTMENTOFHOMEAFFAIRS_H 
