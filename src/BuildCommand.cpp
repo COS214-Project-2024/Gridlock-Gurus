@@ -3,14 +3,14 @@
 void BuildCommand::execute() {
     status = EXECUTED;
     executionCount++;
-    city.addBuilding(buildingType);
+    city->addBuilding(buildingType);
 }
 
 void BuildCommand::undo() {
     if (status == EXECUTED) {
         status = UNDONE;
     }
-    city.removeLastBuilding();
+    city->removeLastBuilding();
 }
 
 void BuildCommand::redo() {

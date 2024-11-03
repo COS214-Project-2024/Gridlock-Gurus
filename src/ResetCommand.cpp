@@ -2,8 +2,7 @@
 #include "BuildCommand.h"
 
 void ResetCommand::execute() {
-    delete city;
-    city = new City();
+    city = std::make_shared<City>();
     BuildCommand newBuild(*city, director, BuildingType::House);
     newBuild.execute();
     std::cout<<"New city created"<<std::endl;
