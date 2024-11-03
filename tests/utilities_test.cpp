@@ -101,4 +101,8 @@ TEST_F(UtilitiesTest, CheckCapacity) {
     sanitation->checkCapacity();
     output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Sanitation system processing capacity: 200 liters per minute.\n");
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
