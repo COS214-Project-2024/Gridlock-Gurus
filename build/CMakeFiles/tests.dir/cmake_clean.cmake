@@ -71,6 +71,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/tests.dir/src/Power.cpp.o.d"
   "CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o"
   "CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.o.d"
+  "CMakeFiles/tests.dir/src/RepairUtilitiesCommand.cpp.o"
+  "CMakeFiles/tests.dir/src/RepairUtilitiesCommand.cpp.o.d"
   "CMakeFiles/tests.dir/src/Residential.cpp.o"
   "CMakeFiles/tests.dir/src/Residential.cpp.o.d"
   "CMakeFiles/tests.dir/src/ResidentialFactory.cpp.o"

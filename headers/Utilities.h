@@ -37,6 +37,10 @@ public:
     int getCost() const {
         return costOfRepair;
     }
+
+    void upgradeProduction() {
+        this->maxProduction *= 2;
+    }
 };
 
 #endif // UTILITIES_H

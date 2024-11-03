@@ -83,9 +83,17 @@ void City::calculateHappiness() {
 void City::checkUtilityUsage() {
     int totalWater = government->getTaxAuthority()->getWaterUsage();
     int totalPower = government->getTaxAuthority()->getPowerUsage();
-    
      government->getDepartmentOfWaterPowerAndSanitation()->reviewWaterUsage(totalWater);
      government->getDepartmentOfWaterPowerAndSanitation()->reviewPowerUsage(totalPower);
+}
+
+void City::getUtilityStats(std::string& temp) {
+    temp += government->getDepartmentOfWaterPowerAndSanitation()->checkNetwork();
+}
+
+void City::upgradeUtilities() {
+    government->getDepartmentOfWaterPowerAndSanitation()->upgrade();
+    std::cout << "Utilites have been upgraded and undergone any repairs.\n";
 }
 
 void City::repairUtilities() {
