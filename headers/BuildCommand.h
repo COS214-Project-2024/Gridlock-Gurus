@@ -18,13 +18,15 @@ class City;
  * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle building construction.
  */
 class BuildCommand : public Command {
+    std::shared_ptr<City> city;
     Director& director;
     BuildingType buildingType;
 public:
     /**
      * @brief Constructs a new BuildCommand object.
      */
-    BuildCommand(City& city, Director& director, BuildingType buildingType) : city(city), director(director), buildingType(buildingType){}
+ BuildCommand(std::shared_ptr<City> city, Director& director, BuildingType buildingType)
+     : city(city), director(director), buildingType(buildingType) {}
 
 
     /**
