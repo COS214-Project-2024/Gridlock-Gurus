@@ -5,10 +5,9 @@
 #include "City.h"
 
 class IncreaseTransport : public Command {
-    City& city;
     VehicleType transportType;
 public:
-    IncreaseTransport(City& city, VehicleType& transportType) : city(city), transportType(transportType) {};
+    IncreaseTransport(VehicleType& transportType) : transportType(transportType) {};
     ~IncreaseTransport() {};
     void execute() override;
 };

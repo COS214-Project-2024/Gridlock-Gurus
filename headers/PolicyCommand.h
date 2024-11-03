@@ -10,7 +10,6 @@
  * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle the enforcement of government policies.
  */
 class PolicyCommand : public Command {
-    City& city;
     std::string policyName;
     int previousHappiness;
 
@@ -18,7 +17,7 @@ public:
     /**
      * @brief Constructs a new PolicyCommand object.
      */
-    PolicyCommand(City& city, const std::string& policyName): city(city), policyName(policyName), previousHappiness(0) {}
+    PolicyCommand(const std::string& policyName): policyName(policyName), previousHappiness(0) {}
 
     /**
      * @brief Destroys the PolicyCommand object.

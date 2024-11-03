@@ -1,5 +1,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
+#include <memory>
+
+#include "City.h"
 
 /**
  * @brief Enum for command status.
@@ -17,6 +20,7 @@
  */
 class Command {
 protected:
+    std::shared_ptr<City> city;
     Status status;
     int executionCount;
 public:

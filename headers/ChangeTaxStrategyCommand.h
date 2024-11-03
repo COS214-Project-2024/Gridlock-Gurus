@@ -5,9 +5,8 @@
 #include "City.h"
 
 class ChangeTaxStrategyCommand : public Command{
-    City*& city;
 public:
-  ChangeTaxStrategyCommand(City*& city) : city(city){};
+  ChangeTaxStrategyCommand();
   ~ChangeTaxStrategyCommand(){};
   void execute() override;
 };

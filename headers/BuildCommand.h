@@ -18,7 +18,6 @@ class City;
  * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle building construction.
  */
 class BuildCommand : public Command {
-    City& city;
     Director& director;
     BuildingType buildingType;
 public:
