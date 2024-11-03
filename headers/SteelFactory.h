@@ -13,7 +13,9 @@ public:
     SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) 
     : Factory(cost, location, resources,size,owner,name,productionRate,max) {};
     ~SteelFactory() override = default;
-    std::string getDetails() const override;
+    /**
+     * @brief Produces steel in the factory.
+     */
     int produceResource() override;
      int pay() override;
 

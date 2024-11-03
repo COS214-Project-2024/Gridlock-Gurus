@@ -14,7 +14,6 @@ public:
 
     ~Landmark() override = default;
 
-    std::string getDetails() const override;
 };
 
 #endif // LANDMARK_H

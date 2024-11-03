@@ -12,18 +12,23 @@ class Resources;
 
 class Building {
 protected:
-    int cost;
-    std::string location;
-    Resources* resources;
-    int size;
-    Citizen& owner;
+    int cost;  ///< The construction cost of the building.
+    std::string location;  ///< The location of the building.
+    Resources* resources;  ///< Resources used by the building.
+    int size;  ///< The size of the building.
+    Citizen* owner;  ///< The owner of the building.
     BuildingType name;
 
 public:
     Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name);
     virtual ~Building();
-     virtual std::string getDetails() const;
-     virtual int pay();
+
+    virtual int pay();
+  
+     /**
+     * @brief Pays taxes on the building.
+     * @param amount The amount of tax to be paid.
+     */
     void payTax(int amount);
      int getCost() const;
      std::string getLocation() const;

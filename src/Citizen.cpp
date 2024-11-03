@@ -50,10 +50,17 @@ void Citizen::payTaxes(int amount){
     }
 }
 
+void Citizen::quitJob() {
+    if (employmentStatus && placeOfWork) {
+        //placeOfWork->retire(*this);
+    }
+}
+
 void Citizen::retire(){
     type = CitizenType::Retired;
     employmentStatus = false;
     retired = true;
+    //home->removeTenant(*this);
     placeOfWork = nullptr;
     if(satisfactionLevel < 100)
             satisfactionLevel += 5;

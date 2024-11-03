@@ -14,13 +14,15 @@ class Commercial : public Building {
 private:
     int productionRate;  
     int maxEmployees;
-    std::vector<Citizen*> employees;  
+    std::vector<int> employees;  
 
 public:
     Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name,int max, int rate); 
 
     ~Commercial() override = default;
-
+    /**
+     * @brief Generates money in the commercial building.
+     */
     int produceMoney();
 
     void employ(Citizen& employee);

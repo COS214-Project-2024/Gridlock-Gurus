@@ -1,9 +1,8 @@
 #include "Command.h"
 #include <iostream>
 
-Command::Command() : status(PENDING), executionCount(0) {}
 
-void Command::executed() {
+/*void Command::executed() {
     status = EXECUTED;
     executionCount++;
 
@@ -32,3 +31,4 @@ Status Command::getStatus() const {
 int Command::getExecutionCount() const {
     return executionCount;
 }
+*/

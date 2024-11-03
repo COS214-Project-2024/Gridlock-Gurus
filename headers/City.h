@@ -15,6 +15,7 @@
 #include "Commercial.h"
 #include "BuildingType.h"
 #include "Citizen.h"
+#include "TaxStrategy.h"
 #include "BrickFactory.h"
 #include "WoodFactory.h"
 #include "SteelFactory.h"
@@ -72,11 +73,11 @@ public:
 
     void increaseTransport(VehicleType type);
 
-    void changeTaxStrategy();
+    void changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
 
     int getBuildingCount();
     int getCitizenCount();
-    int getWorkierCount();
+    int getWorkerCount();
 
 };
 

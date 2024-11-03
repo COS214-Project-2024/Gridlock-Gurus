@@ -12,9 +12,9 @@
 
 class Factory : public Building {
 protected:
-    int maxEmployees;
-    int productionRate;
-    std::vector<Citizen*> employees;
+    int maxEmployees;  ///< Number of employees working in the factory.
+    int productionRate;  ///< The rate at which resources are produced by the factory.
+    std::vector<int> employees;
 
 public:
     Factory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) 
