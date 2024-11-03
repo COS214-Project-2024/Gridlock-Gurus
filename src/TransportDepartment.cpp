@@ -4,8 +4,8 @@
 
 #include <map>
 
-void TransportDepartment::addVehicle(const Vehicle& vehicle) {
-    vehicles.push_back(&vehicle);
+void TransportDepartment::addVehicle(Vehicle* vehicle) {
+    vehicles.push_back(vehicle);
 }
 
 void TransportDepartment::manage() {
@@ -38,7 +38,7 @@ int TransportDepartment::getBroken() {
 
 TransportDepartment::~TransportDepartment() {
     for (Vehicle* v : vehicles) {
-            delete v;
+        delete v;
     }
 }
 
