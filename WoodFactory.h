@@ -55,4 +55,4 @@ public:
     void payEmployee(Citizen* employee);
 };
 
-#endif // WOODFACTORY_H
+#endif // WOODFACTORY_H 
