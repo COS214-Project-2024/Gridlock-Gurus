@@ -4,7 +4,7 @@
 
 #include <map>
 
-void TransportDepartment::addVehicle(Vehicle& vehicle) {
+void TransportDepartment::addVehicle(const Vehicle& vehicle) {
     vehicles.push_back(&vehicle);
 }
 

@@ -113,8 +113,10 @@ int City::getWorkierCount() {
     return government->getTaxAuthority()->getAmountOfCitizens();
 }
 
-void City::increaseTransport(Vehicle &type){
-    government->getTransportDepartment()->addVehicle(type);
+void City::increaseTransport(VehicleType type){
+    int capacity = (type == VehicleType::Taxi) ? 4 : 100;
+    Vehicle newVehicle(type, capacity, *government->getTransportDepartment());
+    government->getTransportDepartment()->addVehicle(newVehicle);
 }
 
 void City::changeTaxStrategy(){

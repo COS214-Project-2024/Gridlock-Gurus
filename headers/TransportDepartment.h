@@ -13,7 +13,7 @@ private:
     std::vector<Vehicle*> vehicles;
 
 public:
-    void addVehicle(Vehicle& vehicle);
+    void addVehicle(const Vehicle& vehicle);
     void manage();
     ~TransportDepartment(); 
     Vehicle& getAvailableVehicle(VehicleType type);

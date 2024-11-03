@@ -40,7 +40,7 @@ public:
         return totalAvailable <= 100;
     }
 
-    std::unique_ptr<TaxStrategy> BudgetDepartment::recommendTaxStrategy();
+    std::unique_ptr<TaxStrategy> recommendTaxStrategy();
 };
 
 #endif // BUDGETDEPARTMENT_H

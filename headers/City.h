@@ -93,7 +93,7 @@ public:
 
     void startTaxCycle();
 
-    void increaseTransport(Vehicle &type);
+    void increaseTransport(VehicleType type);
 
     void changeTaxStrategy();
 
