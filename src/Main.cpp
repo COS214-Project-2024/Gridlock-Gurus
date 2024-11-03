@@ -24,7 +24,7 @@ public:
     }
 
     bool OnUserCreate() override {
-        png = new olc::Sprite("imageSet.png");
+        png = new olc::Sprite("./images/imageSet.png");
 
         buildingListBox->m_vList.emplace_back("BUILDINGS:");
         buildingNameLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
@@ -41,7 +41,6 @@ public:
     }
 
     bool OnUserUpdate(float fElapsedTime) override {
-
         Clear(olc::BLACK);
 
         guiManager.Update(this);
@@ -68,7 +67,8 @@ public:
         }
 
         if (buildingListBox->nSelectedItem) {
-            DrawPartialSprite(400, 20, png, 22, 16, 68, 130);
+            size_t n = buildingListBox->nSelectedItem;
+            DrawPartialSprite({400, 20}, png, getSpritePartials(n, true), getSpritePartials(n, false));
         }
 
         if (newCitizenButton->bReleased) {
@@ -90,6 +90,7 @@ public:
 
         if (citizenListBox->bSelectionChanged) {
             if (citizenListBox->nSelectedItem == 0) {
+
             } else {
                 console->sText = cits.at(citizenListBox->nSelectedItem - 1)->getName();
             }
@@ -143,6 +144,19 @@ protected:
         }
     }
 
+    olc::v_2d<int> getSpritePartials(int i, bool b) {
+        switch (i) {
+            case 1:
+                return (b) ? olc::v_2d{30, 30} : olc::v_2d{51, 99};
+            case 2:
+                return (b) ? olc::v_2d{110, 30} : olc::v_2d{51, 99};
+            case 3:
+                return (b) ? olc::v_2d{190, 30} : olc::v_2d{51, 99};
+            default:
+                return (b) ? olc::v_2d{493, 128} : olc::v_2d{21, 20};
+        }
+    }
+
     olc::Sprite *png = nullptr;
 
     olc::QuickGUI::Manager guiManager;
@@ -171,8 +185,16 @@ protected:
 };
 
 int main() {
+
+
     cits.push_back(new Citizen(1, CitizenType::Worker, 80, 5000, tax));
     cits.push_back(new Citizen(2, CitizenType::Citizen, 75, 1000, tax));
+
+    TransportDepartment department;
+
+    Train *train = new Train(100);
+    Taxi *taxi = new Taxi(4);
+    Truck *truck = new Truck(10);
 
     GridGui gui;
     if (gui.Construct(730, 370, 2, 2)) {
@@ -181,11 +203,7 @@ int main() {
         std::cout << "ERROR:\tGui failed to construct\n";
     }
 
-    TransportDepartment department;
 
-    Train *train = new Train(100);
-    Taxi *taxi = new Taxi(4);
-    Truck *truck = new Truck(10);
 
     Functional functional;
     Damaged damaged;
