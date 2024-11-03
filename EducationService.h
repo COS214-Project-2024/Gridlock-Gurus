@@ -63,4 +63,4 @@ public:
     void payStaff(Citizen* staffMember);
 };
 
-#endif // EDUCATIONSERVICE_H
+#endif // EDUCATIONSERVICE_H 
