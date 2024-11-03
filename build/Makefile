@@ -1316,54 +1316,6 @@ src/TaxCommand.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.s
 .PHONY : src/TaxCommand.cpp.s
 
-src/Taxi.o: src/Taxi.cpp.o
-.PHONY : src/Taxi.o
-
-# target to build an object file
-src/Taxi.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Taxi.cpp.o
-.PHONY : src/Taxi.cpp.o
-
-src/Taxi.i: src/Taxi.cpp.i
-.PHONY : src/Taxi.i
-
-# target to preprocess a source file
-src/Taxi.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Taxi.cpp.i
-.PHONY : src/Taxi.cpp.i
-
-src/Taxi.s: src/Taxi.cpp.s
-.PHONY : src/Taxi.s
-
-# target to generate assembly for a file
-src/Taxi.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Taxi.cpp.s
-.PHONY : src/Taxi.cpp.s
-
-src/Train.o: src/Train.cpp.o
-.PHONY : src/Train.o
-
-# target to build an object file
-src/Train.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Train.cpp.o
-.PHONY : src/Train.cpp.o
-
-src/Train.i: src/Train.cpp.i
-.PHONY : src/Train.i
-
-# target to preprocess a source file
-src/Train.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Train.cpp.i
-.PHONY : src/Train.cpp.i
-
-src/Train.s: src/Train.cpp.s
-.PHONY : src/Train.s
-
-# target to generate assembly for a file
-src/Train.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Train.cpp.s
-.PHONY : src/Train.cpp.s
-
 src/TransportDepartment.o: src/TransportDepartment.cpp.o
 .PHONY : src/TransportDepartment.o
 
@@ -1580,6 +1532,30 @@ tests/tax_system_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/tax_system_test.cpp.s
 .PHONY : tests/tax_system_test.cpp.s
 
+tests/transport_test.o: tests/transport_test.cpp.o
+.PHONY : tests/transport_test.o
+
+# target to build an object file
+tests/transport_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/transport_test.cpp.o
+.PHONY : tests/transport_test.cpp.o
+
+tests/transport_test.i: tests/transport_test.cpp.i
+.PHONY : tests/transport_test.i
+
+# target to preprocess a source file
+tests/transport_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/transport_test.cpp.i
+.PHONY : tests/transport_test.cpp.i
+
+tests/transport_test.s: tests/transport_test.cpp.s
+.PHONY : tests/transport_test.s
+
+# target to generate assembly for a file
+tests/transport_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/transport_test.cpp.s
+.PHONY : tests/transport_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1733,12 +1709,6 @@ help:
 	@echo "... src/TaxCommand.o"
 	@echo "... src/TaxCommand.i"
 	@echo "... src/TaxCommand.s"
-	@echo "... src/Taxi.o"
-	@echo "... src/Taxi.i"
-	@echo "... src/Taxi.s"
-	@echo "... src/Train.o"
-	@echo "... src/Train.i"
-	@echo "... src/Train.s"
 	@echo "... src/TransportDepartment.o"
 	@echo "... src/TransportDepartment.i"
 	@echo "... src/TransportDepartment.s"
@@ -1766,6 +1736,9 @@ help:
 	@echo "... tests/tax_system_test.o"
 	@echo "... tests/tax_system_test.i"
 	@echo "... tests/tax_system_test.s"
+	@echo "... tests/transport_test.o"
+	@echo "... tests/transport_test.i"
+	@echo "... tests/transport_test.s"
 .PHONY : help
 
 

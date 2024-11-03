@@ -4,12 +4,12 @@
 #include <string>
 #include "TransportState.h"
 #include "TransportDepartment.h"
+#include "BrokenState.h"
+#include "FunctionalState.h"
 #include "VehicleType.h"
 #include <memory>
 class TransportDepartment;
 class TransportState;
-
-
 
 enum VehicleState {
     Functional,
@@ -31,9 +31,18 @@ public:
     ~Vehicle() = default;
 
     void collect(int passengers); 
+
     bool run();           
+
     void setState();
-    virtual Vehicle* clone();     
+
+    Vehicle* clone();     
+
+    void offload();
+
+    void repair();
+
+    void requestRepair();
 
     VehicleType getType() const {
         return type;
@@ -43,9 +52,19 @@ public:
         return vehicle_state;
     }
 
-    void offload();
-    void repair();
-    void requestRepair();
+    int getUsage() {
+        return usageCount;
+    }
+
+    int getCurrentPassengers() {
+        return currentPassengers;
+    }
+
+    int getCapacity() {
+        return capacity;
+    }
+
 };
 
-#endif
+#endif //VEHICLE_H
+

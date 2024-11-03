@@ -2,26 +2,38 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <map>
+
 void TransportDepartment::addVehicle(Vehicle& vehicle) {
-    vehicles.push_back(vehicle);
+    vehicles.push_back(&vehicle);
 }
 
 void TransportDepartment::manage() {
-     std::map<VehicleType, int> functionalCounts;
-
-    for (auto& vehicle : vehicles) {
-        if (vehicle->getState() == VehicleState::Functional) {
-            functionalCounts[vehicle->getType()]++;
+    int count = 0;
+    for(Vehicle* v : vehicles) {
+        if(v->getState() == VehicleState::Broken) {
+            count++;
         }
     }
 
-    for (auto& vehicle : vehicles) {
-        if (vehicle->getState() == VehicleState::Broken) {
-            if (functionalCounts[vehicle->getType()] < (vehicles.size() / 2)) {
-                repairVehicles(vehicle);
+    if(count == vehicles.size()/2){
+        for(Vehicle* v : vehicles) {
+            if(v->getState() == VehicleState::Broken) {
+                repairVehicle(*v);
             }
         }
     }
+
+}
+
+int TransportDepartment::getBroken() {
+    int count = 0;
+    for(Vehicle* v : vehicles) {
+        if(v->getState() == VehicleState::Broken) {
+            count++;
+        }
+    }
+    return count;
 }
 
 TransportDepartment::~TransportDepartment() {
@@ -38,12 +50,17 @@ Vehicle& TransportDepartment::getAvailableVehicle(VehicleType type) {
             }
         }
     }
+
+    Vehicle* v = new Vehicle(VehicleType::Taxi,4,*this);
+    addVehicle(*v);
+
+    return *v;
 }
 
-void TransportDepartment::repairVehicles(Vehicle* vehicle) {
+void TransportDepartment::repairVehicle(Vehicle& vehicle) {
     std::cout << "Repairing Vehicle Fleet." << std::endl;
-    if (vehicle->getState() == VehicleState::Broken) {
-        vehicle->repair();
+    if (vehicle.getState() == VehicleState::Broken) {
+        vehicle.repair();
     }
 }
 

@@ -6,6 +6,7 @@
 #include "Vehicle.h"
 #include "VehicleType.h"
 class Vehicle;
+class VehicleTaxi;
 
 class TransportDepartment {
 private:
@@ -16,7 +17,11 @@ public:
     void manage();
     ~TransportDepartment(); 
     Vehicle& getAvailableVehicle(VehicleType type);
-    void repairVehicles(Vehicle* vehicle);
+    void repairVehicle(Vehicle& vehicle);
+    int getSize() {
+        return vehicles.size();
+    }
+    int getBroken();
 };
 
 #endif

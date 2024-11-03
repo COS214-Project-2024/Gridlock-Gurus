@@ -2,6 +2,7 @@
 #define CITIZEN_H
 
 #include "Vehicle.h"
+#include "VehicleType.h"
 #include "TransportDepartment.h"
 #include "Building.h"
 #include "TaxAuthority.h"
@@ -82,7 +83,7 @@ public:
      */
     void payTaxes(int amount);
     
-    void callTransport(TransportDepartment& department, const std::string& type);
+    void callTransport(TransportDepartment& department, VehicleType type);
 
     void retire();
     void retireToCountryside();

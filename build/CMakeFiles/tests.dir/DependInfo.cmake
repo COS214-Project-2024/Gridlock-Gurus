@@ -53,8 +53,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/SteelFactory.cpp" "CMakeFiles/tests.dir/src/SteelFactory.cpp.o" "gcc" "CMakeFiles/tests.dir/src/SteelFactory.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/TaxAuthority.cpp" "CMakeFiles/tests.dir/src/TaxAuthority.cpp.o" "gcc" "CMakeFiles/tests.dir/src/TaxAuthority.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/TaxCommand.cpp" "CMakeFiles/tests.dir/src/TaxCommand.cpp.o" "gcc" "CMakeFiles/tests.dir/src/TaxCommand.cpp.o.d"
-  "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Taxi.cpp" "CMakeFiles/tests.dir/src/Taxi.cpp.o" "gcc" "CMakeFiles/tests.dir/src/Taxi.cpp.o.d"
-  "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Train.cpp" "CMakeFiles/tests.dir/src/Train.cpp.o" "gcc" "CMakeFiles/tests.dir/src/Train.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/TransportDepartment.cpp" "CMakeFiles/tests.dir/src/TransportDepartment.cpp.o" "gcc" "CMakeFiles/tests.dir/src/TransportDepartment.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/UnrestState.cpp" "CMakeFiles/tests.dir/src/UnrestState.cpp.o" "gcc" "CMakeFiles/tests.dir/src/UnrestState.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/src/Utilities.cpp" "CMakeFiles/tests.dir/src/Utilities.cpp.o" "gcc" "CMakeFiles/tests.dir/src/Utilities.cpp.o.d"
@@ -64,6 +62,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/building_test.cpp" "CMakeFiles/tests.dir/tests/building_test.cpp.o" "gcc" "CMakeFiles/tests.dir/tests/building_test.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/citizen_test.cpp" "CMakeFiles/tests.dir/tests/citizen_test.cpp.o" "gcc" "CMakeFiles/tests.dir/tests/citizen_test.cpp.o.d"
   "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/tax_system_test.cpp" "CMakeFiles/tests.dir/tests/tax_system_test.cpp.o" "gcc" "CMakeFiles/tests.dir/tests/tax_system_test.cpp.o.d"
+  "/home/hayley/Documents/COS_214/Gridlock-Gurus-dev/tests/transport_test.cpp" "CMakeFiles/tests.dir/tests/transport_test.cpp.o" "gcc" "CMakeFiles/tests.dir/tests/transport_test.cpp.o.d"
   )
 
 # Targets to which this target links.

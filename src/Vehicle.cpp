@@ -2,12 +2,12 @@
 #include <iostream>
 
 Vehicle::Vehicle(VehicleType type, int capacity, TransportDepartment& transportDep): department(transportDep) {
-    type = type;
-    capacity = capacity;
+    this->type = type;
+    this->capacity = capacity;
+    this->usageCount = 0;
     currentPassengers = 0;
-    state = std::make_unique<Functional>();
+    state = std::make_unique<FunctionalState>();
     vehicle_state = VehicleState::Functional;
-    int usageCount = 0;
 }
 
 Vehicle* Vehicle::clone() {
@@ -15,7 +15,8 @@ Vehicle* Vehicle::clone() {
 }
 
 bool Vehicle::run() {
-    state->run();
+    offload();
+    return state->run();
 }
 
 void Vehicle::setState() {

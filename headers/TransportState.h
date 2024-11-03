@@ -1,7 +1,6 @@
 #ifndef TRANSPORTSTATE_H
 #define TRANSPORTSTATE_H
 
-class Vehicle;
 
 class TransportState {
 public:
