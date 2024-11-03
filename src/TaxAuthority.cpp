@@ -17,9 +17,8 @@ void TaxAuthority::registerCitizen(Citizen& citizen) {
 }
 
 int TaxAuthority::collectTaxes() {
-    this->collectedTax = 0; // Reset the collected tax for the new cycle
-    
-    // Collect Taxes
+    this->collectedTax = 0;
+
     this->notifyBuildings();
     this->notifyCitizens();
 

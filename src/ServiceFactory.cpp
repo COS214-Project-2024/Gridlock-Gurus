@@ -6,7 +6,6 @@
 #include "EducationService.h"
 #include <string>
 
-// Made citizen a reference instead of pointer to prevent it being nullptr
 Building *ServiceFactory::createBuilding(BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(200,200,false);
     std::string location = "City Center";
