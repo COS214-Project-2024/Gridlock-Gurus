@@ -48,4 +48,4 @@ public:
     void produceMoney();
 };
 
-#endif // COMMERCIAL_H
+#endif // COMMERCIAL_H 
