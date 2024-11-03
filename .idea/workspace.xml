@@ -31,11 +31,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16c26553-33ae-482c-8ff2-b2f75937db87" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/BudgetDepartment.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/BudgetDepartment.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/City.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/City.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/TransportDepartment.h" beforeDir="false" afterPath="$PROJECT_DIR$/headers/TransportDepartment.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/City.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/City.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TransportDepartment.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/TransportDepartment.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
