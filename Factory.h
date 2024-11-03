@@ -57,4 +57,4 @@ public:
     virtual void produceResource() = 0;
 };
 
-#endif // FACTORY_H
+#endif // FACTORY_H 
