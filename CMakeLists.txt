@@ -30,4 +30,3 @@ target_link_libraries(tests gtest gtest_main pthread)
 
 # Register tests with CTest
 add_test(NAME all_tests COMMAND tests)
-

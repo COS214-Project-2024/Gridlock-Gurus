@@ -93,13 +93,14 @@ public:
 
     void startTaxCycle();
 
-    void increaseTransport(VehicleType type);
+    void increaseTransport(Vehicle &type);
 
     void changeTaxStrategy();
 
     int getBuildingCount();
     int getCitizenCount();
     int getWorkierCount();
+    void newTaxi();
 
 };
 

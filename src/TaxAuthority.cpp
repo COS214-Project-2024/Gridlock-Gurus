@@ -76,3 +76,7 @@ int TaxAuthority::getWaterUsage() const {
 int TaxAuthority::getPowerUsage() const {
     return buildings->getCityPowerConsumption();
 }
+
+std::unique_ptr<TaxStrategy> TaxAuthority::updateFromBudget(BudgetDepartment &budgetDepartment) {
+    return budgetDepartment.recommendTaxStrategy();
+}

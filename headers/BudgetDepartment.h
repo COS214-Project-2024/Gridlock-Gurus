@@ -1,6 +1,7 @@
 #ifndef BUDGETDEPARTMENT_H
 #define BUDGETDEPARTMENT_H
 
+class TaxStrategy;
 class TaxAuthority;
 #include <memory>
 
@@ -36,8 +37,10 @@ public:
     void receiveTaxes();
 
     bool isBroke() {
-        return totalAvailable <= 0;
+        return totalAvailable <= 100;
     }
+
+    std::unique_ptr<TaxStrategy> BudgetDepartment::recommendTaxStrategy();
 };
 
 #endif // BUDGETDEPARTMENT_H

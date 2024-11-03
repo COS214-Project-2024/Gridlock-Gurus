@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 
+#include "BudgetDepartment.h"
 #include "BuildingCollection.h"
 #include "TaxStrategy.h"
 #include "Citizen.h"
@@ -88,6 +89,7 @@ public:
     int getPowerUsage() const;
 
     void removeLastBuilding();
+    std::unique_ptr<TaxStrategy> updateFromBudget(BudgetDepartment& budgetDepartment);
 
 private:
     /**

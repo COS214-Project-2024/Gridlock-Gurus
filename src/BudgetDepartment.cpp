@@ -1,4 +1,7 @@
 #include "BudgetDepartment.h"
+
+#include "FlatTaxStrategy.h"
+#include "ProgressiveTaxStrategy.h"
 #include "TaxAuthority.h"
 
 BudgetDepartment::BudgetDepartment(std::shared_ptr<TaxAuthority> taxAuthority) : taxAuthority(taxAuthority) {
@@ -14,3 +17,10 @@ void BudgetDepartment::receiveTaxes() {
     totalAvailable += taxesCollected;
 }
 
+std::unique_ptr<TaxStrategy> BudgetDepartment::recommendTaxStrategy() {
+    if(isBroke()) {
+        return std::make_unique<FlatTaxStrategy>();
+    } else {
+        return std::make_unique<ProgressiveTaxStrategy>();
+    }
+}
