@@ -3,14 +3,12 @@
 
 #include "Command.h"
 #include "City.h"
-#include "Director.h"
 #include "BuildingType.h"
 #include "Citizen.h"
 #include <iostream>
+#include <memory>
 
-class Director;
 class Building;
-class Citizen;
 class City;
 /**
  * @brief Command to handle the construction of buildings in the city.
@@ -18,15 +16,15 @@ class City;
  * ConcreteCommand participant in the Command design pattern. It implements the `execute()` method to handle building construction.
  */
 class BuildCommand : public Command {
-    City& city;
-    Director& director;
-    BuildingType buildingType;
+    BuildingType type;
+
 public:
     /**
      * @brief Constructs a new BuildCommand object.
      */
-    BuildCommand(City& city, Director& director, BuildingType buildingType) : city(city), director(director), buildingType(buildingType){}
-
+    BuildCommand(std::shared_ptr<City> city, BuildingType type) : Command (city){
+        this->type = type;
+    }
 
     /**
      * @brief Destroys the BuildCommand object.
@@ -38,15 +36,6 @@ public:
      */
     void execute() override;
 
-    /**
-     * @brief Undo functionality.
-     */
-    void undo() override ;
-
-    /**
-     * @brief Redo functionality.
-     */
-    void redo() override;
 
 };
 #endif // BUILDCOMMAND_H

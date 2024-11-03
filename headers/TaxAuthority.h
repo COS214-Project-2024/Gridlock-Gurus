@@ -57,6 +57,8 @@ public:
      */
     void registerCitizen(Citizen& citizen);
   
+    void unregisterCitizen(Citizen& citizen); 
+
     /**
      * @brief Notifies all registered members to pay taxes.
      */
@@ -78,6 +80,9 @@ public:
     
     int getCollectedTax();
     
+    /**
+     * Gets the amount of buildings in the city registers with the tax authority.
+     */
     int getSize();
     
     int getAmountOfCitizens() const {
@@ -88,6 +93,7 @@ public:
     int getPowerUsage() const;
 
     void removeLastBuilding();
+    void deregisterAllCitizens() ;
 
 private:
     /**

@@ -109,7 +109,7 @@ int City::getCitizenCount() {
     return government->getDepartmentOfHomeAffairs()->getPopulation();
 }
 
-int City::getWorkierCount() {
+int City::getWorkerCount() {
     return government->getTaxAuthority()->getAmountOfCitizens();
 }
 
@@ -117,6 +117,8 @@ void City::increaseTransport(VehicleType type){
 
 }
 
-void City::changeTaxStrategy(){
+void City::changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy){
+    return government->getTaxAuthority()->setStrategy(std::move(taxStrategy));
+
 }
 

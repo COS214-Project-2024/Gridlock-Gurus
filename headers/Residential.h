@@ -14,7 +14,8 @@
 class Residential : public Building {
 private:
     int maxCapacity;  ///< The maximum number of citizens the building can house.
-    std::vector<Citizen*> tenants;  ///< List of tenants living in the building.
+    //std::vector<Citizen*> tenants;  ///< List of tenants living in the building.
+    std::vector<int> tenants;
 
 public:
     /**
@@ -31,22 +32,7 @@ public:
     /**
      * @brief Destroys the Residential building object.
      */
-    ~Residential() override = default;
-
-    /**
-     * @brief Gets details about the residential building.
-     * @return A string containing details about the residential building.
-     *
-     * This method overrides the base `getDetails()` method to provide specific details for residential buildings.
-     */
-    std::string getDetails() const override;
-
-    /**
-     * @brief Calculates household tax for the residential building.
-     * 
-     * The calculated household tax.
-     */
-    //void householdTax();
+    ~Residential() override = default; 
 
     /**
      * @brief Adds a tenant to the residential building.

@@ -54,7 +54,7 @@ public:
      * @param placeOfEmployment Pointer to the building where the citizen will work.
      */
     void setWork(Building& work);
-
+    void quitJob() ;
     /**
      * @brief Finds a home in a specified building.
      *

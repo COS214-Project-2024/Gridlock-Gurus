@@ -31,11 +31,6 @@ public:
      */
     ~Landmark() override = default;  ///< Destructor
 
-    /**
-     * @brief Gets details about the landmark building.
-     * @return A string containing details about the landmark.
-     */
-    std::string getDetails() const override;
 };
 
 #endif // LANDMARK_H
