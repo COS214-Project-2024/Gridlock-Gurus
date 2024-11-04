@@ -7,26 +7,31 @@
 
 class City;
 
+/**
+ * @brief Command to generate a report for a city.
+ */
 class CityReportCommand : public Command {
-    std::string& temp;
+    std::string& temp; ///< Reference to a string to store the report.
+
 public:
     /**
-     * @brief Constructs a new Command object.
+     * @brief Constructs a CityReportCommand object.
+     * @param city Pointer to the city for which the report will be generated.
+     * @param temp Reference to a string that will store the generated report.
      */
-    CityReportCommand(std::shared_ptr<City> city,std::string& temp) : Command(city), temp(temp){
-    }
+    CityReportCommand(std::shared_ptr<City> city, std::string& temp) : Command(city), temp(temp) {}
 
     /**
-     * @brief Destroys the Command object.
+     * @brief Default destructor.
      */
-     ~CityReportCommand() = default;
+    ~CityReportCommand() = default;
 
     /**
-     * @brief Executes the command.
+     * @brief Executes the command to generate the city report.
      */
-     void execute() override {
+    void execute() override {
         city->generateReport(temp);
-     }
+    }
 };
 
 #endif // CITYREPORTCOMMAND_H

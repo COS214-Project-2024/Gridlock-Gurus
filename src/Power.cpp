@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-
 void Power::checkCapacity() const {
     Utilities::checkCapacity();
 }

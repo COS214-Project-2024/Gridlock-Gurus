@@ -6,17 +6,29 @@
 #include "BuildingType.h"
 #include <memory>
 
+/**
+ * @class FactoryFactory
+ * @brief Class for creating building instances.
+ */
 class FactoryFactory : public BuildingFactory {
 public:
-    FactoryFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
-    ~FactoryFactory() override = default;
-    
     /**
-     * @brief Creates a Factory building.
-     * @param type The type of Factory building to create.
-     * @return Pointer to the created Factory building object.
-     *
-     * This method overrides the factory method to create a Factory building.
+     * @brief Constructor for FactoryFactory.
+     * @param taxAuthority A shared pointer to the TaxAuthority used for building creation.
+     */
+    FactoryFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+
+    /** 
+     * @brief Default destructor for FactoryFactory.
+     */
+    ~FactoryFactory() override = default;
+
+    /**
+     * @brief Create a building of the specified type.
+     * @param name The name of the building.
+     * @param type The type of building to create.
+     * @param owner The owner of the building.
+     * @return A pointer to the created Building instance.
      */
     Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };

@@ -1,6 +1,5 @@
 #include "Simulation.h"
 
-
 void Simulation::storeAndExecute(std::unique_ptr<Command> cmd) {
     commandQueue.push(std::move(cmd));
     

@@ -2,7 +2,6 @@
 #include "CommercialFactory.h"
 #include <string>
 
-// Made citizen a reference instead of pointer to prevent it being nullptr
 Building *CommercialFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(100,100,true);
     int maxEmployees;

@@ -1,6 +1,5 @@
 #include "BuildingIterator.h"
 
-
 Building* BuildingIterator::operator*() const { 
     return buildings.at(position); 
 }
