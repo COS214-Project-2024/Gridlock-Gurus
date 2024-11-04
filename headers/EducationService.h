@@ -44,11 +44,37 @@ public:
      */
     ~EducationService() override = default;
 
-    void setState();
-    int pay() override;
+    /**
+     * @brief Sets the current state of the city.
+     * This function updates the city's state based on various factors such as citizen satisfaction,
+     * resource availability, and building conditions. It may alter the overall status of the city.
+     */
+      void setState();
 
-    void prestigeDec(int by);
-    void prestigeInc(int by);
+      /**
+       * @brief Processes the payment for services or taxes.
+       * @return An integer indicating the result of the payment process.
+       * This function handles the payment logic, including deductions from citizen funds or city resources.
+       * It overrides a base class function and may implement additional checks or calculations.
+       */
+      int pay() override;
+
+      /**
+       * @brief Decreases the prestige of the city by a specified amount.
+       * @param by The amount to decrease the prestige.
+       * This function modifies the city's prestige value, reflecting a decrease due to events such as
+       * dissatisfaction among citizens or reduced services.
+       */
+      void prestigeDec(int by);
+
+      /**
+       * @brief Increases the prestige of the city by a specified amount.
+       * @param by The amount to increase the prestige.
+       * This function updates the city's prestige value, indicating improvements in citizen satisfaction,
+       * services, or overall city conditions.
+       */
+      void prestigeInc(int by);
+
 
     /**
      * @brief Gets the prestige level of the education service.

@@ -53,9 +53,24 @@ public:
      */
     int calculateAvgHappiness();
 
+    /**
+     * @brief Fills a house with tenants.
+     */
     void fillHomeWithTenants(Residential& home);
+
+   /**
+    * @brief Fills a factory with employees.
+    */
     void fillWorkWithEmployees(Factory& work);
+
+    /**
+     * @brief Fills a service with employees.
+     */
     void fillWorkWithEmployees(Service& work);
+
+    /**
+     * @brief Fills a commercial lot with employees.
+     */
     void fillWorkWithEmployees(Commercial& work);
 
     /**
@@ -64,18 +79,57 @@ public:
      */
     Citizen& getRandomCitizen();
 
+     /**
+     * @brief Gets the population of a city.
+     * @return Population count.
+     */
     int getPopulation() {
         return population;
     }
 
-    std::string createCitizen(CitizenType type, int satisfaction, int funds);
-    std::string getCitizenDetails(int id);
-    Citizen& getCitizen(int id);
-    std::vector<Citizen*>& getCitizens();
+
+   /**
+    * @brief Creates a new citizen in the city.
+    * @param type The type of citizen to create (e.g., worker, resident).
+    * @param satisfaction Initial satisfaction level of the new citizen.
+    * @param funds Initial funds allocated to the citizen.
+    * @return A string representing the ID or name of the created citizen.
+    */
+     std::string createCitizen(CitizenType type, int satisfaction, int funds);
+
+     /**
+      * @brief Retrieves details of a specific citizen by their ID.
+      * @param id The ID of the citizen whose details are to be retrieved.
+      * @return A string containing the details of the specified citizen.
+      */
+     std::string getCitizenDetails(int id);
+
+     /**
+      * @brief Retrieves a reference to a specific citizen by their ID.
+      * @param id The ID of the citizen to retrieve.
+      * @return A reference to the Citizen object with the specified ID.
+      */
+     Citizen& getCitizen(int id);
+
+     /**
+      * @brief Retrieves a list of all citizens in the city.
+      * @return A vector containing pointers to all Citizen objects in the city.
+      */
+     std::vector<Citizen*>& getCitizens();
 
 protected:
-    void registerBirth();
-    void registerDeath(Citizen& citizen);
+     /**
+      * @brief Registers the birth of a new citizen within the city.
+      * This function is called internally when a new citizen is added to the city.
+      */
+     void registerBirth();
+
+     /**
+      * @brief Registers the death of a specific citizen.
+      * @param citizen A reference to the Citizen object representing the deceased citizen.
+      * This function handles the necessary procedures and updates to remove the citizen.
+      */
+     void registerDeath(Citizen& citizen);
 };
 
 #endif // DEPARTMENTOFHOMEAFFAIRS_H

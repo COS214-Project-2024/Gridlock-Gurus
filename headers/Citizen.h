@@ -1,3 +1,8 @@
+/**
+ * @file Citizen.h
+ * @brief Defines the Citizen class representing an individual in the simulation.
+ */
+
 #ifndef CITIZEN_H
 #define CITIZEN_H
 
@@ -10,102 +15,156 @@
 #include <string>
 #include <memory>
 
-/**
- * @brief Forward declaration of TaxAuthority and Building classes.
- */
 class TaxAuthority;
 class Building;
 
 /**
- * @brief Represents a citizen in the city.
+ * @class Citizen
+ * @brief Represents a citizen with properties such as employment status, funds, and satisfaction level.
  */
 class Citizen {
 private:
-    std::weak_ptr<TaxAuthority> taxAuthority;
-    int id;
-    std::string name;
-    CitizenType type;
-    int satisfactionLevel;
-    int funds;
-    bool employmentStatus;
-    bool retired;
-    Building* home;
-    Building* placeOfWork;
+    std::weak_ptr<TaxAuthority> taxAuthority; ///< Weak pointer to the Tax Authority for managing taxes.
+
+protected:
+    std::string name; ///< Name of the citizen.
+    CitizenType type; ///< Type of the citizen (e.g., worker, retired).
+    int satisfactionLevel; ///< Satisfaction level of the citizen.
+    int funds; ///< Financial funds available to the citizen.
+    bool employmentStatus; ///< Employment status of the citizen.
+    bool retired; ///< Retirement status of the citizen.
+    Building* home; ///< Pointer to the citizen's home building.
+    Building* placeOfWork; ///< Pointer to the citizen's workplace.
+    int id; ///< Unique identifier for the citizen.
 
 public:
     /**
-     * @brief Constructs a Citizen with specified attributes.
+     * @brief Constructs a Citizen object.
      * @param id Unique identifier for the citizen.
-     * @param type Type of citizen.
-     * @param satisfactionLevel Initial satisfaction level.
-     * @param funds Initial funds available to the citizen.
-     * @param taxAuthority Reference to the tax authority managing this citizen's taxes.
+     * @param type Type of the citizen.
+     * @param satisfactionLevel Initial satisfaction level of the citizen.
+     * @param funds Initial amount of funds the citizen has.
+     * @param taxAuthority Weak pointer to the Tax Authority.
      */
     Citizen(int id, CitizenType type, int satisfactionLevel, int funds, std::weak_ptr<TaxAuthority> taxAuthority);
 
     /**
-     * @brief Sets the citizen's workplace.
-     * @param work Building representing the citizen's place of work.
+     * @brief Destructor for the Citizen class.
+     */
+    ~Citizen() = default;
+
+    /**
+     * @brief Assigns a workplace to the citizen.
+     * @param work Reference to the building that will be the citizen's workplace.
      */
     void setWork(Building& work);
 
     /**
-     * @brief Quits the citizen's current job.
+     * @brief Causes the citizen to quit their job, removing their workplace.
      */
     void quitJob();
 
     /**
-     * @brief Sets the citizen's home.
-     * @param home Building representing the citizen's home.
+     * @brief Assigns a home to the citizen.
+     * @param home Reference to the building that will be the citizen's home.
      */
     void setHome(Building& home);
 
     /**
-     * @brief Simulates a workday, updating the citizen's state accordingly.
+     * @brief Simulates a work day for the citizen.
      */
     void workDay();
 
     /**
-     * @brief Collects salary for the citizen.
+     * @brief Collects the salary for the citizen.
      */
     void collectSalary();
 
     /**
-     * @brief Pays taxes for the citizen.
-     * @param amount Amount of taxes to pay.
+     * @brief Pays taxes to the Tax Authority.
+     * @param amount The amount of tax to be paid.
      */
     void payTaxes(int amount);
 
     /**
-     * @brief Requests transport from the transport department.
-     * @param department Transport department reference.
-     * @param type Type of vehicle required.
+     * @brief Calls transport for the citizen through the specified transport department.
+     * @param department Reference to the transport department.
+     * @param type Type of vehicle requested.
      */
     void callTransport(TransportDepartment& department, VehicleType type);
 
     /**
-     * @brief Sets the citizen's status to retired.
+     * @brief Retires the citizen.
      */
     void retire();
 
     /**
-     * @brief Moves the citizen to the countryside upon retirement.
+     * @brief Retires the citizen to the countryside.
      */
     void retireToCountryside();
 
     /**
-     * @brief Sets the citizen's employment status to fired.
+     * @brief Handles the event of the citizen being fired from their job.
      */
     void fired();
 
     // GETTERS
-    bool getEmploymentStatus() const;
-    std::string getName() const;
-    int getId() const;
-    int getFunds() const;
-    int getSatisfactionLevel() const;
-    CitizenType getType() const;
-    bool hasHome() const;
+
+    /**
+     * @brief Gets the employment status of the citizen.
+     * @return True if employed, false otherwise.
+     */
+    bool getEmploymentStatus() const {
+     return this->employmentStatus;
+    };
+
+    /**
+     * @brief Gets the name of the citizen.
+     * @return Name of the citizen.
+     */
+    std::string getName() const {
+     return this->name;
+    };
+
+    /**
+     * @brief Gets the unique identifier of the citizen.
+     * @return Citizen's unique identifier.
+     */
+    int getId() const {
+     return this->id;
+    };
+
+    /**
+     * @brief Gets the funds available to the citizen.
+     * @return Amount of funds.
+     */
+    int getFunds() const {
+     return this->funds;
+    };
+
+    /**
+     * @brief Gets the satisfaction level of the citizen.
+     * @return Satisfaction level.
+     */
+    int getSatisfactionLevel() const {
+     return this->satisfactionLevel;
+    };
+
+    /**
+     * @brief Gets the type of the citizen.
+     * @return Type of the citizen.
+     */
+    CitizenType getType() const {
+     return this->type;
+    };
+
+    /**
+     * @brief Checks if the citizen has a home.
+     * @return True if the citizen has a home, false otherwise.
+     */
+    bool hasHome() const {
+     return this->home != nullptr;
+    };
 };
 
 #endif // CITIZEN_H

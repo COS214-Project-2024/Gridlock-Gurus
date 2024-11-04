@@ -42,7 +42,20 @@ public:
      */
     std::string checkNetwork() const;
 
-    void reviewWaterUsage(int totalWater);
+    /**
+    * @brief Reviews the total water usage within the city.
+    * @param totalWater The total amount of water used, measured in appropriate units (e.g., liters).
+    * This function evaluates the city's water consumption and can trigger alerts or actions
+    * based on the water usage levels.
+    */
+     void reviewWaterUsage(int totalWater);
+
+    /**
+     * @brief Reviews the total power usage within the city.
+     * @param totalPower The total amount of power used, measured in appropriate units (e.g., kilowatt-hours).
+     * This function assesses the city's power consumption and can initiate alerts or actions
+     * depending on the power usage metrics.
+     */
     void reviewPowerUsage(int totalPower);
 
     /**

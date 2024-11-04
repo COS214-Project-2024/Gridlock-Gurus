@@ -9,7 +9,7 @@
 #include <memory>
 
 /**
- * @brief Forward declaration of Building and City class.
+ * @brief Forward declaration of Building and City classes.
  */
 class Building;
 class City;
