@@ -86,7 +86,9 @@ public:
      * @brief Gets the number of registered citizens.
      * @return The number of citizens.
      */
-    int getAmountOfCitizens() const;
+    int getAmountOfCitizens() const {
+        return citizens.size();
+    }
 
     /**
      * @brief Gets the water usage among registered buildings.

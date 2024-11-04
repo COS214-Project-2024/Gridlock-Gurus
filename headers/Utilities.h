@@ -55,36 +55,48 @@ public:
      * @brief Gets the type of the utility.
      * @return The type of the utility.
      */
-    UtilityType getType() const;
+    UtilityType getType() const { 
+        return type; 
+    }
 
     /**
      * @brief Checks if the utility is shedding load.
      * @return true if shedding load, false otherwise.
      */
-    bool isShedding() const;
+    bool isShedding() const { 
+        return shedding; 
+    }
 
     /**
      * @brief Checks if the utility is under repair.
      * @return true if under repair, false otherwise.
      */
-    bool isBroken() const;
+    bool isBroken() const { 
+        return isRepair; 
+    }
 
     /**
      * @brief Gets the maximum production capacity of the utility.
      * @return The maximum production capacity.
      */
-    int getMax() const;
+    int getMax() const {
+        return maxProduction;
+     }
 
     /**
      * @brief Gets the cost of repairing the utility.
      * @return The cost of repair.
      */
-    int getCost() const;
+    int getCost() const {
+        return costOfRepair;
+    }
 
     /**
      * @brief Doubles the production capacity of the utility.
      */
-    void upgradeProduction();
+    void upgradeProduction() {
+        this->maxProduction *= 2;
+    }
 };
 
 #endif // UTILITIES_H

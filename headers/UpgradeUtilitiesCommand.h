@@ -5,6 +5,8 @@
 #include "Command.h"
 #include "City.h"
 
+class City;
+
 /**
  * @class UpgradeUtilitiesCommand
  * @brief Command to upgrade utilities in a city.

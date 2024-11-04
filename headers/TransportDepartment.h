@@ -52,7 +52,9 @@ public:
      * @brief Gets the size of the vehicle fleet.
      * @return The number of vehicles.
      */
-    int getSize();
+    int getSize() {
+        return vehicles.size();
+    }
 
     /**
      * @brief Gets the number of broken vehicles in the fleet.
