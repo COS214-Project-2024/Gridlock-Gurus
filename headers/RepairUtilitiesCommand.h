@@ -1,27 +1,33 @@
 #ifndef REPAIRUTILITIESCOMMAND_H
 #define REPAIRUTILITIESCOMMAND_H
+
 #include <memory>
 #include "Command.h"
 #include "City.h"
 
 class City;
 
+/**
+ * @class RepairUtilitiesCommand
+ * @brief Command to repair utilities in the city.
+ */
 class RepairUtilitiesCommand : public Command {
 public:
     /**
-     * @brief Constructs a new Command object.
+     * @brief Constructs a new RepairUtilitiesCommand object.
+     * @param city Shared pointer to the city object.
      */
     RepairUtilitiesCommand(std::shared_ptr<City> city) : Command(city) {}
 
     /**
-     * @brief Destroys the Command object.
+     * @brief Destroys the RepairUtilitiesCommand object.
      */
-     ~RepairUtilitiesCommand() = default;
+    ~RepairUtilitiesCommand() = default;
 
     /**
-     * @brief Executes the command.
+     * @brief Executes the command to repair utilities.
      */
-     void execute() override;
+    void execute() override;
 };
 
-#endif // CHANGETAXSTRATEGYCOMMAND_H
+#endif // REPAIRUTILITIESCOMMAND_H
