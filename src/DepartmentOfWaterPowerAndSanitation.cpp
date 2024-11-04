@@ -22,10 +22,15 @@ std::string DepartmentOfWaterPowerAndSanitation::checkNetwork() const {
 
     if(water->isBroken()) {
        ret += "Water Facilities are broked waiting for repair!\n"; 
-    } 
+    } else {
+        ret += "Water Facilities are functional.\n"; 
+    }
 
     if(power->isBroken()) {
        ret += "Power Facilities are broked waiting for repair!\n";    
+    } else {
+        ret += "Power Facilities are functional.\n"; 
+        ret += "Sanitation Facilities are functional.\n"; 
     }
 
     ret += "Shedding Facilities:\n"; 
