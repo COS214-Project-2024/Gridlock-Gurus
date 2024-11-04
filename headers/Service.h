@@ -4,6 +4,7 @@
 #include "Building.h"
 #include "BuildingType.h"
 #include <vector>
+#include <algorithm>
 #include <string>
 #include <memory>
 
