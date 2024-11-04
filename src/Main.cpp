@@ -1,23 +1,23 @@
-
 #define OLC_PGE_APPLICATION
 #define OLC_PGEX_QUICKGUI
 #include "olcPixelGameEngine.h"
 #include "olcPGEX_QuickGUI.h"
 #include "TransportDepartment.h"
 #include "CitizenFactory.h"
-#include "Train.h"
-#include "Taxi.h"
-#include "Truck.h"
-#include "Functional.h"
-#include "Damaged.h"
-#include "Broken.h"
+// #include "Train.h"
+// #include "Taxi.h"
+// #include "Truck.h"
+// #include "Functional.h"
+// #include "Damaged.h"
+// #include "Broken.h"
 #include "TaxAuthority.h"
-
+#include "City.h"
 
 #include <iostream>
 
 std::shared_ptr<TaxAuthority> tax = std::make_shared<TaxAuthority>();
 std::vector<Citizen *> cits;
+std::shared_ptr<City> city = std::make_shared<City>();
 
 class GridGui : public olc::PixelGameEngine {
 public:
@@ -25,14 +25,13 @@ public:
         sAppName = "GridLock";
     }
 
-
     bool OnUserCreate() override {
         png = new olc::Sprite("./images/imageSet.png");
 
         buildingListBox->m_vList.emplace_back("BUILDINGS:");
         buildingNameLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
         buildingNameLabel->bHasBorder = true;
-        toggleBuildingGroup();
+        buildingGroupToggle(false);
 
         citSatisfactionLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
         citTypeLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
@@ -51,23 +50,26 @@ public:
 
         if (newBuildingButton->bReleased) {
             buildingNameTextBox->sText = "";
-            toggleBuildingGroup();
-        }
-
-        if (cancelBuildingButton->bReleased) {
-            toggleBuildingGroup();
-            cancelBuildingButton->bReleased = false;
-        }
-
-        if (addBuildingButton->bReleased) {
-            buildingList.emplace_back(buildingNameTextBox->sText);
-            toggleBuildingGroup();
-            addBuildingButton->bReleased = false;
+            buildingGroupToggle(true);
         }
 
         if (buildingListBox->bSelectionChanged) {
             renderCitizenGroup();
         }
+
+        if (addBuildingButton->bReleased) {
+            const BuildingType type = selectedBuildingType();
+            city->addBuilding(type);
+            city.
+            buildingGroupToggle(false);
+            addBuildingButton->bReleased = false;
+        }
+
+        if (cancelBuildingButton->bReleased) {
+            buildingGroupToggle(false);
+            cancelBuildingButton->bReleased = false;
+        }
+
 
         if (buildingListBox->nSelectedItem) {
             size_t n = buildingListBox->nSelectedItem;
@@ -93,7 +95,6 @@ public:
 
         if (citizenListBox->bSelectionChanged) {
             if (citizenListBox->nSelectedItem == 0) {
-
             } else {
                 console->sText = cits.at(citizenListBox->nSelectedItem - 1)->getName();
             }
@@ -103,11 +104,26 @@ public:
     }
 
 protected:
-    void toggleBuildingGroup() {
-        buildingNameLabel->bVisible = !buildingNameLabel->bVisible;
-        buildingNameTextBox->bVisible = !buildingNameTextBox->bVisible;
-        addBuildingButton->bVisible = !addBuildingButton->bVisible;
-        cancelBuildingButton->bVisible = !cancelBuildingButton->bVisible;
+    void buildingGroupToggle(const bool t) {
+        buildingNameLabel->bVisible = t;
+        buildingNameTextBox->bVisible = t;
+        buildingTypeLabel->bVisible = t;
+        bTypeScho->bVisible = t;
+        bTypeEsta->bVisible = t;
+        bTypeShop->bVisible = t;
+        bTypeStat->bVisible = t;
+        bTypeBank->bVisible = t;
+        bTypePark->bVisible = t;
+        bTypeHous->bVisible = t;
+        bTypeHosp->bVisible = t;
+        bTypeFlat->bVisible = t;
+        bTypeResi->bVisible = t;
+        bTypePoli->bVisible = t;
+        bTypeBFac->bVisible = t;
+        bTypeSFac->bVisible = t;
+        bTypeWFac->bVisible = t;
+        addBuildingButton->bVisible = t;
+        cancelBuildingButton->bVisible = t;
     }
 
     void citizenGroupToggle(const bool t) {
@@ -160,6 +176,52 @@ protected:
         }
     }
 
+    BuildingType selectedBuildingType() const {
+        if (bTypeScho) {
+            return BuildingType::School;
+        }
+        if (bTypeEsta) {
+            return BuildingType::Estate;
+        }
+        if (bTypeFlat) {
+            return BuildingType::Flat;
+        }
+        if (bTypeHous) {
+            return BuildingType::House;
+        }
+        if (bTypePark) {
+            return BuildingType::Park;
+        }
+        if (bTypeStat) {
+            return BuildingType::Statue;
+        }
+        if (bTypeResi) {
+            return BuildingType::Residential;
+        }
+        if (bTypeShop) {
+            return BuildingType::Shop;
+        }
+        if (bTypeBFac) {
+            return BuildingType::BrickFactory;
+        }
+        if (bTypeSFac) {
+            return BuildingType::SteelFactory;
+        }
+        if (bTypeWFac) {
+            return BuildingType::WoodFactory;
+        }
+        if (bTypeBank) {
+            return BuildingType::Bank;
+        }
+        if (bTypePoli) {
+            return BuildingType::PoliceStation;
+        }
+        if (bTypeHosp) {
+            return BuildingType::Hospital;
+        }
+        return BuildingType::Residential; // Default case
+    }
+
     olc::Sprite *png = nullptr;
 
     olc::QuickGUI::Manager guiManager;
@@ -169,8 +231,23 @@ protected:
     olc::QuickGUI::ListBox *buildingListBox = new olc::QuickGUI::ListBox(guiManager, buildingList, {5, 20}, {120, 60});
     olc::QuickGUI::Label *buildingNameLabel = new olc::QuickGUI::Label(guiManager, "Building Name:", {5, 80}, {100, 15});
     olc::QuickGUI::TextBox *buildingNameTextBox = new olc::QuickGUI::TextBox(guiManager, "", {5, 95}, {100, 15});
-    olc::QuickGUI::Button *addBuildingButton = new olc::QuickGUI::Button(guiManager, "Confirm", {5, 110}, {60, 15});
-    olc::QuickGUI::Button *cancelBuildingButton = new olc::QuickGUI::Button(guiManager, "Cancel", {65, 110}, {60, 15});
+    olc::QuickGUI::Label *buildingTypeLabel = new olc::QuickGUI::Label(guiManager, "Building Type:", {5, 110}, {100, 15});
+    olc::QuickGUI::CheckBox *bTypeScho = new olc::QuickGUI::CheckBox(guiManager, "School", false, {5, 125}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeShop = new olc::QuickGUI::CheckBox(guiManager, "Shop", false, {5, 140}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeBank = new olc::QuickGUI::CheckBox(guiManager, "Bank", false, {5, 155}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeHous = new olc::QuickGUI::CheckBox(guiManager, "House", false, {5, 170}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeFlat = new olc::QuickGUI::CheckBox(guiManager, "Flat", false, {5, 185}, {50, 15});
+    olc::QuickGUI::CheckBox *bTypeEsta = new olc::QuickGUI::CheckBox(guiManager, "Estate", false, {65, 125}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeStat = new olc::QuickGUI::CheckBox(guiManager, "Statue", false, {65, 140}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypePark = new olc::QuickGUI::CheckBox(guiManager, "Park", false, {65, 155}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeHosp = new olc::QuickGUI::CheckBox(guiManager, "Hospital", false, {65, 170}, {60, 15});
+    olc::QuickGUI::CheckBox *bTypeResi = new olc::QuickGUI::CheckBox(guiManager, "Residential", false, {55, 185}, {70, 15});
+    olc::QuickGUI::CheckBox *bTypePoli = new olc::QuickGUI::CheckBox(guiManager, "Police Station", false, {5, 200}, {100, 15});
+    olc::QuickGUI::CheckBox *bTypeBFac = new olc::QuickGUI::CheckBox(guiManager, "Brick Factory", false, {5, 215}, {100, 15});
+    olc::QuickGUI::CheckBox *bTypeSFac = new olc::QuickGUI::CheckBox(guiManager, "Steel Factory", false, {5, 230}, {100, 15});
+    olc::QuickGUI::CheckBox *bTypeWFac = new olc::QuickGUI::CheckBox(guiManager, "Wood Factory", false, {5, 245}, {100, 15});
+    olc::QuickGUI::Button *addBuildingButton = new olc::QuickGUI::Button(guiManager, "Confirm", {5, 265}, {60, 15});
+    olc::QuickGUI::Button *cancelBuildingButton = new olc::QuickGUI::Button(guiManager, "Cancel", {65, 265}, {60, 15});
 
     olc::QuickGUI::Button *newCitizenButton = new olc::QuickGUI::Button(guiManager, "New Citizen", {130, 5}, {120, 15});
     std::vector<std::string> citizenList;
@@ -188,16 +265,14 @@ protected:
 };
 
 int main() {
-
-
     cits.push_back(new Citizen(1, CitizenType::Worker, 80, 5000, tax));
     cits.push_back(new Citizen(2, CitizenType::Citizen, 75, 1000, tax));
 
     TransportDepartment department;
 
-    Train *train = new Train(100);
-    Taxi *taxi = new Taxi(4);
-    Truck *truck = new Truck(10);
+    // Train *train = new Train(100);
+    // Taxi *taxi = new Taxi(4);
+    // Truck *truck = new Truck(10);
 
     GridGui gui;
     if (gui.Construct(730, 370, 2, 2)) {
@@ -207,44 +282,43 @@ int main() {
     }
 
 
-
-    Functional functional;
-    Damaged damaged;
-    Broken broken;
-
-    train->setState(&functional);
-    taxi->setState(&damaged);
-    truck->setState(&broken);
-
-    department.addVehicle(train);
-    department.addVehicle(taxi);
-    department.addVehicle(truck);
-
-    cits.at(0)->callTransport(department, "Train");
-    cits.at(1)->callTransport(department, "Taxi");
-
-    train->run();
-    train->delay();
-    truck->run();
-    truck->breakDown();
-
-    std::cout << "\n--- State Transitions ---" << std::endl;
-    taxi->repair();
-    taxi->setState(&functional);
-    taxi->run();
-
-    std::cout << "\n--- Offloading Passengers ---" << std::endl;
-    cits.at(0)->offloadVehicle();
-    cits.at(1)->offloadVehicle();
-
-    std::cout << "\n--- Cloning Vehicles ---" << std::endl;
-    Vehicle *clonedTrain = train->clone();
-    std::cout << "Cloned a new: " << clonedTrain->getType() << std::endl;
-
-    delete train;
-    delete taxi;
-    delete truck;
-    delete clonedTrain;
+    // Functional functional;
+    // Damaged damaged;
+    // Broken broken;
+    //
+    // train->setState(&functional);
+    // taxi->setState(&damaged);
+    // truck->setState(&broken);
+    //
+    // department.addVehicle(train);
+    // department.addVehicle(taxi);
+    // department.addVehicle(truck);
+    //
+    // cits.at(0)->callTransport(department, "Train");
+    // cits.at(1)->callTransport(department, "Taxi");
+    //
+    // train->run();
+    // train->delay();
+    // truck->run();
+    // truck->breakDown();
+    //
+    // std::cout << "\n--- State Transitions ---" << std::endl;
+    // taxi->repair();
+    // taxi->setState(&functional);
+    // taxi->run();
+    //
+    // std::cout << "\n--- Offloading Passengers ---" << std::endl;
+    // cits.at(0)->offloadVehicle();
+    // cits.at(1)->offloadVehicle();
+    //
+    // std::cout << "\n--- Cloning Vehicles ---" << std::endl;
+    // Vehicle *clonedTrain = train->clone();
+    // std::cout << "Cloned a new: " << clonedTrain->getType() << std::endl;
+    //
+    // delete train;
+    // delete taxi;
+    // delete truck;
+    // delete clonedTrain;
 
     std::cout << "\n--- All Tests Completed ---" << std::endl;
 

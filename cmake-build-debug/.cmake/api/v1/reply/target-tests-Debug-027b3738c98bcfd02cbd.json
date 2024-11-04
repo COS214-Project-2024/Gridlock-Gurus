@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "main.exe"
+			"path" : "tests.exe"
 		},
 		{
-			"path" : "main.pdb"
+			"path" : "tests.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -35,7 +35,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 31,
+				"line" : 32,
 				"parent" : 0
 			},
 			{
@@ -90,6 +90,16 @@
 				{
 					"backtrace" : 6,
 					"path" : "C:/Users/ruben/CLionProjects/Gridlock-Gurus/images"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "C:/Users/ruben/CLionProjects/Gridlock-Gurus/googletest/googletest/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "C:/Users/ruben/CLionProjects/Gridlock-Gurus/googletest/googletest"
 				}
 			],
 			"language" : "CXX",
@@ -97,7 +107,7 @@
 			{
 				"backtraces" : 
 				[
-					1
+					2
 				],
 				"standard" : "17"
 			},
@@ -157,11 +167,23 @@
 				51,
 				52,
 				53,
-				54
+				54,
+				55
 			]
 		}
 	],
-	"id" : "main::@6890427a1f51a3e7e1df",
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "gtest_main::@f95b5c00bd49b3b4698d"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "gtest::@f95b5c00bd49b3b4698d"
+		}
+	],
+	"id" : "tests::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -176,37 +198,22 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-luser32",
+				"fragment" : "lib\\libgtest.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-lgdi32",
+				"fragment" : "lib\\libgtest_main.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-lopengl32",
+				"fragment" : "-lpthread",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-lgdiplus",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "-lShlwapi",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "-ldwmapi",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "-lstdc++fs",
+				"fragment" : "lib\\libgtest.a",
 				"role" : "libraries"
 			},
 			{
@@ -216,8 +223,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "main",
-	"nameOnDisk" : "main.exe",
+	"name" : "tests",
+	"nameOnDisk" : "tests.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -283,14 +290,14 @@
 				51,
 				52,
 				53,
-				54
+				54,
+				55
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				55,
 				56,
 				57,
 				58,
@@ -366,7 +373,31 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Main.cpp",
+			"path" : "tests/government_tests.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "tests/transport_test.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "tests/tax_system_test.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "tests/building_test.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "tests/citizen_test.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -378,7 +409,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Broken.cpp",
+			"path" : "src/BrokenState.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -414,6 +445,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/ChangeTaxStrategyCommand.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/Citizen.cpp",
 			"sourceGroupIndex" : 0
 		},
@@ -421,6 +458,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/CitizenFactory.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/City.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -439,12 +482,6 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/CommercialFactory.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Damaged.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -486,7 +523,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Functional.cpp",
+			"path" : "src/FunctionalState.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -540,6 +577,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/Main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/NameGenerator.cpp",
 			"sourceGroupIndex" : 0
 		},
@@ -558,12 +601,6 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/PolicyCommand.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
 			"path" : "src/Power.cpp",
 			"sourceGroupIndex" : 0
 		},
@@ -571,6 +608,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/ProgressiveTaxStrategy.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/RepairUtilitiesCommand.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -630,37 +673,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/TaxCommand.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Taxi.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Train.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
 			"path" : "src/TransportDepartment.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/TransportState.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Truck.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -700,7 +713,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "headers/Broken.h",
+			"path" : "headers/BrokenState.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -740,17 +753,17 @@
 		},
 		{
 			"backtrace" : 1,
+			"path" : "headers/ChangeTaxStrategyCommand.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
 			"path" : "headers/Citizen.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"path" : "headers/CitizenFactory.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "headers/CitizenIterator.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -770,6 +783,11 @@
 		},
 		{
 			"backtrace" : 1,
+			"path" : "headers/CityReportCommand.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
 			"path" : "headers/Command.h",
 			"sourceGroupIndex" : 1
 		},
@@ -781,11 +799,6 @@
 		{
 			"backtrace" : 1,
 			"path" : "headers/CommercialFactory.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "headers/Damaged.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -830,7 +843,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "headers/Functional.h",
+			"path" : "headers/FunctionalState.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -856,6 +869,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "headers/HighFundingState.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "headers/IncreaseTransportCommand.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -900,17 +918,17 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "headers/PolicyCommand.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"path" : "headers/Power.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"path" : "headers/ProgressiveTaxStrategy.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "headers/RepairUtilitiesCommand.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -960,22 +978,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "headers/TaxCommand.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"path" : "headers/TaxStrategy.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "headers/Taxi.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "headers/Train.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -990,12 +993,12 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "headers/Truck.h",
+			"path" : "headers/UnrestState.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "headers/UnrestState.h",
+			"path" : "headers/UpgradeUtilitiesCommand.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -1011,6 +1014,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "headers/Vehicle.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "headers/VehicleType.h",
 			"sourceGroupIndex" : 1
 		},
 		{
