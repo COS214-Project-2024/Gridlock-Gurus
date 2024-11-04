@@ -33,7 +33,13 @@ add_executable(main src/Main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
 
 target_link_libraries(tests gtest gtest_main pthread)
-target_link_libraries(main user32 gdi32 opengl32 gdiplus Shlwapi dwmapi stdc++fs)
+
+# Link libraries based on the operating system
+if(WIN32)
+    target_link_libraries(main user32 gdi32 opengl32 gdiplus Shlwapi dwmapi stdc++fs)
+else()
+    target_link_libraries(main pthread stdc++fs)
+endif()
 
 # Register tests with CTest
 add_test(NAME all_tests COMMAND tests)
