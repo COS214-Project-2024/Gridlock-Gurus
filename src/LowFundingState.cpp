@@ -1,5 +1,10 @@
 #include "LowFundingState.h"
 
+/**
+ * @brief Gets the health status for the low funding state.
+ *
+ * @return A string representing the current health status.
+ */
 std::string LowFundingState::getHealthStatus() {
 /*    string state = "Current state: " + name + "\n";
     state += "Response time: " + to_string(service->getResponseTime()) + " minutes\n";
@@ -7,6 +12,11 @@ std::string LowFundingState::getHealthStatus() {
     return "Poor Quality";
 }
 
+/**
+ * @brief Gets the quality of time for the health service in the low funding state.
+ *
+ * @return The quality of time as an integer (currently always returns 0).
+ */
 int LowFundingState::getQualityOfTime() {
 /*    if(service) {
         int currStaff = service->getStaff();
@@ -25,6 +35,11 @@ int LowFundingState::getQualityOfTime() {
     return 0;
 }
 
+/**
+ * @brief Gets the name of the current health state.
+ *
+ * @return A string representing the name of the health state.
+ */
 std::string LowFundingState::getName() {
     return "Low Funding";
 }

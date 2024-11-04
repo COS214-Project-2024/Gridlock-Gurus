@@ -2,6 +2,9 @@
 #include <sstream>
 #include <cmath>
 
+/**
+ * @brief Constructs a NameGenerator and initializes lists of first and last names.
+ */
 NameGenerator::NameGenerator() {
     std::srand(std::time(0));
 
@@ -9,17 +12,30 @@ NameGenerator::NameGenerator() {
     lastNames = { "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin" };
 }
 
+/**
+ * @brief Gets the singleton instance of NameGenerator.
+ * @return Reference to the singleton NameGenerator instance.
+ */
 NameGenerator& NameGenerator::getInstance() {
     static NameGenerator instance;
     return instance;
 }
 
+/**
+ * @brief Generates a random name by combining a first name and a last name.
+ * @return Randomly generated full name in the format "First Last".
+ */
 std::string NameGenerator::getRandomName() {
     std::string firstName = firstNames[rand() % firstNames.size()];
     std::string lastName = lastNames[rand() % lastNames.size()];
     return firstName + " " + lastName;
 }
 
+/**
+ * @brief Generates a random ID with a specified number of digits.
+ * @param numDigits Number of digits for the ID.
+ * @return Randomly generated ID with the specified number of digits.
+ */
 int NameGenerator::getRandomID(int numDigits) {
     int min = std::pow(10, numDigits - 1);
     int max = std::pow(10, numDigits) - 1;
