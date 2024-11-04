@@ -16,7 +16,7 @@
 #include <iostream>
 
 std::shared_ptr<TaxAuthority> tax = std::make_shared<TaxAuthority>();
-std::vector<Citizen *> cits;
+std::vector<int> ids;
 std::shared_ptr<City> city = std::make_shared<City>();
 
 class GridGui : public olc::PixelGameEngine {
@@ -59,8 +59,14 @@ public:
 
         if (addBuildingButton->bReleased) {
             const BuildingType type = selectedBuildingType();
-            city->addBuilding(type);
-            city.
+            std::string name = buildingNameTextBox->sText;
+            city->addBuilding(name, type);
+
+            std::vector<std::string> names = city->getBuildingNames();
+            buildingList.insert(++buildingList.begin(), names.begin(), names.end());
+
+            std::cout << city->getBuildings().at(0)->getDetails();
+
             buildingGroupToggle(false);
             addBuildingButton->bReleased = false;
         }
@@ -69,7 +75,6 @@ public:
             buildingGroupToggle(false);
             cancelBuildingButton->bReleased = false;
         }
-
 
         if (buildingListBox->nSelectedItem) {
             size_t n = buildingListBox->nSelectedItem;
@@ -82,7 +87,6 @@ public:
 
         if (addCitButton->bReleased) {
             CitizenType type = (citTypeCheckBoxC) ? CitizenType::Citizen : (citTypeCheckBoxR) ? CitizenType::Retired : CitizenType::Worker;
-            cits.push_back(new Citizen(cits.size() + 1, type, std::stoi(citSatisfactionTextBox->sText), 500, tax));
             renderCitizenGroup();
             citizenGroupToggle(false);
             addCitButton->bReleased = false;
@@ -96,7 +100,7 @@ public:
         if (citizenListBox->bSelectionChanged) {
             if (citizenListBox->nSelectedItem == 0) {
             } else {
-                console->sText = cits.at(citizenListBox->nSelectedItem - 1)->getName();
+                console->sText = city->getCitizenDetails(ids.at(citizenListBox->nSelectedItem) - 1);
             }
         }
 
@@ -141,12 +145,6 @@ protected:
         cancelCitButton->bVisible = t;
     }
 
-    void getCitizens(std::vector<std::string> &v) {
-        for (Citizen *c: cits) {
-            v.push_back(c->getName());
-        }
-    }
-
     void renderCitizenGroup() {
         size_t n = buildingListBox->nSelectedItem;
         if (n == 0) {
@@ -156,7 +154,33 @@ protected:
         } else {
             citizenList.clear();
             citizenList.emplace_back(buildingListBox->m_vList.at(n));
-            getCitizens(citizenList);
+
+            Building *b = city->getBuildings().at(buildingListBox->nSelectedItem - 1);
+            ids.clear(); {
+                if (b->getType() == BuildingType::BrickFactory || b->getType() == BuildingType::SteelFactory || b->getType() ==
+                    BuildingType::WoodFactory) {
+                    //Factory
+                    auto *f = dynamic_cast<Factory *>(b);
+                    ids = f->getEmployees();
+                } else if (b->getType() == BuildingType::Shop || b->getType() == BuildingType::Bank) {
+                    auto *f = dynamic_cast<Commercial *>(b);
+                    ids = f->getEmployees();
+                } else if (b->getType() == BuildingType::Flat || b->getType() == BuildingType::House || b->getType() == BuildingType::Estate) {
+                    auto *f = dynamic_cast<Residential *>(b);
+                    ids = f->getTenants();
+                } else if (b->getType() == BuildingType::Statue || b->getType() == BuildingType::Park) {
+                    //Landmark
+                    //no citizens
+                } else {
+                    auto *f = dynamic_cast<Service *>(b);
+                    ids = f->getEmployees();
+                }
+            }
+            std::vector<std::string> names;
+            for (const auto id: ids) {
+                names.push_back(city->getCitizen(id).getName());
+            }
+            citizenList.insert(++citizenList.begin(), names.begin(), names.end());
 
             newCitizenButton->bVisible = true;
             citizenListBox->bVisible = true;
@@ -229,7 +253,7 @@ protected:
     olc::QuickGUI::Button *newBuildingButton = new olc::QuickGUI::Button(guiManager, "Build New Building", {5, 5}, {120, 15});
     std::vector<std::string> buildingList;
     olc::QuickGUI::ListBox *buildingListBox = new olc::QuickGUI::ListBox(guiManager, buildingList, {5, 20}, {120, 60});
-    olc::QuickGUI::Label *buildingNameLabel = new olc::QuickGUI::Label(guiManager, "Building Name:", {5, 80}, {100, 15});
+    olc::QuickGUI::Label *buildingNameLabel = new olc::QuickGUI::Label(guiManager, "Building Name:", {5, 80}, {120, 15});
     olc::QuickGUI::TextBox *buildingNameTextBox = new olc::QuickGUI::TextBox(guiManager, "", {5, 95}, {100, 15});
     olc::QuickGUI::Label *buildingTypeLabel = new olc::QuickGUI::Label(guiManager, "Building Type:", {5, 110}, {100, 15});
     olc::QuickGUI::CheckBox *bTypeScho = new olc::QuickGUI::CheckBox(guiManager, "School", false, {5, 125}, {60, 15});
@@ -265,9 +289,6 @@ protected:
 };
 
 int main() {
-    cits.push_back(new Citizen(1, CitizenType::Worker, 80, 5000, tax));
-    cits.push_back(new Citizen(2, CitizenType::Citizen, 75, 1000, tax));
-
     TransportDepartment department;
 
     // Train *train = new Train(100);

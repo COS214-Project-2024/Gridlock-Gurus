@@ -152,8 +152,7 @@
 				46,
 				47,
 				48,
-				49,
-				50
+				49
 			]
 		}
 	],
@@ -274,14 +273,14 @@
 				46,
 				47,
 				48,
-				49,
-				50
+				49
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
+				50,
 				51,
 				52,
 				53,
@@ -347,8 +346,7 @@
 				113,
 				114,
 				115,
-				116,
-				117
+				116
 			]
 		}
 	],
@@ -508,12 +506,6 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/HighFundingState.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Landmark.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

@@ -131,7 +131,7 @@ public:
         return government->getBudgetDepartment();
     }
 
- std::vector<std::string>& getBuildingNames();
+ std::vector<std::string> getBuildingNames();
    
 };
 
