@@ -29,18 +29,17 @@ enable_testing()
 add_executable(tests tests/government_tests.cpp tests/transport_test.cpp tests/tax_system_test.cpp tests/building_test.cpp tests/citizen_test.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
 # Add main application executable (with Main.cpp)
-add_executable(main src/Main.cpp ${SOURCE_FILES} ${HEADER_FILES})
+# add_executable(main src/Main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
 
 target_link_libraries(tests gtest gtest_main pthread)
 
 # Link libraries based on the operating system
 # if(WIN32)
-target_link_libraries(main user32 gdi32 opengl32 gdiplus Shlwapi dwmapi stdc++fs)
+    # target_link_libraries(main user32 gdi32 opengl32 gdiplus Shlwapi dwmapi stdc++fs)
 # else()
     # target_link_libraries(main pthread stdc++fs)
 # endif()
 
 # Register tests with CTest
 add_test(NAME all_tests COMMAND tests)
-
