@@ -25,9 +25,25 @@ private:
     std::shared_ptr<DepartmentOfWaterPowerAndSanitation> utilities; ///< Utility department managed by the government
     std::shared_ptr<DepartmentOfHomeAffairs> homeAffairs;           ///< Home affairs department managed by the government
 
-    // Delete copy constructor and assignment operator
-    // Government(const Government&) = delete;
-    // Government& operator=(const Government&) = delete;
+   /**
+     * @brief Delete the copy constructor for the Government class.
+     * 
+     * This constructor is deleted to prevent copying of Government objects, 
+     * ensuring that each instance remains unique and avoids potential issues 
+     * related to shared state.
+     */
+    Government(const Government&) = delete;
+    
+    /**
+     * @brief Delete the assignment operator for the Government class.
+     * 
+     * This assignment operator is deleted to prevent assignment of one 
+     * Government object to another, which can lead to unintended behavior 
+     * and shared state issues. Each Government object should manage its own 
+     * state independently.
+     */
+    Government& operator=(const Government&) = delete;
+
 
     /** 
      * @brief Private constructor for singleton pattern.
