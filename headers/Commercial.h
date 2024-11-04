@@ -10,11 +10,6 @@
 #include "BuildingType.h"
 
 
-/**
- * @brief Represents a commercial building.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and adds functionality specific to commercial buildings, including the ability to generate money.
- */
 class Commercial : public Building {
 private:
     int productionRate;  
@@ -31,11 +26,8 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name,int max, int rate); 
+    Commercial(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type,int max, int rate); 
 
-    /**
-     * @brief Destroys the Commercial building.
-     */
     ~Commercial() override = default;
     /**
      * @brief Generates money in the commercial building.
@@ -59,6 +51,10 @@ public:
     bool isFull() {
         return maxEmployees <= employees.size();
     }
+
+    std::vector<int>& getEmployees();
+
 };
+
 
 #endif // COMMERCIAL_H

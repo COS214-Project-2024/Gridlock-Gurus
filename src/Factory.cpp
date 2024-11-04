@@ -26,3 +26,6 @@ void Factory::employ(Citizen& employee) {
     }
 }
 
+std::vector<int>& Factory::getEmployees() {
+    return employees;
+}

@@ -63,18 +63,19 @@ class building_test : public ::testing::Test {
             factory_factory = new FactoryFactory(taxAuth);
             homeFactory = new ResidentialFactory(taxAuth);
 
-            brick_factory = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen);
-            steel_factory = factory_factory->createBuilding(BuildingType::SteelFactory,*citizen);
-            wood_factory = factory_factory->createBuilding(BuildingType::WoodFactory,*citizen);
+            std::string name = "Trump Towers";
+            brick_factory = factory_factory->createBuilding(name,BuildingType::BrickFactory,*citizen);
+            steel_factory = factory_factory->createBuilding(name,BuildingType::SteelFactory,*citizen);
+            wood_factory = factory_factory->createBuilding(name,BuildingType::WoodFactory,*citizen);
 
-            school = service_factory->createBuilding(BuildingType::School,*citizen);
-            police = service_factory->createBuilding(BuildingType::PoliceStation,*citizen);
-            health = service_factory->createBuilding(BuildingType::Hospital,*citizen);
+            school = service_factory->createBuilding(name,BuildingType::School,*citizen);
+            police = service_factory->createBuilding(name,BuildingType::PoliceStation,*citizen);
+            health = service_factory->createBuilding(name,BuildingType::Hospital,*citizen);
 
-            landmark = landmark_factory->createBuilding(BuildingType::Statue,*citizen);
-            home = homeFactory->createBuilding(BuildingType::House,*citizen);     
+            landmark = landmark_factory->createBuilding(name,BuildingType::Statue,*citizen);
+            home = homeFactory->createBuilding(name,BuildingType::House,*citizen);     
 
-            b1 = building_factory->createBuilding(BuildingType::Bank, *citizen);
+            b1 = building_factory->createBuilding(name,BuildingType::Bank, *citizen);
         }
 
         void TearDown() override {
@@ -105,7 +106,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(b1->getCost(),200);
     EXPECT_EQ(b1->getLocation(),"Business district");
     EXPECT_EQ(b1->getSize(),1000);
-    EXPECT_EQ(b1->getName(),BuildingType::Bank);
+    EXPECT_EQ(b1->getType(),BuildingType::Bank);
 
     // Brick
     BrickFactory* brickPtr = dynamic_cast<BrickFactory*>(brick_factory);
@@ -121,7 +122,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(brick_factory->getCost(),500);
     EXPECT_EQ(brick_factory->getLocation(),"Factory district");
     EXPECT_EQ(brick_factory->getSize(),1000);
-    EXPECT_EQ(brick_factory->getName(),BuildingType::BrickFactory);
+    EXPECT_EQ(brick_factory->getType(),BuildingType::BrickFactory);
     
     //Steel
     SteelFactory* steelPtr = dynamic_cast<SteelFactory*>(steel_factory);
@@ -137,7 +138,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(steel_factory->getCost(),1000);
     EXPECT_EQ(steel_factory->getLocation(),"Factory district");
     EXPECT_EQ(steel_factory->getSize(),1000);
-    EXPECT_EQ(steel_factory->getName(),BuildingType::SteelFactory);
+    EXPECT_EQ(steel_factory->getType(),BuildingType::SteelFactory);
 
     //wood
     WoodFactory* woodPtr = dynamic_cast<WoodFactory*>(wood_factory);
@@ -153,7 +154,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(wood_factory->getCost(),100);
     EXPECT_EQ(wood_factory->getLocation(),"Factory district");
     EXPECT_EQ(wood_factory->getSize(),1000);
-    EXPECT_EQ(wood_factory->getName(),BuildingType::WoodFactory);
+    EXPECT_EQ(wood_factory->getType(),BuildingType::WoodFactory);
     
     //police
     PoliceService* PolicePtr = dynamic_cast<PoliceService*>(police);
@@ -180,7 +181,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(police->getCost(),300);
     EXPECT_EQ(police->getLocation(),"City Center");
     EXPECT_EQ(police->getSize(),300);
-    EXPECT_EQ(police->getName(),BuildingType::PoliceStation);
+    EXPECT_EQ(police->getType(),BuildingType::PoliceStation);
     
     //school
     EducationService* schoolPtr = dynamic_cast<EducationService*>(school);
@@ -207,7 +208,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(school->getCost(),200);
     EXPECT_EQ(school->getLocation(),"City Center");
     EXPECT_EQ(school->getSize(),1000);
-    EXPECT_EQ(school->getName(),BuildingType::School);
+    EXPECT_EQ(school->getType(),BuildingType::School);
     
     //health
     HealthService* healthPtr = dynamic_cast<HealthService*>(health);
@@ -234,7 +235,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(health->getCost(),500);
     EXPECT_EQ(health->getLocation(),"City Center");
     EXPECT_EQ(health->getSize(),500);
-    EXPECT_EQ(health->getName(),BuildingType::Hospital);
+    EXPECT_EQ(health->getType(),BuildingType::Hospital);
     
     //home
     Residential* homePtr = dynamic_cast<Residential*>(home);
@@ -250,7 +251,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(home->getCost(),2000);
     EXPECT_EQ(home->getLocation(),"Suburbs");
     EXPECT_EQ(home->getSize(),500);
-    EXPECT_EQ(home->getName(),BuildingType::House);
+    EXPECT_EQ(home->getType(),BuildingType::House);
 
     //landmark
     Landmark* landPtr = dynamic_cast<Landmark*>(landmark);
@@ -262,7 +263,7 @@ TEST_F(building_test, test_construction) {
     EXPECT_EQ(landmark->getCost(),1000);
     EXPECT_EQ(landmark->getLocation(),"City center");
     EXPECT_EQ(landmark->getSize(),2000);
-    EXPECT_EQ(landmark->getName(),BuildingType::Statue);
+    EXPECT_EQ(landmark->getType(),BuildingType::Statue);
 
     EXPECT_EQ(taxAuth->getSize(),9);
 }

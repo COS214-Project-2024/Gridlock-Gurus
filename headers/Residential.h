@@ -6,11 +6,6 @@
 #include <string>
 #include <memory>
 
-/**
- * @brief Represents a residential building.
- *
- * ConcreteProduct participant in the Factory Method pattern. It represents a specific type of building and adds features like managing tenants.
- */
 class Residential : public Building {
 private:
     int maxCapacity;  ///< The maximum number of citizens the building can house.
@@ -27,7 +22,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int capacity);
+    Residential(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int capacity);
 
     /**
      * @brief Destroys the Residential building object.
@@ -39,11 +34,6 @@ public:
      * @param tenant Pointer to the citizen to add as a tenant.
      */
     void addTenant(Citizen& tenant);
-
-    /**
-        * @brief Adds a tenant to the residential building.
-        * @param tenant Pointer to the citizen to add as a tenant.
-        */
     void removeTenant(Citizen& tenant);
 
     bool isFull() const;
@@ -51,6 +41,9 @@ public:
     int getNumberOfTenants() const {
         return tenants.size();
     }
+
+    std::vector<int>& getTenants();
+
 };
 
 #endif // RESIDENTIAL_H

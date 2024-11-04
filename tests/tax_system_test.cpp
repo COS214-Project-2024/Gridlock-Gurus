@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "../headers/TaxAuthority.h"
+#include <string>
+
 #include "../headers/Building.h"
 #include "../headers/Citizen.h"
 #include "../headers/BuildingCollection.h"
@@ -56,8 +58,9 @@ TEST_F(tax_system_test, ConstructorSetCorrectValues) {
 
     EXPECT_EQ(taxAuth->getAmountOfCitizens(), 2);
 
-    factory1 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
-    factory2 = factory_factory->createBuilding(BuildingType::BrickFactory,*citizen1);
+    std::string name = "Trump towers";
+    factory1 = factory_factory->createBuilding(name,BuildingType::BrickFactory,*citizen1);
+    factory2 = factory_factory->createBuilding(name,BuildingType::BrickFactory,*citizen1);
     EXPECT_EQ(taxAuth->getSize(), 2);
     BrickFactory* fac1 = dynamic_cast<BrickFactory*>(factory1);
     //BrickFactory* fac2 = dynamic_cast<BrickFactory*>(factory2);
