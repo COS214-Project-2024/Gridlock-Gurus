@@ -24,12 +24,21 @@ public:
      ~TaxAuthority() = default;
     void registerBuilding(Building& building);
     void registerCitizen(Citizen& citizen);
+  
+    void unregisterCitizen(Citizen& citizen); 
+
+    /**
+     * @brief Notifies all registered members to pay taxes.
+     */
     int collectTaxes();
     void setStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
     void sendTax(int amount);
     
     int getCollectedTax();
     
+    /**
+     * Gets the amount of buildings in the city registers with the tax authority.
+     */
     int getSize();
     
     int getAmountOfCitizens() const {
@@ -40,7 +49,12 @@ public:
     int getPowerUsage() const;
 
     void removeLastBuilding();
+    void deregisterAllCitizens() ;
 
+    std::string getCitizenDetails(int id);
+    Citizen& getCitizen(int id); 
+    std::vector<Building*>& getBuildings();
+ 
 private:
     void notifyCitizens();
     void notifyBuildings();

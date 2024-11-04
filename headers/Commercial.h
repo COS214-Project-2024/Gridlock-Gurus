@@ -14,13 +14,24 @@ class Commercial : public Building {
 private:
     int productionRate;  
     int maxEmployees;
-    std::vector<Citizen*> employees;  
+    std::vector<int> employees;  
 
 public:
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name,int max, int rate); 
+    /**
+     * @brief Constructs a new Commercial building.
+     * @param cost The construction cost of the building.
+     * @param location The location of the building.
+     * @param resources Pointer to the resources the building consumes.
+     * @param size The size of the building.
+     * @param owner Pointer to the owner of the building.
+     * @param taxAuthority Pointer to the tax authority associated with the building.
+     */
+    Commercial(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type,int max, int rate); 
 
     ~Commercial() override = default;
-
+    /**
+     * @brief Generates money in the commercial building.
+     */
     int produceMoney();
 
     void employ(Citizen& employee);
@@ -40,6 +51,10 @@ public:
     bool isFull() {
         return maxEmployees <= employees.size();
     }
+
+    std::vector<int>& getEmployees();
+
 };
+
 
 #endif // COMMERCIAL_H

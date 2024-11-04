@@ -10,7 +10,15 @@ class FactoryFactory : public BuildingFactory {
 public:
     FactoryFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
     ~FactoryFactory() override = default;
-    Building* createBuilding(BuildingType type, Citizen& owner) override;
+    
+    /**
+     * @brief Creates a Factory building.
+     * @param type The type of Factory building to create.
+     * @return Pointer to the created Factory building object.
+     *
+     * This method overrides the factory method to create a Factory building.
+     */
+    Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // FACTORYFACTORY_H

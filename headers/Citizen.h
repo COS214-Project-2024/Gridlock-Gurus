@@ -37,7 +37,12 @@ public:
      ~Citizen() = default;
 
     void setWork(Building& work);
-
+    void quitJob() ;
+    /**
+     * @brief Finds a home in a specified building.
+     *
+     * @param home Pointer to the building that will be the citizen's home.
+     */
     void setHome(Building& home);
 
     void workDay();

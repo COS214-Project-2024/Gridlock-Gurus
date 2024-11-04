@@ -14,14 +14,28 @@ private:
 
 public:
     void addVehicle(Vehicle& vehicle);
+
     void manage();
+
     ~TransportDepartment(); 
+
     Vehicle& getAvailableVehicle(VehicleType type);
+
     void repairVehicle(Vehicle& vehicle);
+
     int getSize() {
         return vehicles.size();
     }
+
     int getBroken();
+
+    void addTransport(VehicleType type);
+
+    int getFleetSize();
+
+    void getReport(std::string& temp);
+
+    std::vector<Vehicle*>& getFleet();
 };
 
 #endif

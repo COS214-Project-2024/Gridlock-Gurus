@@ -2,29 +2,19 @@
 #include <algorithm>
 #include <iostream>
 
-Residential::Residential(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name, int capacity) : Building(cost, location, resources, size, owner,name) {
+Residential::Residential(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType type, int capacity) : Building(name,cost, location, resources, size, owner,type) {
     this->maxCapacity = capacity;
-}
-
-std::string Residential::getDetails() const {
-    std::string details =  "Residential: \n";
-    details += "Owner: " + owner.getName() + "\n";
-    details += "Location: " + location + "\n";
-    details += "Capacity: " + std::to_string(tenants.size()) + "/" + std::to_string(maxCapacity) + "\n";
-    details += "Cost: " + std::to_string(cost) + "\n";
-    details += "Size: " + std::to_string(size) + "\n";
-    return details;
 }
 
 void Residential::addTenant(Citizen& tenant) {
     if(tenants.size() < maxCapacity) {
-        tenants.push_back(&tenant);
+        tenants.push_back(tenant.getId());
         tenant.setHome(*this);
     }
 }
 
 void Residential::removeTenant(Citizen& tenant) {
-    auto it = std::find(tenants.begin(), tenants.end(), &tenant);
+    auto it = std::find(tenants.begin(), tenants.end(), tenant.getId());
 
     if(it != tenants.end()) {
         tenants.erase(it);
@@ -33,4 +23,8 @@ void Residential::removeTenant(Citizen& tenant) {
 
 bool Residential::isFull() const {
     return tenants.size() >= maxCapacity;
+}
+
+std::vector<int>& Residential::getTenants() {
+    return tenants;
 }

@@ -2,7 +2,7 @@
 #include "PeaceState.h"
 #include "UnrestState.h"
 
-PoliceService::PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id) {
+PoliceService::PoliceService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType type) : Service(name,cost, location, resources, size, owner,type,id) {
     this->responseTime = 10;
     policeState =std::make_unique<PeaceState>(*this);
     state = PoliceStateType::Peace;

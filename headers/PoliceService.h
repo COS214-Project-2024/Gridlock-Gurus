@@ -19,7 +19,19 @@ private:
     int responseTime;
 
 public:
-    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType name);
+    /**
+     * @brief Constructs a new PoliceService building.
+     * @param cost The construction cost of the police service.
+     * @param location The location of the police service.
+     * @param resources Pointer to the resources the police service uses.
+     * @param size The size of the police service.
+     * @param owner Pointer to the owner of the police service.
+     */
+    PoliceService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType type);
+
+    /**
+     * @brief Destroys the PoliceService building.
+     */
     ~PoliceService() override = default;
     // void payTax(int amount) override;
     void setState();

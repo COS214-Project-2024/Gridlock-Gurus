@@ -404,6 +404,30 @@ src/BuildingIterator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/BuildingIterator.cpp.s
 .PHONY : src/BuildingIterator.cpp.s
 
+src/ChangeTaxStrategyCommand.o: src/ChangeTaxStrategyCommand.cpp.o
+.PHONY : src/ChangeTaxStrategyCommand.o
+
+# target to build an object file
+src/ChangeTaxStrategyCommand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ChangeTaxStrategyCommand.cpp.o
+.PHONY : src/ChangeTaxStrategyCommand.cpp.o
+
+src/ChangeTaxStrategyCommand.i: src/ChangeTaxStrategyCommand.cpp.i
+.PHONY : src/ChangeTaxStrategyCommand.i
+
+# target to preprocess a source file
+src/ChangeTaxStrategyCommand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ChangeTaxStrategyCommand.cpp.i
+.PHONY : src/ChangeTaxStrategyCommand.cpp.i
+
+src/ChangeTaxStrategyCommand.s: src/ChangeTaxStrategyCommand.cpp.s
+.PHONY : src/ChangeTaxStrategyCommand.s
+
+# target to generate assembly for a file
+src/ChangeTaxStrategyCommand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ChangeTaxStrategyCommand.cpp.s
+.PHONY : src/ChangeTaxStrategyCommand.cpp.s
+
 src/Citizen.o: src/Citizen.cpp.o
 .PHONY : src/Citizen.o
 
@@ -812,30 +836,6 @@ src/HighFundingState.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HighFundingState.cpp.s
 .PHONY : src/HighFundingState.cpp.s
 
-src/Landmark.o: src/Landmark.cpp.o
-.PHONY : src/Landmark.o
-
-# target to build an object file
-src/Landmark.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Landmark.cpp.o
-.PHONY : src/Landmark.cpp.o
-
-src/Landmark.i: src/Landmark.cpp.i
-.PHONY : src/Landmark.i
-
-# target to preprocess a source file
-src/Landmark.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Landmark.cpp.i
-.PHONY : src/Landmark.cpp.i
-
-src/Landmark.s: src/Landmark.cpp.s
-.PHONY : src/Landmark.s
-
-# target to generate assembly for a file
-src/Landmark.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Landmark.cpp.s
-.PHONY : src/Landmark.cpp.s
-
 src/LandmarkFactory.o: src/LandmarkFactory.cpp.o
 .PHONY : src/LandmarkFactory.o
 
@@ -1004,30 +1004,6 @@ src/PoliceService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PoliceService.cpp.s
 .PHONY : src/PoliceService.cpp.s
 
-src/PolicyCommand.o: src/PolicyCommand.cpp.o
-.PHONY : src/PolicyCommand.o
-
-# target to build an object file
-src/PolicyCommand.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PolicyCommand.cpp.o
-.PHONY : src/PolicyCommand.cpp.o
-
-src/PolicyCommand.i: src/PolicyCommand.cpp.i
-.PHONY : src/PolicyCommand.i
-
-# target to preprocess a source file
-src/PolicyCommand.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PolicyCommand.cpp.i
-.PHONY : src/PolicyCommand.cpp.i
-
-src/PolicyCommand.s: src/PolicyCommand.cpp.s
-.PHONY : src/PolicyCommand.s
-
-# target to generate assembly for a file
-src/PolicyCommand.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/PolicyCommand.cpp.s
-.PHONY : src/PolicyCommand.cpp.s
-
 src/Power.o: src/Power.cpp.o
 .PHONY : src/Power.o
 
@@ -1075,6 +1051,30 @@ src/ProgressiveTaxStrategy.s: src/ProgressiveTaxStrategy.cpp.s
 src/ProgressiveTaxStrategy.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/ProgressiveTaxStrategy.cpp.s
 .PHONY : src/ProgressiveTaxStrategy.cpp.s
+
+src/RepairUtilitiesCommand.o: src/RepairUtilitiesCommand.cpp.o
+.PHONY : src/RepairUtilitiesCommand.o
+
+# target to build an object file
+src/RepairUtilitiesCommand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/RepairUtilitiesCommand.cpp.o
+.PHONY : src/RepairUtilitiesCommand.cpp.o
+
+src/RepairUtilitiesCommand.i: src/RepairUtilitiesCommand.cpp.i
+.PHONY : src/RepairUtilitiesCommand.i
+
+# target to preprocess a source file
+src/RepairUtilitiesCommand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/RepairUtilitiesCommand.cpp.i
+.PHONY : src/RepairUtilitiesCommand.cpp.i
+
+src/RepairUtilitiesCommand.s: src/RepairUtilitiesCommand.cpp.s
+.PHONY : src/RepairUtilitiesCommand.s
+
+# target to generate assembly for a file
+src/RepairUtilitiesCommand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/RepairUtilitiesCommand.cpp.s
+.PHONY : src/RepairUtilitiesCommand.cpp.s
 
 src/Residential.o: src/Residential.cpp.o
 .PHONY : src/Residential.o
@@ -1292,30 +1292,6 @@ src/TaxAuthority.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxAuthority.cpp.s
 .PHONY : src/TaxAuthority.cpp.s
 
-src/TaxCommand.o: src/TaxCommand.cpp.o
-.PHONY : src/TaxCommand.o
-
-# target to build an object file
-src/TaxCommand.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.o
-.PHONY : src/TaxCommand.cpp.o
-
-src/TaxCommand.i: src/TaxCommand.cpp.i
-.PHONY : src/TaxCommand.i
-
-# target to preprocess a source file
-src/TaxCommand.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.i
-.PHONY : src/TaxCommand.cpp.i
-
-src/TaxCommand.s: src/TaxCommand.cpp.s
-.PHONY : src/TaxCommand.s
-
-# target to generate assembly for a file
-src/TaxCommand.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/TaxCommand.cpp.s
-.PHONY : src/TaxCommand.cpp.s
-
 src/TransportDepartment.o: src/TransportDepartment.cpp.o
 .PHONY : src/TransportDepartment.o
 
@@ -1508,6 +1484,30 @@ tests/citizen_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/citizen_test.cpp.s
 .PHONY : tests/citizen_test.cpp.s
 
+tests/government_tests.o: tests/government_tests.cpp.o
+.PHONY : tests/government_tests.o
+
+# target to build an object file
+tests/government_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/government_tests.cpp.o
+.PHONY : tests/government_tests.cpp.o
+
+tests/government_tests.i: tests/government_tests.cpp.i
+.PHONY : tests/government_tests.i
+
+# target to preprocess a source file
+tests/government_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/government_tests.cpp.i
+.PHONY : tests/government_tests.cpp.i
+
+tests/government_tests.s: tests/government_tests.cpp.s
+.PHONY : tests/government_tests.s
+
+# target to generate assembly for a file
+tests/government_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/government_tests.cpp.s
+.PHONY : tests/government_tests.cpp.s
+
 tests/tax_system_test.o: tests/tax_system_test.cpp.o
 .PHONY : tests/tax_system_test.o
 
@@ -1595,6 +1595,9 @@ help:
 	@echo "... src/BuildingIterator.o"
 	@echo "... src/BuildingIterator.i"
 	@echo "... src/BuildingIterator.s"
+	@echo "... src/ChangeTaxStrategyCommand.o"
+	@echo "... src/ChangeTaxStrategyCommand.i"
+	@echo "... src/ChangeTaxStrategyCommand.s"
 	@echo "... src/Citizen.o"
 	@echo "... src/Citizen.i"
 	@echo "... src/Citizen.s"
@@ -1646,9 +1649,6 @@ help:
 	@echo "... src/HighFundingState.o"
 	@echo "... src/HighFundingState.i"
 	@echo "... src/HighFundingState.s"
-	@echo "... src/Landmark.o"
-	@echo "... src/Landmark.i"
-	@echo "... src/Landmark.s"
 	@echo "... src/LandmarkFactory.o"
 	@echo "... src/LandmarkFactory.i"
 	@echo "... src/LandmarkFactory.s"
@@ -1670,15 +1670,15 @@ help:
 	@echo "... src/PoliceService.o"
 	@echo "... src/PoliceService.i"
 	@echo "... src/PoliceService.s"
-	@echo "... src/PolicyCommand.o"
-	@echo "... src/PolicyCommand.i"
-	@echo "... src/PolicyCommand.s"
 	@echo "... src/Power.o"
 	@echo "... src/Power.i"
 	@echo "... src/Power.s"
 	@echo "... src/ProgressiveTaxStrategy.o"
 	@echo "... src/ProgressiveTaxStrategy.i"
 	@echo "... src/ProgressiveTaxStrategy.s"
+	@echo "... src/RepairUtilitiesCommand.o"
+	@echo "... src/RepairUtilitiesCommand.i"
+	@echo "... src/RepairUtilitiesCommand.s"
 	@echo "... src/Residential.o"
 	@echo "... src/Residential.i"
 	@echo "... src/Residential.s"
@@ -1706,9 +1706,6 @@ help:
 	@echo "... src/TaxAuthority.o"
 	@echo "... src/TaxAuthority.i"
 	@echo "... src/TaxAuthority.s"
-	@echo "... src/TaxCommand.o"
-	@echo "... src/TaxCommand.i"
-	@echo "... src/TaxCommand.s"
 	@echo "... src/TransportDepartment.o"
 	@echo "... src/TransportDepartment.i"
 	@echo "... src/TransportDepartment.s"
@@ -1733,6 +1730,9 @@ help:
 	@echo "... tests/citizen_test.o"
 	@echo "... tests/citizen_test.i"
 	@echo "... tests/citizen_test.s"
+	@echo "... tests/government_tests.o"
+	@echo "... tests/government_tests.i"
+	@echo "... tests/government_tests.s"
 	@echo "... tests/tax_system_test.o"
 	@echo "... tests/tax_system_test.i"
 	@echo "... tests/tax_system_test.s"

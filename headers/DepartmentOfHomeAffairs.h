@@ -1,7 +1,6 @@
 #ifndef DEPARTMENTOFHOMEAFFAIRS_H
 #define DEPARTMENTOFHOMEAFFAIRS_H
 
-#include "CitizenIterator.h"
 #include "CitizenFactory.h"
 #include "TaxAuthority.h"
 #include <vector>
@@ -46,6 +45,11 @@ public:
     int getPopulation() {
         return population;
     }
+    std::string createCitizen(CitizenType type, int satisfaction, int funds);
+    std::string getCitizenDetails(int id);
+    Citizen& getCitizen(int id); 
+    std::vector<Citizen*>& getCitizens();
+
 protected:
     void registerBirth();
 

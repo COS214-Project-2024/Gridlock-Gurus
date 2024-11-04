@@ -12,23 +12,44 @@ class Resources;
 
 class Building {
 protected:
-    int cost;
-    std::string location;
-    Resources* resources;
-    int size;
-    Citizen& owner;
-    BuildingType name;
+    std::string name;
+    int cost;  ///< The construction cost of the building.
+    std::string location;  ///< The location of the building.
+    Resources* resources;  ///< Resources used by the building.
+    int size;  ///< The size of the building.
+    Citizen* owner;  ///< The owner of the building.
+    BuildingType type;
 
 public:
-    Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name);
+    /**
+     * @brief Constructs a new Building object.
+     * @param cost The construction cost.
+     * @param location The location of the building.
+     * @param resources Pointer to the resources used by the building.
+     * @param size The size of the building.
+     * @param owner Pointer to the citizen who owns the building.
+     * @param taxAuthority Pointer to the tax authority.
+     */
+    Building(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type);
+
+    /**
+     * @brief Destroys the Building object.
+     */
     virtual ~Building();
-     virtual std::string getDetails() const;
-     virtual int pay();
+
+    virtual int pay();
+  
+     /**
+     * @brief Pays taxes on the building.
+     * @param amount The amount of tax to be paid.
+     */
     void payTax(int amount);
      int getCost() const;
      std::string getLocation() const;
      int getSize() const;
-     BuildingType getName() const;
+
+     BuildingType getType() const;
+
     int getWaterConsumption() const {
         return resources->getWaterConsumption();
     }
@@ -36,6 +57,13 @@ public:
     int getPowerConsumption() const {
         return resources->getPowerConsumption();
     }
+
+    std::string getName() const {
+        return name;
+    }
+
+    std::string getDetails() const;
+
 };
 
 #endif // BUILDING_H

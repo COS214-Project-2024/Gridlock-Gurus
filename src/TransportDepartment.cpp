@@ -64,3 +64,26 @@ void TransportDepartment::repairVehicle(Vehicle& vehicle) {
     }
 }
 
+void TransportDepartment::addTransport(VehicleType type) {
+    Vehicle* v = new Vehicle(type,4,*this);
+    vehicles.push_back(v);
+}
+
+int TransportDepartment::getFleetSize() {
+    return vehicles.size();
+}
+
+void TransportDepartment::getReport(std::string& temp) {
+    temp+= "Working Vehicles: ";
+    temp += std::to_string(getFleetSize()-getBroken());
+    temp += "\nBroken Vehicles: ";
+    temp += std::to_string(getBroken());
+    temp += "\nTotal Vehicles: ";
+    temp += std::to_string(getFleetSize());
+    temp += "\n";
+}
+
+std::vector<Vehicle*>& TransportDepartment::getFleet() {
+ return vehicles;
+}
+

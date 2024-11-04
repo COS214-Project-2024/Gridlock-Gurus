@@ -8,8 +8,6 @@ BuildingCollection::~BuildingCollection() {
     for (Building* building : buildings) {
             delete building;
     }
-
-    //buildings.clear();
 }
 
 BuildingIterator BuildingCollection::begin() { 
@@ -48,3 +46,8 @@ int BuildingCollection::getCityPowerConsumption() const {
 
     return consumption;
 }
+
+std::vector<Building*>& BuildingCollection::getBuildings() {
+    return buildings;
+}
+

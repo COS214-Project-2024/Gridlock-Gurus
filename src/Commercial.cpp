@@ -1,6 +1,6 @@
 #include "Commercial.h"
 
-Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int max, int rate) : Building(cost, location, resources, size, owner , name) {
+Commercial::Commercial(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int max, int rate) : Building(name,cost, location, resources, size, owner , type) {
     this->maxEmployees = max;
     this->productionRate = rate;
 }
@@ -11,9 +11,11 @@ int Commercial::produceMoney() {
 }
 
 void Commercial::employ(Citizen& employee) {
-    if (!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
-        employees.push_back(&employee);
+    if(!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
+        employees.push_back(employee.getId());
+        employee.setWork(*this);
     }
+
 }
 
 int Commercial::pay() {
@@ -21,16 +23,16 @@ int Commercial::pay() {
 }
 
 void Commercial::fire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
-        employee.fired();
         employees.erase(it);
-    }
+        employee.fired();
+    }   
 }
 
 void Commercial::retire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employees.erase(it);
@@ -48,4 +50,8 @@ int Commercial::getNumberOfEmployees() {
 
 int Commercial::getMaxEmployees() {
     return maxEmployees;
+}
+
+std::vector<int>& Commercial::getEmployees() {
+    return employees;
 }

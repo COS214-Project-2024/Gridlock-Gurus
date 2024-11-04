@@ -12,8 +12,15 @@ public:
     CommercialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
      ~CommercialFactory() override = default;
-
-     Building* createBuilding(BuildingType type, Citizen& owner) override;
+    
+    /**
+     * @brief Creates a commercial building.
+     * @param type The type of commercial building to create.
+     * @return Pointer to the created commercial building object.
+     *
+     * This method overrides the factory method to create a commercial building.
+     */
+     Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // COMMERCIALFACTORY_H

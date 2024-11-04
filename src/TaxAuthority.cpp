@@ -1,6 +1,7 @@
 #include "TaxAuthority.h"
 #include "FlatTaxStrategy.h"
 #include "ProgressiveTaxStrategy.h"
+#include <algorithm>
 
 TaxAuthority::TaxAuthority(){
     this->buildings = std::make_unique<BuildingCollection>();
@@ -74,4 +75,19 @@ int TaxAuthority::getWaterUsage() const {
 
 int TaxAuthority::getPowerUsage() const {
     return buildings->getCityPowerConsumption();
+}
+
+void TaxAuthority::unregisterCitizen(Citizen& citizen) {
+    auto it = std::remove(citizens.begin(), citizens.end(), &citizen);
+    if (it != citizens.end()) {
+        citizens.erase(it, citizens.end());
+    }
+}
+
+void TaxAuthority::deregisterAllCitizens() {
+    citizens.clear();
+}
+
+std::vector<Building*>& TaxAuthority::getBuildings() {
+    return buildings->getBuildings();
 }

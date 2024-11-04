@@ -2,7 +2,7 @@
 #include "City.h"
 #include "Residential.h"
 
-Building *ResidentialFactory::createBuilding(BuildingType type,Citizen &owner) {
+Building *ResidentialFactory::createBuilding(const std::string& name,BuildingType type,Citizen &owner) {
   Resources *resources = new Resources(400, 400, true);
   int maxInhabitants;
   int cost;
@@ -26,7 +26,7 @@ Building *ResidentialFactory::createBuilding(BuildingType type,Citizen &owner) {
     location = "Country";
   }
 
-    Residential* r = new Residential(cost, location, resources, 500, owner, type, maxInhabitants);
+    Residential* r = new Residential(name,cost, location, resources, 500, owner, type, maxInhabitants);
     taxAuthority->registerBuilding(*r);
 
   return r;

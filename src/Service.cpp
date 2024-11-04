@@ -1,6 +1,6 @@
 #include "Service.h"
 
-Service::Service(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name,int id) : Building(cost, location, resources, size, owner,name) {
+Service::Service(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType type,int id) : Building(name,cost, location, resources, size, owner,type) {
     this->id = id;
     this->maxEmployees = 30;
     this->benefits = 0.5;
@@ -8,12 +8,12 @@ Service::Service(int cost, std::string& location, Resources *resources, int size
 
 void Service::employ(Citizen& employee) {
     if (!employee.getEmploymentStatus() && employees.size() < maxEmployees) {
-        employees.push_back(&employee);
+        employees.push_back(employee.getId());
     }
 }
 
 void Service::fire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employee.fired();
@@ -22,7 +22,7 @@ void Service::fire(Citizen& employee) {
 }
 
 void Service::retire(Citizen& employee) {
-    auto it = std::find(employees.begin(), employees.end(), &employee);
+    auto it = std::find(employees.begin(), employees.end(), employee.getId());
 
     if(it != employees.end()) {
         employees.erase(it);

@@ -3,7 +3,7 @@
 #include <string>
 
 
-Building *LandmarkFactory::createBuilding(BuildingType type, Citizen& owner) {
+Building *LandmarkFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(0,0,false);
     int cost;
     std::string location = "City center";
@@ -17,7 +17,7 @@ Building *LandmarkFactory::createBuilding(BuildingType type, Citizen& owner) {
         cost = 3000;
     }
 
-    Landmark* l = new Landmark(cost,location,resources,size,owner,type);
+    Landmark* l = new Landmark(name,cost,location,resources,size,owner,type);
     taxAuthority->registerBuilding(*l);
 
     return l;
