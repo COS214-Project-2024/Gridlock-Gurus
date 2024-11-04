@@ -137,8 +137,9 @@ int City::checkCityFunds() const {
     return government->getBudgetDepartment()->checkTotal();
 }
 
-void City::startTaxCycle() {
-    government->getBudgetDepartment()->receiveTaxes();
+std::string City::startTaxCycle() {
+    int amount = government->getBudgetDepartment()->receiveTaxes();
+    return "The city collected $" + std::to_string(amount) + " in taxes\n";
 }
 
 int City::getBuildingCount() {
@@ -190,5 +191,12 @@ std::string City::getCitizenDetails(int id) {
     return government->getDepartmentOfHomeAffairs()->getCitizenDetails(id);
 }
 
+std::vector<std::string> City::getBuildingNames() {
+    std::vector<std::string> names;
+    for(Building* b : getBuildings()) {
+        names.push_back(b->getName());
+    }
+    return names;
+}
 
 

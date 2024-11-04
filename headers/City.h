@@ -143,7 +143,7 @@ public:
     /**
      * @brief Initiates a new cycle of tax collection.
      */
-    void startTaxCycle();
+    std::string startTaxCycle();
 
     /**
      * @brief Increases the city's transport services by adding vehicles.
@@ -269,8 +269,13 @@ public:
      * @return Shared pointer to the BudgetDepartment.
      */
     std::shared_ptr<BudgetDepartment> getBudgetDepartment() const {
-     return government->getBudgetDepartment();
-    };
+
+        return government->getBudgetDepartment();
+    }
+
+    std::vector<std::string> getBuildingNames();
+   
+
 };
 
 #endif // CITY_H
