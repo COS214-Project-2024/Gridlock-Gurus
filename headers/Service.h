@@ -63,7 +63,7 @@ public:
      * @return The number of employees.
      */
     int getNumberOfEmployees() const {
-        return employees.size();
+        return this->employees.size();
     }
 
     /**
@@ -78,7 +78,7 @@ public:
      * @brief Gets the unique identifier of the service building.
      * @return The unique identifier.
      */
-    int getId() const {
+    int getId() {
         return id;
     }
 
@@ -86,7 +86,7 @@ public:
      * @brief Checks if the building has reached its maximum capacity.
      * @return true if the building is full, false otherwise.
      */
-    bool isFull() const {
+    bool isFull() {
         return maxEmployees <= employees.size();
     }
 };
