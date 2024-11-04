@@ -174,7 +174,7 @@ public:
             vehiclePNG = new olc::Sprite("./images/train.png");
         }
 
-        DrawSprite(600, 200, vehiclePNG);
+        DrawSprite(600, 180, vehiclePNG);
 
         if (taxButton->bReleased) {
             console->sText = city->startTaxCycle();
@@ -269,7 +269,6 @@ protected:
     olc::Sprite *buildingPNG = nullptr;
     olc::Sprite *vehiclePNG = nullptr;
 
-
     olc::QuickGUI::Manager guiManager;
 
     olc::QuickGUI::Button *newBuildingButton = new olc::QuickGUI::Button(guiManager, "Build New Building", {5, 5}, {120, 15});
@@ -314,7 +313,7 @@ protected:
     olc::QuickGUI::Button *newTrainButton = new olc::QuickGUI::Button(guiManager, "New Train", {610, 20}, {60, 15});
     olc::QuickGUI::Button *taxButton = new olc::QuickGUI::Button(guiManager, "Tax Report", {550, 35}, {120, 15});
 
-    olc::QuickGUI::TextBox *console = new olc::QuickGUI::TextBox(guiManager, "", {5, 300}, {720, 65});
+    olc::QuickGUI::TextBox *console = new olc::QuickGUI::TextBox(guiManager, "", {5, 290}, {720, 75});
 };
 
 int main() {
