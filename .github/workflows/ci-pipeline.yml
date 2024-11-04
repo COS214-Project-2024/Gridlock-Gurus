@@ -51,6 +51,12 @@ jobs:
               fi
           done
 
+       # Step 4: Static Code Analysis with cppcheck
+      - name: Static Code Analysis with cppcheck
+        run: |
+          sudo apt-get install -y cppcheck
+          cppcheck --enable=all --error-exitcode=1 src tests
+
   build:
     runs-on: ubuntu-latest
     
