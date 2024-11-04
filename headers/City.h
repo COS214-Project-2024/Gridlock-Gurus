@@ -47,6 +47,7 @@ private:
 
 public:
     City();
+    ~City();
 
     /**
      * @brief Adds a new building to the city's collection of buildings.
