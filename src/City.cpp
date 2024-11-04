@@ -137,8 +137,9 @@ int City::checkCityFunds() const {
     return government->getBudgetDepartment()->checkTotal();
 }
 
-void City::startTaxCycle() {
-    government->getBudgetDepartment()->receiveTaxes();
+std::string City::startTaxCycle() {
+    int amount = government->getBudgetDepartment()->receiveTaxes();
+    return "The city collected $" + std::to_string(amount) + " in taxes\n";
 }
 
 int City::getBuildingCount() {
