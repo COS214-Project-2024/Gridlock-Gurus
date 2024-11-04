@@ -1,11 +1,5 @@
 #include "UnrestState.h"
 
-/**
- * @brief Checks the operational status of a service during unrest.
- *
- * If assigned, this function assesses whether a service has adequate staffing for the unrest scenario. It provides
- * warnings or adjustments to response times based on the current staffing ratio.
- */
 void UnrestState::checkOperation() {
 /*    if(service) {
         int currStaff = service->getStaff();
@@ -24,10 +18,6 @@ void UnrestState::checkOperation() {
 */
 }
 
-/**
- * @brief Retrieves the name of the state.
- * @return A string representing the name of the unrest state.
- */
 std::string UnrestState::getName() {
     return "Unrest State";
 }
