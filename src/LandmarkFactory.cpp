@@ -2,7 +2,6 @@
 #include "Landmark.h"
 #include <string>
 
-
 Building *LandmarkFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(0,0,false);
     int cost;

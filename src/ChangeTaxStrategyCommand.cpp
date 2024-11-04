@@ -7,3 +7,4 @@ void ChangeTaxStrategyCommand::execute() {
         city->changeTaxStrategy(std::make_unique<ProgressiveTaxStrategy>());
     }
 }
+

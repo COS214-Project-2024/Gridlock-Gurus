@@ -5,7 +5,6 @@ Commercial::Commercial(const std::string& name,int cost, std::string& location, 
     this->productionRate = rate;
 }
 
-
 int Commercial::produceMoney() {
     return 100;
 }

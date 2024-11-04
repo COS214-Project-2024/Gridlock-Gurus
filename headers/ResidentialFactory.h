@@ -7,17 +7,30 @@
 #include <memory>
 #include <string>
 
+/**
+ * @class ResidentialFactory
+ * @brief Factory for creating residential buildings.
+ */
 class ResidentialFactory : public BuildingFactory {
 public:
+    /**
+     * @brief Constructs a new ResidentialFactory object.
+     * @param taxAuthority Shared pointer to the tax authority.
+     */
     ResidentialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
+
+    /**
+     * @brief Destroys the ResidentialFactory object.
+     */
     ~ResidentialFactory() override = default;
 
     /**
      * @brief Creates a residential building.
+     * 
+     * @param name The name of the building.
      * @param type The type of residential building to create.
+     * @param owner Reference to the owner of the building.
      * @return Pointer to the created Residential building object.
-     *
-     * This method overrides the factory method to create a residential building.
      */
     Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };

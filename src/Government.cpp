@@ -6,7 +6,8 @@ std::shared_ptr<Government> Government::getInstance() {
     if (instance == nullptr) {
         instance = std::shared_ptr<Government>(new Government());
     }
-    return instance;}
+    return instance;
+}
 
 Government::Government() {
         taxAuthority = std::make_shared<TaxAuthority>();

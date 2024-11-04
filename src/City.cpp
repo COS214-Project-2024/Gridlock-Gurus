@@ -10,7 +10,7 @@ City::City() {
     state = CityState::Happy;
     citizen_happiness = 0;
 };
-    
+
 City::~City() {
     delete factory_factory;
     delete landmark_factory;

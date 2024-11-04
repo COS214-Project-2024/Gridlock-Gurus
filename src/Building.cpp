@@ -11,13 +11,11 @@ int Building::pay() {
     return 0;
 }
 
-
 void Building::payTax(int amount) {
     if(owner) {
         this->owner->payTaxes(amount);
     }
 }
-
 
 int Building::getCost() const {
     return this->cost;
@@ -42,4 +40,3 @@ std::string Building::getDetails() const {
     details += "\nLocation:\t";
     return details;
 }
-
