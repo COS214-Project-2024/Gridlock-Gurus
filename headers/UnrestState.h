@@ -5,14 +5,14 @@
 #include "PoliceState.h"
 
 /**
- * @brief Represents a state of unrest in the city.
- *
- * ConcreteState in the State pattern. It extends the PoliceState class and provides an implementation for checking the operational status of police services during times of unrest.
+ * @class UnrestState
+ * @brief Represents the state of unrest in the police service.
  */
 class UnrestState : public PoliceState {
 public:
     /**
      * @brief Constructs a new UnrestState object.
+     * @param service Reference to the police service.
      */
     UnrestState(PoliceService& service) : PoliceState(service) {}
 
@@ -22,10 +22,14 @@ public:
     ~UnrestState() = default;
 
     /**
-     * @brief Checks the operational status of the police service during a state of unrest.
-     * This method implements behavior specific to the unrest state.
+     * @brief Checks the operational status during unrest.
      */
     void checkOperation() override;
+
+    /**
+     * @brief Gets the name of the current state.
+     * @return The name of the state.
+     */
     std::string getName() override;
 };
 

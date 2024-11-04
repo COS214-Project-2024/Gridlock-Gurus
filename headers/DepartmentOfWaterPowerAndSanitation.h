@@ -11,48 +11,60 @@
 #include <string>
 
 /**
- * @brief Department managing water, power, and sanitation utilities.
+ * @brief Manages water, power, and sanitation services in the city.
  */
 class DepartmentOfWaterPowerAndSanitation {
 private:
-    std::unique_ptr<Water> water;
-    std::unique_ptr<Power> power;
-    std::unique_ptr<Sanitation> sanitation;
+    std::unique_ptr<Water> water;               ///< Water management system.
+    std::unique_ptr<Power> power;               ///< Power management system.
+    std::unique_ptr<Sanitation> sanitation;     ///< Sanitation management system.
 
 public:
-
     /**
-     * @brief Construct a new DepartmentOfWaterPowerAndSanitation object.
-     *
-     * Initializes the DepartmentOfWaterPowerAndSanitation and prepares the resources and utilities.
+     * @brief Constructs the Department of Water, Power, and Sanitation.
      */
     DepartmentOfWaterPowerAndSanitation() {
-        water = std::make_unique<Water>();
-        power = std::make_unique<Power>();
-        sanitation = std::make_unique<Sanitation>();
-    }
+     water = std::make_unique<Water>();
+     power = std::make_unique<Power>();
+     sanitation = std::make_unique<Sanitation>();
+    };
 
     /**
-     * @brief Destroy the DepartmentOfWaterPowerAndSanitation object.
-     *
-     * Cleans up resources and deletes the utilities.
+     * @brief Default destructor.
      */
-     ~DepartmentOfWaterPowerAndSanitation() = default;
-    
+    ~DepartmentOfWaterPowerAndSanitation() = default;
+
     /**
-     * @brief Repair the utilities managed by the department.
+     * @brief Repairs utilities in the department.
+     * @return The cost of repairs.
      */
     int repair();
 
     /**
-     * @brief Check the utility network capacity.
+     * @brief Checks the status of the utility network.
+     * @return A string describing the network status.
      */
     std::string checkNetwork() const;
 
-    void reviewWaterUsage(int totalWater);
+    /**
+    * @brief Reviews the total water usage within the city.
+    * @param totalWater The total amount of water used, measured in appropriate units (e.g., liters).
+    * This function evaluates the city's water consumption and can trigger alerts or actions
+    * based on the water usage levels.
+    */
+     void reviewWaterUsage(int totalWater);
 
+    /**
+     * @brief Reviews the total power usage within the city.
+     * @param totalPower The total amount of power used, measured in appropriate units (e.g., kilowatt-hours).
+     * This function assesses the city's power consumption and can initiate alerts or actions
+     * depending on the power usage metrics.
+     */
     void reviewPowerUsage(int totalPower);
 
+    /**
+     * @brief Upgrades the utilities in the department.
+     */
     void upgrade();
 };
 

@@ -2,37 +2,32 @@
 #define TAXSTRATEGY_H
 
 /**
- * @brief Abstract strategy class for calculating taxes.
- *
- * Strategy participant in the Strategy Design Pattern.
+ * @class TaxStrategy
+ * @brief Abstract base class defining tax calculation strategies.
  */
 class TaxStrategy {
 public:
     /**
-     * @brief Constructor for the TaxStrategy.
+     * @brief Constructs a new TaxStrategy object.
      */
     TaxStrategy() = default;
-    
+
     /**
-     * @brief Destructor for the TaxStrategy.
+     * @brief Destroys the TaxStrategy object.
      */
     virtual ~TaxStrategy() = default;
 
     /**
-     * @brief Calculates tax on a building.
+     * @brief Calculates the tax for a building.
      * @param value The value of the building.
-     * @return Calculated building tax.
-     *
-     * This function acts as the algorithm() function.
+     * @return The calculated tax amount.
      */
     virtual int calculateBuildingTax(int value) = 0;
 
     /**
-     * @brief Calculates tax on a citizen's earnings.
+     * @brief Calculates the tax for a citizen.
      * @param earnings The earnings of the citizen.
-     * @return Calculated citizen tax.
-     *
-     * This function acts as the algorithm() function.
+     * @return The calculated tax amount.
      */
     virtual int calculateCitizenTax(int earnings) = 0;
 };

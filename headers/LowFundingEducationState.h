@@ -6,33 +6,37 @@
 #include "EducationState.h"
 
 /**
- * @brief Represents a low-funding state for education services.
- *
- * ConcreteState in the State pattern. It extends the EducationState class and implements the methods to manage education service operations when funding is low.
+ * @class LowFundingEducationState
+ * @brief Represents a state of low funding for the education service.
  */
 class LowFundingEducationState : public EducationState {
 public:
     /**
-     * @brief Constructs a new LowFundingEducationState object.
+     * @brief Constructs a LowFundingEducationState.
+     * @param service Reference to the associated EducationService.
      */
     LowFundingEducationState(EducationService& service) : EducationState(service) {}
 
     /**
-     * @brief Destroys the LowFundingEducationState object.
+     * @brief Destructor for LowFundingEducationState.
      */
-     ~LowFundingEducationState() override = default;
+    ~LowFundingEducationState() override = default;
 
     /**
-     * @brief Checks the current state of education services in a low-funding condition.
-     * This method implements behavior specific to the low-funding condition.
+     * @brief Checks the current state of the education service.
      */
     void checkEducationState() override;
 
     /**
-     * @brief Gets the quality of education in a low-funding state.
-     * @return int The quality level of education.
+     * @brief Gets the quality of education in the low funding state.
+     * @return The quality of education as an integer.
      */
     int getEducationQuality() override;
+
+    /**
+     * @brief Gets the name of the low funding education state.
+     * @return The name of the state.
+     */
     std::string getName() override;
 };
 

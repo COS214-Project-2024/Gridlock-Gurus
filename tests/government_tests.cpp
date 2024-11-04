@@ -1,13 +1,6 @@
 #include <gtest/gtest.h>
-#include "../headers/Citizen.h"
-#include "../headers/CitizenType.h"
-#include "../headers/TaxAuthority.h"
-#include "../headers/Building.h"
+#include <string>
 #include "../headers/City.h"
-#include "../headers/Government.h"
-#include "../headers/BuildingType.h"
-#include "../headers/VehicleType.h"
-#include "../headers/Command.h"
 #include "../headers/BuildCommand.h"
 #include "../headers/ChangeTaxStrategyCommand.h"
 #include "../headers/CityReportCommand.h"
@@ -78,7 +71,8 @@ TEST_F(government_test, tax_test) {
     EXPECT_EQ(city->checkCityFunds(),20000);
     city->startTaxCycle();
     EXPECT_EQ(city->checkCityFunds(),20000);
-    city->addBuilding(BuildingType::BrickFactory);
+    std::string name = "Trump towers";
+    city->addBuilding(name,BuildingType::BrickFactory);
     city->startTaxCycle();
     EXPECT_GT(city->checkCityFunds(),20000);
     EXPECT_GT(city->getCitizenCount(),0);

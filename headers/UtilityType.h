@@ -4,6 +4,11 @@
 #include <string>
 #include <ostream>
 
+/**
+ * @enum UtilityType
+ * @brief Enum representing types of utilites in the Utility system.
+ */
+
 enum class UtilityType {
     Power,
     Sanitation,

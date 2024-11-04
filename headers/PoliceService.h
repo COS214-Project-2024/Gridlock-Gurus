@@ -12,60 +12,67 @@ enum PoliceStateType{
     Peace,
     Unrest
 };
-/**
- * @brief Represents a police service building.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Service class and represents a specific type of service building that provides police services.
- */
 class PoliceService : public Service {
 private:
     PoliceStateType state;
-    std::unique_ptr<PoliceState> policeState;  ///< Current state of the police service.
+    std::unique_ptr<PoliceState> policeState;
     int responseTime;
 
 public:
     /**
      * @brief Constructs a new PoliceService building.
-     * @param cost The construction cost of the police service.
-     * @param location The location of the police service.
-     * @param resources Pointer to the resources the police service uses.
-     * @param size The size of the police service.
-     * @param owner Pointer to the owner of the police service.
+     * @param name The name of the police service.
+     * @param cost The construction cost.
+     * @param location The location of the service.
+     * @param resources Pointer to the resources used.
+     * @param size The size of the service.
+     * @param owner Reference to the owner of the service.
+     * @param id The unique identifier for the service.
+     * @param type The building type.
      */
-    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType name);
+    PoliceService(const std::string& name, int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType type);
 
     /**
-     * @brief Destroys the PoliceService building.
+     * @brief Destructor for PoliceService.
      */
     ~PoliceService() override = default;
 
     /**
-     * @brief Pays taxes for the police service building.
-     */
-    // void payTax(int amount) override;
-
-    /**
-     * @brief Sets the state of the police service.
-     * @param state Pointer to the new police state.
+     * @brief Sets the current state of the police service.
      */
     void setState();
 
     /**
-     * @brief Pays an officer in the police service.
-     * @param officer Pointer to the officer being paid.
+     * @brief Pays the due amount for the police service.
+     * @return The paid amount.
      */
     int pay() override;
 
+    /**
+     * @brief Decreases the response time by a specified amount.
+     * @param by The amount to decrease the response time by.
+     */
     void responseTimeDec(int by);
 
+    /**
+     * @brief Increases the response time by a specified amount.
+     * @param by The amount to increase the response time by.
+     */
     void responseTimeInc(int by);
 
+    /**
+     * @brief Gets the current response time of the police service.
+     * @return The response time.
+     */
     int getResponseTime() const {
         return responseTime;
     }
 
-    std::string getState() const; 
+    /**
+     * @brief Gets the current state of the police service as a string.
+     * @return The state as a string.
+     */
+    std::string getState() const;
 };
-
 
 #endif // POLICESERVICE_H

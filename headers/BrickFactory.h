@@ -4,41 +4,43 @@
 #include "Factory.h"
 #include "Building.h"
 #include "BuildingType.h"
-
 #include <vector>
 #include <string>
 
 /**
- * @brief Represents a brick manufacturing factory.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that produces bricks.
+ * @class BrickFactory
+ * @brief A factory specialized in producing bricks, inheriting from the Factory base class.
  */
 class BrickFactory : public Factory {
 public:
     /**
      * @brief Constructs a new BrickFactory object.
+     * @param name The name of the factory.
      * @param cost The construction cost of the factory.
      * @param location The location of the factory.
      * @param resources Pointer to the resources the factory consumes.
      * @param size The size of the factory.
-     * @param owner Pointer to the factory's owner.
-     * @param taxAuthority Pointer to the tax authority associated with the factory.
+     * @param owner Reference to the factory's owner.
+     * @param type The type of building the factory represents.
+     * @param productionRate The rate at which bricks are produced.
+     * @param max The maximum production capacity.
      */
-    BrickFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner ,BuildingType name, int productionRate, int max);
+    BrickFactory(const std::string& name, int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type, int productionRate, int max);
 
     /**
      * @brief Destroys the BrickFactory object.
      */
-     ~BrickFactory() override = default;
+    ~BrickFactory() override = default;
 
     /**
-     * @brief Produces bricks in the factory.
+     * @brief Produces resources (bricks) and returns the amount produced.
+     * @return The amount of resources produced.
      */
     int produceResource() override;
 
     /**
-     * @brief Pays an employee working at the brick factory.
-     * @param employee Pointer to the employee.
+     * @brief Calculates and returns the payment required for production.
+     * @return The payment amount.
      */
     int pay() override;
 };

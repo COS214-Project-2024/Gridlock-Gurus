@@ -2,7 +2,7 @@
 #include "HighFundingState.h"
 #include "LowFundingState.h"
 
-HealthService::HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType name, int id) : Service(cost, location, resources, size, owner, name,id){
+HealthService::HealthService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner, BuildingType type, int id) : Service(name,cost, location, resources, size, owner, type,id){
     this->responseTime = 10;
     healthState =std::make_unique<HighFundingState>(*this);
     state = HealthStateType::HighFunding;
@@ -33,7 +33,6 @@ void HealthService::responseTimeInc(int by) {
 int HealthService::getResponseTime() const {
     return this->responseTime;
 }
-
 
 std::string HealthService::getState() const {
     if(state == HealthStateType::HighFunding) {

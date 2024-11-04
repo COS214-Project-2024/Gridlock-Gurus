@@ -6,8 +6,7 @@
 #include "WoodFactory.h"
 #include <string>
 
-// Made citizen a reference instead of pointer to prevent it being nullptr
-Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
+Building *FactoryFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(200,200,false);
     int maxEmployees;
     int productionRate;
@@ -19,7 +18,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         cost = 100;
         productionRate = 4;
 
-        Building* b = new WoodFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
+        Building* b = new WoodFactory(name,cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
         taxAuthority->registerBuilding(*b);
         return b; 
     } else if(type == BuildingType::SteelFactory) {
@@ -27,7 +26,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         cost = 1000;
         productionRate = 6;
 
-        Building* b = new SteelFactory(cost, location,resources, 1000, owner,type,productionRate, maxEmployees);
+        Building* b = new SteelFactory(name,cost, location,resources, 1000, owner,type,productionRate, maxEmployees);
         taxAuthority->registerBuilding(*b);
         return b; 
 
@@ -36,7 +35,7 @@ Building *FactoryFactory::createBuilding(BuildingType type, Citizen& owner) {
         cost = 500;
         productionRate = 12;
 
-        Building* b = new BrickFactory(cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
+        Building* b = new BrickFactory(name,cost, location,resources, 1000, owner, type,productionRate, maxEmployees);
         taxAuthority->registerBuilding(*b);
         return b; 
 

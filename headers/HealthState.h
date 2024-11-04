@@ -4,38 +4,44 @@
 #include <string>
 #include <iostream>
 #include "HealthService.h"
+
 class HealthService;
+
 /**
- * @brief Abstract class representing the state of health services.
- *
- * AbstractState in the State pattern, defining the interface for various health service states. Concrete states will implement specific behaviors for managing health service operations based on funding levels.
+ * @class HealthState
+ * @brief Abstract base class representing a state of the health service.
  */
 class HealthState {
 protected:
     HealthService& service;
 public:
     /**
-     * @brief Constructs a new HealthState object.
+     * @brief Constructs a HealthState.
+     * @param service Reference to the associated HealthService.
      */
     HealthState(HealthService& service) : service(service) {}
 
     /**
-     * @brief Destroys the HealthState object.
+     * @brief Virtual destructor for HealthState.
      */
     virtual ~HealthState() = default;
 
     /**
-     * @brief Retrieves the current health status of the services.
-     * This method must be implemented by concrete states to provide specific health status information.
+     * @brief Gets the health status of the current state.
+     * @return The health status as a string.
      */
     virtual std::string getHealthStatus() = 0;
 
     /**
-     * @brief Gets the quality of service time in the current state.
-     * This method must be implemented by concrete states to determine the quality level of health services.
-     * @return int The quality level of service time.
+     * @brief Gets the quality of time spent in the health service.
+     * @return The quality of time as an integer.
      */
     virtual int getQualityOfTime() = 0;
+
+    /**
+     * @brief Gets the name of the current health state.
+     * @return The name of the state.
+     */
     virtual std::string getName() = 0;
 };
 

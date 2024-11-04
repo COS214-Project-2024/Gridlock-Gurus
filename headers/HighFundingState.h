@@ -4,34 +4,40 @@
 #include "HealthService.h"
 #include "HealthState.h"
 #include <string>
+
 /**
- * @brief Represents a high-funding state for health services.
- *
- * ConcreteState in the State pattern. It extends the HealthState class and implements the methods to manage health service operations when funding is high.
+ * @class HighFundingState
+ * @brief Represents a state of high funding for the health service.
  */
 class HighFundingState : public HealthState {
 public:
     /**
-     * @brief Constructs a new HighFundingState object.
+     * @brief Constructs a HighFundingState.
+     * @param service Reference to the associated HealthService.
      */
     HighFundingState(HealthService& service) : HealthState(service) {}
 
     /**
-     * @brief Destroys the HighFundingState object.
+     * @brief Destructor for HighFundingState.
      */
-     ~HighFundingState() override = default;
+    ~HighFundingState() override = default;
 
     /**
-     * @brief Retrieves the current health status of the services in a high-funding state.
-     * This method implements behavior specific to the high-funding condition.
+     * @brief Gets the health status in the high funding state.
+     * @return The health status as a string.
      */
     std::string getHealthStatus() override;
 
     /**
-     * @brief Gets the quality of service time in a high-funding state.
-     * @return int The quality level of service time.
+     * @brief Gets the quality of time spent in the health service.
+     * @return The quality of time as an integer.
      */
     int getQualityOfTime() override;
+
+    /**
+     * @brief Gets the name of the high funding state.
+     * @return The name of the state.
+     */
     std::string getName() override;
 };
 

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-Residential::Residential(int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType name, int capacity) : Building(cost, location, resources, size, owner,name) {
+Residential::Residential(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner,BuildingType type, int capacity) : Building(name,cost, location, resources, size, owner,type) {
     this->maxCapacity = capacity;
 }
 
@@ -23,4 +23,8 @@ void Residential::removeTenant(Citizen& tenant) {
 
 bool Residential::isFull() const {
     return tenants.size() >= maxCapacity;
+}
+
+std::vector<int>& Residential::getTenants() {
+    return tenants;
 }

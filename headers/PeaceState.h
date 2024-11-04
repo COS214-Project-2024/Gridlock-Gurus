@@ -4,31 +4,35 @@
 #include "PoliceState.h"
 #include "PoliceService.h"
 
-
 /**
- * @brief Represents a state of peace in the city.
- *
- * ConcreteState in the State pattern. It extends the PoliceState class and provides an implementation for checking the operational status of police services during peaceful conditions.
+ * @class PeaceState
+ * @brief Represents the 'Peace' state of the police service.
  */
 class PeaceState : public PoliceState {
 private:
- PoliceService* service;
+    PoliceService* service;
+
 public:
     /**
-     * @brief Constructs a new PeaceState object.
+     * @brief Constructs a PeaceState.
+     * @param service Reference to the associated PoliceService.
      */
     PeaceState(PoliceService& service) : PoliceState(service) {}
 
     /**
-     * @brief Destroys the PeaceState object.
+     * @brief Destructor for PeaceState.
      */
-    ~PeaceState()override = default;
+    ~PeaceState() override = default;
 
     /**
-     * @brief Checks the operational status of the police service during a state of peace.
-     * This method implements behavior specific to the peaceful state.
+     * @brief Checks the operation status in the Peace state.
      */
     void checkOperation() override;
+
+    /**
+     * @brief Gets the name of the Peace state.
+     * @return The name of the state.
+     */
     std::string getName() override;
 };
 

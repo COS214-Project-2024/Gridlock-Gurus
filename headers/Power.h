@@ -4,38 +4,42 @@
 #include "Utilities.h"
 #include <string>
 #include "UtilityType.h"
+
 /**
- * @brief Represents a Power utility.
+ * @class Power
+ * @brief Represents a power utility in the simulation.
  */
 class Power : public Utilities {
 public:
     /**
-     * @brief Constructor for Power utility.
+     * @brief Constructs a Power utility with default parameters.
      */
     Power() : Utilities(UtilityType::Power, 1000, 500) {}
 
-    ~Power()override = default;
+    /**
+     * @brief Destructor for Power utility.
+     */
+    ~Power() override = default;
 
     /**
-     * @brief Check the power capacity.
-     * @return The current power capacity.
+     * @brief Checks the current capacity of the power utility.
      */
     void checkCapacity() const override;
 
-     /**
-      * @brief Shed power temporarily.
-      */
-     void shed() override;
+    /**
+     * @brief Sheds load to manage power distribution.
+     */
+    void shed() override;
 
-     /**
-      * @brief Break the power utility.
-      */
-     void breakUtility() override;
+    /**
+     * @brief Simulates a breakdown of the power utility.
+     */
+    void breakUtility() override;
 
-     /**
-      * @brief Repair the power utility.
-      */
-     void repair() override;
+    /**
+     * @brief Repairs the power utility after a breakdown.
+     */
+    void repair() override;
 };
 
 #endif // POWER_H

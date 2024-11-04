@@ -5,33 +5,37 @@
 #include <string>
 
 /**
- * @brief Represents a high-funding state for education services.
- *
- * ConcreteState in the State pattern. It extends the EducationState class and implements the methods to manage education service operations when funding is high.
+ * @class HighFundingEducationState
+ * @brief Represents a state of high funding for the education service.
  */
 class HighFundingEducationState : public EducationState {
 public:
     /**
-     * @brief Constructs a new HighFundingEducationState object.
+     * @brief Constructs a HighFundingEducationState.
+     * @param service Reference to the associated EducationService.
      */
     HighFundingEducationState(EducationService& service) : EducationState(service) {}
 
     /**
-     * @brief Destroys the HighFundingEducationState object.
+     * @brief Destructor for HighFundingEducationState.
      */
     ~HighFundingEducationState()override = default;
 
     /**
-     * @brief Checks the current state of education services in a high-funding condition.
-     * This method implements behavior specific to the high-funding condition.
+     * @brief Checks the current state of the education service.
      */
     void checkEducationState() override;
 
     /**
-     * @brief Gets the quality of education in a high-funding state.
-     * @return int The quality level of education.
+     * @brief Gets the quality of education in the high funding state.
+     * @return The quality of education as an integer.
      */
     int getEducationQuality() override;
+
+    /**
+     * @brief Gets the name of the high funding education state.
+     * @return The name of the state.
+     */
     std::string getName() override;
 };
 

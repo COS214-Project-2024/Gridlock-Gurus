@@ -4,34 +4,40 @@
 #include "HealthService.h"
 #include "HealthState.h"
 #include <string>
+
 /**
- * @brief Represents a low-funding state for health services.
- *
- * ConcreteState in the State pattern. It extends the HealthState class and implements the methods to manage health service operations when funding is low.
+ * @class LowFundingState
+ * @brief Represents a state of low funding for the health service.
  */
 class LowFundingState : public HealthState {
 public:
     /**
-     * @brief Constructs a new LowFundingState object.
+     * @brief Constructs a LowFundingState.
+     * @param service Reference to the associated HealthService.
      */
     LowFundingState(HealthService& service) : HealthState(service) {}
 
     /**
-     * @brief Destroys the LowFundingState object.
+     * @brief Destructor for LowFundingState.
      */
-     ~LowFundingState()override = default;
+    ~LowFundingState()override = default;
 
     /**
-     * @brief Retrieves the current health status of the services in a low-funding state.
-     * This method implements behavior specific to the low-funding condition.
+     * @brief Gets the health status in the low funding state.
+     * @return The health status as a string.
      */
     std::string getHealthStatus() override;
 
     /**
-     * @brief Gets the quality of service time in a low-funding state.
-     * @return int The quality level of service time.
+     * @brief Gets the quality of time spent in the health service.
+     * @return The quality of time as an integer.
      */
     int getQualityOfTime() override;
+
+    /**
+     * @brief Gets the name of the low funding state.
+     * @return The name of the state.
+     */
     std::string getName() override;
 };
 

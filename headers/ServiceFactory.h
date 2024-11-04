@@ -6,35 +6,37 @@
 #include "TaxAuthority.h"
 #include <memory>
 
-
 /**
- * @brief Factory for creating service buildings.
- * 
- * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create service buildings.
+ * @class ServiceFactory
+ * @brief Factory for creating service buildings such as schools, hospitals, and police stations.
  */
 class ServiceFactory : public BuildingFactory {
-    int numberOfSchools;
-    int numberOfHospitals;
-    int numberOfPoliceStations;
+private:
+    int numberOfSchools;        ///< Number of schools created.
+    int numberOfHospitals;      ///< Number of hospitals created.
+    int numberOfPoliceStations; ///< Number of police stations created.
+
 public:
     /**
      * @brief Constructs a new ServiceFactory object.
+     * @param taxAuthority Shared pointer to the tax authority.
      */
-    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority), numberOfSchools(0),numberOfHospitals(0),numberOfPoliceStations(0) {}
+    ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority), numberOfSchools(0), numberOfHospitals(0), numberOfPoliceStations(0) {}
 
     /**
      * @brief Destroys the ServiceFactory object.
      */
     ~ServiceFactory() override = default;
-    
+
     /**
      * @brief Creates a service building.
+     * 
+     * @param name The name of the building.
      * @param type The type of service building to create.
+     * @param owner Reference to the owner of the building.
      * @return Pointer to the created service building object.
-     *
-     * This method overrides the factory method to create a service building.
      */
-    Building* createBuilding(BuildingType type, Citizen& owner) override;
+    Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // SERVICEFACTORY_H

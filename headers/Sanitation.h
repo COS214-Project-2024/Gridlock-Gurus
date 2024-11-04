@@ -5,27 +5,40 @@
 #include "UtilityType.h"
 
 /**
- * @brief Represents a Sanitation utility.
+ * @class Sanitation
+ * @brief Represents the sanitation utility service.
  */
 class Sanitation : public Utilities {
 public:
     /**
-     * @brief Constructor for Sanitation utility.
+     * @brief Constructs a new Sanitation utility.
      */
-    Sanitation() : Utilities(UtilityType::Sanitation,300,300) {}
-
-    ~Sanitation()override = default;
+    Sanitation() : Utilities(UtilityType::Sanitation, 300, 300) {}
 
     /**
-     * @brief Check the sanitation capacity.
-     * @return The current sanitation capacity.
+     * @brief Destroys the Sanitation utility.
+     */
+    ~Sanitation() override = default;
+
+    /**
+     * @brief Checks the capacity of the sanitation utility.
      */
     void checkCapacity() const override;
 
+    /**
+     * @brief Sheds the load of the sanitation utility.
+     */
     void shed() override;
-    void breakUtility() override;
-    void repair() override;
 
+    /**
+     * @brief Breaks the sanitation utility.
+     */
+    void breakUtility() override;
+
+    /**
+     * @brief Repairs the sanitation utility.
+     */
+    void repair() override;
 };
 
 #endif // SANITATION_H

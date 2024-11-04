@@ -4,38 +4,33 @@
 #include "TaxStrategy.h"
 
 /**
- * @brief Implements a flat tax strategy.
- *
- * ConcreteStrategy participant in the Strategy Design Pattern.
+ * @class FlatTaxStrategy
+ * @brief Class representing a flat tax strategy.
  */
+
 class FlatTaxStrategy : public TaxStrategy {
 public:
-    /**
-     * @brief Constructor for the FlatTaxStrategy.
+    /** 
+     * @brief Default constructor for FlatTaxStrategy.
      */
     FlatTaxStrategy() = default;
 
-    
-    /**
-     * @brief Destructor for the FlatTaxStrategy.
+    /** 
+     * @brief Default destructor for FlatTaxStrategy.
      */
-     ~FlatTaxStrategy() = default;
+    ~FlatTaxStrategy() = default;
 
     /**
-     * @brief Calculates tax on a building using the flat tax strategy.
+     * @brief Calculate the tax for a building.
      * @param value The value of the building.
-     * @return Calculated building tax.
-     *
-     * This function acts as the algorithm() function.
+     * @return The calculated building tax.
      */
     int calculateBuildingTax(int value) override;
 
     /**
-     * @brief Calculates tax on a citizen's earnings using the flat tax strategy.
+     * @brief Calculate the tax for a citizen based on their earnings.
      * @param earnings The earnings of the citizen.
-     * @return Calculated citizen tax.
-     *
-     * This function acts as the algorithm() function.
+     * @return The calculated citizen tax.
      */
     int calculateCitizenTax(int earnings) override;
 };

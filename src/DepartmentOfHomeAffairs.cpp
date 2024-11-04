@@ -99,3 +99,40 @@ Citizen& DepartmentOfHomeAffairs::getRandomCitizen(){
     return *citizens[randomIndex];  
 }
 
+std::string DepartmentOfHomeAffairs::createCitizen(CitizenType type, int satisfaction, int funds){
+    Citizen* c = factory->createCitizen(type, satisfaction, funds);
+    std::string name = c->getName();
+    citizens.push_back(c);
+    ++population;
+    return name + " was created with $" + std::to_string(funds) + " in their account.";
+}
+
+std::string DepartmentOfHomeAffairs::getCitizenDetails(int id) {
+    std::string details = "";
+    for(Citizen* c : citizens) {
+        if(c->getId() == id) {
+            details += "#";
+            details += std::to_string(c->getId());
+            details += "\nName:\t";
+            details += c->getName();
+            details += "\nFunds:\t";
+            details += std::to_string(c->getFunds());
+            details += "\nSatisfaction Level:\t";
+            details += std::to_string(c->getSatisfactionLevel());
+        }
+    }
+    return details;
+}
+
+Citizen& DepartmentOfHomeAffairs::getCitizen(int id) {
+    for (Citizen* c : citizens) {
+        if(c->getId() == id) {
+            return *c;
+        }
+    }
+    return getRandomCitizen();
+}
+
+std::vector<Citizen*>& DepartmentOfHomeAffairs::getCitizens() {
+    return citizens;
+}

@@ -4,40 +4,47 @@
 #include "EducationService.h"
 #include <string>
 #include <iostream>
-class EducationService;
+
 /**
- * @brief Abstract class representing the state of education services.
- *
- * AbstractState in the State pattern, defining the interface for various education service states. Concrete states will implement specific behaviors for managing education service operations based on funding levels.
+ * @brief Forward declaration of EducationService class.
+ */
+class EducationService;
+
+/**
+ * @brief Abstract base class representing the state of an education service.
  */
 class EducationState {
 protected:
-    EducationService& service;
-    std::string name;
+    EducationService& service; ///< Reference to the associated EducationService.
+    std::string name;          ///< Name of the education state.
 
 public:
     /**
-     * @brief Constructs a new EducationState object.
+     * @brief Constructs an EducationState with the given service.
+     * @param service Reference to the EducationService associated with this state.
      */
     EducationState(EducationService& service) : service(service) {}
 
     /**
-     * @brief Destroys the EducationState object.
+     * @brief Virtual destructor for EducationState.
      */
     virtual ~EducationState() = default;
 
     /**
-     * @brief Checks the current state of education services.
-     * This method must be implemented by concrete states to provide specific education state information.
+     * @brief Checks and updates the state of education based on conditions.
      */
     virtual void checkEducationState() = 0;
 
     /**
-     * @brief Gets the quality of education in the current state.
-     * This method must be implemented by concrete states to define the quality level of education services.
-     * @return int The quality level of education.
+     * @brief Gets the quality of education provided.
+     * @return The quality level of education.
      */
     virtual int getEducationQuality() = 0;
+
+    /**
+     * @brief Gets the name of this education state.
+     * @return The state name.
+     */
     virtual std::string getName() = 0;
 };
 

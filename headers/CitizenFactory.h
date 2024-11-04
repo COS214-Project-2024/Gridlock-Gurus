@@ -7,9 +7,7 @@
 #include "CitizenType.h"
 
 /**
- * @brief Factory class to create Citizen objects.
- *
- * This class provides methods to create instances of Citizen with specific attributes.
+ * @brief Factory class for creating Citizen instances.
  */
 class CitizenFactory {
 private:
@@ -18,26 +16,22 @@ private:
 
 public:
     /**
-     * @brief Construct a new CitizenFactory object.
-     *
-     * Initializes the CitizenFactory with default values.
+     * @brief Constructs a CitizenFactory with a specified tax authority.
+     * @param taxAuthority Shared pointer to the tax authority.
      */
     CitizenFactory(std::shared_ptr<TaxAuthority> taxAuthority);
 
     /**
-     * @brief Destroy the CitizenFactory object.
-     *
-     * Cleans up any resources used by the factory.
+     * @brief Default destructor for the CitizenFactory class.
      */
-     ~CitizenFactory() = default;
+    ~CitizenFactory() = default;
 
     /**
-     * @brief Creates a new Citizen object.
-     *
-     * @param type The type of citizen to create.
-     * @param startingSatisfaction The initial satisfaction level of the citizen.
-     * @param startingFunds The initial funds available to the citizen.
-     * @return Pointer to the newly created Citizen object.
+     * @brief Creates a new Citizen with specified attributes.
+     * @param type Type of citizen.
+     * @param startingSatisfaction Initial satisfaction level.
+     * @param startingFunds Initial funds for the citizen.
+     * @return Pointer to the newly created Citizen.
      */
     Citizen* createCitizen(CitizenType type, int startingSatisfaction, int startingFunds);
 };

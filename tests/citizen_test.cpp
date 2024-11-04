@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "../headers/Citizen.h"
+#include <string>
+
 #include "../headers/CitizenType.h"
 #include "../headers/TaxAuthority.h"
 #include "../headers/Building.h"
@@ -26,8 +28,9 @@ class citizen_test : public ::testing::Test {
             factory = new FactoryFactory(taxAuth);
             homeFactory = new ResidentialFactory(taxAuth);
             c = new Citizen(0,CitizenType::Citizen,100,300,taxAuth);
-            work = factory->createBuilding(BuildingType::BrickFactory,*c);
-            home = homeFactory->createBuilding(BuildingType::House,*c);     
+            std::string name = "Trump towers";
+            work = factory->createBuilding(name,BuildingType::BrickFactory,*c);
+            home = homeFactory->createBuilding(name,BuildingType::House,*c);     
         }
         
         void TearDown() override {

@@ -4,38 +4,32 @@
 #include "TaxStrategy.h"
 
 /**
- * @brief Implements a progressive tax strategy.
- *
- * ConcreteStrategy participant in the Strategy Design Pattern.
+ * @class ProgressiveTaxStrategy
+ * @brief Implements a tax strategy with progressive rates.
  */
 class ProgressiveTaxStrategy : public TaxStrategy {
-
 public:
     /**
-     * @brief Constructor for the ProgressiveTaxStrategy.
+     * @brief Default constructor for ProgressiveTaxStrategy.
      */
     ProgressiveTaxStrategy() = default;
-    
+
     /**
-     * @brief Destructor for the ProgressiveTaxStrategy.
+     * @brief Default destructor for ProgressiveTaxStrategy.
      */
     ~ProgressiveTaxStrategy() = default;
 
     /**
-     * @brief Calculates tax on a building using the progressive tax strategy.
+     * @brief Calculates tax for a building based on its value.
      * @param value The value of the building.
-     * @return Calculated building tax.
-     *
-     * This function acts as the algorithm() function.
+     * @return The calculated tax amount.
      */
     int calculateBuildingTax(int value) override;
 
     /**
-     * @brief Calculates tax on a citizen's earnings using the progressive tax strategy.
+     * @brief Calculates tax for a citizen based on their earnings.
      * @param earnings The earnings of the citizen.
-     * @return Calculated citizen tax.
-     *
-     * This function acts as the algorithm() function.
+     * @return The calculated tax amount.
      */
     int calculateCitizenTax(int earnings) override;
 };

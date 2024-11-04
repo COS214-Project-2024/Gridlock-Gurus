@@ -5,30 +5,30 @@
 #include "CityBuilder.h"
 
 /**
- * @brief Directs the building process using the CityBuilder.
- *
- * Director participant in the Builder pattern. It uses a CityBuilder object to construct a complete city by calling the appropriate building methods in the right sequence.
+ * @brief Orchestrates the construction of a city.
  */
 class Director {
 public:
     /**
-     * @brief Constructs a new Director object.
+     * @brief Constructs a Director object.
      */
     Director();
-    
+
     /**
-     * @brief Destroys the Director object.
+     * @brief Default destructor.
      */
     virtual ~Director();
 
     /**
-     * @brief Constructs a city using the CityBuilder.
-     * @return A pointer to the constructed City object.
-     *
-     * This function orchestrates the steps defined in CityBuilder to create the final city.
+     * @brief Constructs a new city.
+     * @return Pointer to the constructed city.
      */
     City* construct();
 
+    /**
+     * @brief Sets a building as part of the city construction.
+     * @param building Building to be added.
+     */
     void setBuilding(Building& building) {}
 };
 

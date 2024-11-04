@@ -7,30 +7,30 @@
 #include <memory>
 
 /**
- * @brief Factory for creating factories/industrial buildings.
- *
- * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create factories/industrial buildings.
+ * @class FactoryFactory
+ * @brief Class for creating building instances.
  */
 class FactoryFactory : public BuildingFactory {
 public:
     /**
-     * @brief Constructs a new FactoryFactory object.
+     * @brief Constructor for FactoryFactory.
+     * @param taxAuthority A shared pointer to the TaxAuthority used for building creation.
      */
     FactoryFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
-    /**
-     * @brief Destroys the FactoryFactory object.
+    /** 
+     * @brief Default destructor for FactoryFactory.
      */
     ~FactoryFactory() override = default;
-    
+
     /**
-     * @brief Creates a Factory building.
-     * @param type The type of Factory building to create.
-     * @return Pointer to the created Factory building object.
-     *
-     * This method overrides the factory method to create a Factory building.
+     * @brief Create a building of the specified type.
+     * @param name The name of the building.
+     * @param type The type of building to create.
+     * @param owner The owner of the building.
+     * @return A pointer to the created Building instance.
      */
-    Building* createBuilding(BuildingType type, Citizen& owner) override;
+    Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // FACTORYFACTORY_H

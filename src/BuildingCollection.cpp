@@ -1,5 +1,6 @@
 #include "BuildingCollection.h"
 #include <iostream>
+
 void BuildingCollection::addBuilding(Building& building) {
     this->buildings.push_back(&building);
 }
@@ -46,3 +47,8 @@ int BuildingCollection::getCityPowerConsumption() const {
 
     return consumption;
 }
+
+std::vector<Building*>& BuildingCollection::getBuildings() {
+    return buildings;
+}
+

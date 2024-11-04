@@ -9,38 +9,43 @@
 #include <string>
 
 /**
- * @brief Represents a wood processing factory.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that processes wood.
+ * @class WoodFactory
+ * @brief Represents a factory specialized in producing wood resources.
  */
+
 class WoodFactory : public Factory {
 public:
     /**
      * @brief Constructs a new WoodFactory object.
+     * 
+     * @param name The name of the factory.
      * @param cost The construction cost of the factory.
      * @param location The location of the factory.
      * @param resources Pointer to the resources the factory consumes.
      * @param size The size of the factory.
-     * @param owner Pointer to the factory's owner.
-     * @param taxAuthority Pointer to the tax authority associated with the factory.
+     * @param owner Reference to the factory's owner.
+     * @param type The type of building this factory represents.
+     * @param productionRate The rate at which the factory produces wood.
+     * @param max The maximum production capacity of the factory.
      */
-    WoodFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int productionRate, int max);
+    WoodFactory(const std::string& name, int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type, int productionRate, int max);
 
     /**
      * @brief Destroys the WoodFactory object.
      */
-     ~WoodFactory() override = default;
+    ~WoodFactory() override = default;
 
     /**
      * @brief Produces wood in the factory.
+     * @return The amount of wood produced.
      */
     int produceResource() override;
 
     /**
-     * @brief Pays an employee working at the wood factory.
-     * @param employee Pointer to the employee.
+     * @brief Handles the payment process for the factory.
+     * @return The amount paid.
      */
-     int pay() override;
+    int pay() override;
 };
 
 #endif // WOODFACTORY_H

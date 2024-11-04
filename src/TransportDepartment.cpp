@@ -82,3 +82,8 @@ void TransportDepartment::getReport(std::string& temp) {
     temp += std::to_string(getFleetSize());
     temp += "\n";
 }
+
+std::vector<Vehicle*>& TransportDepartment::getFleet() {
+ return vehicles;
+}
+

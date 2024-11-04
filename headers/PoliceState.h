@@ -6,31 +6,36 @@
 #include "PoliceService.h"
 
 class PoliceService;
+
 /**
- * @brief Abstract class representing the state of police services.
- *
- * AbstractState in the State pattern. It defines the interface for concrete states that represent various conditions of police operations. Each state will implement specific behaviors for checking the operational status of police services.
+ * @class PoliceState
+ * @brief Abstract class representing the state of a police service.
  */
 class PoliceState {
 protected:
     PoliceService& service;
+
 public:
     /**
-     * @brief Constructs a new PoliceState object.
+     * @brief Constructs a PoliceState.
+     * @param service Reference to the associated PoliceService.
      */
     PoliceState(PoliceService& service) : service(service) {}
 
     /**
-     * @brief Destroys the PoliceState object.
+     * @brief Virtual destructor for PoliceState.
      */
     virtual ~PoliceState() = default;
 
     /**
-     * @brief Checks the operational status of the police service.
-     * This method will be overridden by concrete state classes to define specific behavior based on the current state.
+     * @brief Checks the operation status of the police service.
      */
     virtual void checkOperation() = 0;
 
+    /**
+     * @brief Gets the name of the current police state.
+     * @return The name of the state.
+     */
     virtual std::string getName() = 0;
 };
 

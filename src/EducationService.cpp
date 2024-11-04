@@ -2,7 +2,7 @@
 #include "HighFundingEducationState.h"
 #include "LowFundingEducationState.h"
 
-EducationService::EducationService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType name) : Service(cost, location, resources, size, owner,name,id){
+EducationService::EducationService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id, BuildingType type) : Service(name,cost, location, resources, size, owner,type,id){
     this->prestige = 0;
     educationState =std::make_unique<HighFundingEducationState>(*this);
     this->state =EducationStateType::HighFundingEducation; 
