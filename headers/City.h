@@ -269,8 +269,13 @@ public:
      * @return Shared pointer to the BudgetDepartment.
      */
     std::shared_ptr<BudgetDepartment> getBudgetDepartment() const {
-     return government->getBudgetDepartment();
-    };
+
+        return government->getBudgetDepartment();
+    }
+
+    std::vector<std::string> getBuildingNames();
+   
+
 };
 
 #endif // CITY_H

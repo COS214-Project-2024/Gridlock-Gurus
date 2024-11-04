@@ -38,5 +38,6 @@ std::string Building::getDetails() const {
     details += "Building Name:\t";
     details += name;
     details += "\nLocation:\t";
+    details += location;
     return details;
 }

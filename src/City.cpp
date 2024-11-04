@@ -190,5 +190,12 @@ std::string City::getCitizenDetails(int id) {
     return government->getDepartmentOfHomeAffairs()->getCitizenDetails(id);
 }
 
+std::vector<std::string> City::getBuildingNames() {
+    std::vector<std::string> names;
+    for(Building* b : getBuildings()) {
+        names.push_back(b->getName());
+    }
+    return names;
+}
 
 

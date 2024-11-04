@@ -89,6 +89,13 @@ public:
     bool isFull() {
         return maxEmployees <= employees.size();
     }
+
+
+    std::vector<int>& getEmployees() {
+        return employees;
+    }
+
+
 };
 
 #endif // SERVICE_H
