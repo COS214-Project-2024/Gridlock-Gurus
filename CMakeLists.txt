@@ -16,6 +16,7 @@ include_directories(images)
 
 
 file(GLOB_RECURSE SOURCE_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+list(REMOVE_ITEM SOURCE_FILES "${CMAKE_SOURCE_DIR}/src/Main.cpp")  # Exclude Main.cpp
 file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/headers/*.h")
 
 
@@ -23,9 +24,11 @@ file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/headers/*.h")
 add_subdirectory(googletest)
 enable_testing()
 
-# Add test executable
 
+# Add test executable (without Main.cpp)
 add_executable(tests tests/government_tests.cpp tests/transport_test.cpp tests/tax_system_test.cpp tests/building_test.cpp tests/citizen_test.cpp ${SOURCE_FILES} ${HEADER_FILES})
+
+# Add main application executable (with Main.cpp)
 add_executable(main src/Main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
 
