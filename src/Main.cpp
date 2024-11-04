@@ -41,7 +41,7 @@ public:
     }
 
     bool OnUserCreate() override {
-        png = new olc::Sprite("./images/imageSet.png");
+        buildingPNG = new olc::Sprite("./images/imageSet.png");
 
         buildingListBox->m_vList.emplace_back("BUILDINGS:");
         buildingNameLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
@@ -128,8 +128,8 @@ public:
 
         if (buildingListBox->nSelectedItem) {
             std::string building = buildingTypeName.at(city->getBuildings().at(buildingListBox->nSelectedItem - 1)->getType());
-            png = new olc::Sprite("./images/" + building + ".png");
-            DrawSprite(330, 5, png);
+            buildingPNG = new olc::Sprite("./images/" + building + ".png");
+            DrawSprite(330, 5, buildingPNG);
         }
 
         if (newCitizenButton->bReleased) {
@@ -153,7 +153,6 @@ public:
             if (citizenListBox->nSelectedItem == 0) {
                 newCitizenGroupToggle(false);
             } else {
-                std::cout << "got here\n";
                 console->sText = city->getCitizenDetails(ids.at(citizenListBox->nSelectedItem) - 1);
             }
         }
@@ -162,18 +161,23 @@ public:
             std::string r;
             city->generateReport(r);
             console->sText = r;
+            vehiclePNG = nullptr;
         }
 
         if (newTaxiButton->bReleased) {
             city->increaseTransport(Taxi);
+            vehiclePNG = new olc::Sprite("./images/taxi.png");
         }
 
         if (newTrainButton->bReleased) {
             city->increaseTransport(Train);
+            vehiclePNG = new olc::Sprite("./images/train.png");
         }
 
-        if (taxButton->bReleased) {
+        DrawSprite(600, 200, vehiclePNG);
 
+        if (taxButton->bReleased) {
+            console->sText = city->startTaxCycle();
         }
 
         return true;
@@ -262,20 +266,9 @@ protected:
         }
     }
 
-    olc::v_2d<int> getSpritePartials(int i, bool b) {
-        switch (i) {
-            case 1:
-                return (b) ? olc::v_2d{30, 30} : olc::v_2d{51, 99};
-            case 2:
-                return (b) ? olc::v_2d{110, 30} : olc::v_2d{51, 99};
-            case 3:
-                return (b) ? olc::v_2d{190, 30} : olc::v_2d{51, 99};
-            default:
-                return (b) ? olc::v_2d{493, 128} : olc::v_2d{21, 20};
-        }
-    }
+    olc::Sprite *buildingPNG = nullptr;
+    olc::Sprite *vehiclePNG = nullptr;
 
-    olc::Sprite *png = nullptr;
 
     olc::QuickGUI::Manager guiManager;
 
