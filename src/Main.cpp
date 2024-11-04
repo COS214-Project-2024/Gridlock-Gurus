@@ -10,14 +10,29 @@
 // #include "Functional.h"
 // #include "Damaged.h"
 // #include "Broken.h"
-#include "TaxAuthority.h"
 #include "City.h"
 
 #include <iostream>
 
-std::shared_ptr<TaxAuthority> tax = std::make_shared<TaxAuthority>();
-std::vector<int> ids;
 std::shared_ptr<City> city = std::make_shared<City>();
+std::vector<int> ids;
+
+const std::unordered_map<BuildingType, std::string> buildingTypeName = {
+    {BuildingType::Residential, "Residential"},
+    {BuildingType::Shop, "Shop"},
+    {BuildingType::BrickFactory, "Brick Factory"},
+    {BuildingType::SteelFactory, "Steel Factory"},
+    {BuildingType::WoodFactory, "Wood Factory"},
+    {BuildingType::Bank, "Bank"},
+    {BuildingType::Flat, "Flat"},
+    {BuildingType::Estate, "Estate"},
+    {BuildingType::House, "House"},
+    {BuildingType::Statue, "Statue"},
+    {BuildingType::Park, "Park"},
+    {BuildingType::PoliceStation, "Police Station"},
+    {BuildingType::Hospital, "Hospital"},
+    {BuildingType::School, "School"}
+};
 
 class GridGui : public olc::PixelGameEngine {
 public:
@@ -26,7 +41,7 @@ public:
     }
 
     bool OnUserCreate() override {
-        png = new olc::Sprite("./images/imageSet.png");
+        buildingPNG = new olc::Sprite("./images/imageSet.png");
 
         buildingListBox->m_vList.emplace_back("BUILDINGS:");
         buildingNameLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
@@ -37,7 +52,7 @@ public:
         citTypeLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
         newCitizenButton->bVisible = false;
         citizenListBox->bVisible = false;
-        citizenGroupToggle(false);
+        newCitizenGroupToggle(false);
 
         return true;
     }
@@ -54,15 +69,50 @@ public:
         }
 
         if (buildingListBox->bSelectionChanged) {
+            if (buildingListBox->nSelectedItem != 0) {
+                console->sText = buildingTypeName.at(city->getBuildings().at(buildingListBox->nSelectedItem - 1)->getType());
+            }
             renderCitizenGroup();
         }
 
         if (addBuildingButton->bReleased) {
-            const BuildingType type = selectedBuildingType();
+            BuildingType type; {
+                type = (bTypeScho->bChecked)
+                           ? BuildingType::School
+                           : (bTypeEsta->bChecked)
+                                 ? BuildingType::Estate
+                                 : (bTypeFlat->bChecked)
+                                       ? BuildingType::Flat
+                                       : (bTypeHous->bChecked)
+                                             ? BuildingType::House
+                                             : (bTypePark->bChecked)
+                                                   ? BuildingType::Park
+                                                   : (bTypeStat->bChecked)
+                                                         ? BuildingType::Statue
+                                                         : (bTypeResi->bChecked)
+                                                               ? BuildingType::Residential
+                                                               : (bTypeShop->bChecked)
+                                                                     ? BuildingType::Shop
+                                                                     : (bTypeBFac->bChecked)
+                                                                           ? BuildingType::BrickFactory
+                                                                           : (bTypeSFac->bChecked)
+                                                                                 ? BuildingType::SteelFactory
+                                                                                 : (bTypeWFac->bChecked)
+                                                                                       ? BuildingType::WoodFactory
+                                                                                       : (bTypeBank->bChecked)
+                                                                                             ? BuildingType::Bank
+                                                                                             : (bTypePoli->bChecked)
+                                                                                                   ? BuildingType::PoliceStation
+                                                                                                   : (bTypeHosp->bChecked)
+                                                                                                           ? BuildingType::Hospital
+                                                                                                           : BuildingType::Residential;
+            }
+            std::cout << "type: " << buildingTypeName.at(type) << std::endl;
             std::string name = buildingNameTextBox->sText;
             city->addBuilding(name, type);
 
             std::vector<std::string> names = city->getBuildingNames();
+            buildingList.erase(++buildingList.begin(), buildingList.end());
             buildingList.insert(++buildingList.begin(), names.begin(), names.end());
 
             std::cout << city->getBuildings().at(0)->getDetails();
@@ -77,31 +127,57 @@ public:
         }
 
         if (buildingListBox->nSelectedItem) {
-            size_t n = buildingListBox->nSelectedItem;
-            DrawPartialSprite({400, 20}, png, getSpritePartials(n, true), getSpritePartials(n, false));
+            std::string building = buildingTypeName.at(city->getBuildings().at(buildingListBox->nSelectedItem - 1)->getType());
+            buildingPNG = new olc::Sprite("./images/" + building + ".png");
+            DrawSprite(330, 5, buildingPNG);
         }
 
         if (newCitizenButton->bReleased) {
-            citizenGroupToggle(true);
+            newCitizenGroupToggle(true);
         }
 
         if (addCitButton->bReleased) {
             CitizenType type = (citTypeCheckBoxC) ? CitizenType::Citizen : (citTypeCheckBoxR) ? CitizenType::Retired : CitizenType::Worker;
+            console->sText = city->createCitizen(type, stoi(citSatisfactionTextBox->sText), stoi(citFundsTextBox->sText));
             renderCitizenGroup();
-            citizenGroupToggle(false);
+            newCitizenGroupToggle(false);
             addCitButton->bReleased = false;
         }
 
         if (cancelCitButton->bReleased) {
-            citizenGroupToggle(false);
+            newCitizenGroupToggle(false);
             cancelCitButton->bReleased = false;
         }
 
         if (citizenListBox->bSelectionChanged) {
             if (citizenListBox->nSelectedItem == 0) {
+                newCitizenGroupToggle(false);
             } else {
                 console->sText = city->getCitizenDetails(ids.at(citizenListBox->nSelectedItem) - 1);
             }
+        }
+
+        if (cityReportButton->bReleased) {
+            std::string r;
+            city->generateReport(r);
+            console->sText = r;
+            vehiclePNG = nullptr;
+        }
+
+        if (newTaxiButton->bReleased) {
+            city->increaseTransport(Taxi);
+            vehiclePNG = new olc::Sprite("./images/taxi.png");
+        }
+
+        if (newTrainButton->bReleased) {
+            city->increaseTransport(Train);
+            vehiclePNG = new olc::Sprite("./images/train.png");
+        }
+
+        DrawSprite(600, 180, vehiclePNG);
+
+        if (taxButton->bReleased) {
+            console->sText = city->startTaxCycle();
         }
 
         return true;
@@ -130,7 +206,7 @@ protected:
         cancelBuildingButton->bVisible = t;
     }
 
-    void citizenGroupToggle(const bool t) {
+    void newCitizenGroupToggle(const bool t) {
         citTypeLabel->bVisible = t;
         citTypeCheckBoxW->bVisible = t;
         citTypeCheckBoxW->bChecked = false;
@@ -141,6 +217,9 @@ protected:
         citSatisfactionLabel->bVisible = t;
         citSatisfactionTextBox->bVisible = t;
         citSatisfactionTextBox->sText = "";
+        citFundsLabel->bVisible = t;
+        citFundsTextBox->bVisible = t;
+        citFundsTextBox->sText = "";
         addCitButton->bVisible = t;
         cancelCitButton->bVisible = t;
     }
@@ -150,7 +229,7 @@ protected:
         if (n == 0) {
             newCitizenButton->bVisible = false;
             citizenListBox->bVisible = false;
-            citizenGroupToggle(false);
+            newCitizenGroupToggle(false);
         } else {
             citizenList.clear();
             citizenList.emplace_back(buildingListBox->m_vList.at(n));
@@ -187,66 +266,8 @@ protected:
         }
     }
 
-    olc::v_2d<int> getSpritePartials(int i, bool b) {
-        switch (i) {
-            case 1:
-                return (b) ? olc::v_2d{30, 30} : olc::v_2d{51, 99};
-            case 2:
-                return (b) ? olc::v_2d{110, 30} : olc::v_2d{51, 99};
-            case 3:
-                return (b) ? olc::v_2d{190, 30} : olc::v_2d{51, 99};
-            default:
-                return (b) ? olc::v_2d{493, 128} : olc::v_2d{21, 20};
-        }
-    }
-
-    BuildingType selectedBuildingType() const {
-        if (bTypeScho) {
-            return BuildingType::School;
-        }
-        if (bTypeEsta) {
-            return BuildingType::Estate;
-        }
-        if (bTypeFlat) {
-            return BuildingType::Flat;
-        }
-        if (bTypeHous) {
-            return BuildingType::House;
-        }
-        if (bTypePark) {
-            return BuildingType::Park;
-        }
-        if (bTypeStat) {
-            return BuildingType::Statue;
-        }
-        if (bTypeResi) {
-            return BuildingType::Residential;
-        }
-        if (bTypeShop) {
-            return BuildingType::Shop;
-        }
-        if (bTypeBFac) {
-            return BuildingType::BrickFactory;
-        }
-        if (bTypeSFac) {
-            return BuildingType::SteelFactory;
-        }
-        if (bTypeWFac) {
-            return BuildingType::WoodFactory;
-        }
-        if (bTypeBank) {
-            return BuildingType::Bank;
-        }
-        if (bTypePoli) {
-            return BuildingType::PoliceStation;
-        }
-        if (bTypeHosp) {
-            return BuildingType::Hospital;
-        }
-        return BuildingType::Residential; // Default case
-    }
-
-    olc::Sprite *png = nullptr;
+    olc::Sprite *buildingPNG = nullptr;
+    olc::Sprite *vehiclePNG = nullptr;
 
     olc::QuickGUI::Manager guiManager;
 
@@ -282,10 +303,17 @@ protected:
     olc::QuickGUI::CheckBox *citTypeCheckBoxR = new olc::QuickGUI::CheckBox(guiManager, "Retired", false, {230, 95}, {50, 15});
     olc::QuickGUI::Label *citSatisfactionLabel = new olc::QuickGUI::Label(guiManager, "Citizen Satisfaction:", {130, 110}, {100, 15});
     olc::QuickGUI::TextBox *citSatisfactionTextBox = new olc::QuickGUI::TextBox(guiManager, "", {130, 125}, {100, 15});
+    olc::QuickGUI::Label *citFundsLabel = new olc::QuickGUI::Label(guiManager, "Citizen Funds:", {130, 140}, {100, 15});
+    olc::QuickGUI::TextBox *citFundsTextBox = new olc::QuickGUI::TextBox(guiManager, "", {130, 155}, {100, 15});
     olc::QuickGUI::Button *addCitButton = new olc::QuickGUI::Button(guiManager, "Confirm", {130, 250}, {60, 15});
     olc::QuickGUI::Button *cancelCitButton = new olc::QuickGUI::Button(guiManager, "Cancel", {190, 250}, {60, 15});
 
-    olc::QuickGUI::TextBox *console = new olc::QuickGUI::TextBox(guiManager, "", {5, 300}, {720, 65});
+    olc::QuickGUI::Button *cityReportButton = new olc::QuickGUI::Button(guiManager, "City Report", {550, 5}, {120, 15});
+    olc::QuickGUI::Button *newTaxiButton = new olc::QuickGUI::Button(guiManager, "New Taxi", {550, 20}, {60, 15});
+    olc::QuickGUI::Button *newTrainButton = new olc::QuickGUI::Button(guiManager, "New Train", {610, 20}, {60, 15});
+    olc::QuickGUI::Button *taxButton = new olc::QuickGUI::Button(guiManager, "Tax Report", {550, 35}, {120, 15});
+
+    olc::QuickGUI::TextBox *console = new olc::QuickGUI::TextBox(guiManager, "", {5, 290}, {720, 75});
 };
 
 int main() {
@@ -340,8 +368,6 @@ int main() {
     // delete taxi;
     // delete truck;
     // delete clonedTrain;
-
-    std::cout << "\n--- All Tests Completed ---" << std::endl;
 
     return 0;
 }

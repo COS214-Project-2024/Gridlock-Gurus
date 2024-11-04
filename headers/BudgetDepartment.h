@@ -38,7 +38,7 @@ public:
     /**
      * @brief Receives and adds collected taxes to the budget.
      */
-    void receiveTaxes();
+    int receiveTaxes();
 
     /**
      * @brief Checks if the budget department is broke.
