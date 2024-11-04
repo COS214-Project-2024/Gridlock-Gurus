@@ -46,7 +46,7 @@ jobs:
           cd ..
           for file in src/*.cpp; do
               if [ "$file" != "src/Main.cpp" ]; then
-                  clang-tidy "$file"
+                  clang-tidy "$file" -p build
               fi
           done
 
