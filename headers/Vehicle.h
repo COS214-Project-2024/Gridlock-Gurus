@@ -8,11 +8,14 @@
 #include "FunctionalState.h"
 #include "VehicleType.h"
 #include <memory>
+class TransportDepartment;
+class TransportState;
 
-/**
- * @class Vehicle
- * @brief Represents a vehicle in the transport system.
- */
+enum VehicleState {
+    Functional,
+    Broken
+};
+
 class Vehicle {
 protected:
     VehicleType type;                           ///< Type of the vehicle.
@@ -79,31 +82,41 @@ public:
      * @brief Gets the type of the vehicle.
      * @return The type of the vehicle.
      */
-    VehicleType getType() const;
+    VehicleType getType() const {
+        return type;
+    }
 
     /**
      * @brief Gets the current state of the vehicle.
      * @return The state of the vehicle.
      */
-    VehicleState getState() const;
+    VehicleState getState() const {
+        return vehicle_state;
+    }
 
     /**
      * @brief Gets the usage count of the vehicle.
      * @return The number of times the vehicle has been used.
      */
-    int getUsage();
+    int getUsage() {
+        return usageCount;
+    }
 
     /**
      * @brief Gets the current number of passengers on the vehicle.
      * @return The current passenger count.
      */
-    int getCurrentPassengers();
+    int getCurrentPassengers() {
+        return currentPassengers;
+    }
 
     /**
      * @brief Gets the capacity of the vehicle.
      * @return The maximum capacity of the vehicle.
      */
-    int getCapacity();
+    int getCapacity() {
+        return capacity;
+    }
 };
 
 #endif // VEHICLE_H
