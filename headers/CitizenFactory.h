@@ -22,6 +22,11 @@ public:
     CitizenFactory(std::shared_ptr<TaxAuthority> taxAuthority);
 
     /**
+     * @brief Default destructor for the CitizenFactory class.
+     */
+    ~CitizenFactory() = default;
+
+    /**
      * @brief Creates a new Citizen with specified attributes.
      * @param type Type of citizen.
      * @param startingSatisfaction Initial satisfaction level.
