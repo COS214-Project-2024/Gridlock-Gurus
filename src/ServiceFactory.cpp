@@ -6,7 +6,14 @@
 #include "EducationService.h"
 #include <string>
 
-// Made citizen a reference instead of pointer to prevent it being nullptr
+/**
+ * @brief Creates a specific type of service building based on the given type.
+ *
+ * @param name The name of the building.
+ * @param type The type of the building.
+ * @param owner The owner of the building.
+ * @return Pointer to the created building.
+ */
 Building *ServiceFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(200,200,false);
     std::string location = "City Center";
