@@ -4,45 +4,63 @@
 #include "Service.h"
 #include "EducationState.h"
 #include "BuildingType.h"
-#include "EducationState.h"
 #include <memory>
+
+/**
+ * @brief Forward declaration of EducationState class.
+ */
 class EducationState;
 
-enum EducationStateType{
-    HighFundingEducation,
-    LowFundingEducation
+enum EducationStateType {
+    HighFundingEducation,  ///< Education with high funding.
+    LowFundingEducation    ///< Education with low funding.
 };
+
+/**
+ * @brief Provides education services and manages educational state.
+ */
 class EducationService : public Service {
 private:
-    EducationStateType state;
-    std::unique_ptr<EducationState> educationState; 
-    int prestige;
+    EducationStateType state;                           ///< Current state of the education service.
+    std::unique_ptr<EducationState> educationState;     ///< Pointer to the current education state.
+    int prestige;                                       ///< Prestige level of the education service.
 
 public:
     /**
-     * @brief Constructs a new EducationService building.
-     * @param cost The construction cost of the education service.
-     * @param location The location of the education service.
-     * @param resources Pointer to the resources the education service uses.
-     * @param size The size of the education service.
-     * @param owner Pointer to the owner of the education service.
-     * @param taxAuthority Pointer to the tax authority associated with the education service.
+     * @brief Constructs an EducationService with specified parameters.
+     * @param name Name of the service.
+     * @param cost Cost of the service.
+     * @param location Location of the service.
+     * @param resources Resources used by the service.
+     * @param size Size of the service.
+     * @param owner Owner of the service.
+     * @param id Unique identifier of the service.
+     * @param type Type of the building.
      */
-    EducationService(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType type);
+    EducationService(const std::string& name, int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType type);
 
     /**
-     * @brief Destroys the EducationService building.
+     * @brief Default destructor.
      */
     ~EducationService() override = default;
+
     void setState();
     int pay() override;
+
     void prestigeDec(int by);
     void prestigeInc(int by);
 
+    /**
+     * @brief Gets the prestige level of the education service.
+     * @return The current prestige level.
+     */
     int getPrestige();
 
+    /**
+     * @brief Gets the name of the current state of the education service.
+     * @return The name of the current state.
+     */
     std::string getState() const;
-
 };
 
 #endif // EDUCATIONSERVICE_H

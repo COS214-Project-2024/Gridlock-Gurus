@@ -26,112 +26,72 @@
 #include "PoliceService.h"
 #include "VehicleType.h"
 
+/**
+ * @brief Enumeration of possible city states.
+ */
 enum CityState {
-    Happy,
-    Normal,
-    Upset
+    Happy,   ///< City is happy.
+    Normal,  ///< City is in a normal state.
+    Upset    ///< City is upset.
 };
 
+/**
+ * @brief Represents a city and manages its entities and utilities.
+ */
 class City {
 private:
     std::shared_ptr<Government> government;
-
     FactoryFactory* factory_factory;
     LandmarkFactory* landmark_factory;
     ResidentialFactory* residential_factory;
     CommercialFactory* commercial_factory;
     ServiceFactory* service_factory;
-
     int citizen_happiness;
     CityState state;
 
 public:
+    /**
+     * @brief Default constructor for City.
+     */
     City();
+
+    /**
+     * @brief Default destructor for City.
+     */
     ~City();
 
-    /**
-     * @brief Adds a new building to the city's collection of buildings.
-     */
-    void addBuilding(const std::string & name,BuildingType type);
-
+    void addBuilding(const std::string& name, BuildingType type);
     void setState();
-
-    CityState getState() const; 
-
-    void removeLastBuilding();//test
-
-    int getCitizenHappiness() const;//test
-
+    CityState getState() const;
+    void removeLastBuilding();
+    int getCitizenHappiness() const;
     void setCitizenHappiness(int happiness);
-
     void calculateHappiness();
-
-    //UTILITIES
-    /**
-    * Determines if the utilites are functional or under strain.
-    */
     void checkUtilityUsage();
-
     void getUtilityStats(std::string& temp);
-
     void upgradeUtilities();
-
     void repairUtilities();
-
-    //TAX
-
-    int checkCityFunds() const;//tested
-
+    int checkCityFunds() const;
     void startTaxCycle();
-
     void increaseTransport(VehicleType type);
-
-    //Tested
     void changeTaxStrategy(std::unique_ptr<TaxStrategy> taxStrategy);
-
     int getBuildingCount();
-
     int getCitizenCount();
-
     int getWorkerCount();
-
     void generateReport(std::string& temp);
-
     std::vector<Building*>& getBuildings();
-
     std::vector<Citizen*>& getCitizens();
-
     std::vector<Vehicle*>& getVehicles();
-
     Citizen& getCitizen(int id);
-
     std::string createCitizen(CitizenType type, int satisfaction, int funds);
-
     std::string getCitizenDetails(int id);
+    std::string addNewBuilding(const std::string& name, BuildingType type);
 
-    std::string addNewBuilding(const std::string & name,BuildingType type);
-
-    std::shared_ptr<DepartmentOfWaterPowerAndSanitation> getDepartmentOfWaterPowerAndSanitation() const {
-        return government->getDepartmentOfWaterPowerAndSanitation();
-    }
-
-    std::shared_ptr<TaxAuthority> getTaxAuthority() const {
-        return government->getTaxAuthority();
-    }
-
-    std::shared_ptr<DepartmentOfHomeAffairs> getDepartmentOfHomeAffairs() const {
-        return government->getDepartmentOfHomeAffairs();
-    }
-
-     std::shared_ptr<TransportDepartment> getTransportDepartment() const {
-        return government->getTransportDepartment();
-    }
-
-    std::shared_ptr<BudgetDepartment> getBudgetDepartment() const {
-        return government->getBudgetDepartment();
-    }
-    
-   
+    std::shared_ptr<DepartmentOfWaterPowerAndSanitation> getDepartmentOfWaterPowerAndSanitation() const;
+    std::shared_ptr<TaxAuthority> getTaxAuthority() const;
+    std::shared_ptr<DepartmentOfHomeAffairs> getDepartmentOfHomeAffairs() const;
+    std::shared_ptr<TransportDepartment> getTransportDepartment() const;
+    std::shared_ptr<BudgetDepartment> getBudgetDepartment() const;
 };
 
 #endif // CITY_H

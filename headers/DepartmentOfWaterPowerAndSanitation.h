@@ -10,30 +10,44 @@
 #include <memory>
 #include <string>
 
+/**
+ * @brief Manages water, power, and sanitation services in the city.
+ */
 class DepartmentOfWaterPowerAndSanitation {
 private:
-    std::unique_ptr<Water> water;
-    std::unique_ptr<Power> power;
-    std::unique_ptr<Sanitation> sanitation;
+    std::unique_ptr<Water> water;               ///< Water management system.
+    std::unique_ptr<Power> power;               ///< Power management system.
+    std::unique_ptr<Sanitation> sanitation;     ///< Sanitation management system.
 
 public:
+    /**
+     * @brief Constructs the Department of Water, Power, and Sanitation.
+     */
+    DepartmentOfWaterPowerAndSanitation();
 
-    DepartmentOfWaterPowerAndSanitation() {
-        water = std::make_unique<Water>();
-        power = std::make_unique<Power>();
-        sanitation = std::make_unique<Sanitation>();
-    }
+    /**
+     * @brief Default destructor.
+     */
+    ~DepartmentOfWaterPowerAndSanitation() = default;
 
-     ~DepartmentOfWaterPowerAndSanitation() = default;
-
+    /**
+     * @brief Repairs utilities in the department.
+     * @return The cost of repairs.
+     */
     int repair();
 
+    /**
+     * @brief Checks the status of the utility network.
+     * @return A string describing the network status.
+     */
     std::string checkNetwork() const;
 
     void reviewWaterUsage(int totalWater);
-
     void reviewPowerUsage(int totalPower);
 
+    /**
+     * @brief Upgrades the utilities in the department.
+     */
     void upgrade();
 };
 
