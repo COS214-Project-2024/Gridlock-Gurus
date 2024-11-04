@@ -44,7 +44,12 @@ jobs:
           cd build
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
           cd ..
-          run: clang-tidy src/*.cpp -line-filter='[{"name": "src/Main.cpp", "lines": []}]'
+          for file in src/*.cpp; do
+              if [ "$file" != "src/Main.cpp" ]; then
+                  clang-tidy "$file"
+              fi
+          done
+
 
   build:
     runs-on: ubuntu-latest
