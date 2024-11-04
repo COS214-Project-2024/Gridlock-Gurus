@@ -6,19 +6,29 @@
 #include "TaxAuthority.h"
 #include <memory>
 
-
+/**
+ * @class LandmarkFactory
+ * @brief Factory class for creating Landmark buildings.
+ */
 class LandmarkFactory : public BuildingFactory {
 public:
+    /**
+     * @brief Constructs a LandmarkFactory.
+     * @param taxAuthority Shared pointer to the TaxAuthority associated with the landmarks.
+     */
     LandmarkFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
-     ~LandmarkFactory() override = default;
+    /**
+     * @brief Destructor for LandmarkFactory.
+     */
+    ~LandmarkFactory() override = default;
     
     /**
      * @brief Creates a Landmark building.
+     * @param name The name of the Landmark building.
      * @param type The type of Landmark building to create.
+     * @param owner Reference to the owner of the building.
      * @return Pointer to the created Landmark building object.
-     *
-     * This method overrides the factory method to create a Landmark building.
      */
     Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };

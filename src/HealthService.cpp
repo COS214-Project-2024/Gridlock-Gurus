@@ -34,7 +34,6 @@ int HealthService::getResponseTime() const {
     return this->responseTime;
 }
 
-
 std::string HealthService::getState() const {
     if(state == HealthStateType::HighFunding) {
         return "High funding";

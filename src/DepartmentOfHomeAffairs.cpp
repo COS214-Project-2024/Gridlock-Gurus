@@ -133,7 +133,6 @@ Citizen& DepartmentOfHomeAffairs::getCitizen(int id) {
     return getRandomCitizen();
 }
 
-
 std::vector<Citizen*>& DepartmentOfHomeAffairs::getCitizens() {
     return citizens;
 }

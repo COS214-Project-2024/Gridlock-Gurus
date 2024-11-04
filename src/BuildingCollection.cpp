@@ -1,5 +1,6 @@
 #include "BuildingCollection.h"
 #include <iostream>
+
 void BuildingCollection::addBuilding(Building& building) {
     this->buildings.push_back(&building);
 }

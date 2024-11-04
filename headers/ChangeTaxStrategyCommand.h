@@ -7,32 +7,42 @@
 #include "FlatTaxStrategy.h"
 #include "ProgressiveTaxStrategy.h"
 
+/**
+ * @brief Forward declaration of City class.
+ */
 class City;
 
-enum TaxType{
-    Flat,
-    Progressive
+/**
+ * @brief Enumeration for different tax types.
+ */
+enum TaxType {
+    Flat,         ///< Represents a flat tax strategy.
+    Progressive   ///< Represents a progressive tax strategy.
 };
 
+/**
+ * @brief Command to change the tax strategy in a city.
+ */
 class ChangeTaxStrategyCommand : public Command {
     TaxType strategy;
+
 public:
     /**
-     * @brief Constructs a new Command object.
+     * @brief Constructor for ChangeTaxStrategyCommand.
+     * @param city The city where the tax strategy will be changed.
+     * @param strategy The new tax strategy to apply.
      */
-    ChangeTaxStrategyCommand(std::shared_ptr<City> city, TaxType strategy) : Command(city) {
-        this->strategy = strategy;
-    }
+    ChangeTaxStrategyCommand(std::shared_ptr<City> city, TaxType strategy) : Command(city), strategy(strategy) {}
 
     /**
-     * @brief Destroys the Command object.
+     * @brief Default destructor.
      */
-     ~ChangeTaxStrategyCommand() = default;
+    ~ChangeTaxStrategyCommand() = default;
 
     /**
-     * @brief Executes the command.
+     * @brief Executes the command to change the tax strategy.
      */
-     void execute() override;
+    void execute() override;
 };
 
 #endif // CHANGETAXSTRATEGYCOMMAND_H
