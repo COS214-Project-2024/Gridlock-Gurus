@@ -6,19 +6,6 @@
 #include "WoodFactory.h"
 #include <string>
 
-
-/**
- * @brief Creates a new building of the specified type.
- *
- * Allocates resources and creates a building of the given type with the
- * specified name and owner. The building is registered with the tax
- * authority upon creation.
- *
- * @param name The name of the building.
- * @param type The type of the building to create (Wood, Steel, or Brick Factory).
- * @param owner The Citizen who will own the building.
- * @return Pointer to the created Building object.
- */
 Building *FactoryFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(200,200,false);
     int maxEmployees;
