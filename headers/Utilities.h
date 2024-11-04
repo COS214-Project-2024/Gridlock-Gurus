@@ -24,7 +24,7 @@ public:
      * @param maxProduction The maximum production capacity.
      * @param costOfRepair The cost of repairing the utility.
      */
-    Utilities(UtilityType type, int maxProduction, int costOfRepair);
+    Utilities(UtilityType type, int maxProduction, int costOfRepair) {};
 
     /**
      * @brief Checks the current production capacity of the utility.
