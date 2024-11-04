@@ -11,6 +11,7 @@ class BudgetDepartment {
 private:
     int totalAvailable;  ///< The total available budget.
     bool broke;  ///< Indicates whether the budget department is out of funds.
+bool rich;
 
 public:
     /**
