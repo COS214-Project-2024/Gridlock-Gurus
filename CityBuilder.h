@@ -32,6 +32,7 @@ public:
      * @brief Builds the city's infrastructure, such as roads, utilities, and public services.
      */
     void buildInfrastructure();
+void break();
 };
 
 #endif // CITYBUILDER_H
