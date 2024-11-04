@@ -130,7 +130,8 @@ public:
     std::shared_ptr<BudgetDepartment> getBudgetDepartment() const {
         return government->getBudgetDepartment();
     }
-    
+
+ std::vector<std::string>& getBuildingNames();
    
 };
 
