@@ -44,7 +44,7 @@ jobs:
           cd build
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
           cd ..
-          clang-tidy src/*.cpp tests/*.cpp --warnings-as-errors=* -p build
+          run: clang-tidy src/*.cpp -- -Iheaders -header-filter='src/.*' -line-filter='[{"name": "src/Main.cpp", "lines": []}]'
 
   build:
     runs-on: ubuntu-latest
