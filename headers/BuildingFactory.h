@@ -40,7 +40,7 @@ class BuildingFactory {
         * @return Pointer to the created Building object.
         * Factory Method function, which must be implemented by concrete factory subclasses.
         */
-        virtual Building* createBuilding(BuildingType type, Citizen& owner) = 0;
+        virtual Building* createBuilding(const std::string& name,BuildingType type, Citizen& owner) = 0;
 
 
 };

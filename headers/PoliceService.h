@@ -32,7 +32,7 @@ public:
      * @param size The size of the police service.
      * @param owner Pointer to the owner of the police service.
      */
-    PoliceService(int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType name);
+    PoliceService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner, int id,BuildingType type);
 
     /**
      * @brief Destroys the PoliceService building.

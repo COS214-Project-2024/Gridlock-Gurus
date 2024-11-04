@@ -30,7 +30,7 @@ public:
      *
      * This method overrides the factory method to create a Factory building.
      */
-    Building* createBuilding(BuildingType type, Citizen& owner) override;
+    Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // FACTORYFACTORY_H

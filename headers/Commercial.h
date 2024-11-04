@@ -31,7 +31,7 @@ public:
      * @param owner Pointer to the owner of the building.
      * @param taxAuthority Pointer to the tax authority associated with the building.
      */
-    Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name,int max, int rate); 
+    Commercial(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type,int max, int rate); 
 
     /**
      * @brief Destroys the Commercial building.
@@ -59,6 +59,10 @@ public:
     bool isFull() {
         return maxEmployees <= employees.size();
     }
+
+    std::vector<int>& getEmployees();
+
 };
+
 
 #endif // COMMERCIAL_H

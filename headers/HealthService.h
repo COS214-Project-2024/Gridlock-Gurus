@@ -31,7 +31,7 @@ public:
      * @param owner Pointer to the owner of the health service.
      * @param taxAuthority Pointer to the tax authority associated with the health service.
      */
-    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType name, int id);
+    HealthService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType type, int id);
 
     /**
      * @brief Destroys the HealthService building.

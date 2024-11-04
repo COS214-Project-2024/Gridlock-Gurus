@@ -27,7 +27,7 @@ public:
      * @param owner Pointer to the citizen who owns the building.
      * @param taxAuthority Pointer to the tax authority.
      */
-    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int capacity);
+    Residential(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int capacity);
 
     /**
      * @brief Destroys the Residential building object.
@@ -51,6 +51,9 @@ public:
     int getNumberOfTenants() const {
         return tenants.size();
     }
+
+    std::vector<int>& getTenants();
+
 };
 
 #endif // RESIDENTIAL_H

@@ -46,3 +46,8 @@ int BuildingCollection::getCityPowerConsumption() const {
 
     return consumption;
 }
+
+std::vector<Building*>& BuildingCollection::getBuildings() {
+    return buildings;
+}
+

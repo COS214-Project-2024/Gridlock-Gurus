@@ -24,8 +24,8 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    SteelFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) 
-    : Factory(cost, location, resources,size,owner,name,productionRate,max) {};
+    SteelFactory(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type, int productionRate, int max) 
+    : Factory(name,cost, location, resources,size,owner,type,productionRate,max) {};
 
     /**
      * @brief Destroys the SteelFactory object.
