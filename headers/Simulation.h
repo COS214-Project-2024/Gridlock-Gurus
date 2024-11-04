@@ -39,7 +39,13 @@ public:
     /**
      * @brief Destroys the Simulation object.
      */
-    ~Simulation() = default;
+    ~Simulation() {
+        /*while (!commandQueue.empty()) {
+            Command* cmd = commandQueue.front();
+            delete cmd; 
+            commandQueue.pop();    
+        }*/
+    }
 };
 
 #endif // SIMULATION_H
