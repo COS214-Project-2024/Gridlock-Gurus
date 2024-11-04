@@ -1,68 +1,99 @@
-# Gridlock-Gurus: City Builder Simulation
 
-> Team-10
+# Gridlock Gurus
 
-Welcome to Gridlock-Gurus' City Builder Simulation, where managing a city is no walk in the park! We're a team of coders who are set on solving traffic jams, building skyscrapers and keeping citizens happy, all while avoiding total - *well* - **gridlock**.
+Gridlock Gurus is a city simulation project that models complex urban dynamics and interactions among citizens, infrastructure, transportation systems, and government policies. The project uses C++ and Google Test for testing, with a focus on modular architecture and design patterns to simulate a city environment.
 
-With smart design patterns under the hood, our system is built to grow as a city does — whether stuck in a budgeting bottleneck or navigating a service snafu. From factories to public services, we’ve paved the way for endless possibilities.
-
-### Components
-
-#### Buildings
-- Residential: Houses, apartments, estates.
-- Commercial: Shops, offices, malls.
-- Industrial: Factories, warehouses, plants.
-- Landmarks: Parks, monuments, cultural centers.
-
-#### Utilities
-- Power Plants
-- Water Supply
-- Waste Management
-- Sewage Systems
-
-#### Transportation
-- Roads
-- Public Transit
-- Trains
-- Airports
-
-#### Citizens
-- Population Growth
-- Employment
-- Services (Healthcare, Education, Security)
-- Satisfaction metrics
-
-#### Government
-- Taxation
-- Budget Allocation
-- Policies
-- Public Services (Healthcare, Law Enforcement)
-
-#### Resources
-- Materials (wood, steel, concrete)
-- Energy
-- Water
-- Budget
-
-#### Taxes
-- Tax rates for citizens and businesses
-- Collection and allocation of taxes
-- Impact on city growth and citizen satisfaction
-
-#### City Growth
-- Population and economic growth
-- Housing needs
-- Infrastructure expansion
+This simulation offers a simplified yet interactive model of a bustling city, enabling experimentation with infrastructure planning, taxation policies, transportation networks, and citizen satisfaction.
 
 
-## Milestones and Deadlines
+## Features
 
-| Milestone                                        | Deadline               |
-|--------------------------------------------------|------------------------|
-| Team registration (5-7 members) & assign team lead | **13 October 2024**     |
-| Submit initial project design (Practical 6)      | **15 October 2024**     |
-| Initial design marked & feedback received        | **15 and 16 October 2024** |
-| Demonstrate updated design & skeleton implementation | **22 and 23 October 2024** |
-| Review minimal viable project & receive feedback | **29 and 30 October 2024** |
-| Submit final project on ClickUP                  | **4 November 2024**     |
-| Project demos                                    | **5 and 6 November 2024** |
+- Citizen Management: Manages citizens’ attributes and their interactions within the city.
+- Tax System: Implements a flexible taxation system to dynamically impact citizen satisfaction and city revenue.
+- Transportation Network: Models transit options.
+- Government Departments: Includes departments like Home Affairs and Tax Authority, handling city governance and citizen oversight.
+
+
+## Installation Requirements
+
+- CMake 3.10 or higher
+- A C++17-compatible compiler
+- Google Test library
+    
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/COS214-Project-2024/Gridlock-Gurus
+  cd GridlockGurus
+```
+
+Create Build Directory
+
+```bash
+  mkdir build
+  cd build
+```
+
+Generate the build files with CMake
+
+```bash
+  cmake ..
+```
+
+Compile the project
+
+```bash
+  make
+```
+Run executable
+
+```bash
+  ./main
+```
+
+## Running Tests
+
+Clone the project
+
+```bash
+  git clone https://github.com/COS214-Project-2024/Gridlock-Gurus
+  cd GridlockGurus
+```
+
+Create Build Directory
+
+```bash
+  mkdir build
+  cd build
+```
+
+Generate the build files with CMake
+
+```bash
+  cmake ..
+```
+
+Compile the project
+
+```bash
+  make
+```
+Run tests
+
+```bash
+  ./tests
+```
+
+## Authors
+
+- [@hayley-d](https://www.github.com/hayley-d)
+- [@TaylorSergel](https://www.github.com/TaylorSergel)
+- [@KgosiSegale](https://www.github.com/KgosiSegale)
+- [@PatV3-0](https://www.github.com/PatV3-0)
+- [@lantern516](https://www.github.com/lantern516)
+- [@Kc-Nell](https://www.github.com/Kc-Nell)
+- [@Trappies13](https://www.github.com/Trappies13)
+
+
