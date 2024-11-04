@@ -369,7 +369,5 @@ int main() {
     // delete truck;
     // delete clonedTrain;
 
-    std::cout << "\n--- All Tests Completed ---" << std::endl;
-
     return 0;
 }
