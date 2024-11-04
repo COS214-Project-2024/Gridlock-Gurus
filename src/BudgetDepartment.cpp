@@ -9,7 +9,8 @@ int BudgetDepartment::checkTotal() {
     return totalAvailable;
 }
 
-void BudgetDepartment::receiveTaxes() {
+int BudgetDepartment::receiveTaxes() {
     int taxesCollected = taxAuthority->collectTaxes();
     totalAvailable += taxesCollected;
+    return taxesCollected;
 }

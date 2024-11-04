@@ -143,7 +143,7 @@ public:
     /**
      * @brief Initiates a new cycle of tax collection.
      */
-    void startTaxCycle();
+    std::string startTaxCycle();
 
     /**
      * @brief Increases the city's transport services by adding vehicles.
