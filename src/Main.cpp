@@ -52,7 +52,7 @@ public:
         citTypeLabel->nAlign = olc::QuickGUI::Label::Alignment::Left;
         newCitizenButton->bVisible = false;
         citizenListBox->bVisible = false;
-        citizenGroupToggle(false);
+        newCitizenGroupToggle(false);
 
         return true;
     }
@@ -69,7 +69,6 @@ public:
         }
 
         if (buildingListBox->bSelectionChanged) {
-            std::cout << buildingListBox->nSelectedItem << "was here\n";
             if (buildingListBox->nSelectedItem != 0) {
                 console->sText = buildingTypeName.at(city->getBuildings().at(buildingListBox->nSelectedItem - 1)->getType());
             }
@@ -108,6 +107,7 @@ public:
                                                                                                            ? BuildingType::Hospital
                                                                                                            : BuildingType::Residential;
             }
+            std::cout << "type: " << buildingTypeName.at(type) << std::endl;
             std::string name = buildingNameTextBox->sText;
             city->addBuilding(name, type);
 
@@ -133,25 +133,27 @@ public:
         }
 
         if (newCitizenButton->bReleased) {
-            citizenGroupToggle(true);
+            newCitizenGroupToggle(true);
         }
 
         if (addCitButton->bReleased) {
             CitizenType type = (citTypeCheckBoxC) ? CitizenType::Citizen : (citTypeCheckBoxR) ? CitizenType::Retired : CitizenType::Worker;
-            console->sText = city->createCitizen(type, stoi(citSatisfactionTextBox->sText), 400);
+            console->sText = city->createCitizen(type, stoi(citSatisfactionTextBox->sText), stoi(citFundsTextBox->sText));
             renderCitizenGroup();
-            citizenGroupToggle(false);
+            newCitizenGroupToggle(false);
             addCitButton->bReleased = false;
         }
 
         if (cancelCitButton->bReleased) {
-            citizenGroupToggle(false);
+            newCitizenGroupToggle(false);
             cancelCitButton->bReleased = false;
         }
 
         if (citizenListBox->bSelectionChanged) {
             if (citizenListBox->nSelectedItem == 0) {
+                newCitizenGroupToggle(false);
             } else {
+                std::cout << "got here\n";
                 console->sText = city->getCitizenDetails(ids.at(citizenListBox->nSelectedItem) - 1);
             }
         }
@@ -168,6 +170,10 @@ public:
 
         if (newTrainButton->bReleased) {
             city->increaseTransport(Train);
+        }
+
+        if (taxButton->bReleased) {
+
         }
 
         return true;
@@ -196,7 +202,7 @@ protected:
         cancelBuildingButton->bVisible = t;
     }
 
-    void citizenGroupToggle(const bool t) {
+    void newCitizenGroupToggle(const bool t) {
         citTypeLabel->bVisible = t;
         citTypeCheckBoxW->bVisible = t;
         citTypeCheckBoxW->bChecked = false;
@@ -207,6 +213,9 @@ protected:
         citSatisfactionLabel->bVisible = t;
         citSatisfactionTextBox->bVisible = t;
         citSatisfactionTextBox->sText = "";
+        citFundsLabel->bVisible = t;
+        citFundsTextBox->bVisible = t;
+        citFundsTextBox->sText = "";
         addCitButton->bVisible = t;
         cancelCitButton->bVisible = t;
     }
@@ -216,7 +225,7 @@ protected:
         if (n == 0) {
             newCitizenButton->bVisible = false;
             citizenListBox->bVisible = false;
-            citizenGroupToggle(false);
+            newCitizenGroupToggle(false);
         } else {
             citizenList.clear();
             citizenList.emplace_back(buildingListBox->m_vList.at(n));
@@ -266,52 +275,6 @@ protected:
         }
     }
 
-    BuildingType selectedBuildingType() const {
-        if (bTypeScho->bChecked) {
-            return BuildingType::School;
-        }
-        if (bTypeEsta) {
-            return BuildingType::Estate;
-        }
-        if (bTypeFlat) {
-            return BuildingType::Flat;
-        }
-        if (bTypeHous) {
-            return BuildingType::House;
-        }
-        if (bTypePark) {
-            return BuildingType::Park;
-        }
-        if (bTypeStat) {
-            return BuildingType::Statue;
-        }
-        if (bTypeResi) {
-            return BuildingType::Residential;
-        }
-        if (bTypeShop) {
-            return BuildingType::Shop;
-        }
-        if (bTypeBFac) {
-            return BuildingType::BrickFactory;
-        }
-        if (bTypeSFac) {
-            return BuildingType::SteelFactory;
-        }
-        if (bTypeWFac) {
-            return BuildingType::WoodFactory;
-        }
-        if (bTypeBank) {
-            return BuildingType::Bank;
-        }
-        if (bTypePoli) {
-            return BuildingType::PoliceStation;
-        }
-        if (bTypeHosp) {
-            return BuildingType::Hospital;
-        }
-        return BuildingType::Residential; // Default case
-    }
-
     olc::Sprite *png = nullptr;
 
     olc::QuickGUI::Manager guiManager;
@@ -348,13 +311,15 @@ protected:
     olc::QuickGUI::CheckBox *citTypeCheckBoxR = new olc::QuickGUI::CheckBox(guiManager, "Retired", false, {230, 95}, {50, 15});
     olc::QuickGUI::Label *citSatisfactionLabel = new olc::QuickGUI::Label(guiManager, "Citizen Satisfaction:", {130, 110}, {100, 15});
     olc::QuickGUI::TextBox *citSatisfactionTextBox = new olc::QuickGUI::TextBox(guiManager, "", {130, 125}, {100, 15});
+    olc::QuickGUI::Label *citFundsLabel = new olc::QuickGUI::Label(guiManager, "Citizen Funds:", {130, 140}, {100, 15});
+    olc::QuickGUI::TextBox *citFundsTextBox = new olc::QuickGUI::TextBox(guiManager, "", {130, 155}, {100, 15});
     olc::QuickGUI::Button *addCitButton = new olc::QuickGUI::Button(guiManager, "Confirm", {130, 250}, {60, 15});
     olc::QuickGUI::Button *cancelCitButton = new olc::QuickGUI::Button(guiManager, "Cancel", {190, 250}, {60, 15});
 
     olc::QuickGUI::Button *cityReportButton = new olc::QuickGUI::Button(guiManager, "City Report", {550, 5}, {120, 15});
     olc::QuickGUI::Button *newTaxiButton = new olc::QuickGUI::Button(guiManager, "New Taxi", {550, 20}, {60, 15});
     olc::QuickGUI::Button *newTrainButton = new olc::QuickGUI::Button(guiManager, "New Train", {610, 20}, {60, 15});
-    olc::QuickGUI::Button *newButton = new olc::QuickGUI::Button(guiManager, "Button", {550, 35}, {120, 15});
+    olc::QuickGUI::Button *taxButton = new olc::QuickGUI::Button(guiManager, "Tax Report", {550, 35}, {120, 15});
 
     olc::QuickGUI::TextBox *console = new olc::QuickGUI::TextBox(guiManager, "", {5, 300}, {720, 65});
 };

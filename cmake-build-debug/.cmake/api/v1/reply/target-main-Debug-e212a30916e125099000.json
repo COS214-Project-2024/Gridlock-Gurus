@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "tests.exe"
+			"path" : "main.exe"
 		},
 		{
-			"path" : "tests.pdb"
+			"path" : "main.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -29,13 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 28,
+				"line" : 32,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 32,
+				"line" : 39,
 				"parent" : 0
 			},
 			{
@@ -90,16 +90,6 @@
 				{
 					"backtrace" : 6,
 					"path" : "C:/Users/ruben/CLionProjects/Gridlock-Gurus/images"
-				},
-				{
-					"backtrace" : 2,
-					"isSystem" : true,
-					"path" : "C:/Users/ruben/CLionProjects/Gridlock-Gurus/googletest/googletest/include"
-				},
-				{
-					"backtrace" : 2,
-					"isSystem" : true,
-					"path" : "C:/Users/ruben/CLionProjects/Gridlock-Gurus/googletest/googletest"
 				}
 			],
 			"language" : "CXX",
@@ -107,7 +97,7 @@
 			{
 				"backtraces" : 
 				[
-					2
+					1
 				],
 				"standard" : "17"
 			},
@@ -162,27 +152,11 @@
 				46,
 				47,
 				48,
-				49,
-				50,
-				51,
-				52,
-				53,
-				54
+				49
 			]
 		}
 	],
-	"dependencies" : 
-	[
-		{
-			"backtrace" : 2,
-			"id" : "gtest::@f95b5c00bd49b3b4698d"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "gtest_main::@f95b5c00bd49b3b4698d"
-		}
-	],
-	"id" : "tests::@6890427a1f51a3e7e1df",
+	"id" : "main::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -197,22 +171,37 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "lib\\libgtest.a",
+				"fragment" : "-luser32",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "lib\\libgtest_main.a",
+				"fragment" : "-lgdi32",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-lpthread",
+				"fragment" : "-lopengl32",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "lib\\libgtest.a",
+				"fragment" : "-lgdiplus",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lShlwapi",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-ldwmapi",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lstdc++fs",
 				"role" : "libraries"
 			},
 			{
@@ -222,8 +211,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "tests",
-	"nameOnDisk" : "tests.exe",
+	"name" : "main",
+	"nameOnDisk" : "main.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -284,18 +273,18 @@
 				46,
 				47,
 				48,
-				49,
-				50,
-				51,
-				52,
-				53,
-				54
+				49
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
+				50,
+				51,
+				52,
+				53,
+				54,
 				55,
 				56,
 				57,
@@ -357,12 +346,7 @@
 				113,
 				114,
 				115,
-				116,
-				117,
-				118,
-				119,
-				120,
-				121
+				116
 			]
 		}
 	],
@@ -371,31 +355,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "tests/government_tests.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "tests/transport_test.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "tests/tax_system_test.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "tests/building_test.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "tests/citizen_test.cpp",
+			"path" : "src/Main.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -564,12 +524,6 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/LowFundingState.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/Main.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
