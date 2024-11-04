@@ -23,7 +23,11 @@ public:
     /**
      * @brief Constructs the Department of Water, Power, and Sanitation.
      */
-    DepartmentOfWaterPowerAndSanitation();
+    DepartmentOfWaterPowerAndSanitation() {
+     water = std::make_unique<Water>();
+     power = std::make_unique<Power>();
+     sanitation = std::make_unique<Sanitation>();
+    };
 
     /**
      * @brief Default destructor.
