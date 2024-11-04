@@ -53,6 +53,8 @@ public:
 
     int getCityPowerConsumption() const;
 
+    std::vector<Building*>& getBuildings();
+
 private:
     std::vector<Building*> buildings;                 ///< The collection of buildings in the city.
 

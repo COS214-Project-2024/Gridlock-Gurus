@@ -24,7 +24,7 @@ public:
      * @param owner Pointer to the factory's owner.
      * @param taxAuthority Pointer to the tax authority associated with the factory.
      */
-    WoodFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int productionRate, int max);
+    WoodFactory(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int productionRate, int max);
 
     /**
      * @brief Destroys the WoodFactory object.

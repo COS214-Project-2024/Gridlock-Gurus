@@ -29,15 +29,12 @@ public:
      * @param size The size of the service building.
      * @param owner Pointer to the owner of the service building.
      */
-    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name,int id);
+    Service(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type,int id);
 
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service() {
-        employees.clear();
-    }
-
+    virtual ~Service() = default;
     /**
      * @brief Produces resources in the service building.
      */

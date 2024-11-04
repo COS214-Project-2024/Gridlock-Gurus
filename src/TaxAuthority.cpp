@@ -88,3 +88,7 @@ void TaxAuthority::unregisterCitizen(Citizen& citizen) {
 void TaxAuthority::deregisterAllCitizens() {
     citizens.clear();
 }
+
+std::vector<Building*>& TaxAuthority::getBuildings() {
+    return buildings->getBuildings();
+}

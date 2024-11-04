@@ -33,7 +33,7 @@ public:
      * @param owner Pointer to the owner of the education service.
      * @param taxAuthority Pointer to the tax authority associated with the education service.
      */
-    EducationService(int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType name);
+    EducationService(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, int id, BuildingType type);
 
     /**
      * @brief Destroys the EducationService building.

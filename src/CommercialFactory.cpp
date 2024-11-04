@@ -3,7 +3,7 @@
 #include <string>
 
 // Made citizen a reference instead of pointer to prevent it being nullptr
-Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
+Building *CommercialFactory::createBuilding(const std::string& name,BuildingType type, Citizen& owner) {
     Resources* resources = new Resources(100,100,true);
     int maxEmployees;
     int productionRate;
@@ -22,7 +22,7 @@ Building *CommercialFactory::createBuilding(BuildingType type, Citizen& owner) {
         productionRate = 12;
     }
 
-    Commercial* c = new Commercial(cost, location,resources, 1000, owner, type,maxEmployees,productionRate);
+    Commercial* c = new Commercial(name,cost, location,resources, 1000, owner, type,maxEmployees,productionRate);
     taxAuthority->registerBuilding(*c);
     return c;
 }
