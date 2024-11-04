@@ -45,6 +45,11 @@ public:
     int getPopulation() {
         return population;
     }
+    std::string createCitizen(CitizenType type, int satisfaction, int funds);
+    std::string getCitizenDetails(int id);
+    Citizen& getCitizen(int id); 
+    std::vector<Citizen*>& getCitizens();
+
 protected:
     void registerBirth();
 

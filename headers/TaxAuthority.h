@@ -51,6 +51,10 @@ public:
     void removeLastBuilding();
     void deregisterAllCitizens() ;
 
+    std::string getCitizenDetails(int id);
+    Citizen& getCitizen(int id); 
+    std::vector<Building*>& getBuildings();
+ 
 private:
     void notifyCitizens();
     void notifyBuildings();

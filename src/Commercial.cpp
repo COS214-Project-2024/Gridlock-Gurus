@@ -1,6 +1,6 @@
 #include "Commercial.h"
 
-Commercial::Commercial(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int max, int rate) : Building(cost, location, resources, size, owner , name) {
+Commercial::Commercial(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int max, int rate) : Building(name,cost, location, resources, size, owner , type) {
     this->maxEmployees = max;
     this->productionRate = rate;
 }
@@ -50,4 +50,8 @@ int Commercial::getNumberOfEmployees() {
 
 int Commercial::getMaxEmployees() {
     return maxEmployees;
+}
+
+std::vector<int>& Commercial::getEmployees() {
+    return employees;
 }

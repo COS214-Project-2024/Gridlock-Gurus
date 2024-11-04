@@ -17,8 +17,17 @@ protected:
     std::vector<int> employees;
 
 public:
-    Factory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) 
-    : Building(cost,location,resources,size,owner,name) {
+    /**
+     * @brief Constructs a new Factory object.
+     * @param cost The construction cost of the factory.
+     * @param location The location of the factory.
+     * @param resources Pointer to the resources the factory consumes.
+     * @param size The size of the factory.
+     * @param owner Pointer to the factory's owner.
+     * @param taxAuthority Pointer to the tax authority associated with the factory.
+     */
+    Factory(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type, int productionRate, int max) 
+    : Building(name,cost,location,resources,size,owner,type) {
         this->productionRate = productionRate;
         this->maxEmployees = max;
     };
@@ -41,6 +50,9 @@ public:
     bool isFull() {
         return maxEmployees <= employees.size();
     }
+
+    std::vector<int>& getEmployees();
+
 };
 
 #endif // FACTORY_H

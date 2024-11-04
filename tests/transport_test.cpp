@@ -3,6 +3,8 @@
 #include "../headers/Vehicle.h"
 #include "../headers/VehicleType.h"
 #include <memory>
+#include <string>
+
 
 class transport_system_test : public ::testing::Test {
     protected:

@@ -19,7 +19,13 @@ class BuildingFactory {
             
         }
 
-        virtual Building* createBuilding(BuildingType type, Citizen& owner) = 0;
+        /**
+        * @brief Creates a building of a specific type.
+        * @param type The type of building to create.
+        * @return Pointer to the created Building object.
+        * Factory Method function, which must be implemented by concrete factory subclasses.
+        */
+        virtual Building* createBuilding(const std::string& name,BuildingType type, Citizen& owner) = 0;
 
 
 };

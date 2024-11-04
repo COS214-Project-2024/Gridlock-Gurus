@@ -48,8 +48,10 @@ private:
 public:
     City();
 
-     ~City();
-    void addBuilding(BuildingType type);
+    /**
+     * @brief Adds a new building to the city's collection of buildings.
+     */
+    void addBuilding(const std::string & name,BuildingType type);
 
     void setState();
 
@@ -93,6 +95,42 @@ public:
     int getWorkerCount();
 
     void generateReport(std::string& temp);
+
+    std::vector<Building*>& getBuildings();
+
+    std::vector<Citizen*>& getCitizens();
+
+    std::vector<Vehicle*>& getVehicles();
+
+    Citizen& getCitizen(int id);
+
+    std::string createCitizen(CitizenType type, int satisfaction, int funds);
+
+    std::string getCitizenDetails(int id);
+
+    std::string addNewBuilding(const std::string & name,BuildingType type);
+
+    std::shared_ptr<DepartmentOfWaterPowerAndSanitation> getDepartmentOfWaterPowerAndSanitation() const {
+        return government->getDepartmentOfWaterPowerAndSanitation();
+    }
+
+    std::shared_ptr<TaxAuthority> getTaxAuthority() const {
+        return government->getTaxAuthority();
+    }
+
+    std::shared_ptr<DepartmentOfHomeAffairs> getDepartmentOfHomeAffairs() const {
+        return government->getDepartmentOfHomeAffairs();
+    }
+
+     std::shared_ptr<TransportDepartment> getTransportDepartment() const {
+        return government->getTransportDepartment();
+    }
+
+    std::shared_ptr<BudgetDepartment> getBudgetDepartment() const {
+        return government->getBudgetDepartment();
+    }
+    
+   
 };
 
 #endif // CITY_H

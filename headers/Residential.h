@@ -13,7 +13,16 @@ private:
     std::vector<int> tenants;
 
 public:
-    Residential(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name, int capacity);
+    /**
+     * @brief Constructs a new Residential building object.
+     * @param cost The construction cost.
+     * @param location The location of the building.
+     * @param resources Pointer to the resources used by the building.
+     * @param size The size of the building.
+     * @param owner Pointer to the citizen who owns the building.
+     * @param taxAuthority Pointer to the tax authority.
+     */
+    Residential(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int capacity);
 
     /**
      * @brief Destroys the Residential building object.
@@ -32,6 +41,9 @@ public:
     int getNumberOfTenants() const {
         return tenants.size();
     }
+
+    std::vector<int>& getTenants();
+
 };
 
 #endif // RESIDENTIAL_H

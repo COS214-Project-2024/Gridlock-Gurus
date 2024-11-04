@@ -1,6 +1,6 @@
 #include "WoodFactory.h"
 
-WoodFactory::WoodFactory(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name, int productionRate, int max) : Factory(cost, location, resources, size, owner,name, productionRate, max){}
+WoodFactory::WoodFactory(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type, int productionRate, int max) : Factory(name,cost, location, resources, size, owner,type, productionRate, max){}
 
 
 int WoodFactory::produceResource() {

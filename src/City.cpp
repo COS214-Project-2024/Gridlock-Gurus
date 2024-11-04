@@ -19,34 +19,66 @@ City::~City() {
     delete service_factory;
 }
 
-void City::addBuilding(BuildingType type){
+void City::addBuilding(const std::string& name, BuildingType type){
     Citizen& citizen = government->getDepartmentOfHomeAffairs()->getRandomCitizen();
 
     if(type == BuildingType::BrickFactory ||type == BuildingType::SteelFactory || type == BuildingType::WoodFactory) {
         //Factory
-        Building* temp = factory_factory->createBuilding(type,citizen); 
+        Building* temp = factory_factory->createBuilding(name,type,citizen); 
         Factory* work = dynamic_cast<Factory*>(temp);
         government->getDepartmentOfHomeAffairs()->fillWorkWithEmployees(*work);
 
     } else if(type == BuildingType::Shop ||type == BuildingType::Bank) {
-        Building* temp = commercial_factory->createBuilding(type,citizen); 
+        Building* temp = commercial_factory->createBuilding(name,type,citizen); 
         Commercial* work = dynamic_cast<Commercial*>(temp);
         government->getDepartmentOfHomeAffairs()->fillWorkWithEmployees(*work); 
 
     } else if(type == BuildingType::Flat ||type == BuildingType::House || type == BuildingType::Estate) {
-        Building* temp = residential_factory->createBuilding(type,citizen); 
+        Building* temp = residential_factory->createBuilding(name,type,citizen); 
         Residential* home = dynamic_cast<Residential*>(temp);
         government->getDepartmentOfHomeAffairs()->fillHomeWithTenants(*home); 
 
     } else if(type == BuildingType::Statue ||type == BuildingType::Park) {
         //Landmark
-        landmark_factory->createBuilding(type,citizen); 
+        landmark_factory->createBuilding(name,type,citizen); 
     } else {
         //Service
-        Building* temp = service_factory->createBuilding(type,citizen); 
+        Building* temp = service_factory->createBuilding(name,type,citizen); 
         Service* work = dynamic_cast<Service*>(temp);
         government->getDepartmentOfHomeAffairs()->fillWorkWithEmployees(*work); 
     }
+}
+
+std::string City::addNewBuilding(const std::string & name,BuildingType type){
+ Citizen& citizen = government->getDepartmentOfHomeAffairs()->getRandomCitizen();
+
+    if(type == BuildingType::BrickFactory ||type == BuildingType::SteelFactory || type == BuildingType::WoodFactory) {
+        //Factory
+        Building* temp = factory_factory->createBuilding(name,type,citizen); 
+        Factory* work = dynamic_cast<Factory*>(temp);
+        government->getDepartmentOfHomeAffairs()->fillWorkWithEmployees(*work);
+
+    } else if(type == BuildingType::Shop ||type == BuildingType::Bank) {
+        Building* temp = commercial_factory->createBuilding(name,type,citizen); 
+        Commercial* work = dynamic_cast<Commercial*>(temp);
+        government->getDepartmentOfHomeAffairs()->fillWorkWithEmployees(*work); 
+
+    } else if(type == BuildingType::Flat ||type == BuildingType::House || type == BuildingType::Estate) {
+        Building* temp = residential_factory->createBuilding(name,type,citizen); 
+        Residential* home = dynamic_cast<Residential*>(temp);
+        government->getDepartmentOfHomeAffairs()->fillHomeWithTenants(*home); 
+
+    } else if(type == BuildingType::Statue ||type == BuildingType::Park) {
+        //Landmark
+        landmark_factory->createBuilding(name,type,citizen); 
+    } else {
+        //Service
+        Building* temp = service_factory->createBuilding(name,type,citizen); 
+        Service* work = dynamic_cast<Service*>(temp);
+        government->getDepartmentOfHomeAffairs()->fillWorkWithEmployees(*work); 
+    }
+
+    return name + " has been constructed";
 }
 
 void City::setState() {
@@ -133,3 +165,30 @@ void City::generateReport(std::string& temp) {
     government->getTransportDepartment()->getReport(temp);
     getUtilityStats(temp);
 }
+
+std::vector<Building*>& City::getBuildings() {
+    return government->getTaxAuthority()->getBuildings();
+}
+
+std::vector<Citizen*>& City::getCitizens() {
+    return government->getDepartmentOfHomeAffairs()->getCitizens();
+}
+
+std::vector<Vehicle*>& City::getVehicles() {
+    return government->getTransportDepartment()->getFleet();
+}
+
+Citizen& City::getCitizen(int id) {
+    return government->getDepartmentOfHomeAffairs()->getCitizen(id);
+}
+
+std::string City::createCitizen(CitizenType type, int satisfaction, int funds) {
+    return government->getDepartmentOfHomeAffairs()->createCitizen(type,satisfaction, funds);
+}
+
+std::string City::getCitizenDetails(int id) {
+    return government->getDepartmentOfHomeAffairs()->getCitizenDetails(id);
+}
+
+
+

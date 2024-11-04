@@ -16,15 +16,20 @@ protected:
     int maxEmployees;
     int id;
 public:
-    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name,int id);
+    /**
+     * @brief Constructs a new Service building.
+     * @param cost The construction cost of the service building.
+     * @param location The location of the service building.
+     * @param resources Pointer to the resources the building uses.
+     * @param size The size of the service building.
+     * @param owner Pointer to the owner of the service building.
+     */
+    Service(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type,int id);
 
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service() {
-        employees.clear();
-    }
-
+    virtual ~Service() = default;
     /**
      * @brief Produces resources in the service building.
      */

@@ -17,7 +17,16 @@ private:
     std::unique_ptr<HealthState> healthState; 
     int responseTime;
 public:
-    HealthService(int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType name, int id);
+    /**
+     * @brief Constructs a new HealthService building.
+     * @param cost The construction cost of the health service.
+     * @param location The location of the health service.
+     * @param resources Pointer to the resources the health service uses.
+     * @param size The size of the health service.
+     * @param owner Pointer to the owner of the health service.
+     * @param taxAuthority Pointer to the tax authority associated with the health service.
+     */
+    HealthService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType type, int id);
 
      ~HealthService() override = default;
 

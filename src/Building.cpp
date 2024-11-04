@@ -1,12 +1,9 @@
 #include "Building.h"
 
-Building::Building(int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType name)
-    : cost(cost), location(location), resources(resources), size(size), owner(&owner), name(name) {}
+Building::Building(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type)
+    : name(name), cost(cost), location(location), resources(resources), size(size), owner(&owner), type(type) {}
 
 Building::~Building() {
-    if(owner) {
-        //delete owner;
-    }
     delete resources;
 }
 
@@ -34,8 +31,15 @@ int Building::getSize() const {
     return this->size;
 }
 
-BuildingType Building::getName() const {
-    return name;
+BuildingType Building::getType() const {
+    return type;
 }
 
+std::string Building::getDetails() const {
+    std::string details = "";
+    details += "Building Name:\t";
+    details += name;
+    details += "\nLocation:\t";
+    return details;
+}
 

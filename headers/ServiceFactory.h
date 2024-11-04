@@ -14,8 +14,15 @@ class ServiceFactory : public BuildingFactory {
 public:
     ServiceFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority), numberOfSchools(0),numberOfHospitals(0),numberOfPoliceStations(0) {}
     ~ServiceFactory() override = default;
-
-    Building* createBuilding(BuildingType type, Citizen& owner) override;
+    
+    /**
+     * @brief Creates a service building.
+     * @param type The type of service building to create.
+     * @return Pointer to the created service building object.
+     *
+     * This method overrides the factory method to create a service building.
+     */
+    Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // SERVICEFACTORY_H
