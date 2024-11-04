@@ -48,6 +48,7 @@ public:
      * making it functional again.
      */
     void repair() override;
+void tenders();
 };
 
 #endif // BROKEN_H
