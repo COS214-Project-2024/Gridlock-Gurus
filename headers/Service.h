@@ -9,11 +9,6 @@
 #include <memory>
 
 
-/**
- * @brief Represents a service building (e.g., hospital, police station).
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and serves as a base for specific types of service buildings, providing a common interface for tax payment and services.
- */
 class Service : public Building {
 protected:
     std::vector<int> employees;
@@ -29,15 +24,12 @@ public:
      * @param size The size of the service building.
      * @param owner Pointer to the owner of the service building.
      */
-    Service(int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType name,int id);
+    Service(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type,int id);
 
     /**
      * @brief Destroys the Service building.
      */
-    virtual ~Service() {
-        employees.clear();
-    }
-
+    virtual ~Service() = default;
     /**
      * @brief Produces resources in the service building.
      */

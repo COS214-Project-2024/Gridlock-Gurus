@@ -4,11 +4,6 @@
 #include "City.h"
 #include <memory>
 
-/**
- * @brief Abstract class representing a command in the simulation.
- *
- * Command participant in the Command design pattern. It declares the `execute()` method that all concrete commands must implement.
- */
 class Command {
 protected:
     //int executionCount;
@@ -20,16 +15,8 @@ public:
      */
     Command(std::shared_ptr<City> city) : city(city) {}
 
-    /**
-     * @brief Destroys the Command object.
-     */
     virtual ~Command() = default;
 
-    /**
-     * @brief Executes the command.
-     *
-     * This is a pure virtual function that concrete command classes must implement.
-     */
     virtual void execute() = 0;
 
      /**

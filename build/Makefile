@@ -836,30 +836,6 @@ src/HighFundingState.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/HighFundingState.cpp.s
 .PHONY : src/HighFundingState.cpp.s
 
-src/Landmark.o: src/Landmark.cpp.o
-.PHONY : src/Landmark.o
-
-# target to build an object file
-src/Landmark.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Landmark.cpp.o
-.PHONY : src/Landmark.cpp.o
-
-src/Landmark.i: src/Landmark.cpp.i
-.PHONY : src/Landmark.i
-
-# target to preprocess a source file
-src/Landmark.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Landmark.cpp.i
-.PHONY : src/Landmark.cpp.i
-
-src/Landmark.s: src/Landmark.cpp.s
-.PHONY : src/Landmark.s
-
-# target to generate assembly for a file
-src/Landmark.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/Landmark.cpp.s
-.PHONY : src/Landmark.cpp.s
-
 src/LandmarkFactory.o: src/LandmarkFactory.cpp.o
 .PHONY : src/LandmarkFactory.o
 
@@ -1673,9 +1649,6 @@ help:
 	@echo "... src/HighFundingState.o"
 	@echo "... src/HighFundingState.i"
 	@echo "... src/HighFundingState.s"
-	@echo "... src/Landmark.o"
-	@echo "... src/Landmark.i"
-	@echo "... src/Landmark.s"
 	@echo "... src/LandmarkFactory.o"
 	@echo "... src/LandmarkFactory.i"
 	@echo "... src/LandmarkFactory.s"

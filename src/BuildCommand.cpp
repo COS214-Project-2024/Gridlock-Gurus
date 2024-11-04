@@ -1,7 +1,8 @@
 #include "BuildCommand.h"
 
 void BuildCommand::execute() {
-    city->addBuilding(type);
+    std::string name = "";
+    city->addBuilding(name,type);
 }
 
 

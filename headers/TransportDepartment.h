@@ -34,6 +34,8 @@ public:
     int getFleetSize();
 
     void getReport(std::string& temp);
+
+    std::vector<Vehicle*>& getFleet();
 };
 
 #endif

@@ -6,22 +6,11 @@
 #include "BuildingType.h"
 #include "TaxAuthority.h"
 
-/**
- * @brief Factory for creating commercial buildings.
- * 
- *  ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create commercial buildings.
- */
 class CommercialFactory : public BuildingFactory {
 
 public:
-    /**
-     * @brief Constructs a new CommercialFactory object.
-     */
     CommercialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
-    /**
-     * @brief Destroys the CommercialFactory object.
-     */
      ~CommercialFactory() override = default;
     
     /**
@@ -31,7 +20,7 @@ public:
      *
      * This method overrides the factory method to create a commercial building.
      */
-     Building* createBuilding(BuildingType type, Citizen& owner) override;
+     Building* createBuilding(const std::string& name, BuildingType type, Citizen& owner) override;
 };
 
 #endif // COMMERCIALFACTORY_H
