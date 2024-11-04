@@ -10,14 +10,29 @@
 // #include "Functional.h"
 // #include "Damaged.h"
 // #include "Broken.h"
-#include "TaxAuthority.h"
 #include "City.h"
 
 #include <iostream>
 
-std::shared_ptr<TaxAuthority> tax = std::make_shared<TaxAuthority>();
-std::vector<int> ids;
 std::shared_ptr<City> city = std::make_shared<City>();
+std::vector<int> ids;
+
+const std::unordered_map<BuildingType, std::string> buildingTypeName = {
+    {BuildingType::Residential, "Residential"},
+    {BuildingType::Shop, "Shop"},
+    {BuildingType::BrickFactory, "Brick Factory"},
+    {BuildingType::SteelFactory, "Steel Factory"},
+    {BuildingType::WoodFactory, "Wood Factory"},
+    {BuildingType::Bank, "Bank"},
+    {BuildingType::Flat, "Flat"},
+    {BuildingType::Estate, "Estate"},
+    {BuildingType::House, "House"},
+    {BuildingType::Statue, "Statue"},
+    {BuildingType::Park, "Park"},
+    {BuildingType::PoliceStation, "Police Station"},
+    {BuildingType::Hospital, "Hospital"},
+    {BuildingType::School, "School"}
+};
 
 class GridGui : public olc::PixelGameEngine {
 public:
@@ -54,15 +69,50 @@ public:
         }
 
         if (buildingListBox->bSelectionChanged) {
+            std::cout << buildingListBox->nSelectedItem << "was here\n";
+            if (buildingListBox->nSelectedItem != 0) {
+                console->sText = buildingTypeName.at(city->getBuildings().at(buildingListBox->nSelectedItem - 1)->getType());
+            }
             renderCitizenGroup();
         }
 
         if (addBuildingButton->bReleased) {
-            const BuildingType type = selectedBuildingType();
+            BuildingType type; {
+                type = (bTypeScho->bChecked)
+                           ? BuildingType::School
+                           : (bTypeEsta->bChecked)
+                                 ? BuildingType::Estate
+                                 : (bTypeFlat->bChecked)
+                                       ? BuildingType::Flat
+                                       : (bTypeHous->bChecked)
+                                             ? BuildingType::House
+                                             : (bTypePark->bChecked)
+                                                   ? BuildingType::Park
+                                                   : (bTypeStat->bChecked)
+                                                         ? BuildingType::Statue
+                                                         : (bTypeResi->bChecked)
+                                                               ? BuildingType::Residential
+                                                               : (bTypeShop->bChecked)
+                                                                     ? BuildingType::Shop
+                                                                     : (bTypeBFac->bChecked)
+                                                                           ? BuildingType::BrickFactory
+                                                                           : (bTypeSFac->bChecked)
+                                                                                 ? BuildingType::SteelFactory
+                                                                                 : (bTypeWFac->bChecked)
+                                                                                       ? BuildingType::WoodFactory
+                                                                                       : (bTypeBank->bChecked)
+                                                                                             ? BuildingType::Bank
+                                                                                             : (bTypePoli->bChecked)
+                                                                                                   ? BuildingType::PoliceStation
+                                                                                                   : (bTypeHosp->bChecked)
+                                                                                                           ? BuildingType::Hospital
+                                                                                                           : BuildingType::Residential;
+            }
             std::string name = buildingNameTextBox->sText;
             city->addBuilding(name, type);
 
             std::vector<std::string> names = city->getBuildingNames();
+            buildingList.erase(++buildingList.begin(), buildingList.end());
             buildingList.insert(++buildingList.begin(), names.begin(), names.end());
 
             std::cout << city->getBuildings().at(0)->getDetails();
@@ -77,8 +127,9 @@ public:
         }
 
         if (buildingListBox->nSelectedItem) {
-            size_t n = buildingListBox->nSelectedItem;
-            DrawPartialSprite({400, 20}, png, getSpritePartials(n, true), getSpritePartials(n, false));
+            std::string building = buildingTypeName.at(city->getBuildings().at(buildingListBox->nSelectedItem - 1)->getType());
+            png = new olc::Sprite("./images/" + building + ".png");
+            DrawSprite(330, 5, png);
         }
 
         if (newCitizenButton->bReleased) {
@@ -87,6 +138,7 @@ public:
 
         if (addCitButton->bReleased) {
             CitizenType type = (citTypeCheckBoxC) ? CitizenType::Citizen : (citTypeCheckBoxR) ? CitizenType::Retired : CitizenType::Worker;
+            console->sText = city->createCitizen(type, stoi(citSatisfactionTextBox->sText), 400);
             renderCitizenGroup();
             citizenGroupToggle(false);
             addCitButton->bReleased = false;
@@ -102,6 +154,20 @@ public:
             } else {
                 console->sText = city->getCitizenDetails(ids.at(citizenListBox->nSelectedItem) - 1);
             }
+        }
+
+        if (cityReportButton->bReleased) {
+            std::string r;
+            city->generateReport(r);
+            console->sText = r;
+        }
+
+        if (newTaxiButton->bReleased) {
+            city->increaseTransport(Taxi);
+        }
+
+        if (newTrainButton->bReleased) {
+            city->increaseTransport(Train);
         }
 
         return true;
@@ -201,7 +267,7 @@ protected:
     }
 
     BuildingType selectedBuildingType() const {
-        if (bTypeScho) {
+        if (bTypeScho->bChecked) {
             return BuildingType::School;
         }
         if (bTypeEsta) {
@@ -284,6 +350,11 @@ protected:
     olc::QuickGUI::TextBox *citSatisfactionTextBox = new olc::QuickGUI::TextBox(guiManager, "", {130, 125}, {100, 15});
     olc::QuickGUI::Button *addCitButton = new olc::QuickGUI::Button(guiManager, "Confirm", {130, 250}, {60, 15});
     olc::QuickGUI::Button *cancelCitButton = new olc::QuickGUI::Button(guiManager, "Cancel", {190, 250}, {60, 15});
+
+    olc::QuickGUI::Button *cityReportButton = new olc::QuickGUI::Button(guiManager, "City Report", {550, 5}, {120, 15});
+    olc::QuickGUI::Button *newTaxiButton = new olc::QuickGUI::Button(guiManager, "New Taxi", {550, 20}, {60, 15});
+    olc::QuickGUI::Button *newTrainButton = new olc::QuickGUI::Button(guiManager, "New Train", {610, 20}, {60, 15});
+    olc::QuickGUI::Button *newButton = new olc::QuickGUI::Button(guiManager, "Button", {550, 35}, {120, 15});
 
     olc::QuickGUI::TextBox *console = new olc::QuickGUI::TextBox(guiManager, "", {5, 300}, {720, 65});
 };
