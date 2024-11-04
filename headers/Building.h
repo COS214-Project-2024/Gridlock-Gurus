@@ -7,15 +7,9 @@
 #include <memory>
 #include "BuildingType.h"
 
-// Forward Declarations
 class Citizen;
 class Resources;
 
-/**
- * @brief Represents a building in the city.
- *
- * Product participant in the Factory Method pattern. It defines the properties and methods shared by all types of buildings.
- */
 class Building {
 protected:
     std::string name;
@@ -50,14 +44,8 @@ public:
      * @param amount The amount of tax to be paid.
      */
     void payTax(int amount);
-
-     /**
-     * @brief Getter for the cost of the building.
-     */
      int getCost() const;
-     
      std::string getLocation() const;
-     
      int getSize() const;
 
      BuildingType getType() const;

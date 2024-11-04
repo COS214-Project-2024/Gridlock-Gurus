@@ -10,7 +10,6 @@ Building *CommercialFactory::createBuilding(const std::string& name,BuildingType
     int cost;
     std::string location = "Business district";
 
-    // I changed it because before it returs a nullptr? checks should be done before calling, the function of factory is just to produce
     if(type == BuildingType::Bank) {
         maxEmployees = 30;
         cost = 200;

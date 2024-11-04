@@ -8,11 +8,6 @@
 #include <vector>
 #include <string>
 
-/**
- * @brief Represents a wood processing factory.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that processes wood.
- */
 class WoodFactory : public Factory {
 public:
     /**
@@ -26,9 +21,6 @@ public:
      */
     WoodFactory(const std::string& name,int cost, std::string& location, Resources* resources, int size, Citizen& owner,BuildingType type, int productionRate, int max);
 
-    /**
-     * @brief Destroys the WoodFactory object.
-     */
      ~WoodFactory() override = default;
 
     /**
@@ -36,10 +28,6 @@ public:
      */
     int produceResource() override;
 
-    /**
-     * @brief Pays an employee working at the wood factory.
-     * @param employee Pointer to the employee.
-     */
      int pay() override;
 };
 

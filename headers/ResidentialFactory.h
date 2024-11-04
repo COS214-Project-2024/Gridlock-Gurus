@@ -7,21 +7,9 @@
 #include <memory>
 #include <string>
 
-/**
- * @brief Factory for creating residential buildings.
- *
- * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create residential buildings.
- */
 class ResidentialFactory : public BuildingFactory {
 public:
-    /**
-     * @brief Constructs a new ResidentialFactory object.
-     */
     ResidentialFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
-
-    /**
-     * @brief Destroys the ResidentialFactory object.
-     */
     ~ResidentialFactory() override = default;
 
     /**

@@ -9,11 +9,6 @@
 #include <memory>
 
 
-/**
- * @brief Represents a service building (e.g., hospital, police station).
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and serves as a base for specific types of service buildings, providing a common interface for tax payment and services.
- */
 class Service : public Building {
 protected:
     std::vector<int> employees;

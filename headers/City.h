@@ -32,14 +32,9 @@ enum CityState {
     Upset
 };
 
-/**
- * @brief Represents the entire city, managing citizens, buildings, and services.
- *
- * Subject in the Observer pattern, notifying its observers (Government) about changes in the state.
- */
 class City {
 private:
-    std::shared_ptr<Government> government;  ///< Pointer to the government managing the city.
+    std::shared_ptr<Government> government;
 
     FactoryFactory* factory_factory;
     LandmarkFactory* landmark_factory;
@@ -51,31 +46,16 @@ private:
     CityState state;
 
 public:
-    /**
-     * @brief Constructs a new City object.
-     */
     City();
-    
-    /**
-     * @brief Destroys the City object.
-     */
-     ~City();
+    ~City();
 
     /**
      * @brief Adds a new building to the city's collection of buildings.
      */
     void addBuilding(const std::string & name,BuildingType type);
 
-    /**
-     * @brief Sets the state of citizen happiness in the city.
-     * @param citizenHappiness The new citizen happiness level.
-     */
     void setState();
 
-    /**
-     * @brief Gets the current state of citizen happiness in the city.
-     * @return The current citizen happiness level.
-     */
     CityState getState() const; 
 
     void removeLastBuilding();//test

@@ -7,11 +7,6 @@
 #include <string>
 
 
-/**
- * @brief Represents a landmark in the city.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and represents a notable landmark structure within the city.
- */
 class Landmark : public Building {
     
 public:
@@ -26,10 +21,7 @@ public:
      */
     Landmark(const std::string& name, int cost, std::string& location, Resources* resources, int size, Citizen& owner, BuildingType type) : Building(name,cost,location,resources,size,owner,type) {} 
 
-    /**
-     * @brief Destroys the Landmark building.
-     */
-    ~Landmark() override = default;  ///< Destructor
+    ~Landmark() override = default;
 
 };
 

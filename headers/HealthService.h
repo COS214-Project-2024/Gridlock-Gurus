@@ -11,11 +11,6 @@ enum HealthStateType{
     HighFunding,
     LowFunding
 };
-/**
- * @brief Represents a health service building.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Service class and represents a specific type of service building that provides health services.
- */
 class HealthService : public Service {
 private:
     HealthStateType state;
@@ -33,21 +28,9 @@ public:
      */
     HealthService(const std::string& name,int cost, std::string& location, Resources *resources, int size, Citizen& owner,  BuildingType type, int id);
 
-    /**
-     * @brief Destroys the HealthService building.
-     */
      ~HealthService() override = default;
 
-    /**
-     * @brief Sets the state of the health service.
-     * @param state Pointer to the new health state.
-     */
     void setState();
-
-    /**
-     * @brief Pays a staff member in the health service.
-     * @param staffMember Pointer to the staff member being paid.
-     */
     int pay() override;
 
     void responseTimeDec(int by);

@@ -6,21 +6,11 @@
 #include "TaxAuthority.h"
 #include <memory>
 
-/**
- * @brief Factory for creating landmarks.
- * 
- * ConcreteCreator participant in the Factory Method pattern. It implements the factory method to create landmarks.
- */
+
 class LandmarkFactory : public BuildingFactory {
 public:
-    /**
-     * @brief Constructs a new LandmarkFactory object.
-     */
     LandmarkFactory(std::shared_ptr<TaxAuthority> taxAuthority) : BuildingFactory(taxAuthority) {}
 
-    /**
-     * @brief Destroys the LandmarkFactory object.
-     */
      ~LandmarkFactory() override = default;
     
     /**

@@ -9,11 +9,7 @@
 #include <vector>
 
 
-/**
- * @brief Represents an industrial factory building.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Building class and adds functionality specific to factories, including production of resources.
- */
+
 class Factory : public Building {
 protected:
     int maxEmployees;  ///< Number of employees working in the factory.
@@ -36,16 +32,8 @@ public:
         this->maxEmployees = max;
     };
 
-    /**
-     * @brief Destroys the Factory object.
-     */
     virtual ~Factory() = default;
 
-    /**
-     * @brief Produces resources in the factory.
-     *
-     * This is an abstract method that must be implemented by concrete factory subclasses.
-     */
     virtual int produceResource() = 0;
     void employ(Citizen& employee);
     void fire(Citizen& employee) ;

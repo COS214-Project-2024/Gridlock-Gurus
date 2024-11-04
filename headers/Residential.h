@@ -6,11 +6,6 @@
 #include <string>
 #include <memory>
 
-/**
- * @brief Represents a residential building.
- *
- * ConcreteProduct participant in the Factory Method pattern. It represents a specific type of building and adds features like managing tenants.
- */
 class Residential : public Building {
 private:
     int maxCapacity;  ///< The maximum number of citizens the building can house.
@@ -39,11 +34,6 @@ public:
      * @param tenant Pointer to the citizen to add as a tenant.
      */
     void addTenant(Citizen& tenant);
-
-    /**
-        * @brief Adds a tenant to the residential building.
-        * @param tenant Pointer to the citizen to add as a tenant.
-        */
     void removeTenant(Citizen& tenant);
 
     bool isFull() const;

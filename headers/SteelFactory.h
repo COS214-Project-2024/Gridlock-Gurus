@@ -8,11 +8,6 @@
 #include <vector>
 #include <string>
 
-/**
- * @brief Represents a steel factory.
- *
- * ConcreteProduct participant in the Factory Method pattern. It extends the Factory class and represents a factory that produces steel.
- */
 class SteelFactory : public Factory {
 public:
     /**
@@ -35,11 +30,6 @@ public:
      * @brief Produces steel in the factory.
      */
     int produceResource() override;
-
-    /**
-     * @brief Pays an employee working at the steel factory.
-     * @param employee Pointer to the employee.
-     */
      int pay() override;
 
 };
