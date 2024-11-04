@@ -1,10 +1,5 @@
 #include "LowFundingEducationState.h"
 
-/**
- * @brief Gets the education quality for the low funding education state.
- *
- * @return The education quality as an integer (currently always returns 0).
- */
 int LowFundingEducationState::getEducationQuality() {
 /*    int staff = service->getStaff();
     int maxStaff = service->getMaxStaff();
@@ -27,9 +22,6 @@ int LowFundingEducationState::getEducationQuality() {
     return 0;
 }
 
-/**
- * @brief Checks the education state and updates the prestige of the service based on education quality.
- */
 void LowFundingEducationState::checkEducationState() {
 /*    if(service) {
         int quality = getEducationQuality();
@@ -51,11 +43,6 @@ void LowFundingEducationState::checkEducationState() {
     }*/
 }
 
-/**
- * @brief Gets the name of the current education state.
- *
- * @return A string representing the name of the education state.
- */
 std::string LowFundingEducationState::getName() {
     return "Low Funding";
 }

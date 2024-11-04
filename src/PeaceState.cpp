@@ -1,8 +1,5 @@
 #include "PeaceState.h"
 
-/**
- * @brief Checks the operational state of the police service and adjusts response time based on staffing levels.
- */
 void PeaceState::checkOperation() {
 /*    if(service) {
         int currStaff = service->getStaff();
@@ -20,11 +17,6 @@ void PeaceState::checkOperation() {
     }*/
 }
 
-
-/**
- * @brief Gets the name of the PeaceState.
- * @return Name of the state, "Peace State".
- */
 std::string PeaceState::getName() {
     return "Peace State";
 }
