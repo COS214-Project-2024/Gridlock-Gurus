@@ -23,7 +23,6 @@ protected:
     bool retired;                  ///< Retirement status of the citizen.
     Building* home;                ///< Pointer to the citizen's home building.
     Building* placeOfWork;         ///< Pointer to the citizen's workplace.
-string name;
 
 public:
     /**
